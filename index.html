@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MyCloud</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">MyCloud</div>
+    <div id="status" class="status offline">Offline</div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Your private cloud</h1>
+        <p>Files stay on your home device. This interface is hosted separately.</p>
+      </div>
+      <button id="connectBtn">Connect</button>
+    </section>
+
+    <section class="server-card">
+      <label for="serverUrl">Server URL</label>
+      <input id="serverUrl" type="url"
+             placeholder="https://your-home-server.example">
+      <small>
+        For the first test, use an HTTPS address. A local 10.x/192.168.x address
+        will only work inside the same network and cannot be used from GitHub Pages.
+      </small>
+    </section>
+
+    <section class="toolbar">
+      <button id="refreshBtn">Refresh</button>
+      <label class="upload">
+        Upload
+        <input id="fileInput" type="file" multiple hidden>
+      </label>
+      <input id="search" type="search" placeholder="Search files...">
+    </section>
+
+    <section id="gallery" class="gallery"></section>
+    <p id="message" class="message">Connect your server to begin.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

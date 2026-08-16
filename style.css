@@ -1,0 +1,24 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0b0d10;color:#f5f7fa}
+.topbar{height:64px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222831;background:#11151a;position:sticky;top:0;z-index:5}
+.brand{font-size:21px;font-weight:800}
+.status{font-size:13px;padding:7px 11px;border-radius:999px}
+.online{background:#123b25;color:#7dffa9}.offline{background:#392024;color:#ff9fa9}
+.container{max-width:1100px;margin:auto;padding:22px 16px}
+.hero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}
+.hero h1{margin:0 0 6px;font-size:30px}.hero p{margin:0;color:#9aa4b2}
+button,.upload{border:0;border-radius:12px;background:#2d7cff;color:white;padding:11px 16px;font-weight:700;cursor:pointer}
+.server-card{background:#12171d;border:1px solid #252c35;border-radius:16px;padding:16px;margin-bottom:16px}
+.server-card label{display:block;font-weight:700;margin-bottom:8px}
+.server-card input,.toolbar input{width:100%;background:#0c1014;border:1px solid #303945;color:#fff;border-radius:11px;padding:12px}
+.server-card small{display:block;color:#7f8b99;margin-top:9px;line-height:1.45}
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:18px}
+.toolbar #search{max-width:360px;margin-left:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.card{background:#12171d;border:1px solid #252c35;border-radius:14px;overflow:hidden}
+.thumb{height:150px;background:#0b0d10;display:flex;align-items:center;justify-content:center;color:#7f8b99}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover}
+.meta{padding:11px}.name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.size{font-size:12px;color:#7f8b99;margin-top:5px}
+.message{text-align:center;color:#7f8b99;padding:30px}
+@media(max-width:650px){.hero{align-items:flex-start;flex-direction:column}.toolbar{flex-wrap:wrap}.toolbar #search{max-width:none;margin-left:0;width:100%}}
