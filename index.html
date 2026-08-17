@@ -1,49 +1,686 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MyCloud</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Adventure Junction INDIA</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js for SPA Routing & Interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Google Fonts: Outfit for a modern, geometric, professional look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Outfit"', 'sans-serif'] },
+                    colors: {
+                        brandDark: '#111827',
+                        brandGray: '#F3F4F6',
+                        brandAccent: '#059669', // Forest Green
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .modal-enter { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
-<body>
-  <header class="topbar">
-    <div class="brand">MyCloud</div>
-    <div id="status" class="status offline">Offline</div>
-  </header>
+<body class="bg-brandGray text-brandDark font-sans antialiased" x-data="adventureApp()">
 
-  <main class="container">
-    <section class="hero">
-      <div>
-        <h1>Your private cloud</h1>
-        <p>Files stay on your home device. This interface is hosted separately.</p>
-      </div>
-      <button id="connectBtn">Connect</button>
-    </section>
+    <!-- TOP NAVIGATION -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-40 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer group" @click="goHome()">
+                    <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center border-2 border-yellow-400 overflow-hidden relative">
+                        <svg class="w-6 h-6 text-brandDark absolute bottom-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-extrabold tracking-tight leading-none group-hover:text-brandAccent transition-colors">AdventureJunction</h1>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">INDIA</span>
+                    </div>
+                </div>
+                
+                <!-- Nav Links & Social -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-600">
+                    <a href="#expeditions" class="hover:text-brandAccent transition-colors">Expeditions</a>
+                    <a href="#how-it-works" class="hover:text-brandAccent transition-colors">How It Works</a>
+                    <a href="#about" class="hover:text-brandAccent transition-colors">About Us</a>
+                </div>
 
-    <section class="server-card">
-      <label for="serverUrl">Server URL</label>
-      <input id="serverUrl" type="url"
-             placeholder="https://your-home-server.example">
-      <small>
-        For the first test, use an HTTPS address. A local 10.x/192.168.x address
-        will only work inside the same network and cannot be used from GitHub Pages.
-      </small>
-    </section>
+                <a href="https://www.instagram.com/adventure__junction" target="_blank" class="p-2 text-gray-500 hover:text-brandDark transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <section class="toolbar">
-      <button id="refreshBtn">Refresh</button>
-      <label class="upload">
-        Upload
-        <input id="fileInput" type="file" multiple hidden>
-      </label>
-      <input id="search" type="search" placeholder="Search files...">
-    </section>
+    <!-- MAIN WRAPPER -->
+    <main class="pt-16 pb-12 min-h-screen">
 
-    <section id="gallery" class="gallery"></section>
-    <p id="message" class="message">Connect your server to begin.</p>
-  </main>
+        <!-- ========================================== -->
+        <!-- VIEW 1: HOME PAGE                          -->
+        <!-- ========================================== -->
+        <div x-show="view === 'home'" x-transition.opacity.duration.500ms>
+            
+            <!-- Hero Banner -->
+            <header class="relative bg-brandDark text-white overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40"></div>
+                <div class="relative max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center">
+                    <span class="px-4 py-1.5 rounded-full border border-white/35 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm bg-white/10">
+                        Maharashtra | Mumbai • Pune • Lonavala
+                    </span>
+                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 max-w-3xl">
+                        Exploring India's Hidden Forts & History
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mb-8">
+                        Trekking • Climbing • Rappelling. Discover places with no crowd around, managed by our certified technical team.
+                    </p>
+                    <a href="#expeditions" class="bg-brandAccent hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition-transform hover:-translate-y-0.5">
+                        Explore Expeditions
+                    </a>
+                </div>
+            </header>
 
-  <script src="app.js"></script>
+            <!-- Adventures Grid -->
+            <section id="expeditions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                <div class="flex items-center justify-between mb-8 md:mb-12">
+                    <div>
+                        <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-1">Bookings Open</span>
+                        <h3 class="text-2xl md:text-3xl font-bold tracking-tight">Upcoming Expeditions</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <template x-for="ad in adventures" :key="ad.id">
+                        <div @click="openAdventure(ad)" class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 flex flex-col h-full">
+                            <div class="relative h-64 overflow-hidden">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
+                                <img :src="ad.img" :alt="ad.title" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute top-4 left-4 z-20 flex space-x-2">
+                                    <span class="bg-white/90 backdrop-blur-sm text-brandDark text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="ad.category"></span>
+                                </div>
+                                <div class="absolute bottom-4 left-4 z-20">
+                                    <span class="bg-brandDark/80 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-xl" x-text="'₹' + ad.price"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4 class="text-xl font-bold mb-2 group-hover:text-brandAccent transition-colors" x-text="ad.title"></h4>
+                                <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4">
+                                    <span class="flex items-center space-x-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <span x-text="ad.location"></span>
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 text-sm line-clamp-2 mt-auto" x-text="ad.shortDesc"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- HOW IT WORKS SECTION -->
+            <section id="how-it-works" class="bg-white py-20 border-y border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-2">Simple Process</span>
+                        <h3 class="text-3xl font-extrabold text-brandDark tracking-tight">How Adventure Junction Works</h3>
+                        <p class="text-gray-600 mt-2">From booking your slot to conquering the peak, here is how we make your expedition safe and seamless.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
+                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">1</div>
+                            <h4 class="text-xl font-bold mb-3">Choose & Register</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">Select your preferred adventure, check batch dates, pick your pickup location, and secure your slot instantly online.</p>
+                        </div>
+                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
+                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">2</div>
+                            <h4 class="text-xl font-bold mb-3">Prep & Reporting</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">Receive exact reporting details and guidelines. Board our private transit from designated pickup points across Pune/Mumbai.</p>
+                        </div>
+                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
+                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">3</div>
+                            <h4 class="text-xl font-bold mb-3">Conquer & Celebrate</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">Experience thrilling technical rappelling or climbing under expert supervision, enjoy authentic meals, and take home memories.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT US SECTION -->
+            <section id="about" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-brandDark text-white rounded-3xl p-8 md:p-16 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center opacity-15"></div>
+                    <div class="relative z-10 max-w-3xl">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">About Adventure Junction</span>
+                        <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">Engineered for Thrill, Backed by Safety</h3>
+                        <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6 font-light">
+                            Adventure Junction India is dedicated to exploring uncharted terrains, historic forts, and hidden waterfalls across the Sahyadris. We specialize in high-endurance activities like waterfall rappelling, valley crossing, and technical rock climbing.
+                        </p>
+                        <p class="text-gray-300 text-base md:text-lg leading-relaxed font-light">
+                            Every expedition is rigorously managed by certified technical mountaineers, equipped with professional-grade safety gear, ensuring that adventure seekers can experience raw nature without compromising security.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: ADVENTURE DETAIL PAGE              -->
+        <!-- ========================================== -->
+        <div x-show="view === 'detail'" x-cloak x-transition.opacity.duration.500ms class="bg-white">
+            <template x-if="activeAd">
+                <div>
+                    <!-- Detail Hero -->
+                    <div class="relative w-full h-[50vh] md:h-[60vh] bg-black">
+                        <img :src="activeAd.img" class="absolute inset-0 w-full h-full object-cover opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brandDark to-transparent"></div>
+                        
+                        <button @click="goHome()" class="absolute top-6 left-4 md:left-8 z-20 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        </button>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 md:pb-16 max-w-7xl mx-auto">
+                            <span class="inline-block px-3 py-1 bg-brandAccent text-white text-xs font-bold uppercase tracking-wider rounded-md mb-3" x-text="activeAd.category"></span>
+                            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-2" x-text="activeAd.title"></h1>
+                            <div class="flex items-center space-x-3 text-sm text-gray-300 font-medium">
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> <span x-text="activeAd.date"></span></span>
+                                <span>•</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg> <span x-text="activeAd.location"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Layout -->
+                    <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 flex flex-col lg:flex-row gap-10">
+                        
+                        <!-- Left Column: Details -->
+                        <div class="w-full lg:w-2/3 space-y-10">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-brandGray p-4 rounded-2xl">
+                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Grade</span>
+                                    <span class="font-bold text-brandDark" x-text="activeAd.grade"></span>
+                                </div>
+                                <div class="bg-brandGray p-4 rounded-2xl">
+                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Endurance</span>
+                                    <span class="font-bold text-brandDark" x-text="activeAd.endurance"></span>
+                                </div>
+                                <div class="bg-brandGray p-4 rounded-2xl" x-show="activeAd.height">
+                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Height</span>
+                                    <span class="font-bold text-brandDark" x-text="activeAd.height"></span>
+                                </div>
+                                <div class="bg-brandGray p-4 rounded-2xl">
+                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Fee</span>
+                                    <span class="font-bold text-brandDark" x-text="'₹' + activeAd.price"></span>
+                                </div>
+                            </div>
+
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p x-text="activeAd.fullDesc"></p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-2xl font-bold mb-5 flex items-center"><svg class="w-6 h-6 mr-2 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Inclusions</h3>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <template x-for="item in activeAd.inclusions">
+                                        <li class="flex items-start space-x-3 p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
+                                            <svg class="w-5 h-5 text-brandAccent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                            <span class="text-gray-700 text-sm font-medium" x-text="item"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+
+                            <div x-show="activeAd.schedule.length > 0">
+                                <h3 class="text-2xl font-bold mb-6 flex items-center"><svg class="w-6 h-6 mr-2 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Itinerary</h3>
+                                <div class="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+                                    <template x-for="(event, index) in activeAd.schedule">
+                                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                            <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-brandAccent text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-[3px] md:ml-0"></div>
+                                            <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-brandGray p-4 rounded-2xl shadow-sm border border-gray-100">
+                                                <div class="flex items-center justify-between mb-1">
+                                                    <div class="font-bold text-brandDark" x-text="event.time"></div>
+                                                </div>
+                                                <div class="text-sm text-gray-600" x-text="event.activity"></div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-2xl font-bold mb-5 flex items-center"><svg class="w-6 h-6 mr-2 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> Important Guidelines</h3>
+                                <div class="bg-red-50 border border-red-100 p-5 rounded-2xl mb-4" x-show="activeAd.warning">
+                                    <p class="text-sm text-red-800 font-semibold flex items-start">
+                                        <svg class="w-5 h-5 mr-2 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                        <span x-text="activeAd.warning"></span>
+                                    </p>
+                                </div>
+                                <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
+                                    <template x-for="rule in activeAd.rules">
+                                        <li x-text="rule"></li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Sticky Booking Widget (Desktop) -->
+                        <div class="hidden lg:block w-full lg:w-1/3">
+                            <div class="sticky top-24 bg-white border border-gray-200 shadow-xl rounded-3xl p-6">
+                                <div class="mb-6 pb-6 border-b border-gray-100">
+                                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">Total Fee</p>
+                                    <div class="flex items-end space-x-2">
+                                        <h4 class="text-4xl font-extrabold text-brandDark" x-text="'₹' + activeAd.price"></h4>
+                                        <span class="text-gray-500 pb-1">/ person</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-4 mb-6 text-sm text-gray-600">
+                                    <div class="flex justify-between items-center"><span class="flex items-center"><svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Duration:</span> <span class="font-semibold text-brandDark">1 Day</span></div>
+                                    <div class="flex justify-between items-center"><span class="flex items-center"><svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Group Size:</span> <span class="font-semibold text-brandDark">Limited</span></div>
+                                </div>
+                                <button @click="openModal()" class="w-full bg-brandDark hover:bg-black text-white py-4 rounded-xl font-bold text-lg transition-transform transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-black/20 flex justify-center items-center">
+                                    Book Tickets Now
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </template>
+        </div>
+
+    </main>
+
+    <!-- FOOTER WITH TRIP SUCCESS GALLERY & REVIEWS -->
+    <footer class="bg-brandDark text-white pt-16 pb-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Success Gallery / Trip Highlights -->
+            <div class="mb-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-1">Success Stories</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">Recent Expedition Moments</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-2 md:mt-0">Captured live from our recent successful batch events across Maharashtra.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="relative h-48 rounded-2xl overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Trek success">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Waterfall Rappelling Batch</span></div>
+                    </div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Summit success">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Sahyadri Ridge Trek</span></div>
+                    </div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Camp success">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Base Camp Morning</span></div>
+                    </div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Explorer group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Team Summit Victory</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Main Content -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-gray-800 text-sm text-gray-400">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center border-2 border-yellow-400 overflow-hidden relative">
+                            <svg class="w-5 h-5 text-brandDark absolute bottom-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <span class="text-white font-extrabold text-lg tracking-tight">AdventureJunction INDIA</span>
+                    </div>
+                    <p class="max-w-sm mb-4">Your trusted partner for expert-guided technical treks, waterfall rappelling, and hidden historical fort explorations across Maharashtra.</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Quick Links</h5>
+                    <ul class="space-y-2">
+                        <li><a @click="goHome()" href="#expeditions" class="hover:text-white transition-colors">Expeditions</a></li>
+                        <li><a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Connect</h5>
+                    <p class="mb-2">Helpline / UPI: <strong>7038347776</strong></p>
+                    <a href="https://www.instagram.com/adventure__junction" target="_blank" class="inline-flex items-center space-x-2 text-white hover:text-emerald-400 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        <span>Instagram Community</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>&copy; 2026 Adventure Junction India. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Certified Technical Team & Professional Safety Guides.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE FLOATING BOOKING BAR -->
+    <div x-show="view === 'detail' && activeAd" x-cloak class="lg:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 p-4 pb-6 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-30">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs text-gray-500 font-medium">Fee</p>
+                <p class="text-xl font-extrabold text-brandDark" x-text="activeAd ? '₹' + activeAd.price : ''"></p>
+            </div>
+            <button @click="openModal()" class="bg-brandDark text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-black/20">
+                Book Now
+            </button>
+        </div>
+    </div>
+
+    <!-- CUSTOM BOOKING MODAL -->
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-300">
+        <div @click.away="closeModal()" class="w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl relative flex flex-col max-h-[90vh] modal-enter">
+            
+            <button @click="closeModal()" class="absolute top-5 right-5 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-600 transition-colors z-10">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+
+            <div class="p-6 pb-4 border-b border-gray-100 shrink-0">
+                <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-1">Registration</span>
+                <h2 class="text-2xl font-bold text-brandDark pr-8 leading-tight" x-text="activeAd ? activeAd.title : ''"></h2>
+            </div>
+
+            <div class="p-6 overflow-y-auto no-scrollbar space-y-6">
+                
+                <!-- CUSTOM TICKET COUNTER -->
+                <div class="bg-brandGray p-5 rounded-2xl flex items-center justify-between border border-gray-200">
+                    <div>
+                        <h4 class="font-bold text-brandDark text-sm">Number of Tickets</h4>
+                        <p class="text-xs text-gray-500 mt-1">Book for friends & family</p>
+                    </div>
+                    <div class="flex items-center bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <button @click="tickets > 1 ? tickets-- : null" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-brandDark transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+                        </button>
+                        <div class="w-10 h-10 flex items-center justify-center font-bold text-brandDark bg-gray-50 border-x border-gray-200 text-lg" x-text="tickets"></div>
+                        <button @click="tickets++" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-brandDark transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Lead Trekker Name</label>
+                        <input type="text" placeholder="Full Name" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark focus:outline-none focus:border-brandAccent focus:ring-1 focus:ring-brandAccent transition-all shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">WhatsApp / Phone Number</label>
+                        <input type="tel" placeholder="+91" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark focus:outline-none focus:border-brandAccent focus:ring-1 focus:ring-brandAccent transition-all shadow-sm">
+                    </div>
+                </div>
+
+                <!-- CUSTOM DROPDOWN: Date -->
+                <div class="relative" x-data="{ open: false }">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Select Batch</label>
+                    <div @click="open = !open" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark flex items-center justify-between cursor-pointer hover:border-gray-400 transition-all shadow-sm">
+                        <span x-text="formDate"></span>
+                        <svg class="w-4 h-4 text-gray-400 transform transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </div>
+                    <div x-show="open" @click.away="open = false" x-transition class="absolute left-0 right-0 mt-1 bg-white rounded-xl overflow-hidden z-20 border border-gray-200 shadow-xl py-1">
+                        <template x-for="d in activeAd?.dates" :key="d">
+                            <div @click="formDate = d; open = false" class="px-4 py-2.5 text-sm hover:bg-gray-50 cursor-pointer transition-colors text-gray-700" x-text="d"></div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- CUSTOM DROPDOWN: Pickup Location -->
+                <div class="relative" x-data="{ open: false }">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Pickup Point</label>
+                    <div @click="open = !open" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark flex items-center justify-between cursor-pointer hover:border-gray-400 transition-all shadow-sm">
+                        <span x-text="formPickup"></span>
+                        <svg class="w-4 h-4 text-gray-400 transform transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </div>
+                    <div x-show="open" @click.away="open = false" x-transition class="absolute left-0 right-0 mt-1 bg-white rounded-xl overflow-hidden z-20 border border-gray-200 shadow-xl py-1 max-h-40 overflow-y-auto">
+                        <template x-for="p in activeAd?.pickups" :key="p">
+                            <div @click="formPickup = p; open = false" class="px-4 py-2.5 text-sm hover:bg-gray-50 cursor-pointer transition-colors text-gray-700" x-text="p"></div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <div class="text-xs text-blue-800 leading-relaxed">
+                        <span class="font-bold block mb-1">GPay / PhonePe Payment</span>
+                        Transfer total amount to <strong>7038347776</strong>. Your seats will be confirmed immediately after successful payment verification.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 md:p-6 bg-white border-t border-gray-100 shrink-0 rounded-b-3xl flex items-center justify-between">
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Total Amount</p>
+                    <p class="text-2xl font-extrabold text-brandDark" x-text="'₹' + (activeAd ? activeAd.price * tickets : 0)"></p>
+                </div>
+                <button @click="submitForm()" class="bg-brandDark hover:bg-black text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-black/20 transition-all flex items-center">
+                    Pay via UPI
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div x-show="toastOpen" x-cloak x-transition class="fixed top-20 right-4 z-50 bg-brandDark text-white px-5 py-4 rounded-xl shadow-2xl flex items-center space-x-3 border border-gray-700">
+        <svg class="w-5 h-5 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <span class="text-sm font-semibold">Redirecting to Payment Gateway...</span>
+    </div>
+
+    <!-- ALPINE JS LOGIC & DATA -->
+    <script>
+        function adventureApp() {
+            return {
+                view: 'home',
+                activeAd: null,
+                modalOpen: false,
+                toastOpen: false,
+                tickets: 1,
+                formDate: '',
+                formPickup: '',
+
+                adventures: [
+                    {
+                        id: 'hidden-waterfall',
+                        category: 'Rappelling',
+                        title: 'Hidden Waterfall Rappelling',
+                        price: 2500,
+                        date: '15 / 16 Aug 2026',
+                        location: 'Near Pune & Lonavala',
+                        grade: 'Easy',
+                        endurance: 'Medium',
+                        height: '120ft',
+                        img: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'Experience this thrilling adventure activity at a beautifully hidden waterfall with no crowd around, managed by our best certified technical team.',
+                        fullDesc: 'Adventure Junction invites you all to experience this Thrilling Adventure activity at a beautifully Hidden Waterfall with no crowd around and managed by our best Certified Technical Team. Unplug from the city and descend down a roaring 120ft cascade in pristine nature.',
+                        dates: ['15 August 2026', '16 August 2026'],
+                        pickups: ['JM Road - 5:30 AM', 'Wakad - 6:00 AM', 'Mukai Chouk - 6:15 AM', 'Direct at Base Village - 8:30 AM'],
+                        inclusions: [
+                            'Bus transportation (Pune & Mumbai)',
+                            'Waterfall Rappelling (120ft)',
+                            'Best Certified Technical Team & Gear',
+                            'Breakfast & Tea',
+                            'Veg Lunch (Non-veg ₹100 extra)',
+                            'Basic First Aid & Forest charges',
+                            'Guidance and expertise'
+                        ],
+                        schedule: [
+                            { time: '5:30 AM', activity: 'Depart from JM Road by private bus' },
+                            { time: '8:30 AM', activity: 'Reach base village & Have breakfast' },
+                            { time: '10:00 AM', activity: 'Start the adventurous trek towards the Waterfall' },
+                            { time: '11:30 AM', activity: 'Reach top of the waterfall & start Rappelling' },
+                            { time: '3:00 PM', activity: 'Return trek to base village and have lunch' },
+                            { time: '5:00 PM', activity: 'Depart from base village back to Pune' },
+                            { time: '8:00 PM', activity: 'Reach Pune with loads of memories' }
+                        ],
+                        warning: 'Please avoid perfumes as there are wild honeybees in the jungle. Perfume can make them excited and can be fatal.',
+                        rules: [
+                            'Please cut your toenails before the trek.',
+                            'Carry regular medicines (if required).',
+                            'Carry trekking/sports shoes with good grip.',
+                            'Smoking and drinking alcohol are strictly prohibited.',
+                            'Do not wear jewelry or carry valuables.'
+                        ]
+                    },
+                    {
+                        id: 'jivdhan',
+                        category: 'Valley Crossing',
+                        title: 'Jivdhan Valley Crossing & Rappelling',
+                        price: 2800,
+                        date: 'Upcoming',
+                        location: 'Naneghat Region',
+                        grade: 'Moderate',
+                        endurance: 'High',
+                        height: '350ft',
+                        img: 'https://images.unsplash.com/photo-1522362391807-6f02271871de?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'A massive 350ft valley crossing followed by a thrilling rappel down the historic walls of Jivdhan fort.',
+                        fullDesc: 'Conquer the daunting heights of Jivdhan Fort with our specialized technical gear. Experience the rush of traversing the valley gap and abseiling down sheer rock faces.',
+                        dates: ['Select Batch'],
+                        pickups: ['Pune - Shivaji Nagar', 'Kalyan Station'],
+                        inclusions: ['Transport', 'Technical Gear', 'Meals', 'Expert Guide'],
+                        schedule: [],
+                        warning: 'Requires basic fitness level.',
+                        rules: ['Proper trekking shoes mandatory', 'No alcohol']
+                    },
+                    {
+                        id: 'dukes-nose',
+                        category: 'Rappelling',
+                        title: "Duke's Nose Valley Crossing & Rappelling",
+                        price: 2200,
+                        date: 'Upcoming',
+                        location: 'Lonavala',
+                        grade: 'Moderate',
+                        endurance: 'Medium',
+                        height: '300ft',
+                        img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'Rappel down the iconic Duke\'s Nose cliff edge with panoramic views of the Sahyadri ranges.',
+                        fullDesc: 'Duke\'s Nose (Nagphani) offers a heart-pumping 300ft rappel. Let our experts guide you down safely while you soak in the spectacular views of the valley below.',
+                        dates: ['Select Batch'],
+                        pickups: ['Lonavala Station', 'Pune Pickup'],
+                        inclusions: ['Safety Harness & Gear', 'Breakfast', 'Certified Guide'],
+                        schedule: [],
+                        warning: '',
+                        rules: ['No loose clothing', 'Follow instructor commands strictly']
+                    },
+                    {
+                        id: 'tail-baila',
+                        category: 'Climbing',
+                        title: 'Tail Baila Climbing & Rappelling',
+                        price: 3200,
+                        date: 'Upcoming',
+                        location: 'Mulshi / Lonavala',
+                        grade: 'Hard',
+                        endurance: 'High',
+                        height: 'Multi-pitch',
+                        img: 'https://images.unsplash.com/photo-1563299796-17596c35a7ea?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'Take on the colossal dykes of Tail Baila. Multi-pitch rock climbing suitable for adventure enthusiasts.',
+                        fullDesc: 'Tail Baila is famous for its massive rock walls. This event is designed for serious thrill-seekers ready to learn and execute multi-pitch climbing techniques.',
+                        dates: ['Select Batch'],
+                        pickups: ['Pune Center', 'Lonavala'],
+                        inclusions: ['Climbing Shoes', 'Ropes/Carabiners', 'Expert Lead Climber'],
+                        schedule: [],
+                        warning: 'Prior climbing experience is recommended but not mandatory.',
+                        rules: ['High endurance required', 'Strict discipline on the rock']
+                    },
+                    {
+                        id: 'lingana',
+                        category: 'Climbing',
+                        title: 'Lingana Climbing & Rappelling',
+                        price: 3500,
+                        date: 'Upcoming',
+                        location: 'Raigad Region',
+                        grade: 'Extreme',
+                        endurance: 'Very High',
+                        height: '1000ft+',
+                        img: 'https://images.unsplash.com/photo-1516616370751-86d6bd8b0651?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'The ultimate Sahyadri challenge. Climb the formidable Lingana pinnacle and rappel down 1000+ feet.',
+                        fullDesc: 'Lingana is known as one of the toughest treks and climbs in Maharashtra. Test your limits with a gruelling night trek followed by an epic climb.',
+                        dates: ['Select Batch'],
+                        pickups: ['Pune', 'Mumbai'],
+                        inclusions: ['Transport', 'Advanced Climbing Gear', '2 Meals', 'First Aid'],
+                        schedule: [],
+                        warning: 'Only for physically fit individuals. Medical check may be requested.',
+                        rules: ['Strictly no beginners', 'Mental toughness required']
+                    },
+                    {
+                        id: 'kokankada',
+                        category: 'Rappelling',
+                        title: "India's Highest Rappelling Kokankada",
+                        price: 5000,
+                        date: 'Upcoming',
+                        location: 'Harishchandragad',
+                        grade: 'Extreme',
+                        endurance: 'High',
+                        height: '1800ft',
+                        img: 'https://images.unsplash.com/photo-1627884873719-7d0c89ecb715?q=80&w=1200&auto=format&fit=crop',
+                        shortDesc: 'Abseil down the legendary overhanging cliff of Kokankada. A multi-stage 1800ft massive rappel.',
+                        fullDesc: 'The crown jewel of Indian adventure. Rappel down the massive 1800ft overhanging Konkankada wall in stages. An experience that will test your courage and leave you mesmerized.',
+                        dates: ['Select Batch'],
+                        pickups: ['Pune', 'Kalyan'],
+                        inclusions: ['Stay', 'Transport', 'All technical logistics', 'Meals'],
+                        schedule: [],
+                        warning: 'Not for the faint-hearted. Vertigo patients strictly prohibited.',
+                        rules: ['Must have done at least 1 previous 300ft rappel']
+                    }
+                ],
+
+                goHome() {
+                    window.scrollTo(0, 0);
+                    this.view = 'home';
+                    setTimeout(() => { this.activeAd = null; }, 500);
+                },
+
+                openAdventure(ad) {
+                    this.activeAd = ad;
+                    this.formDate = ad.dates[0];
+                    this.formPickup = ad.pickups[0];
+                    this.tickets = 1;
+                    window.scrollTo(0, 0);
+                    this.view = 'detail';
+                },
+
+                openModal() {
+                    this.modalOpen = true;
+                },
+                
+                closeModal() {
+                    this.modalOpen = false;
+                },
+
+                submitForm() {
+                    this.closeModal();
+                    this.toastOpen = true;
+                    setTimeout(() => { this.toastOpen = false; }, 4000);
+                }
+            }
+        }
+    </script>
 </body>
 </html>
