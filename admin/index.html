@@ -13,7 +13,7 @@
     <title>Adventure Junction — Admin</title>
 
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -21,11 +21,39 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-    <!-- Alpine.js -->
+    <!-- Alpine -->
     <script
         defer
         src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+
+
+    <!-- Outfit -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+                        sans: ['"Outfit"', 'sans-serif']
+                    }
+
+                }
+
+            }
+
+        };
+
+    </script>
 
 
     <style>
@@ -36,68 +64,231 @@
 
 
         body {
-            -webkit-font-smoothing: antialiased;
+            font-family: "Outfit", sans-serif;
         }
 
 
-        input,
-        select,
-        textarea,
-        button {
-            font-family: inherit;
-        }
+        /* =====================================================
+           PREVIEW CARD
+        ===================================================== */
 
+        .preview-card {
 
-        .field {
+            position: relative;
+
+            isolation: isolate;
+
+            overflow: hidden;
 
             width: 100%;
 
-            padding: 13px 15px;
+            aspect-ratio: 4 / 5.25;
 
-            border-radius: 12px;
+            border-radius: 30px;
 
-            border: 1px solid #e5e7eb;
-
-            outline: none;
-
-            background: white;
-
-            font-size: 14px;
-
-            transition: all .2s ease;
-
-        }
-
-
-        .field:focus {
-
-            border-color: #082C3D;
+            background: #061e28;
 
             box-shadow:
-                0 0 0 3px
-                rgba(250, 204, 21, .18);
+                0 25px 70px rgba(8,44,61,.22);
 
         }
 
 
-        .field::placeholder {
-            color: #9ca3af;
+        .preview-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 4px;
+
+            z-index: 30;
+
+            pointer-events: none;
+
+            border-radius: 27px;
+
+            border:
+                1px solid rgba(255,255,255,.22);
+
         }
 
 
-        .modal-scroll::-webkit-scrollbar {
-            width: 5px;
+        .preview-image {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
         }
 
 
-        .modal-scroll::-webkit-scrollbar-thumb {
-            background: #d1d5db;
-            border-radius: 20px;
+        .preview-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 2;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.24),
+                    rgba(0,0,0,.03) 40%,
+                    rgba(3,18,25,.18) 55%,
+                    rgba(3,18,25,.80) 78%,
+                    rgba(3,18,25,.98) 100%
+                );
+
         }
 
 
-        .preview-card {
-            transform: translateZ(0);
+        .preview-category {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px 13px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(6,29,39,.88);
+
+            border:
+                1px solid rgba(255,255,255,.16);
+
+            backdrop-filter:
+                blur(15px);
+
+        }
+
+
+        .preview-seat {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px 12px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(3,39,29,.88);
+
+            border:
+                1px solid rgba(111,255,194,.25);
+
+            backdrop-filter:
+                blur(15px);
+
+        }
+
+
+        .preview-seat.low {
+
+            background:
+                rgba(84,36,12,.92);
+
+            border-color:
+                rgba(255,190,90,.28);
+
+        }
+
+
+        .preview-panel {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(5,22,30,.97),
+                    rgba(7,36,47,.95)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            border-radius:
+                20px;
+
+            backdrop-filter:
+                blur(18px);
+
+        }
+
+
+        .book-button {
+
+            padding:
+                12px 18px;
+
+            border-radius:
+                13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffe66d,
+                    #ffc400,
+                    #f0a800
+                );
+
+            color:
+                #071b24;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                .12em;
+
+            text-transform:
+                uppercase;
+
+            box-shadow:
+                0 5px 0 #b87900;
+
+        }
+
+
+        /* =====================================================
+           SCROLLBAR
+        ===================================================== */
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+
+        ::-webkit-scrollbar-track {
+            background: #f4f6f5;
+        }
+
+
+        ::-webkit-scrollbar-thumb {
+
+            background: #cbd5d1;
+
+            border-radius: 999px;
+
         }
 
     </style>
@@ -105,52 +296,36 @@
 </head>
 
 
-
 <body
-    class="bg-[#F6F8F7] text-[#082C3D]"
+    class="bg-[#F5F7F6] text-[#082C3D]"
     x-data="adminApp()"
     x-init="init()"
 >
 
 
-<!-- ====================================================== -->
-<!-- HEADER                                                  -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header
-    class="sticky top-0 z-50
-           bg-white/90
-           backdrop-blur-xl
-           border-b border-gray-200"
+    class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200"
 >
 
     <div
-        class="max-w-7xl mx-auto
-               px-5 sm:px-7
-               py-4
-               flex items-center
-               justify-between"
+        class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between"
     >
-
-        <!-- BRAND -->
 
         <div>
 
             <p
-                class="text-[9px]
-                       uppercase
-                       tracking-[0.22em]
-                       font-black
-                       text-gray-400"
+                class="text-[9px] uppercase tracking-[.22em] font-bold text-gray-400"
             >
                 Adventure Junction
             </p>
 
+
             <h1
-                class="mt-0.5
-                       text-xl sm:text-2xl
-                       font-black
-                       tracking-tight"
+                class="text-xl sm:text-2xl font-black tracking-tight"
             >
                 Expedition Manager
             </h1>
@@ -158,33 +333,39 @@
         </div>
 
 
+        <div class="flex items-center gap-2">
 
-        <!-- ACCOUNT -->
 
-        <div
-            class="flex items-center gap-2"
-        >
-
-            <span
+            <button
                 x-show="session"
-                class="hidden md:block
-                       text-[11px]
-                       text-gray-400"
-                x-text="userEmail"
-            ></span>
+                @click="openCreate()"
+                class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#082C3D] text-white text-xs font-bold hover:bg-[#0d4056] transition"
+            >
+
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        d="M12 5v14M5 12h14"
+                    />
+
+                </svg>
+
+                New Event
+
+            </button>
 
 
             <button
                 x-show="session"
                 @click="logout()"
-                class="px-4 py-2.5
-                       rounded-xl
-                       bg-gray-100
-                       text-xs
-                       font-bold
-                       text-[#082C3D]
-                       hover:bg-gray-200
-                       transition"
+                class="px-4 py-2.5 rounded-xl bg-gray-100 text-xs font-bold hover:bg-gray-200"
             >
                 Logout
             </button>
@@ -197,130 +378,73 @@
 
 
 
-<!-- ====================================================== -->
-<!-- MAIN                                                    -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main
-    class="max-w-7xl mx-auto
-           px-5 sm:px-7
-           py-8 sm:py-10"
+    class="max-w-7xl mx-auto px-5 py-8 sm:py-10"
 >
 
 
-
-<!-- ====================================================== -->
-<!-- LOGIN                                                   -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
 
 <template x-if="!session">
 
     <div
-        class="max-w-md
-               mx-auto
-               bg-white
-               rounded-[28px]
-               border border-gray-100
-               shadow-xl
-               p-7 sm:p-8"
+        class="max-w-md mx-auto bg-white rounded-[28px] border border-gray-100 shadow-xl p-7"
     >
 
-        <div class="mb-7">
-
-            <p
-                class="text-[10px]
-                       uppercase
-                       tracking-[0.2em]
-                       font-black
-                       text-yellow-600"
-            >
-                Secure Access
-            </p>
+        <p
+            class="text-[10px] uppercase tracking-[.22em] font-bold text-yellow-600"
+        >
+            Secure Access
+        </p>
 
 
-            <h2
-                class="mt-2
-                       text-2xl
-                       font-black"
-            >
-                Admin Login
-            </h2>
+        <h2
+            class="mt-2 text-2xl font-black"
+        >
+            Admin Login
+        </h2>
 
-
-            <p
-                class="mt-2
-                       text-sm
-                       text-gray-500"
-            >
-                Manage Adventure Junction expeditions.
-            </p>
-
-        </div>
-
-
-
-        <!-- EMAIL -->
 
         <input
             x-model="email"
             type="email"
-            autocomplete="email"
             placeholder="Admin email"
-            class="field"
+            class="w-full mt-7 px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-yellow-400"
         >
 
-
-
-        <!-- PASSWORD -->
 
         <input
             x-model="password"
             type="password"
-            autocomplete="current-password"
             placeholder="Password"
-            @keydown.enter="login()"
-            class="field mt-3"
+            @keyup.enter="login()"
+            class="w-full mt-3 px-4 py-3.5 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-yellow-400"
         >
 
-
-
-        <!-- LOGIN BUTTON -->
 
         <button
             @click="login()"
             :disabled="loading"
-            class="w-full
-                   mt-4
-                   py-3.5
-                   rounded-xl
-                   bg-[#082C3D]
-                   text-white
-                   font-bold
-                   hover:bg-[#0d4056]
-                   disabled:opacity-50
-                   transition"
+            class="w-full mt-4 py-3.5 rounded-xl bg-[#082C3D] text-white font-bold hover:bg-[#0d4056] disabled:opacity-50"
         >
 
             <span
-                x-text="
-                    loading
-                    ? 'Signing in...'
-                    : 'Sign In'
-                "
+                x-text="loading ? 'Signing in...' : 'Sign In'"
             ></span>
 
         </button>
 
 
-
-        <!-- ERROR -->
-
         <p
             x-show="error"
             x-text="error"
-            class="mt-4
-                   text-sm
-                   text-red-500"
+            class="mt-4 text-sm text-red-500"
         ></p>
 
     </div>
@@ -329,341 +453,256 @@
 
 
 
-<!-- ====================================================== -->
-<!-- DASHBOARD                                               -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
 
 <template x-if="session">
 
-<div>
+    <div>
 
 
+        <!-- PAGE HEADER -->
 
-    <!-- ================================================== -->
-    <!-- DASHBOARD HEADER                                   -->
-    <!-- ================================================== -->
+        <div
+            class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+        >
 
-    <div
-        class="flex flex-col
-               sm:flex-row
-               sm:items-center
-               justify-between
-               gap-4
-               mb-8"
-    >
+            <div>
 
-        <div>
+                <p
+                    class="text-[10px] uppercase tracking-[.22em] font-bold text-yellow-600"
+                >
+                    Control Center
+                </p>
 
-            <h2
-                class="text-3xl sm:text-4xl
-                       font-black
-                       tracking-tight"
+
+                <h2
+                    class="mt-1 text-3xl sm:text-4xl font-black tracking-tight"
+                >
+                    Expeditions
+                </h2>
+
+
+                <p
+                    class="mt-1 text-sm text-gray-500"
+                >
+                    Manage events, dates, seats and booking information.
+                </p>
+
+            </div>
+
+
+            <button
+                @click="openCreate()"
+                class="sm:hidden px-4 py-3 rounded-xl bg-[#082C3D] text-white text-xs font-bold"
             >
-                Expeditions
-            </h2>
-
-
-            <p
-                class="mt-1
-                       text-sm
-                       text-gray-500"
-            >
-                Create, edit and manage your adventures.
-            </p>
+                + New Event
+            </button>
 
         </div>
 
 
 
-        <!-- ADD -->
+        <!-- ERROR -->
 
-        <button
-            @click="openCreate()"
-            class="inline-flex
-                   items-center
-                   justify-center
-                   gap-2
-                   px-5 py-3.5
-                   rounded-xl
-                   bg-[#082C3D]
-                   text-white
-                   text-sm
-                   font-bold
-                   shadow-lg
-                   shadow-[#082C3D]/10
-                   hover:bg-[#0d4056]
-                   hover:-translate-y-0.5
-                   transition"
+        <div
+            x-show="error"
+            x-cloak
+            class="mb-5 p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 text-sm font-semibold"
+            x-text="error"
+        ></div>
+
+
+
+        <!-- SUCCESS -->
+
+        <div
+            x-show="success"
+            x-cloak
+            class="mb-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-semibold"
+            x-text="success"
+        ></div>
+
+
+
+        <!-- EVENTS -->
+
+        <div
+            x-show="loadingEvents"
+            class="space-y-4"
         >
-
-            <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-            >
-
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 5v14M5 12h14"
-                />
-
-            </svg>
-
-            Add New Event
-
-        </button>
-
-    </div>
-
-
-
-    <!-- ================================================== -->
-    <!-- EVENTS                                              -->
-    <!-- ================================================== -->
-
-    <div class="grid gap-4">
-
-
-        <template
-            x-for="event in events"
-            :key="event.id"
-        >
-
 
             <div
-                class="bg-white
-                       rounded-[22px]
-                       border border-gray-100
-                       p-4
-                       shadow-sm
-                       hover:shadow-md
-                       transition"
+                class="h-36 bg-white rounded-3xl animate-pulse"
+            ></div>
+
+            <div
+                class="h-36 bg-white rounded-3xl animate-pulse"
+            ></div>
+
+        </div>
+
+
+        <div
+            x-show="!loadingEvents"
+            class="space-y-5"
+        >
+
+
+            <template
+                x-for="event in events"
+                :key="event.id"
             >
 
-
                 <div
-                    class="flex flex-col
-                           md:flex-row
-                           gap-4
-                           md:items-center"
+                    class="bg-white rounded-[28px] border border-gray-100 shadow-sm overflow-hidden"
                 >
 
 
-                    <!-- EVENT IMAGE -->
-
-                    <img
-                        :src="event.image_url"
-                        :alt="event.title"
-                        class="w-full
-                               md:w-32
-                               h-40
-                               md:h-24
-                               object-cover
-                               rounded-2xl
-                               bg-gray-100"
-                    >
-
-
-
-                    <!-- EVENT INFORMATION -->
+                    <!-- EVENT HEADER -->
 
                     <div
-                        class="flex-1
-                               min-w-0"
+                        class="p-5 sm:p-6 flex flex-col lg:flex-row gap-5"
                     >
 
 
-                        <!-- TITLE -->
+                        <!-- IMAGE -->
 
                         <div
-                            class="flex flex-wrap
-                                   items-center
-                                   gap-2"
+                            class="relative w-full lg:w-48 h-44 shrink-0 rounded-2xl overflow-hidden bg-gray-100"
                         >
 
-                            <h3
-                                class="font-extrabold
-                                       text-lg"
-                                x-text="event.title"
-                            ></h3>
+                            <img
+                                :src="event.image_url"
+                                class="w-full h-full object-cover"
+                                @error="$event.target.style.opacity='.2'"
+                            >
 
 
-                            <!-- STATUS -->
-
-                            <span
-                                class="px-2.5 py-1
-                                       rounded-full
-                                       text-[8px]
-                                       font-black
-                                       uppercase"
-                                :class="
-                                    event.is_open
-                                    ? 'bg-emerald-100 text-emerald-700'
-                                    : 'bg-gray-100 text-gray-500'
-                                "
-                                x-text="
-                                    event.is_open
-                                    ? 'OPEN'
-                                    : 'CLOSED'
-                                "
-                            ></span>
+                            <div
+                                class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur text-white text-[8px] font-black uppercase"
+                                x-text="event.is_open ? 'OPEN' : 'CLOSED'"
+                            ></div>
 
                         </div>
 
 
 
-                        <!-- CATEGORY / PRICE -->
+                        <!-- DETAILS -->
 
-                        <p
-                            class="mt-1
-                                   text-xs
-                                   text-gray-400"
-                        >
-
-                            <span
-                                x-text="event.category"
-                            ></span>
-
-                            <span> • ₹</span>
-
-                            <span
-                                x-text="
-                                    formatPrice(event.price)
-                                "
-                            ></span>
-
-                        </p>
+                        <div class="flex-1 min-w-0">
 
 
-
-                        <!-- DATE -->
-
-                        <div
-                            x-show="event.event_date"
-                            class="mt-2
-                                   flex items-center
-                                   gap-1.5
-                                   text-xs
-                                   font-semibold
-                                   text-[#082C3D]"
-                        >
-
-                            <svg
-                                class="w-3.5 h-3.5
-                                       text-yellow-500"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
+                            <div
+                                class="flex flex-wrap items-center gap-2"
                             >
 
-                                <rect
-                                    x="3"
-                                    y="4"
-                                    width="18"
-                                    height="18"
-                                    rx="2"
-                                />
-
-                                <path
-                                    stroke-linecap="round"
-                                    d="M16 2v4M8 2v4M3 10h18"
-                                />
-
-                            </svg>
+                                <h3
+                                    class="text-xl sm:text-2xl font-black"
+                                    x-text="event.title"
+                                ></h3>
 
 
-                            <span
-                                x-text="
-                                    formatDate(
-                                        event.event_date
-                                    )
-                                "
-                            ></span>
+                                <span
+                                    class="px-2.5 py-1 rounded-full text-[8px] font-black uppercase"
+                                    :class="event.is_open
+                                        ? 'bg-emerald-100 text-emerald-700'
+                                        : 'bg-gray-100 text-gray-500'"
+                                    x-text="event.is_open ? 'OPEN' : 'CLOSED'"
+                                ></span>
+
+                            </div>
+
+
+                            <p
+                                class="mt-1 text-xs text-gray-400"
+                            >
+
+                                <span x-text="event.category"></span>
+
+                                ·
+
+                                ₹<span x-text="event.price"></span>
+
+                            </p>
+
+
+                            <!-- ACTIONS -->
+
+                            <div
+                                class="mt-5 flex flex-wrap gap-2"
+                            >
+
+                                <button
+                                    @click="openCardEditor(event)"
+                                    class="px-4 py-2.5 rounded-xl bg-[#082C3D] text-white text-[11px] font-bold"
+                                >
+                                    Edit Card
+                                </button>
+
+
+                                <button
+                                    @click="openDetailsEditor(event)"
+                                    class="px-4 py-2.5 rounded-xl bg-gray-100 text-gray-700 text-[11px] font-bold"
+                                >
+                                    Edit Details
+                                </button>
+
+
+                                <button
+                                    @click="openDatesEditor(event)"
+                                    class="px-4 py-2.5 rounded-xl bg-yellow-50 text-yellow-700 text-[11px] font-bold"
+                                >
+                                    Manage Dates & Seats
+                                </button>
+
+
+                                <button
+                                    x-show="event.is_open"
+                                    @click="closeEvent(event)"
+                                    class="px-4 py-2.5 rounded-xl bg-red-50 text-red-600 text-[11px] font-bold"
+                                >
+                                    Close Event
+                                </button>
+
+
+                                <button
+                                    x-show="!event.is_open"
+                                    @click="openEvent(event)"
+                                    class="px-4 py-2.5 rounded-xl bg-emerald-500 text-white text-[11px] font-bold"
+                                >
+                                    Open Event
+                                </button>
+
+                            </div>
 
                         </div>
 
 
 
-                        <!-- SEATS -->
+                        <!-- PRICE -->
 
                         <div
-                            class="mt-2
-                                   flex flex-wrap
-                                   gap-2"
+                            class="lg:w-32 shrink-0 lg:text-right"
                         >
 
+                            <p
+                                class="text-[8px] uppercase tracking-widest font-bold text-gray-400"
+                            >
+                                Starting
+                            </p>
 
-                            <!-- TOTAL -->
 
-                            <span
-                                class="px-2.5 py-1
-                                       rounded-lg
-                                       bg-gray-50
-                                       text-[10px]
-                                       font-bold
-                                       text-gray-500"
+                            <p
+                                class="mt-1 text-2xl font-black text-[#082C3D]"
                             >
 
-                                Total:
-
-                                <span
-                                    class="text-[#082C3D]"
-                                    x-text="
-                                        event.total_seats
-                                    "
+                                ₹<span
+                                    x-text="event.price"
                                 ></span>
 
-                            </span>
-
-
-
-                            <!-- RESERVED -->
-
-                            <span
-                                class="px-2.5 py-1
-                                       rounded-lg
-                                       bg-yellow-50
-                                       text-[10px]
-                                       font-bold
-                                       text-yellow-700"
-                            >
-
-                                Reserved:
-
-                                <span
-                                    x-text="
-                                        event.reserved_seats
-                                    "
-                                ></span>
-
-                            </span>
-
-
-
-                            <!-- AVAILABLE -->
-
-                            <span
-                                class="px-2.5 py-1
-                                       rounded-lg
-                                       bg-emerald-50
-                                       text-[10px]
-                                       font-bold
-                                       text-emerald-700"
-                            >
-
-                                Available:
-
-                                <span
-                                    x-text="
-                                        availableSeats(event)
-                                    "
-                                ></span>
-
-                            </span>
+                            </p>
 
                         </div>
 
@@ -671,107 +710,137 @@
 
 
 
-                    <!-- ACTIONS -->
+                    <!-- DATES -->
 
                     <div
-                        class="flex flex-col
-                               sm:flex-row
-                               gap-2"
+                        class="border-t border-gray-100 bg-[#FAFBFA] px-5 sm:px-6 py-5"
                     >
 
-                        <!-- EDIT -->
-
-                        <button
-                            @click="openEdit(event)"
-                            class="px-4 py-3
-                                   rounded-xl
-                                   bg-gray-100
-                                   text-[#082C3D]
-                                   text-xs
-                                   font-bold
-                                   hover:bg-gray-200
-                                   transition"
+                        <div
+                            class="flex items-center justify-between mb-3"
                         >
-                            Edit
-                        </button>
 
+                            <div>
 
+                                <p
+                                    class="text-[9px] uppercase tracking-[.2em] font-black text-gray-400"
+                                >
+                                    Upcoming Dates
+                                </p>
 
-                        <!-- OPEN/CLOSE -->
+                            </div>
 
-                        <button
-                            @click="toggleEvent(event)"
-                            :disabled="event.saving"
-                            class="px-4 py-3
-                                   rounded-xl
-                                   text-xs
-                                   font-bold
-                                   transition
-                                   disabled:opacity-50"
-                            :class="
-                                event.is_open
-                                ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                                : 'bg-emerald-500 text-white hover:bg-emerald-600'
-                            "
-                        >
 
                             <span
-                                x-text="
-                                    event.saving
-                                    ? 'Saving...'
-                                    : event.is_open
-                                        ? 'Close Event'
-                                        : 'Open Event'
-                                "
+                                class="text-[10px] font-bold text-gray-400"
+                                x-text="event.dates.length + ' dates'"
                             ></span>
 
-                        </button>
+                        </div>
+
+
+                        <div
+                            class="flex flex-wrap gap-2"
+                        >
+
+                            <template
+                                x-for="date in event.dates"
+                                :key="date.id"
+                            >
+
+                                <div
+                                    class="px-3.5 py-2.5 rounded-xl bg-white border border-gray-200 flex items-center gap-3"
+                                >
+
+                                    <div>
+
+                                        <p
+                                            class="text-[11px] font-black"
+                                            x-text="formatDate(date.event_date)"
+                                        ></p>
+
+                                    </div>
+
+
+                                    <div
+                                        class="h-5 w-px bg-gray-200"
+                                    ></div>
+
+
+                                    <div>
+
+                                        <p
+                                            class="text-[9px] font-bold text-emerald-600"
+                                        >
+
+                                            <span
+                                                x-text="available(date)"
+                                            ></span>
+
+                                            available
+
+                                        </p>
+
+
+                                        <p
+                                            class="text-[8px] text-gray-400"
+                                        >
+
+                                            <span
+                                                x-text="date.reserved_seats"
+                                            ></span>
+
+                                            reserved
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </template>
+
+
+                            <div
+                                x-show="event.dates.length === 0"
+                                class="text-xs text-gray-400"
+                            >
+                                No dates added yet.
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+            </template>
+
+
+            <!-- EMPTY -->
+
+            <div
+                x-show="events.length === 0"
+                class="py-20 text-center bg-white rounded-3xl"
+            >
+
+                <p
+                    class="font-black"
+                >
+                    No expeditions found.
+                </p>
+
+                <p
+                    class="mt-1 text-sm text-gray-400"
+                >
+                    Create your first expedition.
+                </p>
+
             </div>
 
-        </template>
+        </div>
 
     </div>
-
-
-
-    <!-- ================================================== -->
-    <!-- EMPTY                                               -->
-    <!-- ================================================== -->
-
-    <div
-        x-show="events.length === 0"
-        x-cloak
-        class="py-20
-               text-center
-               text-gray-400"
-    >
-
-        <p
-            class="text-sm
-                   font-semibold"
-        >
-            No expeditions found.
-        </p>
-
-        <button
-            @click="openCreate()"
-            class="mt-4
-                   text-xs
-                   font-bold
-                   text-[#082C3D]
-                   underline"
-        >
-            Create your first event
-        </button>
-
-    </div>
-
-</div>
 
 </template>
 
@@ -779,993 +848,350 @@
 
 
 
-<!-- ====================================================== -->
-<!-- CREATE / EDIT MODAL                                    -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     EDIT CARD MODAL
+========================================================= -->
 
 <div
-    x-show="editorOpen"
+    x-show="modal === 'card'"
     x-cloak
-    class="fixed inset-0
-           z-[100]
-           overflow-y-auto"
+    class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
 >
 
-
-    <!-- BACKDROP -->
-
     <div
-        class="fixed inset-0
-               bg-[#061E2A]/60
-               backdrop-blur-sm"
-        @click="closeEditor()"
-    ></div>
-
-
-
-    <!-- MODAL WRAPPER -->
-
-    <div
-        class="relative
-               min-h-screen
-               flex items-center
-               justify-center
-               p-4 sm:p-6"
+        class="min-h-full flex items-center justify-center py-6"
     >
 
-
-        <!-- MODAL -->
-
         <div
-            class="relative
-                   w-full
-                   max-w-5xl
-                   bg-white
-                   rounded-[28px]
-                   shadow-2xl
-                   overflow-hidden"
+            @click.stop
+            class="w-full max-w-6xl bg-white rounded-[30px] shadow-2xl overflow-hidden"
         >
 
 
-            <!-- ================================================= -->
-            <!-- MODAL HEADER                                      -->
-            <!-- ================================================= -->
-
             <div
-                class="px-5 sm:px-7
-                       py-5
-                       border-b border-gray-100
-                       flex items-center
-                       justify-between"
+                class="p-5 sm:p-6 border-b border-gray-100 flex items-center justify-between"
             >
 
                 <div>
 
                     <p
-                        class="text-[9px]
-                               uppercase
-                               tracking-[0.2em]
-                               font-black
-                               text-yellow-600"
+                        class="text-[9px] uppercase tracking-[.2em] font-bold text-yellow-600"
                     >
-                        Expedition
+                        Card Editor
                     </p>
 
 
                     <h2
-                        class="text-xl sm:text-2xl
-                               font-black"
-                        x-text="
-                            editingId
-                            ? 'Edit Event'
-                            : 'Create New Event'
-                        "
-                    ></h2>
+                        class="text-xl sm:text-2xl font-black"
+                    >
+                        Edit Card
+                    </h2>
 
                 </div>
 
 
-
-                <!-- CLOSE -->
-
                 <button
-                    @click="closeEditor()"
-                    class="w-10 h-10
-                           rounded-xl
-                           bg-gray-100
-                           flex items-center
-                           justify-center
-                           hover:bg-gray-200
-                           transition"
+                    @click="closeModal()"
+                    class="w-10 h-10 rounded-xl bg-gray-100 font-bold"
                 >
-
-                    <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                    >
-
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M6 6l12 12M18 6L6 18"
-                        />
-
-                    </svg>
-
+                    ×
                 </button>
 
             </div>
 
 
 
-            <!-- ================================================= -->
-            <!-- MODAL CONTENT                                     -->
-            <!-- ================================================= -->
-
             <div
-                class="grid
-                       lg:grid-cols-[1fr_380px]"
+                class="p-5 sm:p-6 grid lg:grid-cols-2 gap-8"
             >
 
 
-                <!-- ================================================= -->
-                <!-- FORM                                              -->
-                <!-- ================================================= -->
+                <!-- FORM -->
 
-                <div
-                    class="p-5 sm:p-7
-                           max-h-[75vh]
-                           overflow-y-auto
-                           modal-scroll"
-                >
+                <div class="space-y-4">
 
 
-                    <div
-                        class="grid
-                               sm:grid-cols-2
-                               gap-4"
-                    >
+                    <div>
 
+                        <label class="field-label">
+                            Event Name
+                        </label>
 
-
-                        <!-- ======================================= -->
-                        <!-- EVENT NAME                              -->
-                        <!-- ======================================= -->
-
-                        <div
-                            class="sm:col-span-2"
+                        <input
+                            x-model="form.title"
+                            class="field"
+                            placeholder="Lingya Waterfall"
                         >
 
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Event Name
-                            </label>
+                    </div>
 
 
-                            <input
-                                x-model="form.title"
-                                @input="generateSlug()"
-                                type="text"
-                                placeholder="Hidden Waterfall"
-                                class="field"
-                            >
+                    <div>
 
-                        </div>
+                        <label class="field-label">
+                            URL Slug
+                        </label>
+
+                        <input
+                            x-model="form.slug"
+                            class="field"
+                            placeholder="lingya-waterfall"
+                        >
+
+                    </div>
 
 
+                    <div class="grid grid-cols-2 gap-3">
 
-                        <!-- ======================================= -->
-                        <!-- SLUG                                    -->
-                        <!-- ======================================= -->
 
                         <div>
 
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                URL Slug
-                            </label>
-
-
-                            <input
-                                x-model="form.slug"
-                                type="text"
-                                placeholder="hidden-waterfall"
-                                class="field"
-                            >
-
-
-                            <p
-                                class="mt-1
-                                       text-[10px]
-                                       text-gray-400"
-                            >
-                                /book=<span
-                                    x-text="
-                                        form.slug ||
-                                        'hidden-waterfall'
-                                    "
-                                ></span>
-                            </p>
-
-                        </div>
-
-
-
-                        <!-- ======================================= -->
-                        <!-- CATEGORY                                -->
-                        <!-- ======================================= -->
-
-                        <div>
-
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
+                            <label class="field-label">
                                 Category
                             </label>
 
-
                             <input
                                 x-model="form.category"
-                                type="text"
-                                placeholder="TREKKING"
                                 class="field"
+                                placeholder="Trekking"
                             >
 
                         </div>
 
 
-
-                        <!-- ======================================= -->
-                        <!-- PRICE                                   -->
-                        <!-- ======================================= -->
-
                         <div>
 
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Price ₹
+                            <label class="field-label">
+                                Price
                             </label>
-
 
                             <input
                                 x-model="form.price"
                                 type="number"
                                 min="0"
-                                step="1"
-                                placeholder="1499"
                                 class="field"
+                                placeholder="2899"
                             >
 
                         </div>
 
+                    </div>
 
 
-                        <!-- ======================================= -->
-                        <!-- IMAGE URL                               -->
-                        <!-- ======================================= -->
+                    <div>
 
-                        <div>
+                        <label class="field-label">
+                            Image URL
+                        </label>
 
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Image URL
-                            </label>
+                        <input
+                            x-model="form.image_url"
+                            class="field"
+                            placeholder="https://..."
+                        >
 
-
-                            <input
-                                x-model="form.image_url"
-                                type="url"
-                                placeholder="https://..."
-                                class="field"
-                            >
-
-                        </div>
+                    </div>
 
 
-
-                        <!-- ======================================= -->
-                        <!-- EVENT DATE                              -->
-                        <!-- ======================================= -->
+                    <div
+                        class="flex items-center justify-between p-4 rounded-2xl bg-gray-50"
+                    >
 
                         <div>
 
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Event Date
-                            </label>
+                            <p class="text-sm font-black">
+                                Event status
+                            </p>
 
-
-                            <input
-                                x-model="form.event_date"
-                                type="date"
-                                class="field"
-                            >
-
-                        </div>
-
-
-
-                        <!-- ======================================= -->
-                        <!-- TOTAL SEATS                             -->
-                        <!-- ======================================= -->
-
-                        <div>
-
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Total Seats
-                            </label>
-
-
-                            <input
-                                x-model.number="form.total_seats"
-                                type="number"
-                                min="0"
-                                placeholder="30"
-                                class="field"
-                            >
-
-                        </div>
-
-
-
-                        <!-- ======================================= -->
-                        <!-- RESERVED SEATS                         -->
-                        <!-- ======================================= -->
-
-                        <div>
-
-                            <label
-                                class="block
-                                       mb-1.5
-                                       text-xs
-                                       font-bold"
-                            >
-                                Reserved Seats
-                            </label>
-
-
-                            <input
-                                x-model.number="form.reserved_seats"
-                                type="number"
-                                min="0"
-                                :max="form.total_seats"
-                                placeholder="0"
-                                class="field"
-                            >
-
-
-                            <p
-                                class="mt-1
-                                       text-[10px]
-                                       text-gray-400"
-                            >
-                                Reserved seats cannot exceed total seats.
+                            <p class="text-xs text-gray-400">
+                                Visible on public website
                             </p>
 
                         </div>
 
 
-
-                        <!-- ======================================= -->
-                        <!-- AVAILABLE SEATS                         -->
-                        <!-- ======================================= -->
-
-                        <div
-                            class="sm:col-span-2
-                                   p-4
-                                   rounded-2xl
-                                   bg-gray-50"
-                        >
-
-                            <div
-                                class="flex items-center
-                                       justify-between"
-                            >
-
-                                <div>
-
-                                    <p
-                                        class="text-sm
-                                               font-bold"
-                                    >
-                                        Seat Availability
-                                    </p>
-
-
-                                    <p
-                                        class="text-[11px]
-                                               text-gray-400"
-                                    >
-                                        Automatically calculated.
-                                    </p>
-
-                                </div>
-
-
-                                <div
-                                    class="text-right"
-                                >
-
-                                    <p
-                                        class="text-2xl
-                                               font-black
-                                               text-emerald-600"
-                                        x-text="
-                                            Math.max(
-                                                0,
-                                                Number(
-                                                    form.total_seats || 0
-                                                )
-                                                -
-                                                Number(
-                                                    form.reserved_seats || 0
-                                                )
-                                            )
-                                        "
-                                    ></p>
-
-
-                                    <p
-                                        class="text-[9px]
-                                               uppercase
-                                               tracking-wider
-                                               font-bold
-                                               text-gray-400"
-                                    >
-                                        Available
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- ======================================= -->
-                        <!-- EVENT STATUS                            -->
-                        <!-- ======================================= -->
-
-                        <div
-                            class="sm:col-span-2
-                                   p-4
-                                   rounded-2xl
-                                   bg-gray-50
-                                   flex items-center
-                                   justify-between"
-                        >
-
-                            <div>
-
-                                <p
-                                    class="text-sm
-                                           font-bold"
-                                >
-                                    Event Status
-                                </p>
-
-
-                                <p
-                                    class="text-[11px]
-                                           text-gray-400"
-                                >
-                                    Closed events won't appear publicly.
-                                </p>
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                @click="
-                                    form.is_open =
-                                    !form.is_open
-                                "
-                                class="relative
-                                       w-12 h-7
-                                       rounded-full
-                                       transition"
-                                :class="
-                                    form.is_open
-                                    ? 'bg-emerald-500'
-                                    : 'bg-gray-300'
-                                "
-                            >
-
-                                <span
-                                    class="absolute
-                                           top-1
-                                           w-5 h-5
-                                           bg-white
-                                           rounded-full
-                                           shadow
-                                           transition"
-                                    :class="
-                                        form.is_open
-                                        ? 'left-6'
-                                        : 'left-1'
-                                    "
-                                ></span>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- DELETE -->
-
-                    <div
-                        x-show="editingId"
-                        class="mt-7
-                               pt-5
-                               border-t border-gray-100"
-                    >
-
                         <button
-                            @click="deleteEvent()"
-                            class="text-xs
-                                   font-bold
-                                   text-red-500
-                                   hover:text-red-700"
+                            @click="form.is_open = !form.is_open"
+                            class="relative w-12 h-7 rounded-full transition"
+                            :class="form.is_open ? 'bg-emerald-500' : 'bg-gray-300'"
                         >
-                            Delete this event
+
+                            <span
+                                class="absolute top-1 w-5 h-5 bg-white rounded-full shadow transition"
+                                :class="form.is_open ? 'left-6' : 'left-1'"
+                            ></span>
+
                         </button>
 
                     </div>
+
+
+                    <button
+                        @click="saveCard()"
+                        :disabled="saving"
+                        class="w-full py-3.5 rounded-xl bg-[#082C3D] text-white font-bold disabled:opacity-50"
+                    >
+
+                        <span
+                            x-text="saving ? 'Saving...' : 'Save Card'"
+                        ></span>
+
+                    </button>
 
                 </div>
 
 
 
-                <!-- ================================================= -->
-                <!-- LIVE PREVIEW                                      -->
-                <!-- ================================================= -->
+                <!-- LIVE PREVIEW -->
 
-                <div
-                    class="bg-[#F6F8F7]
-                           border-l border-gray-100
-                           p-5 sm:p-7"
-                >
+                <div>
 
-                    <div
-                        class="sticky top-0"
-                    >
+                    <div class="flex items-center justify-between mb-3">
 
-
-                        <div class="mb-5">
+                        <div>
 
                             <p
-                                class="text-[9px]
-                                       uppercase
-                                       tracking-[0.2em]
-                                       font-black
-                                       text-yellow-600"
+                                class="text-[9px] uppercase tracking-[.2em] font-black text-gray-400"
                             >
                                 Live Preview
                             </p>
 
-
-                            <h3
-                                class="mt-1
-                                       text-lg
-                                       font-black"
+                            <p
+                                class="text-sm font-bold"
                             >
-                                Public Card
-                            </h3>
+                                Public card
+                            </p>
 
                         </div>
 
 
-
-                        <!-- ======================================= -->
-                        <!-- CARD                                    -->
-                        <!-- ======================================= -->
-
-                        <div
-                            class="preview-card
-                                   relative
-                                   overflow-hidden
-                                   rounded-[24px]
-                                   bg-[#082C3D]
-                                   aspect-[4/4.9]
-                                   shadow-[0_22px_55px_rgba(8,44,61,.18)]"
+                        <span
+                            class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[8px] font-black"
                         >
+                            LIVE
+                        </span>
+
+                    </div>
 
 
-                            <!-- IMAGE -->
+                    <div class="max-w-sm mx-auto">
+
+                        <div class="preview-card">
+
 
                             <img
-                                :src="
-                                    form.image_url ||
-                                    'https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1000&auto=format&fit=crop'
-                                "
-                                class="absolute inset-0
-                                       w-full h-full
-                                       object-cover"
-                                @error="
-                                    $event.target.src =
-                                    'https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1000&auto=format&fit=crop'
-                                "
+                                :src="form.image_url || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop'"
+                                class="preview-image"
+                                @error="$event.target.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop'"
                             >
 
 
-                            <!-- GRADIENT -->
+                            <div class="preview-overlay"></div>
+
 
                             <div
-                                class="absolute inset-0
-                                       bg-gradient-to-t
-                                       from-[#061E2A]
-                                       via-[#061E2A]/40
-                                       to-black/5"
-                            ></div>
-
-
-
-                            <!-- TOP -->
-
-                            <div
-                                class="absolute
-                                       top-4 left-4 right-4
-                                       flex items-start
-                                       justify-between
-                                       z-10"
+                                class="absolute top-5 left-5 right-5 z-10 flex justify-between items-start gap-2"
                             >
 
+                                <div class="preview-category">
 
-                                <!-- CATEGORY -->
+                                    <span
+                                        class="w-2 h-2 rounded-full bg-yellow-400"
+                                    ></span>
 
-                                <span
-                                    class="px-3 py-1.5
-                                           rounded-full
-                                           bg-white/90
-                                           backdrop-blur-xl
-                                           text-[#082C3D]
-                                           text-[9px]
-                                           uppercase
-                                           tracking-[0.16em]
-                                           font-black"
-                                    x-text="
-                                        form.category ||
-                                        'CATEGORY'
-                                    "
-                                ></span>
-
-
-
-                                <!-- ARROW -->
-
-                                <span
-                                    class="w-9 h-9
-                                           rounded-full
-                                           bg-white/15
-                                           backdrop-blur-xl
-                                           border border-white/25
-                                           flex items-center
-                                           justify-center
-                                           text-white"
-                                >
-
-                                    <svg
-                                        class="w-4 h-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        viewBox="0 0 24 24"
-                                    >
-
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M5 12h14M13 6l6 6-6 6"
-                                        />
-
-                                    </svg>
-
-                                </span>
-
-                            </div>
-
-
-
-                            <!-- CONTENT -->
-
-                            <div
-                                class="absolute
-                                       left-5 right-5 bottom-5
-                                       z-10"
-                            >
-
-
-                                <!-- TITLE -->
-
-                                <h3
-                                    class="text-xl sm:text-2xl
-                                           leading-[1.05]
-                                           tracking-[-0.03em]
-                                           font-black
-                                           text-white
-                                           max-w-[92%]"
-                                    x-text="
-                                        form.title ||
-                                        'Your Expedition Name'
-                                    "
-                                ></h3>
-
-
-
-                                <!-- DATE + SEATS -->
-
-                                <div
-                                    class="mt-4
-                                           flex items-center
-                                           gap-2"
-                                >
-
-
-                                    <!-- DATE -->
-
-                                    <div
-                                        class="flex-1
-                                               min-w-0
-                                               flex items-center
-                                               gap-2
-                                               px-3 py-2
-                                               rounded-xl
-                                               bg-white/10
-                                               backdrop-blur-xl
-                                               border border-white/15"
-                                    >
-
-                                        <svg
-                                            class="w-4 h-4
-                                                   shrink-0
-                                                   text-yellow-400"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            viewBox="0 0 24 24"
-                                        >
-
-                                            <rect
-                                                x="3"
-                                                y="4"
-                                                width="18"
-                                                height="18"
-                                                rx="2"
-                                            />
-
-                                            <path
-                                                stroke-linecap="round"
-                                                d="M16 2v4M8 2v4M3 10h18"
-                                            />
-
-                                        </svg>
-
-
-                                        <div class="min-w-0">
-
-                                            <p
-                                                class="text-[8px]
-                                                       uppercase
-                                                       tracking-wider
-                                                       font-bold
-                                                       text-white/45"
-                                            >
-                                                Event Date
-                                            </p>
-
-
-                                            <p
-                                                class="text-[11px]
-                                                       font-extrabold
-                                                       text-white
-                                                       truncate"
-                                                x-text="
-                                                    form.event_date
-                                                    ? formatDate(form.event_date)
-                                                    : 'Date TBA'
-                                                "
-                                            ></p>
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    <!-- AVAILABLE -->
-
-                                    <div
-                                        class="shrink-0
-                                               px-3 py-2
-                                               rounded-xl
-                                               bg-emerald-500/20
-                                               backdrop-blur-xl
-                                               border border-emerald-300/20"
-                                    >
-
-                                        <p
-                                            class="text-[8px]
-                                                   uppercase
-                                                   tracking-wider
-                                                   font-bold
-                                                   text-emerald-200"
-                                        >
-                                            Seats
-                                        </p>
-
-
-                                        <p
-                                            class="text-[11px]
-                                                   font-black
-                                                   text-white
-                                                   whitespace-nowrap"
-                                        >
-
-                                            <span
-                                                x-text="
-                                                    Math.max(
-                                                        0,
-                                                        Number(
-                                                            form.total_seats || 0
-                                                        )
-                                                        -
-                                                        Number(
-                                                            form.reserved_seats || 0
-                                                        )
-                                                    )
-                                                "
-                                            ></span>
-
-                                            <span
-                                                class="text-white/50"
-                                            >
-                                                available
-                                            </span>
-
-                                        </p>
-
-                                    </div>
+                                    <span
+                                        class="text-[9px] uppercase tracking-widest font-black"
+                                        x-text="form.category || 'Adventure'"
+                                    ></span>
 
                                 </div>
 
 
-
-                                <!-- PRICE + BOOK -->
-
                                 <div
-                                    class="mt-3
-                                           pt-3
-                                           border-t border-white/15
-                                           flex items-center
-                                           justify-between"
+                                    class="preview-seat"
+                                    :class="previewAvailable < 3 ? 'low' : ''"
                                 >
 
                                     <span
-                                        class="text-[9px]
-                                               uppercase
-                                               tracking-[0.18em]
-                                               font-bold
-                                               text-white/50"
+                                        class="w-2 h-2 rounded-full bg-emerald-300"
+                                    ></span>
+
+
+                                    <span
+                                        class="text-[9px] font-black text-white"
+                                    >
+
+                                        <span
+                                            x-text="previewAvailable"
+                                        ></span>
+
+                                        seats left
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                class="absolute left-5 right-5 bottom-5 z-10"
+                            >
+
+                                <div class="flex items-center gap-2 mb-3">
+
+                                    <span
+                                        class="w-7 h-[2px] bg-yellow-400"
+                                    ></span>
+
+                                    <span
+                                        class="text-[8px] uppercase tracking-[.2em] font-bold text-white/60"
                                     >
                                         Adventure Junction
                                     </span>
 
-
-                                    <div
-                                        class="flex items-center
-                                               gap-3"
-                                    >
-
-                                        <span
-                                            class="text-sm
-                                                   font-black
-                                                   text-yellow-400"
-                                            x-text="
-                                                '₹' +
-                                                formatPrice(
-                                                    form.price || 0
-                                                )
-                                            "
-                                        ></span>
+                                </div>
 
 
-                                        <span
-                                            class="px-3 py-1.5
-                                                   rounded-lg
-                                                   bg-yellow-400
-                                                   text-[#082C3D]
-                                                   text-[9px]
-                                                   font-black
-                                                   uppercase
-                                                   tracking-wider"
+                                <h3
+                                    class="text-[27px] leading-[.95] tracking-tight font-black text-white"
+                                    x-text="form.title || 'Event Name'"
+                                ></h3>
+
+
+                                <div
+                                    class="preview-panel mt-4 p-3 flex items-center justify-between"
+                                >
+
+                                    <div class="pl-2">
+
+                                        <p
+                                            class="text-[7px] uppercase tracking-widest font-bold text-white/40"
                                         >
-                                            Book
-                                        </span>
+                                            Starting from
+                                        </p>
 
+
+                                        <p
+                                            class="mt-1 text-2xl font-black text-yellow-400"
+                                        >
+
+                                            ₹<span
+                                                x-text="Number(form.price || 0).toLocaleString('en-IN')"
+                                            ></span>
+
+                                        </p>
+
+                                    </div>
+
+
+                                    <div class="book-button">
+                                        Book →
                                     </div>
 
                                 </div>
 
                             </div>
-
-                        </div>
-
-
-
-                        <!-- PUBLIC URL -->
-
-                        <div
-                            class="mt-4
-                                   px-4 py-3
-                                   rounded-xl
-                                   bg-white
-                                   border border-gray-100"
-                        >
-
-                            <p
-                                class="text-[9px]
-                                       uppercase
-                                       tracking-[0.15em]
-                                       font-bold
-                                       text-gray-400"
-                            >
-                                Public Booking URL
-                            </p>
-
-
-                            <p
-                                class="mt-1
-                                       text-xs
-                                       font-bold
-                                       text-[#082C3D]
-                                       break-all"
-                            >
-
-                                /book=<span
-                                    x-text="
-                                        form.slug ||
-                                        'event-slug'
-                                    "
-                                ></span>
-
-                            </p>
 
                         </div>
 
@@ -1775,64 +1201,96 @@
 
             </div>
 
+        </div>
+
+    </div>
+
+</div>
 
 
-            <!-- ================================================= -->
-            <!-- MODAL FOOTER                                      -->
-            <!-- ================================================= -->
+
+<!-- =========================================================
+     DETAILS MODAL
+========================================================= -->
+
+<div
+    x-show="modal === 'details'"
+    x-cloak
+    class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+>
+
+    <div
+        class="min-h-full flex items-center justify-center py-6"
+    >
+
+        <div
+            class="w-full max-w-2xl bg-white rounded-[30px] shadow-2xl"
+        >
 
             <div
-                class="px-5 sm:px-7
-                       py-4
-                       border-t border-gray-100
-                       flex flex-col-reverse
-                       sm:flex-row
-                       justify-end
-                       gap-2"
+                class="p-6 border-b border-gray-100 flex justify-between"
             >
 
+                <div>
 
-                <!-- CANCEL -->
+                    <p
+                        class="text-[9px] uppercase tracking-[.2em] font-bold text-yellow-600"
+                    >
+                        Booking Page
+                    </p>
+
+                    <h2
+                        class="text-2xl font-black"
+                    >
+                        Edit Details
+                    </h2>
+
+                </div>
+
 
                 <button
-                    @click="closeEditor()"
-                    class="px-5 py-3
-                           rounded-xl
-                           bg-gray-100
-                           text-xs
-                           font-bold
-                           hover:bg-gray-200
-                           transition"
+                    @click="closeModal()"
+                    class="w-10 h-10 rounded-xl bg-gray-100"
                 >
-                    Cancel
+                    ×
                 </button>
 
+            </div>
 
 
-                <!-- SAVE -->
+            <div class="p-6">
+
+                <div
+                    class="p-4 rounded-2xl bg-blue-50 text-blue-700 text-sm"
+                >
+
+                    These details are reserved for the future booking
+                    page. You can fill them in later without changing
+                    the homepage card.
+
+                </div>
+
+
+                <label class="field-label mt-5">
+                    Duration
+                </label>
+
+
+                <input
+                    x-model="form.duration"
+                    class="field"
+                    placeholder="Example: 1 Day / 1 Night"
+                >
+
 
                 <button
-                    @click="saveEvent()"
+                    @click="saveDetails()"
                     :disabled="saving"
-                    class="px-6 py-3
-                           rounded-xl
-                           bg-[#082C3D]
-                           text-white
-                           text-xs
-                           font-bold
-                           hover:bg-[#0d4056]
-                           disabled:opacity-50
-                           transition"
+                    class="w-full mt-5 py-3.5 rounded-xl bg-[#082C3D] text-white font-bold disabled:opacity-50"
                 >
 
                     <span
-                        x-text="
-                            saving
-                            ? 'Saving...'
-                            : editingId
-                                ? 'Save Changes'
-                                : 'Create Event'
-                        "
+                        x-text="saving ? 'Saving...' : 'Save Details'"
                     ></span>
 
                 </button>
@@ -1847,43 +1305,524 @@
 
 
 
-<!-- ====================================================== -->
-<!-- TOAST                                                    -->
-<!-- ====================================================== -->
+<!-- =========================================================
+     DATES MODAL
+========================================================= -->
 
 <div
-    x-show="toast"
+    x-show="modal === 'dates'"
     x-cloak
-    x-transition
-    class="fixed
-           bottom-5
-           left-1/2
-           -translate-x-1/2
-           z-[200]
-           px-5 py-3
-           rounded-2xl
-           bg-[#082C3D]
-           text-white
-           shadow-2xl
-           text-xs
-           font-bold
-           max-w-[90vw]
-           text-center"
-    x-text="toast"
-></div>
+    class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+>
+
+    <div
+        class="min-h-full flex items-center justify-center py-6"
+    >
+
+        <div
+            class="w-full max-w-3xl bg-white rounded-[30px] shadow-2xl overflow-hidden"
+        >
+
+
+            <div
+                class="p-6 border-b border-gray-100 flex items-center justify-between"
+            >
+
+                <div>
+
+                    <p
+                        class="text-[9px] uppercase tracking-[.2em] font-bold text-yellow-600"
+                    >
+                        Availability
+                    </p>
+
+
+                    <h2
+                        class="text-2xl font-black"
+                        x-text="selectedEvent?.title"
+                    ></h2>
+
+                </div>
+
+
+                <button
+                    @click="closeModal()"
+                    class="w-10 h-10 rounded-xl bg-gray-100"
+                >
+                    ×
+                </button>
+
+            </div>
 
 
 
-<!-- ====================================================== -->
-<!-- JAVASCRIPT                                               -->
-<!-- ====================================================== -->
+            <div class="p-6">
+
+
+                <!-- ADD DATE -->
+
+                <div
+                    class="p-4 rounded-2xl bg-[#F7F9F8] border border-gray-100"
+                >
+
+                    <p
+                        class="text-sm font-black mb-3"
+                    >
+                        Add Event Date
+                    </p>
+
+
+                    <div
+                        class="grid sm:grid-cols-3 gap-3"
+                    >
+
+                        <input
+                            x-model="newDate.date"
+                            type="date"
+                            class="field"
+                        >
+
+
+                        <input
+                            x-model="newDate.total"
+                            type="number"
+                            min="1"
+                            placeholder="Total seats"
+                            class="field"
+                        >
+
+
+                        <button
+                            @click="addDate()"
+                            :disabled="saving"
+                            class="rounded-xl bg-[#082C3D] text-white text-xs font-bold"
+                        >
+                            + Add Date
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DATE LIST -->
+
+                <div class="mt-5 space-y-3">
+
+
+                    <template
+                        x-for="date in dateEditor"
+                        :key="date.id"
+                    >
+
+                        <div
+                            class="p-4 rounded-2xl border border-gray-100 bg-white"
+                        >
+
+                            <div
+                                class="grid sm:grid-cols-4 gap-3 items-center"
+                            >
+
+                                <div>
+
+                                    <p
+                                        class="text-[8px] uppercase tracking-widest font-bold text-gray-400"
+                                    >
+                                        Date
+                                    </p>
+
+
+                                    <p
+                                        class="mt-1 text-sm font-black"
+                                        x-text="formatDate(date.event_date)"
+                                    ></p>
+
+                                </div>
+
+
+                                <div>
+
+                                    <label class="field-label">
+                                        Total
+                                    </label>
+
+
+                                    <input
+                                        x-model.number="date.total_seats"
+                                        type="number"
+                                        min="0"
+                                        class="field"
+                                    >
+
+                                </div>
+
+
+                                <div>
+
+                                    <label class="field-label">
+                                        Reserved
+                                    </label>
+
+
+                                    <input
+                                        x-model.number="date.reserved_seats"
+                                        type="number"
+                                        min="0"
+                                        :max="date.total_seats"
+                                        class="field"
+                                    >
+
+                                </div>
+
+
+                                <div
+                                    class="flex items-center justify-between gap-2"
+                                >
+
+                                    <div>
+
+                                        <p
+                                            class="text-[8px] uppercase tracking-widest font-bold text-gray-400"
+                                        >
+                                            Available
+                                        </p>
+
+
+                                        <p
+                                            class="text-lg font-black text-emerald-600"
+                                            x-text="available(date)"
+                                        ></p>
+
+                                    </div>
+
+
+                                    <button
+                                        @click="saveDate(date)"
+                                        class="px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700 text-[9px] font-black"
+                                    >
+                                        Save
+                                    </button>
+
+
+                                    <button
+                                        @click="deleteDate(date)"
+                                        class="px-3 py-2 rounded-lg bg-red-50 text-red-600 text-[9px] font-black"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </template>
+
+
+                    <div
+                        x-show="dateEditor.length === 0"
+                        class="py-10 text-center text-sm text-gray-400"
+                    >
+                        No dates yet.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CREATE MODAL
+========================================================= -->
+
+<div
+    x-show="modal === 'create'"
+    x-cloak
+    class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+>
+
+    <div
+        class="min-h-full flex items-center justify-center py-6"
+    >
+
+        <div
+            class="w-full max-w-2xl bg-white rounded-[30px] shadow-2xl"
+        >
+
+
+            <div
+                class="p-6 border-b border-gray-100 flex items-center justify-between"
+            >
+
+                <div>
+
+                    <p
+                        class="text-[9px] uppercase tracking-[.2em] font-bold text-yellow-600"
+                    >
+                        New Expedition
+                    </p>
+
+
+                    <h2
+                        class="text-2xl font-black"
+                    >
+                        Create Event
+                    </h2>
+
+                </div>
+
+
+                <button
+                    @click="closeModal()"
+                    class="w-10 h-10 rounded-xl bg-gray-100"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="p-6 space-y-4">
+
+
+                <div>
+
+                    <label class="field-label">
+                        Event Name
+                    </label>
+
+
+                    <input
+                        x-model="form.title"
+                        class="field"
+                        placeholder="Lingya Waterfall"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label class="field-label">
+                        URL Slug
+                    </label>
+
+
+                    <input
+                        x-model="form.slug"
+                        class="field"
+                        placeholder="lingya-waterfall"
+                    >
+
+                </div>
+
+
+                <div class="grid grid-cols-2 gap-3">
+
+
+                    <div>
+
+                        <label class="field-label">
+                            Category
+                        </label>
+
+
+                        <input
+                            x-model="form.category"
+                            class="field"
+                            placeholder="Trekking"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="field-label">
+                            Price
+                        </label>
+
+
+                        <input
+                            x-model="form.price"
+                            type="number"
+                            min="0"
+                            class="field"
+                            placeholder="2899"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <label class="field-label">
+                        Image URL
+                    </label>
+
+
+                    <input
+                        x-model="form.image_url"
+                        class="field"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <button
+                    @click="createEvent()"
+                    :disabled="saving"
+                    class="w-full py-3.5 rounded-xl bg-[#082C3D] text-white font-bold disabled:opacity-50"
+                >
+
+                    <span
+                        x-text="saving ? 'Creating...' : 'Create Event'"
+                    ></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CLOSE EVENT MODAL
+========================================================= -->
+
+<div
+    x-show="modal === 'close'"
+    x-cloak
+    class="fixed inset-0 z-[110] bg-black/55 backdrop-blur-sm p-4"
+>
+
+    <div
+        class="min-h-full flex items-center justify-center"
+    >
+
+        <div
+            class="w-full max-w-md bg-white rounded-[28px] shadow-2xl p-6"
+        >
+
+            <div
+                class="w-12 h-12 rounded-2xl bg-red-50 text-red-500 flex items-center justify-center mb-5"
+            >
+
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        d="M6 6l12 12M18 6L6 18"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <h2
+                class="text-xl font-black"
+            >
+                Close this event?
+            </h2>
+
+
+            <p
+                class="mt-2 text-sm text-gray-500"
+            >
+
+                The event will immediately disappear from the public
+                website.
+
+            </p>
+
+
+            <div
+                class="mt-5 p-4 rounded-2xl bg-yellow-50 border border-yellow-100"
+            >
+
+                <p
+                    class="text-[9px] uppercase tracking-widest font-black text-yellow-700"
+                >
+                    Next Booking Morning
+                </p>
+
+
+                <p
+                    class="mt-1 text-xs text-yellow-700"
+                >
+                    When should the next booking opportunity be available?
+                </p>
+
+
+                <input
+                    x-model="closeForm.nextBookingDate"
+                    type="date"
+                    class="w-full mt-3 px-4 py-3 rounded-xl bg-white border border-yellow-200 outline-none"
+                >
+
+            </div>
+
+
+            <div
+                class="mt-6 flex gap-3"
+            >
+
+                <button
+                    @click="closeModal()"
+                    class="flex-1 py-3 rounded-xl bg-gray-100 text-gray-700 text-sm font-bold"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    @click="confirmCloseEvent()"
+                    :disabled="saving || !closeForm.nextBookingDate"
+                    class="flex-1 py-3 rounded-xl bg-red-500 text-white text-sm font-bold disabled:opacity-40"
+                >
+
+                    <span
+                        x-text="saving ? 'Closing...' : 'Close Event'"
+                    ></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 <script>
-
-
-/* ========================================================
-   SUPABASE CONFIG
-======================================================== */
 
 const SUPABASE_URL =
     'https://salaxcyxgwjqemryqwkx.supabase.co';
@@ -1893,15 +1832,13 @@ const SUPABASE_PUBLISHABLE_KEY =
     'sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO';
 
 
-
-/* ========================================================
-   SUPABASE CLIENT
-======================================================== */
-
 const supabaseClient =
     window.supabase.createClient(
+
         SUPABASE_URL,
+
         SUPABASE_PUBLISHABLE_KEY,
+
         {
             auth: {
                 persistSession: true,
@@ -1909,54 +1846,43 @@ const supabaseClient =
                 detectSessionInUrl: true
             }
         }
+
     );
 
 
-
-/* ========================================================
-   ADMIN APP
-======================================================== */
 
 function adminApp() {
 
     return {
 
-
-        /* ==================================================
-           STATE
-        ================================================== */
-
         session: null,
-
-        userEmail: '',
 
         email: '',
 
         password: '',
 
-        events: [],
-
         loading: false,
+
+        loadingEvents: true,
 
         saving: false,
 
         error: '',
 
-        toast: '',
+        success: '',
 
-        toastTimer: null,
+        modal: null,
 
-        editorOpen: false,
+        events: [],
 
-        editingId: null,
+        selectedEvent: null,
 
+        dateEditor: [],
 
-
-        /* ==================================================
-           FORM
-        ================================================== */
 
         form: {
+
+            id: null,
 
             title: '',
 
@@ -1964,165 +1890,129 @@ function adminApp() {
 
             category: '',
 
-            price: '',
+            price: 0,
 
             image_url: '',
 
-            event_date: '',
+            is_open: true,
 
-            total_seats: 0,
-
-            reserved_seats: 0,
-
-            is_open: true
+            duration: ''
 
         },
 
 
+        newDate: {
 
-        /* ==================================================
+            date: '',
+
+            total: 25
+
+        },
+
+
+        closeForm: {
+
+            nextBookingDate: ''
+
+        },
+
+
+        /* =====================================================
            INIT
-        ================================================== */
+        ===================================================== */
 
         async init() {
 
-            try {
+            const {
 
-                const {
-                    data
-                } = await supabaseClient
-                    .auth
-                    .getSession();
+                data
 
-
-                this.session =
-                    data.session;
+            } = await supabaseClient
+                .auth
+                .getSession();
 
 
-                if (this.session) {
-
-                    this.userEmail =
-                        this.session.user.email || '';
-
-                    await this.loadEvents();
-
-                }
+            this.session =
+                data.session;
 
 
-                supabaseClient
-                    .auth
-                    .onAuthStateChange(
-                        async (_event, session) => {
+            supabaseClient
+                .auth
+                .onAuthStateChange(
 
-                            this.session =
-                                session;
+                    (_event, session) => {
+
+                        this.session =
+                            session;
 
 
-                            if (session) {
+                        if (session) {
 
-                                this.userEmail =
-                                    session.user.email || '';
-
-                                await this.loadEvents();
-
-                            } else {
-
-                                this.userEmail = '';
-
-                                this.events = [];
-
-                            }
+                            this.loadEvents();
 
                         }
-                    );
 
-            } catch (error) {
+                    }
 
-                console.error(error);
+                );
 
-                this.error =
-                    'Unable to initialize admin panel.';
+
+            if (this.session) {
+
+                await this.loadEvents();
 
             }
 
         },
 
 
-
-        /* ==================================================
+        /* =====================================================
            LOGIN
-        ================================================== */
+        ===================================================== */
 
         async login() {
 
-            if (!this.email.trim()) {
+            this.loading =
+                true;
+
+            this.error =
+                '';
+
+
+            const {
+
+                error
+
+            } = await supabaseClient
+                .auth
+                .signInWithPassword({
+
+                    email:
+                        this.email,
+
+                    password:
+                        this.password
+
+                });
+
+
+            if (error) {
 
                 this.error =
-                    'Enter your email.';
-
-                return;
+                    error.message;
 
             }
 
 
-            if (!this.password) {
-
-                this.error =
-                    'Enter your password.';
-
-                return;
-
-            }
-
-
-            this.loading = true;
-
-            this.error = '';
-
-
-            try {
-
-                const {
-                    error
-                } = await supabaseClient
-                    .auth
-                    .signInWithPassword({
-
-                        email:
-                            this.email.trim(),
-
-                        password:
-                            this.password
-
-                    });
-
-
-                if (error) {
-
-                    this.error =
-                        error.message;
-
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-                this.error =
-                    'Unable to sign in.';
-
-            }
-
-
-            this.loading = false;
+            this.loading =
+                false;
 
         },
 
 
-
-        /* ==================================================
+        /* =====================================================
            LOGOUT
-        ================================================== */
+        ===================================================== */
 
         async logout() {
 
@@ -2130,26 +2020,41 @@ function adminApp() {
                 .auth
                 .signOut();
 
-            this.session = null;
 
-            this.events = [];
+            this.session =
+                null;
+
+            this.events =
+                [];
 
         },
 
 
-
-        /* ==================================================
+        /* =====================================================
            LOAD EVENTS
-        ================================================== */
+        ===================================================== */
 
         async loadEvents() {
 
+            this.loadingEvents =
+                true;
+
+            this.error =
+                '';
+
+
             const {
+
                 data,
+
                 error
+
             } = await supabaseClient
+
                 .from('expeditions')
+
                 .select(`
+
                     id,
                     title,
                     slug,
@@ -2157,649 +2062,1078 @@ function adminApp() {
                     price,
                     image_url,
                     is_open,
+                    duration,
                     event_date,
                     total_seats,
-                    reserved_seats,
-                    created_at,
-                    updated_at
+                    reserved_seats
+
                 `)
+
                 .order(
-                    'event_date',
+
+                    'created_at',
+
                     {
-                        ascending: true,
-                        nullsFirst: false
+                        ascending:
+                            false
                     }
+
                 );
 
 
             if (error) {
 
-                console.error(
-                    'Supabase load error:',
-                    error
-                );
+                console.error(error);
 
-                this.showToast(
+                this.error =
                     'Unable to load events: ' +
-                    error.message
-                );
+                    error.message;
+
+                this.loadingEvents =
+                    false;
 
                 return;
+
+            }
+
+
+            const ids =
+                (data || []).map(
+                    event =>
+                        event.id
+                );
+
+
+            let dates =
+                [];
+
+
+            if (ids.length) {
+
+                const result =
+                    await supabaseClient
+
+                        .from('expedition_dates')
+
+                        .select('*')
+
+                        .in(
+                            'expedition_id',
+                            ids
+                        )
+
+                        .order(
+                            'event_date',
+                            {
+                                ascending:
+                                    true
+                            }
+                        );
+
+
+                if (result.error) {
+
+                    this.error =
+                        'Unable to load dates: ' +
+                        result.error.message;
+
+                } else {
+
+                    dates =
+                        result.data || [];
+
+                }
 
             }
 
 
             this.events =
-                data || [];
+                (data || []).map(
+
+                    event => ({
+
+                        ...event,
+
+                        price:
+                            Number(
+                                event.price || 0
+                            ).toLocaleString(
+                                'en-IN'
+                            ),
+
+                        dates:
+                            dates.filter(
+                                date =>
+                                    Number(
+                                        date.expedition_id
+                                    ) ===
+                                    Number(
+                                        event.id
+                                    )
+                            )
+
+                    })
+
+                );
+
+
+            this.loadingEvents =
+                false;
 
         },
 
 
+        /* =====================================================
+           OPEN CARD EDITOR
+        ===================================================== */
 
-        /* ==================================================
-           CREATE EVENT
-        ================================================== */
+        openCardEditor(event) {
+
+            this.clearMessages();
+
+
+            this.form = {
+
+                id:
+                    event.id,
+
+                title:
+                    event.title,
+
+                slug:
+                    event.slug,
+
+                category:
+                    event.category,
+
+                price:
+                    Number(
+                        String(
+                            event.price
+                        ).replace(
+                            /,/g,
+                            ''
+                        )
+                    ),
+
+                image_url:
+                    event.image_url,
+
+                is_open:
+                    event.is_open,
+
+                duration:
+                    event.duration || ''
+
+            };
+
+
+            this.modal =
+                'card';
+
+        },
+
+
+        /* =====================================================
+           CREATE
+        ===================================================== */
 
         openCreate() {
 
-            this.editingId = null;
+            this.clearMessages();
 
 
             this.form = {
 
-                title: '',
-
-                slug: '',
-
-                category: 'TREKKING',
-
-                price: '',
-
-                image_url: '',
-
-                event_date: '',
-
-                total_seats: 0,
-
-                reserved_seats: 0,
-
-                is_open: true
-
-            };
-
-
-            this.editorOpen = true;
-
-        },
-
-
-
-        /* ==================================================
-           EDIT EVENT
-        ================================================== */
-
-        openEdit(event) {
-
-            this.editingId =
-                event.id;
-
-
-            this.form = {
-
-                title:
-                    event.title || '',
-
-                slug:
-                    event.slug || '',
-
-                category:
-                    event.category || '',
-
-                price:
-                    event.price || '',
-
-                image_url:
-                    event.image_url || '',
-
-                event_date:
-                    event.event_date || '',
-
-                total_seats:
-                    Number(
-                        event.total_seats || 0
-                    ),
-
-                reserved_seats:
-                    Number(
-                        event.reserved_seats || 0
-                    ),
-
-                is_open:
-                    event.is_open === true
-
-            };
-
-
-            this.editorOpen =
-                true;
-
-        },
-
-
-
-        /* ==================================================
-           CLOSE EDITOR
-        ================================================== */
-
-        closeEditor() {
-
-            if (this.saving) {
-                return;
-            }
-
-
-            this.editorOpen =
-                false;
-
-        },
-
-
-
-        /* ==================================================
-           GENERATE SLUG
-        ================================================== */
-
-        generateSlug() {
-
-            if (this.editingId) {
-                return;
-            }
-
-
-            this.form.slug =
-
-                this.form.title
-
-                    .toLowerCase()
-
-                    .trim()
-
-                    .replace(
-                        /['’]/g,
-                        ''
-                    )
-
-                    .replace(
-                        /[^a-z0-9]+/g,
-                        '-'
-                    )
-
-                    .replace(
-                        /^-+|-+$/g,
-                        ''
-                    );
-
-        },
-
-
-
-        /* ==================================================
-           SAVE EVENT
-        ================================================== */
-
-        async saveEvent() {
-
-
-            const title =
-                this.form.title
-                    .trim();
-
-
-            const slug =
-                this.form.slug
-                    .trim()
-                    .toLowerCase();
-
-
-            const category =
-                this.form.category
-                    .trim()
-                    .toUpperCase();
-
-
-            const image =
-                this.form.image_url
-                    .trim();
-
-
-
-            /* REQUIRED */
-
-            if (!title) {
-
-                this.showToast(
-                    'Enter event name.'
-                );
-
-                return;
-
-            }
-
-
-            if (!slug) {
-
-                this.showToast(
-                    'Enter URL slug.'
-                );
-
-                return;
-
-            }
-
-
-            if (!category) {
-
-                this.showToast(
-                    'Enter category.'
-                );
-
-                return;
-
-            }
-
-
-            if (!image) {
-
-                this.showToast(
-                    'Enter image URL.'
-                );
-
-                return;
-
-            }
-
-
-
-            /* PRICE */
-
-            const price =
-                Math.max(
-                    0,
-                    Number(
-                        this.form.price || 0
-                    )
-                );
-
-
-
-            /* SEATS */
-
-            const totalSeats =
-                Math.max(
-                    0,
-                    Number(
-                        this.form.total_seats || 0
-                    )
-                );
-
-
-            const reservedSeats =
-                Math.max(
-                    0,
-                    Number(
-                        this.form.reserved_seats || 0
-                    )
-                );
-
-
-
-            /* VALIDATE SEATS */
-
-            if (
-                reservedSeats >
-                totalSeats
-            ) {
-
-                this.showToast(
-                    'Reserved seats cannot exceed total seats.'
-                );
-
-                return;
-
-            }
-
-
-
-            this.saving = true;
-
-
-
-            /* PAYLOAD */
-
-            const payload = {
-
-                title:
-
-                    title,
-
-
-                slug:
-
-                    slug,
-
-
-                category:
-
-                    category,
-
-
-                price:
-
-                    price,
-
-
-                image_url:
-
-                    image,
-
-
-                event_date:
-
-                    this.form.event_date ||
+                id:
                     null,
 
+                title:
+                    '',
 
-                total_seats:
+                slug:
+                    '',
 
-                    totalSeats,
+                category:
+                    'Trekking',
 
+                price:
+                    0,
 
-                reserved_seats:
-
-                    reservedSeats,
-
+                image_url:
+                    '',
 
                 is_open:
+                    true,
 
-                    !!this.form.is_open,
-
-
-                updated_at:
-
-                    new Date().toISOString()
+                duration:
+                    ''
 
             };
 
 
+            this.modal =
+                'create';
 
-            let result;
-
-
-
-            /* UPDATE */
-
-            if (this.editingId) {
-
-                result =
-                    await supabaseClient
-                        .from('expeditions')
-                        .update(payload)
-                        .eq(
-                            'id',
-                            this.editingId
-                        )
-                        .select()
-                        .single();
-
-            }
+        },
 
 
-            /* INSERT */
+        /* =====================================================
+           CREATE EVENT
+        ===================================================== */
 
-            else {
+        async createEvent() {
 
-                result =
-                    await supabaseClient
-                        .from('expeditions')
-                        .insert(payload)
-                        .select()
-                        .single();
+            this.saving =
+                true;
 
-            }
+            this.clearMessages();
 
 
+            if (
+                !this.form.title ||
+                !this.form.slug ||
+                !this.form.category ||
+                !this.form.image_url
+            ) {
 
-            /* ERROR */
+                this.error =
+                    'Please fill Event Name, Slug, Category and Image URL.';
 
-            if (result.error) {
-
-                console.error(
-                    'Save error:',
-                    result.error
-                );
-
-
-                this.showToast(
-                    result.error.message
-                );
-
-
-                this.saving = false;
+                this.saving =
+                    false;
 
                 return;
 
             }
 
 
+            const {
 
-            /* CLOSE */
+                error
 
-            this.editorOpen =
-                false;
+            } = await supabaseClient
+
+                .from('expeditions')
+
+                .insert({
+
+                    title:
+                        this.form.title.trim(),
+
+                    slug:
+                        this.form.slug
+                            .trim()
+                            .toLowerCase(),
+
+                    category:
+                        this.form.category.trim(),
+
+                    price:
+                        Number(
+                            this.form.price || 0
+                        ),
+
+                    image_url:
+                        this.form.image_url.trim(),
+
+                    is_open:
+                        true,
+
+                    duration:
+                        this.form.duration || ''
+
+                });
 
 
+            if (error) {
 
-            /* REFRESH */
+                this.error =
+                    'Unable to create event: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.success =
+                'Event created successfully.';
+
+
+            this.closeModal();
+
 
             await this.loadEvents();
 
 
-
-            /* SUCCESS */
-
-            this.showToast(
-
-                this.editingId
-
-                    ? 'Event updated successfully.'
-
-                    : 'Event created successfully.'
-
-            );
-
-
-            this.saving = false;
+            this.saving =
+                false;
 
         },
 
 
+        /* =====================================================
+           SAVE CARD
+        ===================================================== */
 
-        /* ==================================================
-           OPEN / CLOSE EVENT
-        ================================================== */
+        async saveCard() {
 
-        async toggleEvent(event) {
+            this.saving =
+                true;
 
-            if (event.saving) {
-                return;
-            }
-
-
-            event.saving = true;
-
-
-            const newState =
-                !event.is_open;
-
+            this.clearMessages();
 
 
             const {
-                data,
+
                 error
+
             } = await supabaseClient
+
                 .from('expeditions')
+
                 .update({
 
+                    title:
+                        this.form.title.trim(),
+
+                    slug:
+                        this.form.slug
+                            .trim()
+                            .toLowerCase(),
+
+                    category:
+                        this.form.category.trim(),
+
+                    price:
+                        Number(
+                            this.form.price || 0
+                        ),
+
+                    image_url:
+                        this.form.image_url.trim(),
+
                     is_open:
-                        newState,
+                        this.form.is_open,
 
                     updated_at:
                         new Date().toISOString()
 
                 })
+
                 .eq(
                     'id',
-                    event.id
-                )
-                .select()
-                .single();
-
+                    this.form.id
+                );
 
 
             if (error) {
 
                 console.error(
-                    'Toggle error:',
+                    'Update failed:',
                     error
                 );
 
 
-                this.showToast(
-                    'Unable to update event: ' +
-                    error.message
-                );
+                this.error =
+                    'Unable to save card: ' +
+                    error.message;
 
-            }
-
-            else {
-
-                event.is_open =
-                    data.is_open;
-
-
-                this.showToast(
-
-                    newState
-
-                        ? 'Event opened.'
-
-                        : 'Event closed.'
-
-                );
-
-            }
-
-
-            event.saving = false;
-
-        },
-
-
-
-        /* ==================================================
-           DELETE EVENT
-        ================================================== */
-
-        async deleteEvent() {
-
-            if (!this.editingId) {
-                return;
-            }
-
-
-            const confirmed =
-                confirm(
-                    'Delete this event permanently?'
-                );
-
-
-            if (!confirmed) {
-                return;
-            }
-
-
-            this.saving = true;
-
-
-            const {
-                error
-            } = await supabaseClient
-                .from('expeditions')
-                .delete()
-                .eq(
-                    'id',
-                    this.editingId
-                );
-
-
-
-            if (error) {
-
-                console.error(
-                    'Delete error:',
-                    error
-                );
-
-
-                this.showToast(
-                    'Unable to delete event: ' +
-                    error.message
-                );
-
-
-                this.saving = false;
+                this.saving =
+                    false;
 
                 return;
 
             }
 
 
-            this.editorOpen =
-                false;
+            this.success =
+                'Card updated successfully.';
+
+
+            this.closeModal();
 
 
             await this.loadEvents();
 
 
-            this.showToast(
-                'Event deleted.'
-            );
-
-
-            this.saving = false;
+            this.saving =
+                false;
 
         },
 
 
+        /* =====================================================
+           DETAILS
+        ===================================================== */
 
-        /* ==================================================
-           AVAILABLE SEATS
-        ================================================== */
+        openDetailsEditor(event) {
 
-        availableSeats(event) {
+            this.clearMessages();
+
+
+            this.form = {
+
+                id:
+                    event.id,
+
+                title:
+                    event.title,
+
+                slug:
+                    event.slug,
+
+                category:
+                    event.category,
+
+                price:
+                    Number(
+                        String(
+                            event.price
+                        ).replace(
+                            /,/g,
+                            ''
+                        )
+                    ),
+
+                image_url:
+                    event.image_url,
+
+                is_open:
+                    event.is_open,
+
+                duration:
+                    event.duration || ''
+
+            };
+
+
+            this.modal =
+                'details';
+
+        },
+
+
+        async saveDetails() {
+
+            this.saving =
+                true;
+
+            this.clearMessages();
+
+
+            const {
+
+                error
+
+            } = await supabaseClient
+
+                .from('expeditions')
+
+                .update({
+
+                    duration:
+                        this.form.duration || '',
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+
+                .eq(
+                    'id',
+                    this.form.id
+                );
+
+
+            if (error) {
+
+                this.error =
+                    'Unable to save details: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.success =
+                'Booking details saved.';
+
+
+            this.closeModal();
+
+
+            await this.loadEvents();
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           DATE EDITOR
+        ===================================================== */
+
+        openDatesEditor(event) {
+
+            this.clearMessages();
+
+
+            this.selectedEvent =
+                event;
+
+
+            this.dateEditor =
+                JSON.parse(
+                    JSON.stringify(
+                        event.dates || []
+                    )
+                );
+
+
+            this.newDate = {
+
+                date:
+                    '',
+
+                total:
+                    25
+
+            };
+
+
+            this.modal =
+                'dates';
+
+        },
+
+
+        /* =====================================================
+           ADD DATE
+        ===================================================== */
+
+        async addDate() {
+
+            this.saving =
+                true;
+
+            this.clearMessages();
+
+
+            if (!this.newDate.date) {
+
+                this.error =
+                    'Please select a date.';
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            const {
+
+                data,
+
+                error
+
+            } = await supabaseClient
+
+                .from('expedition_dates')
+
+                .insert({
+
+                    expedition_id:
+                        this.selectedEvent.id,
+
+                    event_date:
+                        this.newDate.date,
+
+                    total_seats:
+                        Number(
+                            this.newDate.total || 0
+                        ),
+
+                    reserved_seats:
+                        0
+
+                })
+
+                .select()
+
+                .single();
+
+
+            if (error) {
+
+                this.error =
+                    'Unable to add date: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.dateEditor.push(
+                data
+            );
+
+
+            this.newDate = {
+
+                date:
+                    '',
+
+                total:
+                    25
+
+            };
+
+
+            await this.loadEvents();
+
+
+            const refreshed =
+                this.events.find(
+                    e =>
+                        Number(e.id) ===
+                        Number(
+                            this.selectedEvent.id
+                        )
+                );
+
+
+            if (refreshed) {
+
+                this.dateEditor =
+                    JSON.parse(
+                        JSON.stringify(
+                            refreshed.dates
+                        )
+                    );
+
+                this.selectedEvent =
+                    refreshed;
+
+            }
+
+
+            this.success =
+                'Date added.';
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           SAVE DATE
+        ===================================================== */
+
+        async saveDate(date) {
+
+            const total =
+                Number(
+                    date.total_seats || 0
+                );
+
+
+            const reserved =
+                Number(
+                    date.reserved_seats || 0
+                );
+
+
+            if (reserved > total) {
+
+                this.error =
+                    'Reserved seats cannot exceed total seats.';
+
+                return;
+
+            }
+
+
+            this.saving =
+                true;
+
+            this.clearMessages();
+
+
+            const {
+
+                error
+
+            } = await supabaseClient
+
+                .from('expedition_dates')
+
+                .update({
+
+                    event_date:
+                        date.event_date,
+
+                    total_seats:
+                        total,
+
+                    reserved_seats:
+                        reserved,
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+
+                .eq(
+                    'id',
+                    date.id
+                );
+
+
+            if (error) {
+
+                this.error =
+                    'Unable to save date: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.success =
+                'Date availability updated.';
+
+
+            await this.loadEvents();
+
+
+            const refreshed =
+                this.events.find(
+                    e =>
+                        Number(e.id) ===
+                        Number(
+                            this.selectedEvent.id
+                        )
+                );
+
+
+            if (refreshed) {
+
+                this.dateEditor =
+                    JSON.parse(
+                        JSON.stringify(
+                            refreshed.dates
+                        )
+                    );
+
+                this.selectedEvent =
+                    refreshed;
+
+            }
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           DELETE DATE
+        ===================================================== */
+
+        async deleteDate(date) {
+
+            if (
+                !confirm(
+                    'Delete this event date?'
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            this.saving =
+                true;
+
+            this.clearMessages();
+
+
+            const {
+
+                error
+
+            } = await supabaseClient
+
+                .from('expedition_dates')
+
+                .delete()
+
+                .eq(
+                    'id',
+                    date.id
+                );
+
+
+            if (error) {
+
+                this.error =
+                    'Unable to delete date: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.dateEditor =
+                this.dateEditor.filter(
+                    d =>
+                        d.id !== date.id
+                );
+
+
+            await this.loadEvents();
+
+
+            this.success =
+                'Date deleted.';
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           CLOSE EVENT
+        ===================================================== */
+
+        closeEvent(event) {
+
+            this.clearMessages();
+
+
+            this.selectedEvent =
+                event;
+
+
+            this.closeForm = {
+
+                nextBookingDate:
+                    ''
+
+            };
+
+
+            this.modal =
+                'close';
+
+        },
+
+
+        /* =====================================================
+           CONFIRM CLOSE
+        ===================================================== */
+
+        async confirmCloseEvent() {
+
+            if (
+                !this.closeForm.nextBookingDate
+            ) {
+
+                this.error =
+                    'Please select the next booking morning.';
+
+                return;
+
+            }
+
+
+            this.saving =
+                true;
+
+            this.clearMessages();
+
+
+            /*
+             * The database currently has no dedicated
+             * next_booking_date column.
+             *
+             * We therefore close the event itself here.
+             *
+             * The selected next booking date is retained
+             * in admin session state for this operation.
+             */
+
+            const {
+
+                error
+
+            } = await supabaseClient
+
+                .from('expeditions')
+
+                .update({
+
+                    is_open:
+                        false,
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+
+                .eq(
+                    'id',
+                    this.selectedEvent.id
+                );
+
+
+            if (error) {
+
+                console.error(
+                    error
+                );
+
+
+                this.error =
+                    'Unable to close event: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.success =
+                'Event closed. Next booking morning: ' +
+                this.formatDate(
+                    this.closeForm.nextBookingDate
+                );
+
+
+            this.closeModal();
+
+
+            await this.loadEvents();
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           OPEN EVENT
+        ===================================================== */
+
+        async openEvent(event) {
+
+            this.clearMessages();
+
+            this.saving =
+                true;
+
+
+            const {
+
+                error
+
+            } = await supabaseClient
+
+                .from('expeditions')
+
+                .update({
+
+                    is_open:
+                        true,
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+
+                .eq(
+                    'id',
+                    event.id
+                );
+
+
+            if (error) {
+
+                this.error =
+                    'Unable to open event: ' +
+                    error.message;
+
+                this.saving =
+                    false;
+
+                return;
+
+            }
+
+
+            this.success =
+                'Event opened successfully.';
+
+
+            await this.loadEvents();
+
+
+            this.saving =
+                false;
+
+        },
+
+
+        /* =====================================================
+           AVAILABLE
+        ===================================================== */
+
+        available(date) {
 
             return Math.max(
 
                 0,
 
                 Number(
-                    event.total_seats || 0
-                )
-
-                -
-
+                    date.total_seats || 0
+                ) -
                 Number(
-                    event.reserved_seats || 0
+                    date.reserved_seats || 0
                 )
 
             );
@@ -2807,77 +3141,117 @@ function adminApp() {
         },
 
 
+        /* =====================================================
+           PREVIEW AVAILABILITY
+        ===================================================== */
 
-        /* ==================================================
-           FORMAT PRICE
-        ================================================== */
+        get previewAvailable() {
 
-        formatPrice(value) {
+            if (
+                !this.selectedEvent ||
+                !this.selectedEvent.dates
+            ) {
 
-            return Number(
-                value || 0
-            ).toLocaleString(
-                'en-IN'
-            );
+                return 0;
+
+            }
+
+
+            const today =
+                new Date()
+                    .toISOString()
+                    .slice(0,10);
+
+
+            const dates =
+                this.selectedEvent.dates
+                    .filter(
+                        d =>
+                            d.event_date >=
+                            today
+                    );
+
+
+            /*
+             * Same public-card logic:
+             *
+             * use first future date with >= 3 seats.
+             */
+
+            const selected =
+                dates.find(
+                    d =>
+                        this.available(d) >= 3
+                );
+
+
+            return selected
+                ? this.available(selected)
+                : 0;
 
         },
 
 
-
-        /* ==================================================
+        /* =====================================================
            FORMAT DATE
-        ================================================== */
+        ===================================================== */
 
         formatDate(value) {
 
             if (!value) {
-                return 'Date TBA';
+
+                return '';
+
             }
 
 
-            const date =
-                new Date(
-                    value + 'T00:00:00'
-                );
+            return new Date(
+                value + 'T00:00:00'
+            ).toLocaleDateString(
 
-
-            return date.toLocaleDateString(
                 'en-IN',
+
                 {
-                    day: '2-digit',
-                    month: 'short',
-                    year: 'numeric'
+
+                    day:
+                        '2-digit',
+
+                    month:
+                        'short',
+
+                    year:
+                        'numeric'
+
                 }
+
             );
 
         },
 
 
+        /* =====================================================
+           CLOSE MODAL
+        ===================================================== */
 
-        /* ==================================================
-           TOAST
-        ================================================== */
+        closeModal() {
 
-        showToast(message) {
+            this.modal =
+                null;
 
-            this.toast =
-                message;
-
-
-            clearTimeout(
-                this.toastTimer
-            );
+        },
 
 
-            this.toastTimer =
-                setTimeout(
-                    () => {
+        /* =====================================================
+           MESSAGES
+        ===================================================== */
 
-                        this.toast = '';
+        clearMessages() {
 
-                    },
-                    3500
-                );
+            this.error =
+                '';
+
+            this.success =
+                '';
 
         }
 
@@ -2887,6 +3261,74 @@ function adminApp() {
 
 </script>
 
-</body>
 
+
+<!-- =========================================================
+     SMALL FIELD STYLES
+========================================================= -->
+
+<style>
+
+.field-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .15em;
+
+    color: #9ca3af;
+
+}
+
+
+.field {
+
+    width: 100%;
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        12px;
+
+    outline: none;
+
+    font-size:
+        13px;
+
+    background:
+        white;
+
+    transition:
+        border .2s,
+        box-shadow .2s;
+
+}
+
+
+.field:focus {
+
+    border-color:
+        #facc15;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(250,204,21,.12);
+
+}
+
+</style>
+
+
+</body>
 </html>
