@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
->
+<title>Adventure Junction | Book Your Adventure</title>
 
-<title>Adventure Junction — Booking</title>
-
-<meta
-    name="description"
-    content="Adventure Junction India booking page"
->
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
@@ -29,557 +22,3593 @@ html{
 }
 
 body{
-    margin:0;
+    font-family:"Outfit",Arial,sans-serif;
+    background:#f5f7f6;
+    color:#082c3d;
     overflow-x:hidden;
-    background:#f5f7f5;
-    color:#082C3D;
-    font-family:Arial,sans-serif;
-}
-
-img{
-    display:block;
-    max-width:100%;
 }
 
 button,
 input,
 select{
-    font:inherit;
+    font-family:inherit;
 }
 
-button,
+button{
+    cursor:pointer;
+}
+
 a{
-    -webkit-tap-highlight-color:transparent;
+    text-decoration:none;
+    color:inherit;
 }
 
-[x-cloak]{
-    display:none!important;
+img{
+    max-width:100%;
+    display:block;
 }
-
 
 /* =====================================================
-   LOADER
+   HEADER
 ===================================================== */
 
-#pageLoader{
-
+.header{
     position:fixed;
-
-    inset:0;
-
-    z-index:99999;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#f7f8f6;
-
-    transition:
-        opacity .25s ease,
-        visibility .25s ease;
-
+    top:0;
+    left:0;
+    right:0;
+    z-index:9999;
+    height:72px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(0,0,0,.06);
 }
 
-#pageLoader.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
-}
-
-.loaderBox{
-    text-align:center;
-}
-
-.loaderCube{
-
-    width:54px;
-
-    height:54px;
-
+.header-inner{
+    width:min(1200px,calc(100% - 32px));
+    height:100%;
     margin:auto;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66d,
-            #ffc400,
-            #f0a800
-        );
-
-    box-shadow:
-        0 6px 0 #b87900,
-        0 15px 30px rgba(255,193,7,.25);
-
-    animation:
-        loaderSpin .75s
-        cubic-bezier(.4,0,.2,1)
-        infinite;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-@keyframes loaderSpin{
-
-    0%{
-        transform:
-            perspective(400px)
-            rotateX(0)
-            rotateY(0)
-            scale(.92);
-    }
-
-    50%{
-        transform:
-            perspective(400px)
-            rotateX(180deg)
-            rotateY(25deg)
-            scale(1);
-    }
-
-    100%{
-        transform:
-            perspective(400px)
-            rotateX(360deg)
-            rotateY(0)
-            scale(.92);
-    }
-
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.loaderText{
+.logo-img{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#082c3d;
+    flex-shrink:0;
+}
 
-    margin-top:16px;
+.logo-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-    font-size:10px;
+.logo-title{
+    font-size:18px;
+    font-weight:900;
+    line-height:1;
+    letter-spacing:-.04em;
+}
 
+.logo-sub{
+    margin-top:5px;
+    color:#8b969b;
+    font-size:9px;
     font-weight:800;
-
-    letter-spacing:.2em;
-
+    letter-spacing:.18em;
     text-transform:uppercase;
-
-    color:#082C3D;
-
 }
 
+.nav{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.nav a{
+    padding:11px 15px;
+    border-radius:12px;
+    color:#66747a;
+    font-size:12px;
+    font-weight:700;
+}
+
+.nav a:hover{
+    background:#f3f5f4;
+    color:#082c3d;
+}
+
+.explore{
+    background:#082c3d !important;
+    color:white !important;
+}
+
+.mobile-menu-btn{
+    display:none;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:12px;
+    background:#f2f5f4;
+    font-size:20px;
+}
+
+.mobile-nav{
+    display:none;
+}
 
 /* =====================================================
    HERO
 ===================================================== */
 
-.eventHero{
-
+.hero{
     position:relative;
-
     min-height:430px;
-
+    margin-top:72px;
     overflow:hidden;
-
     background:#061e28;
-
 }
 
-.eventHeroLow,
-.eventHeroHigh{
-
+.hero img{
     position:absolute;
-
     inset:0;
-
     width:100%;
-
     height:100%;
-
     object-fit:cover;
-
 }
 
-.eventHeroLow{
-    opacity:1;
-}
-
-.eventHeroHigh{
-
-    opacity:0;
-
-    transition:
-        opacity .6s ease;
-
-}
-
-.eventHeroHigh.loaded{
-    opacity:1;
-}
-
-.heroOverlay{
-
+.hero-overlay{
     position:absolute;
-
     inset:0;
-
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,.10),
+            rgba(0,0,0,.05),
             rgba(0,0,0,.12) 35%,
-            rgba(2,15,21,.42) 58%,
-            rgba(2,15,21,.97) 100%
+            rgba(2,15,21,.52) 68%,
+            rgba(2,15,21,.98) 100%
         );
-
 }
 
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:min(1200px,calc(100% - 32px));
+    min-height:430px;
+    margin:auto;
+    display:flex;
+    align-items:flex-end;
+    padding:35px 0 42px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 12px;
+    border-radius:50px;
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.18);
+    color:white;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    backdrop-filter:blur(10px);
+}
+
+.badge-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ffc400;
+}
+
+.hero h1{
+    margin-top:17px;
+    max-width:850px;
+    color:white;
+    font-size:clamp(38px,6vw,66px);
+    line-height:.94;
+    letter-spacing:-.055em;
+    font-weight:900;
+}
+
+.hero-meta{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.hero-meta span{
+    padding:9px 13px;
+    border-radius:12px;
+    background:rgba(0,0,0,.32);
+    color:white;
+    font-size:11px;
+    font-weight:700;
+    backdrop-filter:blur(10px);
+}
 
 /* =====================================================
-   CONTENT
+   MAIN
 ===================================================== */
 
-.contentCard{
+.container{
+    width:min(1200px,calc(100% - 32px));
+    margin:auto;
+}
 
-    background:#fff;
+.main{
+    padding:30px 0 110px;
+}
 
-    border:
-        1px solid #e9eeeb;
+.grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 390px;
+    gap:28px;
+    align-items:start;
+}
 
+.left{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e7ece9;
     border-radius:24px;
-
-    box-shadow:
-        0 10px 35px
-        rgba(8,44,61,.055);
-
+    padding:24px;
+    box-shadow:0 10px 30px rgba(8,44,61,.045);
 }
 
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
 
-/* =====================================================
-   STATS
-===================================================== */
-
-.statCard{
-
-    padding:17px;
-
-    border:
-        1px solid #e9eeeb;
-
+.stat{
+    background:white;
+    border:1px solid #e7ece9;
     border-radius:17px;
-
-    background:#fff;
-
+    padding:17px;
 }
 
+.stat-label{
+    color:#98a2a6;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+.stat-value{
+    margin-top:8px;
+    font-size:14px;
+    font-weight:900;
+}
 
 /* =====================================================
-   DATE
+   INFORMATION
 ===================================================== */
 
-.dateOption{
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-.02em;
+}
 
+.section-icon{
+    width:34px;
+    height:34px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eef3ff;
+    font-size:15px;
+}
+
+.description{
+    margin-top:18px;
+    color:#5c696f;
+    font-size:14px;
+    line-height:1.85;
+}
+
+.list{
+    margin-top:19px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.list-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    color:#5b686e;
+    font-size:14px;
+    line-height:1.65;
+}
+
+.bullet{
+    width:8px;
+    height:8px;
+    margin-top:7px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#ffc400;
+}
+
+.timeline{
+    margin-top:20px;
+    border-left:2px solid #e6ece9;
+}
+
+.timeline-item{
+    position:relative;
+    padding:0 0 24px 25px;
+}
+
+.timeline-item:last-child{
+    padding-bottom:0;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:-7px;
+    top:3px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#ffc400;
+    border:3px solid white;
+    box-shadow:0 0 0 1px #ffc400;
+}
+
+.timeline-time{
+    font-size:12px;
+    font-weight:900;
+}
+
+.timeline-text{
+    margin-top:4px;
+    color:#667278;
+    font-size:14px;
+    line-height:1.65;
+}
+
+.notice{
+    padding:16px;
+    border-radius:17px;
+    background:#fff7dc;
+    border:1px solid #f1dd94;
+    color:#705708;
+    font-size:13px;
+    line-height:1.65;
+}
+
+.warning{
+    padding:16px;
+    border-radius:17px;
+    background:#fff0f0;
+    border:1px solid #f0d0d0;
+    color:#8b3434;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* =====================================================
+   BOOKING PANEL
+===================================================== */
+
+.booking{
+    position:sticky;
+    top:92px;
+}
+
+.booking-title{
+    font-size:21px;
+    font-weight:900;
+}
+
+.booking-sub{
+    margin-top:4px;
+    color:#99a3a7;
+    font-size:11px;
+}
+
+.date-list{
+    margin-top:17px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.date-btn{
     width:100%;
-
+    padding:16px;
+    border:1px solid #e1e7e4;
+    border-radius:17px;
+    background:white;
     text-align:left;
-
-    padding:17px;
-
-    border:
-        1px solid #e2e8e4;
-
-    border-radius:18px;
-
-    background:#fff;
-
-    cursor:pointer;
-
-    transition:
-        .2s ease;
-
+    transition:.2s;
 }
 
-.dateOption:hover{
-
-    transform:
-        translateY(-2px);
-
-    border-color:#f4c400;
-
+.date-btn:hover{
+    transform:translateY(-1px);
+    border-color:#f3c400;
 }
 
-.dateOption.selected{
-
-    border-color:#f4c400;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffef1,
-            #fff9ca
-        );
-
-    box-shadow:
-        0 10px 28px
-        rgba(255,193,7,.12);
-
+.date-btn.selected{
+    background:#fffbea;
+    border-color:#f3c400;
+    box-shadow:0 8px 25px rgba(255,193,7,.10);
 }
 
-.dateOption.closed{
+.date-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
 
+.date-name{
+    font-size:13px;
+    font-weight:900;
+}
+
+.date-event{
+    margin-top:4px;
+    color:#9aa4a8;
+    font-size:9px;
+}
+
+.seats{
+    color:#159665;
+    font-size:12px;
+    font-weight:900;
+    text-align:right;
+}
+
+.seats-label{
+    margin-top:3px;
+    color:#a2abad;
+    font-size:8px;
+    font-weight:700;
+}
+
+.closed{
     opacity:.45;
-
-    cursor:not-allowed;
-
+    pointer-events:none;
 }
 
+/* =====================================================
+   PARTICIPANTS
+===================================================== */
+
+.participant-head{
+    margin-top:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.participant-count{
+    padding:8px 11px;
+    border-radius:12px;
+    background:#ecfaf4;
+    color:#12875b;
+    font-size:11px;
+    font-weight:900;
+}
+
+.saved-list{
+    margin-top:16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.saved{
+    padding:14px;
+    border:1px solid #dcefe5;
+    border-radius:17px;
+    background:#f8fffb;
+}
+
+.saved-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
+
+.saved-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    min-width:0;
+}
+
+.check{
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#17a66b;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:900;
+    flex-shrink:0;
+}
+
+.saved-name{
+    font-size:12px;
+    font-weight:900;
+}
+
+.saved-meta{
+    margin-top:3px;
+    color:#778388;
+    font-size:9px;
+}
+
+.saved-phone{
+    color:#526168;
+    font-size:10px;
+    font-weight:700;
+    text-align:right;
+}
+
+.nonveg-price{
+    margin-top:3px;
+    color:#e87820;
+    font-size:9px;
+    font-weight:800;
+}
 
 /* =====================================================
    FORM
 ===================================================== */
 
-.formInput{
-
-    width:100%;
-
-    min-height:50px;
-
-    padding:13px 15px;
-
-    border:
-        1px solid #dfe6e2;
-
-    border-radius:14px;
-
-    background:#fff;
-
-    color:#082C3D;
-
-    outline:none;
-
-    transition:.2s ease;
-
+.form{
+    margin-top:15px;
+    padding:18px;
+    border:1px solid #e1e7e4;
+    border-radius:20px;
+    background:#fafcfb;
 }
 
-.formInput:focus{
-
-    border-color:#f2c200;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(255,193,7,.12);
-
-}
-
-.formLabel{
-
-    display:block;
-
-    margin-bottom:7px;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    color:#52616a;
-
-}
-
-
-/* =====================================================
-   GENDER / MEAL
-===================================================== */
-
-.choiceGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
-    gap:10px;
-
-}
-
-.choiceButton{
-
-    min-height:48px;
-
-    padding:12px;
-
-    border:
-        1px solid #e0e6e3;
-
-    border-radius:14px;
-
-    background:#fff;
-
-    color:#52616a;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.2s ease;
-
-}
-
-.choiceButton.selected{
-
-    border-color:#f2c200;
-
-    background:#fff9d6;
-
-    color:#082C3D;
-
-}
-
-
-/* =====================================================
-   SAVE GUEST BUTTON
-===================================================== */
-
-.saveGuestButton{
-
-    width:100%;
-
-    min-height:52px;
-
-    border:0;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66d,
-            #ffc400,
-            #f0a800
-        );
-
-    color:#071b24;
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:.1em;
-
-    text-transform:uppercase;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 5px 0 #b87900,
-        0 10px 22px
-        rgba(255,193,7,.2);
-
-    transition:.2s ease;
-
-}
-
-.saveGuestButton:hover{
-
-    transform:
-        translateY(-2px);
-
-}
-
-
-/* =====================================================
-   SAVED GUEST
-===================================================== */
-
-.savedGuest{
-
-    position:relative;
-
-    padding:15px;
-
-    border:
-        1px solid #dcefe5;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fbfffc,
-            #f2fbf5
-        );
-
-}
-
-.savedCheck{
-
-    width:30px;
-
-    height:30px;
-
-    border-radius:50%;
-
+.form-head{
     display:flex;
-
     align-items:center;
-
-    justify-content:center;
-
-    background:#16a66a;
-
-    color:#fff;
-
-    font-size:14px;
-
-    font-weight:900;
-
-    box-shadow:
-        0 5px 15px
-        rgba(22,166,106,.2);
-
+    gap:10px;
+    margin-bottom:18px;
 }
 
+.number{
+    width:35px;
+    height:35px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#082c3d;
+    color:white;
+    font-size:11px;
+    font-weight:900;
+}
+
+.form-title{
+    font-size:13px;
+    font-weight:900;
+}
+
+.form-sub{
+    margin-top:2px;
+    color:#9ba5a8;
+    font-size:9px;
+}
+
+.field{
+    margin-top:14px;
+}
+
+.label{
+    display:block;
+    margin-bottom:7px;
+    color:#526168;
+    font-size:10px;
+    font-weight:900;
+}
+
+.input{
+    width:100%;
+    height:49px;
+    padding:0 14px;
+    border:1px solid #dce4e0;
+    border-radius:14px;
+    outline:none;
+    background:white;
+    color:#082c3d;
+    font-size:13px;
+}
+
+.input:focus{
+    border-color:#f2c300;
+    box-shadow:0 0 0 4px rgba(255,193,7,.11);
+}
+
+.choice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+}
+
+.choice{
+    min-height:48px;
+    border:1px solid #dfe6e2;
+    border-radius:14px;
+    background:white;
+    color:#68757a;
+    font-size:11px;
+    font-weight:900;
+}
+
+.choice.selected{
+    border-color:#f0c300;
+    background:#fff9d4;
+    color:#082c3d;
+}
+
+.extra-note{
+    margin-top:7px;
+    color:#e77922;
+    font-size:9px;
+    line-height:1.5;
+    font-weight:700;
+}
+
+.save-btn{
+    width:100%;
+    height:52px;
+    margin-top:18px;
+    border:0;
+    border-radius:15px;
+    background:linear-gradient(145deg,#ffe66d,#ffc400,#efa900);
+    color:#071b24;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    box-shadow:0 4px 0 #b97c00;
+    transition:.2s;
+}
+
+.save-btn:hover{
+    transform:translateY(-1px);
+}
+
+.complete{
+    margin-top:15px;
+    padding:15px;
+    border-radius:16px;
+    background:#eafaf2;
+    border:1px solid #cfeede;
+    color:#13885c;
+    font-size:12px;
+    line-height:1.55;
+    font-weight:800;
+}
 
 /* =====================================================
    PICKUP
 ===================================================== */
 
-.pickupOption{
-
-    width:100%;
-
+.pickup-list{
+    margin-top:15px;
     display:flex;
+    flex-direction:column;
+    gap:8px;
+}
 
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    padding:15px;
-
-    border:
-        1px solid #e2e8e4;
-
-    border-radius:16px;
-
-    background:#fff;
-
+.pickup{
+    width:100%;
+    padding:14px;
+    border:1px solid #e1e7e4;
+    border-radius:15px;
+    background:white;
     text-align:left;
+}
 
-    cursor:pointer;
+.pickup.selected{
+    border-color:#f2c300;
+    background:#fffbea;
+}
 
-    transition:.2s ease;
+.pickup-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.pickup-name{
+    font-size:11px;
+    font-weight:900;
+}
+
+.pickup-time{
+    color:#68757a;
+    font-size:10px;
+    font-weight:900;
+}
+
+/* =====================================================
+   COUPON
+===================================================== */
+
+.coupon{
+    display:flex;
+    gap:8px;
+    margin-top:13px;
+}
+
+.coupon .input{
+    flex:1;
+}
+
+.coupon-btn{
+    width:75px;
+    border:0;
+    border-radius:14px;
+    background:#082c3d;
+    color:white;
+    font-size:10px;
+    font-weight:900;
+}
+
+.coupon-message{
+    margin-top:7px;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary{
+    margin-top:20px;
+    padding:20px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#061e28,#0a3547);
+    color:white;
+    box-shadow:0 16px 35px rgba(8,44,61,.15);
+}
+
+.summary-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:11px;
+    color:rgba(255,255,255,.63);
+    font-size:12px;
+}
+
+.summary-row strong{
+    color:white;
+}
+
+.summary-row.orange{
+    color:#ffba79;
+}
+
+.summary-row.green{
+    color:#70e1b3;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding-top:16px;
+    margin-top:15px;
+    border-top:1px solid rgba(255,255,255,.11);
+}
+
+.total-label{
+    font-size:13px;
+    font-weight:900;
+}
+
+.total-value{
+    color:#ffd333;
+    font-size:25px;
+    font-weight:900;
+}
+
+.pay-btn{
+    width:100%;
+    height:53px;
+    margin-top:15px;
+    border:0;
+    border-radius:15px;
+    background:linear-gradient(145deg,#ffe66d,#ffc400,#efa900);
+    color:#071b24;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    box-shadow:0 4px 0 #b97c00;
+}
+
+.pay-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.payment-note{
+    margin-top:10px;
+    color:#9ca8ac;
+    font-size:9px;
+    line-height:1.5;
+    text-align:center;
+}
+
+/* =====================================================
+   BOTTOM MOBILE
+===================================================== */
+
+.mobile-bottom{
+    display:none;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,120px);
+    z-index:99999;
+    max-width:calc(100% - 30px);
+    padding:13px 17px;
+    border-radius:14px;
+    background:#082c3d;
+    color:white;
+    font-size:11px;
+    font-weight:700;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+.toast.error{
+    background:#a83c3c;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .booking{
+        position:static;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .mobile-menu-btn{
+        display:block;
+    }
+
+    .mobile-nav{
+        position:absolute;
+        top:72px;
+        left:16px;
+        right:16px;
+        padding:10px;
+        border-radius:18px;
+        background:white;
+        border:1px solid #e8ecea;
+        box-shadow:0 20px 45px rgba(0,0,0,.12);
+    }
+
+    .mobile-nav.show{
+        display:block;
+    }
+
+    .mobile-nav a{
+        display:block;
+        padding:13px;
+        border-radius:12px;
+        font-size:12px;
+        font-weight:800;
+    }
 
 }
 
-.pickupOption.selected{
+@media(max-width:650px){
 
-    border-color:#f3c400;
+    .header-inner,
+    .container,
+    .hero-content{
+        width:min(100% - 24px,1200px);
+    }
 
-    background:#fffbea;
+    .hero{
+        min-height:370px;
+    }
+
+    .hero-content{
+        min-height:370px;
+        padding-bottom:30px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .main{
+        padding-top:20px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .card{
+        padding:19px;
+        border-radius:20px;
+    }
+
+    .mobile-bottom{
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:9000;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:10px 13px calc(10px + env(safe-area-inset-bottom));
+        background:rgba(255,255,255,.96);
+        border-top:1px solid #e5eae7;
+        backdrop-filter:blur(18px);
+    }
+
+    .mobile-total{
+        flex:1;
+    }
+
+    .mobile-total-label{
+        color:#9ba5a8;
+        font-size:8px;
+        font-weight:900;
+        letter-spacing:.13em;
+        text-transform:uppercase;
+    }
+
+    .mobile-total-value{
+        margin-top:2px;
+        font-size:20px;
+        font-weight:900;
+    }
+
+    .mobile-pay{
+        width:150px;
+        height:48px;
+        border:0;
+        border-radius:14px;
+        background:#ffc400;
+        color:#071b24;
+        font-size:10px;
+        font-weight:900;
+    }
+
+    .mobile-pay:disabled{
+        opacity:.45;
+    }
+
+    .hero-meta span{
+        font-size:9px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="./index.html" class="logo">
+
+            <div class="logo-img">
+
+                <img
+                    src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
+                    alt="Adventure Junction"
+                    onerror="
+                        this.onerror=null;
+                        this.src='https://cloud-mypc.github.io/view/images/Icon.png';
+                    "
+                >
+
+            </div>
+
+            <div>
+
+                <div class="logo-title">
+                    Adventure Junction
+                </div>
+
+                <div class="logo-sub">
+                    Climbing • Rappelling
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="./index.html#expeditions">
+                Expeditions
+            </a>
+
+            <a href="./index.html#how-it-works">
+                How It Works
+            </a>
+
+            <a href="./index.html#about">
+                About Us
+            </a>
+
+            <a
+                href="./index.html#expeditions"
+                class="explore"
+            >
+                Explore
+            </a>
+
+        </nav>
+
+
+        <button
+            class="mobile-menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Menu"
+        >
+            ☰
+        </button>
+
+    </div>
+
+
+    <div
+        class="mobile-nav"
+        id="mobileNav"
+    >
+
+        <a href="./index.html#expeditions">
+            Expeditions
+        </a>
+
+        <a href="./index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="./index.html#about">
+            About Us
+        </a>
+
+        <a
+            href="https://www.instagram.com/adventure__junction"
+            target="_blank"
+            rel="noopener"
+        >
+            Instagram
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <img
+        id="heroImage"
+        src=""
+        alt="Lingya Waterfall"
+    >
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div>
+
+            <div class="badge">
+
+                <span class="badge-dot"></span>
+
+                Rappelling Adventure
+
+            </div>
+
+
+            <h1 id="eventTitle">
+                Lingya Waterfall
+            </h1>
+
+
+            <div class="hero-meta">
+
+                <span id="heroDate">
+                    23 Aug 2026
+                </span>
+
+                <span>
+                    300+ ft Rappelling
+                </span>
+
+                <span>
+                    Maharashtra
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+<div class="container">
+
+<div class="grid">
+
+
+<!-- =====================================================
+     LEFT
+===================================================== -->
+
+<div class="left">
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Grade
+        </div>
+
+        <div class="stat-value">
+            Easy
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Endurance
+        </div>
+
+        <div class="stat-value">
+            Medium
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Adventure
+        </div>
+
+        <div class="stat-value">
+            300+ ft
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Fee / Person
+        </div>
+
+        <div
+            class="stat-value"
+            id="statPrice"
+        >
+            ₹0
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            🌿
+        </span>
+
+        Brief Information About Lingya Waterfall
+
+    </h2>
+
+
+    <p class="description">
+
+        <strong>Name: Lingya Waterfall.</strong>
+
+        Lingya Ghat Waterfall is a stunning natural
+        attraction located just 13.5 km ahead of
+        Lavasa city in Maharashtra.
+
+        The waterfall derives its name from the
+        prominent pinnacle nearby, known as Lingya,
+        which holds significant cultural and spiritual
+        value for the local community.
+
+        This striking formation is often revered and
+        worshipped by the villagers of Dhamanohol,
+        the base village for the waterfall.
+
+        Surrounded by lush greenery and vibrant flora,
+        the waterfall is especially breathtaking during
+        the monsoon season when it transforms into a
+        powerful cascade, drawing visitors for its
+        scenic beauty and serene atmosphere.
+
+        The area is perfect for nature enthusiasts,
+        offering opportunities for trekking,
+        birdwatching and photography.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     COST INCLUDES
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Cost Includes
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Transport (by Non-AC Bus)</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Adventure insurance (with travel cover)</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>1 Time Tea, Breakfast & Lunch (Veg)</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Safety Equipment / Gears</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>300+ ft Adventurous Rappelling</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Basic First Aid</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COST EXCLUDES
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Cost Excludes
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Cold drinks, Mineral water, etc.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Dinner on Saturday and Sunday.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Private orders of Tea, Breakfast, Meals, etc.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Personal expenses of any kind.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Any private or shared tempo / travel expenses to reach any railway station.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Medical expenses other than “First aid”.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Any other charges not mentioned in “Cost Includes”.</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ATTRACTIONS
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Major Attractions
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Most Beautiful Waterfall in Maharashtra</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>300+ ft Adventurous Rappelling.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Enjoy the natural pool below the waterfalls.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>The water-pool under the Lingya Waterfall has crystal clear bluish-green water.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Exploring the dense forest.</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PICKUP INFORMATION
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Pickup Points & Time
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+
+            <span>
+                <strong>11:00 PM</strong> :
+                Katraj Main Bus Stop, Pune
+            </span>
+        </div>
+
+
+        <div class="list-item">
+            <span class="bullet"></span>
+
+            <span>
+                <strong>11:15 PM</strong> :
+                Navale Bridge
+            </span>
+        </div>
+
+
+        <div class="list-item">
+            <span class="bullet"></span>
+
+            <span>
+                <strong>11:30 PM</strong> :
+                Chandani Chowk
+            </span>
+        </div>
+
+
+        <div class="list-item">
+            <span class="bullet"></span>
+
+            <span>
+                <strong>11:45 PM</strong> :
+                Hinjewadi Chowk
+            </span>
+        </div>
+
+
+        <div class="list-item">
+            <span class="bullet"></span>
+
+            <span>
+                <strong>12:00 AM</strong> :
+                Pirangut Chowk, Hinjewadi Phase 3
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ITINERARY
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Itinerary
+
+    </h2>
+
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                03:00 AM
+            </div>
+            <div class="timeline-text">
+                Reach base village (Dhamnho[l]/Dhamanohol).
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                03:00 AM – 04:00 AM
+            </div>
+            <div class="timeline-text">
+                Rest in bus.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                05:00 AM
+            </div>
+            <div class="timeline-text">
+                Good morning. Complete your morning routine.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                05:15 AM
+            </div>
+            <div class="timeline-text">
+                Enjoy your morning tea & breakfast.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                05:30 AM
+            </div>
+            <div class="timeline-text">
+                We will have small introduction about trek
+                with the team and fellow participants.
+                Our team of experts will guide you through.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                05:45 AM
+            </div>
+            <div class="timeline-text">
+                We will reach the Lingya Waterfall.
+                Enjoy the swimming and beauty of nature.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                06:00 AM
+            </div>
+            <div class="timeline-text">
+                We will reach the Lingya Waterfall
+                Rappelling point.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                07:30 AM
+            </div>
+            <div class="timeline-text">
+                Rappelling will begin. Participants will
+                need to wait for their turn, and those who
+                have finished will need others to complete.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                03:00 PM
+            </div>
+            <div class="timeline-text">
+                We will complete the activity and start
+                trek towards base village.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                04:30 PM
+            </div>
+            <div class="timeline-text">
+                Reach the Base village. Congratulations
+                on completing the trek.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                04:30 PM – 05:30 PM
+            </div>
+            <div class="timeline-text">
+                Lunch will be served at local villagers house.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                05:30 PM
+            </div>
+            <div class="timeline-text">
+                We will begin our journey to the city.
+                Till this time, heart-whelming memories
+                of the adventure will occupy your mind
+                on the way to Pune.
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">
+                11:00 PM
+            </div>
+            <div class="timeline-text">
+                Reach Pune. We will follow the same route
+                on the return journey.
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     THINGS TO CARRY
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            🎒
+        </span>
+
+        Things to be Carried
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Sanitizer, masks, and personal medicines.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>2–3 liters of water (must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Head Torch or normal Torch with extra batteries (Must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Full sleeve T-shirts and full pant. For girls full neck T-shirt (Must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Good trekking shoes, extra pair of socks (Must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Warm clothes / shawl, towel, a napkin, extra pair of clothes (Must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Raincoat / poncho (must).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Camera, Cap etc. (Optional).</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Electrolyte packets as energy drinks.</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>
+                Carry eatable like fruits, dry fruits to munch
+                on during trek and to avoid dehydration.
+            </span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>
+                A haversack to put in all the things. (Optional)
+            </span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>
+                Good to have stick for support. (Optional)
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OTHER INFORMATION
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Other Information
+
+    </h2>
+
+
+    <div class="list">
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Max. Number of Participants: 25</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>First Come First Priority*</span>
+        </div>
+
+        <div class="list-item">
+            <span class="bullet"></span>
+            <span>Last Date Of Enrollment: 2026 (Saturday)</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NOTES
+===================================================== -->
+
+<section class="card">
+
+    <h2 class="section-title">
+
+        <span class="section-icon">
+            ▶
+        </span>
+
+        Important Note
+
+    </h2>
+
+
+    <div class="warning" style="margin-top:18px;">
+
+        <strong>
+            ADVANCE FULL PAYMENT IS COMPULSORY
+            TO RESERVE SEATS.
+        </strong>
+
+    </div>
+
+
+    <div class="notice" style="margin-top:12px;">
+
+        <strong>
+            Age restriction:
+        </strong>
+
+        Participants below
+        <strong>16 years are not allowed.</strong>
+
+    </div>
+
+
+    <div class="notice" style="margin-top:12px;">
+
+        <strong>
+            Meal:
+        </strong>
+
+        Veg meal is included in the base price.
+        Non-Veg meal costs an additional
+        <strong>₹100 per participant.</strong>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- =====================================================
+     RIGHT BOOKING
+===================================================== -->
+
+<aside class="booking">
+
+<section class="card">
+
+    <div class="booking-title">
+        Book Your Seats
+    </div>
+
+    <div class="booking-sub">
+        Select date and add participants one by one.
+    </div>
+
+
+    <!-- =================================================
+         DATES
+    ================================================= -->
+
+    <div class="date-list" id="dateList">
+        <!-- generated by JS -->
+    </div>
+
+
+    <!-- =================================================
+         PARTICIPANTS
+    ================================================= -->
+
+    <div
+        id="participantArea"
+        style="display:none;"
+    >
+
+        <div class="participant-head">
+
+            <div>
+
+                <div class="booking-title">
+                    Participants
+                </div>
+
+                <div class="booking-sub">
+                    Save one participant before adding the next.
+                </div>
+
+            </div>
+
+            <div class="participant-count">
+
+                <span id="guestCount">
+                    0
+                </span>
+
+                /
+
+                <span id="availableCount">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVED GUESTS -->
+
+        <div
+            class="saved-list"
+            id="savedList"
+        >
+        </div>
+
+
+        <!-- CURRENT FORM -->
+
+        <div
+            class="form"
+            id="guestForm"
+        >
+
+            <div class="form-head">
+
+                <div
+                    class="number"
+                    id="guestNumber"
+                >
+                    1
+                </div>
+
+                <div>
+
+                    <div class="form-title">
+                        Participant <span id="guestNumberText">1</span>
+                    </div>
+
+                    <div class="form-sub">
+                        Enter details and save
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="field">
+
+                <label class="label">
+                    Full Name *
+                </label>
+
+                <input
+                    id="guestName"
+                    class="input"
+                    type="text"
+                    placeholder="Enter full name"
+                    autocomplete="name"
+                >
+
+            </div>
+
+
+            <!-- AGE -->
+
+            <div class="field">
+
+                <label class="label">
+                    Age *
+                </label>
+
+                <input
+                    id="guestAge"
+                    class="input"
+                    type="number"
+                    min="16"
+                    max="100"
+                    inputmode="numeric"
+                    placeholder="Enter age"
+                >
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="field">
+
+                <label class="label">
+                    Mobile Number *
+                </label>
+
+                <input
+                    id="guestPhone"
+                    class="input"
+                    type="tel"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="10-digit mobile number"
+                    autocomplete="tel"
+                >
+
+            </div>
+
+
+            <!-- GENDER -->
+
+            <div class="field">
+
+                <label class="label">
+                    Gender *
+                </label>
+
+                <div class="choice-grid">
+
+                    <button
+                        type="button"
+                        class="choice"
+                        id="maleBtn"
+                    >
+                        ♂ Male
+                    </button>
+
+                    <button
+                        type="button"
+                        class="choice"
+                        id="femaleBtn"
+                    >
+                        ♀ Female
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEAL -->
+
+            <div class="field">
+
+                <label class="label">
+                    Meal Preference *
+                </label>
+
+                <div class="choice-grid">
+
+                    <button
+                        type="button"
+                        class="choice selected"
+                        id="vegBtn"
+                    >
+                        🥗 Veg
+                    </button>
+
+                    <button
+                        type="button"
+                        class="choice"
+                        id="nonVegBtn"
+                    >
+                        🍗 Non-Veg
+                    </button>
+
+                </div>
+
+                <div class="extra-note">
+                    Note: Non-Veg meal costs ₹100 extra per participant.
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <button
+                type="button"
+                class="save-btn"
+                id="saveGuestBtn"
+            >
+                Save Participant
+            </button>
+
+        </div>
+
+
+        <div
+            class="complete"
+            id="completeMessage"
+            style="display:none;"
+        >
+            ✓ All available seats for this date have been added.
+        </div>
+
+
+        <!-- =================================================
+             PICKUP
+        ================================================= -->
+
+        <div style="margin-top:28px;">
+
+            <div class="booking-title">
+                Pickup Location
+            </div>
+
+            <div class="booking-sub">
+                Select your boarding point.
+            </div>
+
+
+            <div class="pickup-list">
+
+                <button
+                    type="button"
+                    class="pickup"
+                    data-pickup="Katraj Main Bus Stop, Pune"
+                    data-time="11:00 PM"
+                >
+
+                    <div class="pickup-row">
+
+                        <span class="pickup-name">
+                            Katraj Main Bus Stop, Pune
+                        </span>
+
+                        <span class="pickup-time">
+                            11:00 PM
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pickup"
+                    data-pickup="Navale Bridge"
+                    data-time="11:15 PM"
+                >
+
+                    <div class="pickup-row">
+
+                        <span class="pickup-name">
+                            Navale Bridge
+                        </span>
+
+                        <span class="pickup-time">
+                            11:15 PM
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pickup"
+                    data-pickup="Chandani Chowk"
+                    data-time="11:30 PM"
+                >
+
+                    <div class="pickup-row">
+
+                        <span class="pickup-name">
+                            Chandani Chowk
+                        </span>
+
+                        <span class="pickup-time">
+                            11:30 PM
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pickup"
+                    data-pickup="Hinjewadi Chowk"
+                    data-time="11:45 PM"
+                >
+
+                    <div class="pickup-row">
+
+                        <span class="pickup-name">
+                            Hinjewadi Chowk
+                        </span>
+
+                        <span class="pickup-time">
+                            11:45 PM
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pickup"
+                    data-pickup="Pirangut Chowk, Hinjewadi Phase 3"
+                    data-time="12:00 AM"
+                >
+
+                    <div class="pickup-row">
+
+                        <span class="pickup-name">
+                            Pirangut Chowk, Hinjewadi Phase 3
+                        </span>
+
+                        <span class="pickup-time">
+                            12:00 AM
+                        </span>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             COUPON
+        ================================================= -->
+
+        <div style="margin-top:27px;">
+
+            <div class="booking-title" style="font-size:14px;">
+                Coupon Code
+            </div>
+
+            <div class="coupon">
+
+                <input
+                    id="couponInput"
+                    class="input"
+                    type="text"
+                    placeholder="Enter coupon"
+                >
+
+                <button
+                    type="button"
+                    class="coupon-btn"
+                    id="couponBtn"
+                >
+                    APPLY
+                </button>
+
+            </div>
+
+            <div
+                id="couponMessage"
+                class="coupon-message"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================= -->
+
+        <div class="summary">
+
+            <div class="summary-row">
+
+                <span>
+                    Tickets
+                </span>
+
+                <strong id="ticketPrice">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row orange">
+
+                <span>
+                    Non-Veg Meals
+                </span>
+
+                <strong id="nonVegPrice">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div
+                class="summary-row green"
+                id="discountRow"
+                style="display:none;"
+            >
+
+                <span>
+                    NEW5 Discount
+                </span>
+
+                <strong id="discountPrice">
+                    -₹0
+                </strong>
+
+            </div>
+
+
+            <div class="total">
+
+                <div class="total-label">
+                    Total
+                </div>
+
+                <div
+                    class="total-value"
+                    id="totalPrice"
+                >
+                    ₹0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="pay-btn"
+            id="payBtn"
+            disabled
+        >
+            Proceed to Payment
+        </button>
+
+
+        <div class="payment-note">
+            Advance full payment is compulsory
+            to reserve seats.
+        </div>
+
+    </div>
+
+</section>
+
+</aside>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     MOBILE TOTAL
+===================================================== -->
+
+<div class="mobile-bottom">
+
+    <div class="mobile-total">
+
+        <div class="mobile-total-label">
+            Total
+        </div>
+
+        <div
+            class="mobile-total-value"
+            id="mobileTotal"
+        >
+            ₹0
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="mobile-pay"
+        id="mobilePayBtn"
+        disabled
+    >
+        PAY NOW
+    </button>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+"use strict";
+
+/* =====================================================
+   EVENT CONFIGURATION
+   =====================================================
+
+   IMPORTANT:
+
+   This is now the source of truth for available seats.
+
+   To make 23 Aug have 25 seats, change:
+
+       seats:15
+
+   to:
+
+       seats:25
+
+   There is NO 10-user limit in this code.
+===================================================== */
+
+const EVENT = {
+
+    title:
+        "Lingya Waterfall Rappelling",
+
+    price:
+        2500,
+
+    image:
+        "https://cloud-mypc.github.io/view/images/lingya-waterfall.jpg",
+
+    dates:[
+
+        {
+            id:"lingya-23-08-2026",
+
+            date:"2026-08-23",
+
+            seats:15
+
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   APPLICATION STATE
+===================================================== */
+
+const state = {
+
+    selectedDate:null,
+
+    guests:[],
+
+    gender:"",
+
+    meal:"Veg",
+
+    pickup:null,
+
+    coupon:"",
+
+    discount:0
+
+};
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const $ = id =>
+    document.getElementById(id);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        initialize();
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+function initialize(){
+
+    /*
+     * Set event information.
+     */
+
+    $("eventTitle").textContent =
+        EVENT.title;
+
+    $("statPrice").textContent =
+        money(EVENT.price);
+
+
+    /*
+     * Hero image.
+     */
+
+    const hero =
+        $("heroImage");
+
+    hero.src =
+        EVENT.image;
+
+    hero.onerror =
+        function(){
+
+            /*
+             * If the exact event image isn't found,
+             * use a reliable waterfall image.
+             */
+
+            this.src =
+                "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1800&q=85";
+
+        };
+
+
+    /*
+     * Render dates.
+     */
+
+    renderDates();
+
+
+    /*
+     * Menu.
+     */
+
+    $("menuBtn").addEventListener(
+        "click",
+        function(){
+
+            $("mobileNav")
+                .classList
+                .toggle("show");
+
+        }
+    );
+
+
+    /*
+     * Gender.
+     */
+
+    $("maleBtn").addEventListener(
+        "click",
+        function(){
+
+            state.gender="Male";
+
+            updateChoices();
+
+        }
+    );
+
+
+    $("femaleBtn").addEventListener(
+        "click",
+        function(){
+
+            state.gender="Female";
+
+            updateChoices();
+
+        }
+    );
+
+
+    /*
+     * Meal.
+     */
+
+    $("vegBtn").addEventListener(
+        "click",
+        function(){
+
+            state.meal="Veg";
+
+            updateChoices();
+
+        }
+    );
+
+
+    $("nonVegBtn").addEventListener(
+        "click",
+        function(){
+
+            state.meal="Non-Veg";
+
+            updateChoices();
+
+        }
+    );
+
+
+    /*
+     * Save participant.
+     */
+
+    $("saveGuestBtn").addEventListener(
+        "click",
+        saveGuest
+    );
+
+
+    /*
+     * Coupon.
+     */
+
+    $("couponBtn").addEventListener(
+        "click",
+        applyCoupon
+    );
+
+
+    /*
+     * Pickup.
+     */
+
+    document
+        .querySelectorAll(".pickup")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function(){
+
+                        document
+                            .querySelectorAll(".pickup")
+                            .forEach(
+                                x =>
+                                    x.classList.remove(
+                                        "selected"
+                                    )
+                            );
+
+
+                        this.classList.add(
+                            "selected"
+                        );
+
+
+                        state.pickup={
+
+                            name:
+                                this.dataset.pickup,
+
+                            time:
+                                this.dataset.time
+
+                        };
+
+
+                        saveDraft();
+
+                        updatePaymentButton();
+
+                    }
+                );
+
+            }
+        );
+
+
+    /*
+     * Payment buttons.
+     */
+
+    $("payBtn").addEventListener(
+        "click",
+        proceedToPayment
+    );
+
+
+    $("mobilePayBtn").addEventListener(
+        "click",
+        proceedToPayment
+    );
+
+
+    /*
+     * Numeric phone field.
+     */
+
+    $("guestPhone").addEventListener(
+        "input",
+        function(){
+
+            this.value =
+                this.value
+                .replace(
+                    /\D/g,
+                    ""
+                )
+                .slice(
+                    0,
+                    10
+                );
+
+        }
+    );
+
+
+    /*
+     * Try to restore previous draft.
+     */
+
+    restoreDraft();
+
+}
+
+
+/* =====================================================
+   RENDER DATES
+===================================================== */
+
+function renderDates(){
+
+    const container =
+        $("dateList");
+
+
+    container.innerHTML="";
+
+
+    EVENT.dates.forEach(
+        date => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type="button";
+
+            button.className =
+                "date-btn";
+
+
+            button.dataset.id =
+                date.id;
+
+
+            const available =
+                getAvailableSeats(
+                    date
+                );
+
+
+            if(available<=0){
+
+                button.classList.add(
+                    "closed"
+                );
+
+            }
+
+
+            button.innerHTML = `
+
+                <div class="date-row">
+
+                    <div>
+
+                        <div class="date-name">
+                            ${formatDate(date.date)}
+                        </div>
+
+                        <div class="date-event">
+                            Lingya Waterfall
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <div class="seats">
+                            ${available} seats
+                        </div>
+
+                        <div class="seats-label">
+                            available
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    selectDate(
+                        date.id
+                    );
+
+                }
+            );
+
+
+            container.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SELECT DATE
+===================================================== */
+
+function selectDate(id){
+
+    const date =
+        EVENT.dates.find(
+            x => x.id===id
+        );
+
+
+    if(!date){
+        return;
+    }
+
+
+    const available =
+        getAvailableSeats(
+            date
+        );
+
+
+    if(available<=0){
+
+        showToast(
+            "No seats are available for this date.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * New date = reset current booking.
+     */
+
+    state.selectedDate =
+        date;
+
+    state.guests=[];
+
+    state.gender="";
+
+    state.meal="Veg";
+
+    state.pickup=null;
+
+    state.coupon="";
+
+    state.discount=0;
+
+
+    /*
+     * Reset fields.
+     */
+
+    resetGuestForm();
+
+
+    /*
+     * Highlight date.
+     */
+
+    document
+        .querySelectorAll(".date-btn")
+        .forEach(
+            button => {
+
+                button.classList.toggle(
+                    "selected",
+                    button.dataset.id===id
+                );
+
+            }
+        );
+
+
+    /*
+     * Show booking area.
+     */
+
+    $("participantArea")
+        .style
+        .display="block";
+
+
+    $("heroDate").textContent =
+        formatDate(
+            date.date
+        );
+
+
+    $("availableCount").textContent =
+        available;
+
+
+    renderGuests();
+
+    updateSummary();
+
+    updatePaymentButton();
+
+    saveDraft();
+
+
+    /*
+     * Scroll booking panel into view
+     * on mobile.
+     */
+
+    if(window.innerWidth<=900){
+
+        setTimeout(
+            function(){
+
+                $("participantArea")
+                    .scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+            },
+            100
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AVAILABLE SEATS
+===================================================== */
+
+function getAvailableSeats(date){
+
+    /*
+     * This calculates seats for the current
+     * browser booking session.
+
+     * IMPORTANT:
+     *
+     * The maximum participants is ALWAYS
+     * the configured seats value.
+     *
+     * There is NO hardcoded 10 here.
+     */
+
+    if(!date){
+        return 0;
+    }
+
+
+    const alreadySelected =
+        state.selectedDate &&
+        state.selectedDate.id===date.id
+            ? state.guests.length
+            : 0;
+
+
+    return Math.max(
+        0,
+        Number(date.seats) -
+        alreadySelected
+    );
+
+}
+
+
+/* =====================================================
+   SAVE GUEST
+===================================================== */
+
+function saveGuest(){
+
+    if(!state.selectedDate){
+
+        showToast(
+            "Please select a date first.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * IMPORTANT:
+     *
+     * Maximum = available seats.
+     *
+     * Not 10.
+     */
+
+    const totalSeats =
+        Number(
+            state.selectedDate.seats
+        );
+
+
+    if(
+        state.guests.length >=
+        totalSeats
+    ){
+
+        showToast(
+            "All available seats are already selected.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        $("guestName")
+        .value
+        .trim();
+
+
+    const age =
+        Number(
+            $("guestAge")
+            .value
+        );
+
+
+    const phone =
+        $("guestPhone")
+        .value
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    /*
+     * Validate name.
+     */
+
+    if(name.length<2){
+
+        showToast(
+            "Please enter the participant's full name.",
+            true
+        );
+
+        $("guestName").focus();
+
+        return;
+
+    }
+
+
+    /*
+     * Validate age.
+     */
+
+    if(
+        !age ||
+        age<16
+    ){
+
+        showToast(
+            "Participants below 16 years are not allowed.",
+            true
+        );
+
+        $("guestAge").focus();
+
+        return;
+
+    }
+
+
+    if(age>100){
+
+        showToast(
+            "Please enter a valid age.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Validate phone.
+     */
+
+    if(
+        !/^[0-9]{10}$/.test(
+            phone
+        )
+    ){
+
+        showToast(
+            "Please enter a valid 10-digit mobile number.",
+            true
+        );
+
+        $("guestPhone").focus();
+
+        return;
+
+    }
+
+
+    /*
+     * Validate gender.
+     */
+
+    if(
+        state.gender!=="Male" &&
+        state.gender!=="Female"
+    ){
+
+        showToast(
+            "Please select Male or Female.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Validate meal.
+     */
+
+    if(
+        state.meal!=="Veg" &&
+        state.meal!=="Non-Veg"
+    ){
+
+        showToast(
+            "Please select Veg or Non-Veg.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Create participant.
+     */
+
+    const guest={
+
+        name:name,
+
+        age:age,
+
+        phone:phone,
+
+        gender:state.gender,
+
+        meal:state.meal
+
+    };
+
+
+    /*
+     * Save.
+     */
+
+    state.guests.push(
+        guest
+    );
+
+
+    /*
+     * Reset current form.
+     */
+
+    resetGuestForm();
+
+
+    /*
+     * Render saved participant.
+     */
+
+    renderGuests();
+
+
+    /*
+     * Update prices.
+     */
+
+    updateSummary();
+
+
+    /*
+     * Save draft.
+     */
+
+    saveDraft();
+
+
+    /*
+     * Show success.
+     */
+
+    showToast(
+        "Participant " +
+        state.guests.length +
+        " saved successfully."
+    );
+
+
+    /*
+     * Refresh date seat display.
+     */
+
+    renderDates();
+
+
+    /*
+     * Keep selected date highlighted.
+     */
+
+    document
+        .querySelectorAll(".date-btn")
+        .forEach(
+            button => {
+
+                if(
+                    button.dataset.id ===
+                    state.selectedDate.id
+                ){
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                }
+
+            }
+        );
+
+
+    /*
+     * Update form number.
+     */
+
+    $("guestNumber").textContent =
+        state.guests.length + 1;
+
+    $("guestNumberText").textContent =
+        state.guests.length + 1;
+
+
+    /*
+     * If all seats are filled,
+     * hide the form.
+     */
+
+    if(
+        state.guests.length >=
+        state.selectedDate.seats
+    ){
+
+        $("guestForm")
+            .style
+            .display="none";
+
+
+        $("completeMessage")
+            .style
+            .display="block";
+
+    }
+
+
+    updatePaymentButton();
+
+}
+
+
+/* =====================================================
+   RENDER GUESTS
+===================================================== */
+
+function renderGuests(){
+
+    const container =
+        $("savedList");
+
+
+    container.innerHTML="";
+
+
+    state.guests.forEach(
+        (guest,index) => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "saved";
+
+
+            div.innerHTML = `
+
+                <div class="saved-row">
+
+                    <div class="saved-left">
+
+                        <div class="check">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <div class="saved-name">
+                                ${escapeHTML(guest.name)}
+                            </div>
+
+                            <div class="saved-meta">
+                                ${guest.age} yrs
+                                •
+                                ${escapeHTML(guest.gender)}
+                                •
+                                ${escapeHTML(guest.meal)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="saved-phone">
+                            ${escapeHTML(guest.phone)}
+                        </div>
+
+                        ${
+                            guest.meal==="Non-Veg"
+                            ? `
+                                <div class="nonveg-price">
+                                    +₹100
+                                </div>
+                              `
+                            : ""
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    $("guestCount").textContent =
+        state.guests.length;
+
+
+    if(state.selectedDate){
+
+        $("availableCount").textContent =
+            state.selectedDate.seats;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET GUEST FORM
+===================================================== */
+
+function resetGuestForm(){
+
+    $("guestName").value="";
+
+    $("guestAge").value="";
+
+    $("guestPhone").value="";
+
+
+    state.gender="";
+
+    state.meal="Veg";
+
+
+    updateChoices();
+
+
+    $("guestForm")
+        .style
+        .display="block";
+
+
+    $("completeMessage")
+        .style
+        .display="none";
+
+
+    const next =
+        state.guests.length+1;
+
+
+    $("guestNumber").textContent =
+        next;
+
+    $("guestNumberText").textContent =
+        next;
+
+}
+
+
+/* =====================================================
+   CHOICE BUTTONS
+===================================================== */
+
+function updateChoices(){
+
+    $("maleBtn")
+        .classList
+        .toggle(
+            "selected",
+            state.gender==="Male"
+        );
+
+
+    $("femaleBtn")
+        .classList
+        .toggle(
+            "selected",
+            state.gender==="Female"
+        );
+
+
+    $("vegBtn")
+        .classList
+        .toggle(
+            "selected",
+            state.meal==="Veg"
+        );
+
+
+    $("nonVegBtn")
+        .classList
+        .toggle(
+            "selected",
+            state.meal==="Non-Veg"
+        );
 
 }
 
@@ -588,4278 +3617,740 @@ a{
    SUMMARY
 ===================================================== */
 
-.summary{
+function updateSummary(){
 
-    padding:21px;
+    const ticketTotal =
+        state.guests.length *
+        Number(EVENT.price);
 
-    border-radius:22px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #061e28,
-            #092f40
+    const nonVegCount =
+        state.guests.filter(
+            guest =>
+                guest.meal==="Non-Veg"
+        ).length;
+
+
+    const nonVegTotal =
+        nonVegCount *
+        100;
+
+
+    let subtotal =
+        ticketTotal +
+        nonVegTotal;
+
+
+    let discount=0;
+
+
+    if(
+        state.coupon ===
+        "NEW5"
+    ){
+
+        discount =
+            Math.round(
+                subtotal *
+                .05
+            );
+
+    }
+
+
+    const total =
+        Math.max(
+            0,
+            subtotal-discount
         );
 
-    color:#fff;
 
-    box-shadow:
-        0 15px 35px
-        rgba(8,44,61,.16);
+    state.discount =
+        discount;
+
+
+    $("ticketPrice").textContent =
+        money(ticketTotal);
+
+
+    $("nonVegPrice").textContent =
+        money(nonVegTotal);
+
+
+    $("totalPrice").textContent =
+        money(total);
+
+
+    $("mobileTotal").textContent =
+        money(total);
+
+
+    if(discount>0){
+
+        $("discountRow")
+            .style
+            .display="flex";
+
+        $("discountPrice").textContent =
+            "-"+money(discount);
+
+    }
+    else{
+
+        $("discountRow")
+            .style
+            .display="none";
+
+    }
+
+
+    updatePaymentButton();
 
 }
 
-.payButton{
 
-    width:100%;
+/* =====================================================
+   COUPON
+===================================================== */
 
-    min-height:54px;
+function applyCoupon(){
 
-    border:0;
+    const input =
+        $("couponInput")
+        .value
+        .trim()
+        .toUpperCase();
 
-    border-radius:15px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66d,
-            #ffc400,
-            #f0a800
+    if(
+        input==="NEW5"
+    ){
+
+        state.coupon="NEW5";
+
+
+        $("couponMessage")
+            .style
+            .color="#159665";
+
+
+        $("couponMessage")
+            .textContent =
+            "NEW5 applied — 5% discount.";
+
+        showToast(
+            "Coupon applied."
         );
 
-    color:#071b24;
+    }
+    else{
 
-    font-size:11px;
+        state.coupon="";
 
-    font-weight:900;
 
-    letter-spacing:.1em;
+        $("couponMessage")
+            .style
+            .color="#b33b3b";
 
-    text-transform:uppercase;
 
-    cursor:pointer;
+        $("couponMessage")
+            .textContent =
+            "Invalid coupon code.";
 
-    box-shadow:
-        0 5px 0 #b87900;
-
-}
-
-.payButton:disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =====================================================
-   INFORMATION
-===================================================== */
-
-.infoSection{
-
-    padding:24px;
-
-    border-radius:24px;
-
-    background:#fff;
-
-    border:
-        1px solid #e9eeeb;
-
-}
-
-.infoTitle{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    font-size:19px;
-
-    font-weight:900;
-
-    color:#082C3D;
-
-}
-
-.infoTitleIcon{
-
-    width:32px;
-
-    height:32px;
-
-    border-radius:10px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#eaf0ff;
-
-    font-size:16px;
-
-}
-
-.infoList{
-
-    margin-top:18px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:11px;
-
-}
-
-.infoItem{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:10px;
-
-    font-size:14px;
-
-    line-height:1.7;
-
-    color:#53616a;
-
-}
-
-.infoBullet{
-
-    flex:0 0 auto;
-
-    margin-top:7px;
-
-    width:7px;
-
-    height:7px;
-
-    border-radius:50%;
-
-    background:#f3c400;
-
-}
-
-
-/* =====================================================
-   ITINERARY
-===================================================== */
-
-.timeline{
-
-    margin-top:20px;
-
-    border-left:
-        2px solid #e8ecea;
-
-}
-
-.timelineItem{
-
-    position:relative;
-
-    padding:
-        0
-        0
-        22px
-        25px;
-
-}
-
-.timelineItem:last-child{
-    padding-bottom:0;
-}
-
-.timelineDot{
-
-    position:absolute;
-
-    left:-7px;
-
-    top:3px;
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:#ffc400;
-
-    border:
-        3px solid #fff;
-
-    box-shadow:
-        0 0 0 1px #ffc400;
-
-}
-
-.timelineTime{
-
-    font-size:12px;
-
-    font-weight:900;
-
-    color:#082C3D;
-
-}
-
-.timelineText{
-
-    margin-top:4px;
-
-    font-size:14px;
-
-    line-height:1.65;
-
-    color:#5c6970;
-
-}
-
-
-/* =====================================================
-   NOTICE
-===================================================== */
-
-.notice{
-
-    padding:16px;
-
-    border-radius:17px;
-
-    background:#fff7df;
-
-    border:
-        1px solid #f7df91;
-
-    color:#765b09;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-}
-
-.dangerNotice{
-
-    padding:16px;
-
-    border-radius:17px;
-
-    background:#fff1f1;
-
-    border:
-        1px solid #f2d0d0;
-
-    color:#8a3535;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-}
-
-
-/* =====================================================
-   MOBILE BOTTOM
-===================================================== */
-
-.mobileBottom{
-
-    position:fixed;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    z-index:80;
-
-    padding:
-        10px
-        14px
-        calc(
-            10px +
-            env(safe-area-inset-bottom)
+        showToast(
+            "Invalid coupon code.",
+            true
         );
 
-    background:
-        rgba(255,255,255,.96);
+    }
 
-    border-top:
-        1px solid #e6eae8;
 
-    backdrop-filter:
-        blur(18px);
+    updateSummary();
 
-    -webkit-backdrop-filter:
-        blur(18px);
+    saveDraft();
 
 }
-
-@media(min-width:1024px){
-
-    .mobileBottom{
-        display:none;
-    }
-
-}
-
-@media(max-width:640px){
-
-    .eventHero{
-        min-height:350px;
-    }
-
-    .infoSection{
-        padding:20px;
-    }
-
-}
-
-</style>
-
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script>
-
-tailwind.config={
-
-    theme:{
-
-        extend:{
-
-            fontFamily:{
-                sans:[
-                    '"Outfit"',
-                    'Arial',
-                    'sans-serif'
-                ]
-            }
-
-        }
-
-    }
-
-};
-
-</script>
-
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
-
-
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
-
-
-<script
-    defer
-    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-></script>
-
-</head>
-
-
-<body
-    x-data="bookingApp()"
-    x-init="init()"
->
-
-
-<!-- =====================================================
-     LOADER
-===================================================== -->
-
-<div id="pageLoader">
-
-    <div class="loaderBox">
-
-        <div class="loaderCube"></div>
-
-        <div class="loaderText">
-            Adventure Junction
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SAME HEADER
-===================================================== -->
-
-<nav
-    x-data="{
-        mobileOpen:false,
-        scrolled:false
-    }"
-
-    @scroll.window="
-        scrolled=window.scrollY>20
-    "
-
-    :class="
-        scrolled
-        ? 'bg-white/95 shadow-lg shadow-black/5'
-        : 'bg-white/85'
-    "
-
-    class="
-        fixed
-        top-0
-        left-0
-        right-0
-        z-50
-        backdrop-blur-xl
-        border-b
-        border-black/5
-    "
->
-
-<div
-    class="
-        max-w-7xl
-        mx-auto
-        px-4
-        sm:px-6
-        lg:px-8
-    "
->
-
-<div
-    class="
-        h-[72px]
-        flex
-        items-center
-        justify-between
-    "
->
-
-
-<a
-    href="./index.html"
-    class="group flex items-center gap-3"
->
-
-<div
-    class="
-        relative
-        w-11
-        h-11
-        sm:w-12
-        sm:h-12
-        shrink-0
-    "
->
-
-<div
-    class="
-        w-full
-        h-full
-        rounded-full
-        overflow-hidden
-        bg-[#092C3D]
-        ring-1
-        ring-black/10
-    "
->
-
-<img
-    src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
-    alt="Adventure Junction"
-    class="
-        absolute
-        inset-0
-        w-full
-        h-full
-        object-cover
-    "
-    onerror="
-        this.onerror=null;
-        this.src='https://cloud-mypc.github.io/view/images/low/icon.png';
-    "
->
-
-<img
-    src="https://cloud-mypc.github.io/view/images/Icon.png"
-    alt=""
-    class="
-        absolute
-        inset-0
-        w-full
-        h-full
-        object-cover
-        opacity-0
-        transition-opacity
-        duration-500
-    "
-    onload="
-        this.classList.remove('opacity-0');
-        this.classList.add('opacity-100');
-    "
->
-
-</div>
-
-</div>
-
-
-<div class="leading-none">
-
-<div class="flex items-center gap-1.5">
-
-<h1
-    class="
-        text-[17px]
-        sm:text-[19px]
-        font-extrabold
-        tracking-[-.03em]
-        text-[#092C3D]
-    "
->
-Adventure Junction
-</h1>
-
-<span
-    class="
-        hidden
-        sm:block
-        w-1.5
-        h-1.5
-        rounded-full
-        bg-yellow-400
-    "
-></span>
-
-</div>
-
-<p
-    class="
-        mt-1
-        text-[9px]
-        sm:text-[10px]
-        uppercase
-        tracking-[.22em]
-        font-bold
-        text-gray-400
-    "
->
-Climbing • Rappelling
-</p>
-
-</div>
-
-</a>
-
-
-
-<div class="hidden lg:flex items-center gap-1">
-
-<a
-    href="./index.html#expeditions"
-    class="
-        px-4
-        py-2.5
-        rounded-xl
-        text-[13px]
-        font-semibold
-        text-gray-600
-        hover:bg-gray-50
-    "
->
-Expeditions
-</a>
-
-<a
-    href="./index.html#how-it-works"
-    class="
-        px-4
-        py-2.5
-        rounded-xl
-        text-[13px]
-        font-semibold
-        text-gray-600
-        hover:bg-gray-50
-    "
->
-How It Works
-</a>
-
-<a
-    href="./index.html#about"
-    class="
-        px-4
-        py-2.5
-        rounded-xl
-        text-[13px]
-        font-semibold
-        text-gray-600
-        hover:bg-gray-50
-    "
->
-About Us
-</a>
-
-</div>
-
-
-
-<div class="flex items-center gap-2">
-
-<a
-    href="https://www.instagram.com/adventure__junction"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="
-        hidden
-        sm:flex
-        w-10
-        h-10
-        items-center
-        justify-center
-        rounded-xl
-        text-gray-500
-        hover:bg-gray-100
-    "
->
-
-<svg
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    viewBox="0 0 24 24"
->
-
-<rect
-    x="3"
-    y="3"
-    width="18"
-    height="18"
-    rx="5"
-></rect>
-
-<circle
-    cx="12"
-    cy="12"
-    r="4"
-></circle>
-
-<circle
-    cx="17.5"
-    cy="6.5"
-    r="1"
-    fill="currentColor"
-    stroke="none"
-></circle>
-
-</svg>
-
-</a>
-
-
-<a
-    href="./index.html#expeditions"
-    class="
-        hidden
-        sm:flex
-        items-center
-        gap-2
-        px-4
-        py-2.5
-        rounded-xl
-        bg-[#092C3D]
-        text-white
-        text-[12px]
-        font-bold
-    "
->
-Explore
-</a>
-
-
-<button
-    type="button"
-    @click="mobileOpen=!mobileOpen"
-    class="
-        lg:hidden
-        w-10
-        h-10
-        rounded-xl
-        bg-gray-50
-        flex
-        items-center
-        justify-center
-        text-[#092C3D]
-    "
->
-
-<svg
-    x-show="!mobileOpen"
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    viewBox="0 0 24 24"
->
-
-<path
-    d="M4 7h16M4 12h16M4 17h16"
-    stroke-linecap="round"
-/>
-
-</svg>
-
-
-<svg
-    x-show="mobileOpen"
-    x-cloak
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    viewBox="0 0 24 24"
->
-
-<path
-    d="M6 6l12 12M18 6L6 18"
-    stroke-linecap="round"
-/>
-
-</svg>
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<div
-    x-show="mobileOpen"
-    x-cloak
-    class="lg:hidden pb-4"
->
-
-<div
-    class="
-        rounded-2xl
-        bg-white
-        border
-        border-gray-100
-        shadow-xl
-        p-2
-    "
->
-
-<a
-    href="./index.html#expeditions"
-    class="
-        block
-        px-4
-        py-3.5
-        rounded-xl
-        text-sm
-        font-semibold
-        text-gray-700
-    "
->
-Expeditions
-</a>
-
-<a
-    href="./index.html#how-it-works"
-    class="
-        block
-        px-4
-        py-3.5
-        rounded-xl
-        text-sm
-        font-semibold
-        text-gray-700
-    "
->
-How It Works
-</a>
-
-<a
-    href="./index.html#about"
-    class="
-        block
-        px-4
-        py-3.5
-        rounded-xl
-        text-sm
-        font-semibold
-        text-gray-700
-    "
->
-About Us
-</a>
-
-<a
-    href="https://www.instagram.com/adventure__junction"
-    target="_blank"
-    class="
-        block
-        px-4
-        py-3.5
-        rounded-xl
-        text-sm
-        font-semibold
-        text-gray-700
-    "
->
-Instagram
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</nav>
-
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="pt-[72px] pb-32">
-
-
-<!-- =====================================================
-     LOADING
-===================================================== -->
-
-<div
-    x-show="loading"
-    class="
-        min-h-[70vh]
-        flex
-        items-center
-        justify-center
-    "
->
-
-<div class="text-center">
-
-<div
-    class="
-        w-10
-        h-10
-        rounded-xl
-        bg-yellow-400
-        animate-spin
-        mx-auto
-    "
-></div>
-
-<p
-    class="
-        mt-4
-        text-[10px]
-        uppercase
-        tracking-[.2em]
-        font-black
-        text-gray-400
-    "
->
-Loading adventure
-</p>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     ERROR
-===================================================== -->
-
-<div
-    x-show="!loading && error"
-    x-cloak
-    class="
-        min-h-[70vh]
-        flex
-        items-center
-        justify-center
-        px-5
-    "
->
-
-<div
-    class="
-        max-w-md
-        w-full
-        bg-white
-        rounded-3xl
-        p-8
-        text-center
-        shadow-xl
-    "
->
-
-<div
-    class="
-        w-14
-        h-14
-        mx-auto
-        rounded-2xl
-        bg-red-50
-        text-red-500
-        flex
-        items-center
-        justify-center
-        text-xl
-        font-black
-    "
->
-!
-</div>
-
-<h2
-    class="
-        mt-5
-        text-xl
-        font-black
-    "
-    x-text="error"
-></h2>
-
-<a
-    href="./index.html#expeditions"
-    class="
-        inline-flex
-        mt-6
-        px-6
-        py-3
-        rounded-xl
-        bg-[#082C3D]
-        text-white
-        text-sm
-        font-bold
-    "
->
-Back to Expeditions
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     BOOKING
-===================================================== -->
-
-<div
-    x-show="!loading && !error && event"
-    x-cloak
->
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="eventHero">
-
-<img
-    class="eventHeroLow"
-    :src="lowImage"
-    :alt="event.title"
->
-
-<img
-    class="eventHeroHigh"
-    :src="event.image_url"
-    :alt="event.title"
-    @load="$event.target.classList.add('loaded')"
->
-
-<div class="heroOverlay"></div>
-
-
-<div
-    class="
-        relative
-        z-10
-        max-w-7xl
-        mx-auto
-        min-h-[430px]
-        px-5
-        sm:px-7
-        lg:px-8
-        pb-10
-        flex
-        items-end
-    "
->
-
-<div>
-
-<div
-    class="
-        inline-flex
-        items-center
-        gap-2
-        px-3
-        py-1.5
-        rounded-full
-        bg-black/30
-        border
-        border-white/20
-        backdrop-blur-xl
-    "
->
-
-<span
-    class="w-2 h-2 rounded-full bg-yellow-400"
-></span>
-
-<span
-    class="
-        text-[9px]
-        uppercase
-        tracking-[.2em]
-        font-black
-        text-white
-    "
-    x-text="event.category || 'Rappelling'"
-></span>
-
-</div>
-
-
-<h1
-    class="
-        mt-4
-        text-4xl
-        sm:text-5xl
-        md:text-6xl
-        font-black
-        leading-[.92]
-        tracking-[-.045em]
-        text-white
-        max-w-4xl
-    "
-    x-text="event.title || 'Lingya Waterfall Rappelling'"
-></h1>
-
-
-<div
-    class="
-        mt-5
-        flex
-        flex-wrap
-        gap-2
-    "
->
-
-<span
-    class="
-        px-3
-        py-2
-        rounded-xl
-        bg-black/30
-        backdrop-blur-lg
-        text-white
-        text-xs
-        font-bold
-    "
-    x-text="selectedDateText"
-></span>
-
-<span
-    class="
-        px-3
-        py-2
-        rounded-xl
-        bg-black/30
-        backdrop-blur-lg
-        text-white
-        text-xs
-        font-bold
-    "
->
-Lingya Waterfall • Maharashtra
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PAGE GRID
-===================================================== -->
-
-<section
-    class="
-        max-w-7xl
-        mx-auto
-        px-5
-        sm:px-7
-        lg:px-8
-        py-8
-    "
->
-
-<div
-    class="
-        grid
-        lg:grid-cols-[minmax(0,1fr)_390px]
-        gap-7
-        items-start
-    "
->
-
-
-<!-- =====================================================
-     LEFT
-===================================================== -->
-
-<div class="space-y-7">
-
-
-<!-- STATS -->
-
-<div
-    class="
-        grid
-        grid-cols-2
-        sm:grid-cols-4
-        gap-3
-    "
->
-
-<div class="statCard">
-
-<p class="text-[8px] uppercase tracking-widest font-bold text-gray-400">
-Grade
-</p>
-
-<p class="mt-2 font-black">
-Easy
-</p>
-
-</div>
-
-
-<div class="statCard">
-
-<p class="text-[8px] uppercase tracking-widest font-bold text-gray-400">
-Endurance
-</p>
-
-<p class="mt-2 font-black">
-Medium
-</p>
-
-</div>
-
-
-<div class="statCard">
-
-<p class="text-[8px] uppercase tracking-widest font-bold text-gray-400">
-Height
-</p>
-
-<p class="mt-2 font-black">
-300+ ft
-</p>
-
-</div>
-
-
-<div class="statCard">
-
-<p class="text-[8px] uppercase tracking-widest font-bold text-gray-400">
-Fee / Person
-</p>
-
-<p
-    class="mt-2 font-black"
-    x-text="'₹'+formatMoney(event.price)"
-></p>
-
-</div>
-
-</div>
-
-
-
-<!-- DESCRIPTION -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-🌿
-</span>
-
-About Lingya Waterfall
-
-</h2>
-
-
-<p class="
-    mt-5
-    text-sm
-    sm:text-[15px]
-    leading-7
-    text-gray-600
-">
-
-Lingya Ghat Waterfall is a stunning natural
-attraction located just 13.5 km ahead of
-Lavasa city in Maharashtra.
-
-The waterfall derives its name from the
-prominent pinnacle nearby, known as Lingya,
-which holds significant cultural and spiritual
-value for the local community.
-
-This striking formation is often revered and
-worshipped by the villagers of Dhamanohol,
-the base village for the waterfall.
-
-Surrounded by lush greenery and vibrant flora,
-the waterfall is especially breathtaking during
-the monsoon season when it transforms into a
-powerful cascade, drawing visitors for its scenic
-beauty and serene atmosphere.
-
-The area is perfect for nature enthusiasts,
-offering opportunities for trekking,
-birdwatching, photography and an adventurous
-waterfall experience.
-
-</p>
-
-</div>
-
-
-
-<!-- =====================================================
-     COST INCLUDES
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Cost Includes
-
-</h2>
-
-
-<div class="infoList">
-
-<template
-    x-for="item in costIncludes"
-    :key="item"
->
-
-<div class="infoItem">
-
-<span class="infoBullet"></span>
-
-<span x-text="item"></span>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     COST EXCLUDES
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Cost Excludes
-
-</h2>
-
-
-<div class="infoList">
-
-<template
-    x-for="item in costExcludes"
-    :key="item"
->
-
-<div class="infoItem">
-
-<span class="infoBullet"></span>
-
-<span x-text="item"></span>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MAJOR ATTRACTIONS
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Major Attractions
-
-</h2>
-
-
-<div class="infoList">
-
-<template
-    x-for="item in attractions"
-    :key="item"
->
-
-<div class="infoItem">
-
-<span class="infoBullet"></span>
-
-<span x-text="item"></span>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     PICKUP POINTS INFORMATION
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Pickup Points & Time
-
-</h2>
-
-
-<div class="mt-6">
-
-<h3
-    class="
-        text-sm
-        font-black
-        uppercase
-        tracking-wider
-        text-[#082C3D]
-    "
->
-Pune
-</h3>
-
-
-<div class="mt-4 space-y-3">
-
-<template
-    x-for="stop in pickupStops"
-    :key="stop.id"
->
-
-<div
-    class="
-        flex
-        items-start
-        gap-3
-        text-sm
-        text-gray-600
-    "
->
-
-<span class="text-emerald-500 font-black">
-✓
-</span>
-
-<span>
-
-<strong x-text="stop.time"></strong>
-
-<span
-    x-text="' : '+stop.name"
-></span>
-
-</span>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     ITINERARY
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Itinerary
-
-</h2>
-
-
-<div class="timeline">
-
-<template
-    x-for="item in itinerary"
-    :key="item.id"
->
-
-<div class="timelineItem">
-
-<div class="timelineDot"></div>
-
-<div
-    class="timelineTime"
-    x-text="item.time"
-></div>
-
-<div
-    class="timelineText"
-    x-text="item.text"
-></div>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     THINGS TO CARRY
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-🎒
-</span>
-
-Things to be carried
-
-</h2>
-
-
-<div class="infoList">
-
-<template
-    x-for="item in thingsToCarry"
-    :key="item"
->
-
-<div class="infoItem">
-
-<span class="infoBullet"></span>
-
-<span x-text="item"></span>
-
-</div>
-
-</template>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     OTHER INFORMATION
-===================================================== -->
-
-<div class="infoSection">
-
-<h2 class="infoTitle">
-
-<span class="infoTitleIcon">
-▶
-</span>
-
-Other Information
-
-</h2>
-
-
-<div class="infoList">
-
-<div class="infoItem">
-<span class="infoBullet"></span>
-<span>Max. Number of Participants: 25</span>
-</div>
-
-<div class="infoItem">
-<span class="infoBullet"></span>
-<span>First Come First Priority*</span>
-</div>
-
-<div class="infoItem">
-<span class="infoBullet"></span>
-<span>Last Date of Enrollment: 2026 (Saturday)</span>
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     NOTE
-===================================================== -->
-
-<div class="dangerNotice">
-
-<strong>
-Advance full payment is compulsory to reserve seats.
-</strong>
-
-</div>
-
-
-
-<!-- AGE NOTICE -->
-
-<div class="notice">
-
-<strong>
-Age restriction:
-</strong>
-
-Guests below <strong>16 years</strong> are not allowed
-to participate in this expedition.
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     RIGHT BOOKING PANEL
-===================================================== -->
-
-<aside
-    class="
-        lg:sticky
-        lg:top-24
-    "
->
-
-<div class="contentCard p-5 sm:p-6">
-
-
-<!-- =====================================================
-     DATE
-===================================================== -->
-
-<h2 class="text-xl font-black">
-Select Date
-</h2>
-
-<p class="mt-1 text-xs text-gray-400">
-Choose your expedition date first.
-</p>
-
-
-<div class="mt-5 space-y-3">
-
-<template
-    x-for="date in dates"
-    :key="date.id"
->
-
-<button
-    type="button"
-
-    class="dateOption"
-
-    @click="selectDate(date)"
-
-    :disabled="
-        date.is_open===false ||
-        date.available<=0
-    "
-
-    :class="{
-
-        selected:
-            selectedDate &&
-            selectedDate.id===date.id,
-
-        closed:
-            date.is_open===false ||
-            date.available<=0
-
-    }"
->
-
-<div
-    class="
-        flex
-        items-center
-        justify-between
-        gap-3
-    "
->
-
-<div>
-
-<p
-    class="
-        text-sm
-        font-black
-    "
-    x-text="formatDate(date.event_date)"
-></p>
-
-<p class="mt-1 text-[10px] text-gray-400">
-Lingya Waterfall
-</p>
-
-</div>
-
-
-<div class="text-right">
-
-<p
-    class="
-        text-sm
-        font-black
-        text-emerald-600
-    "
-    x-text="date.available+' seats'"
-></p>
-
-<p
-    class="
-        mt-1
-        text-[9px]
-        text-gray-400
-    "
->
-available
-</p>
-
-</div>
-
-</div>
-
-</button>
-
-</template>
-
-</div>
-
-
-
-<!-- =====================================================
-     GUEST REGISTRATION
-===================================================== -->
-
-<div
-    x-show="selectedDate"
-    x-cloak
-    class="mt-7"
->
-
-
-<div
-    class="
-        flex
-        items-start
-        justify-between
-        gap-3
-    "
->
-
-<div>
-
-<h2 class="text-xl font-black">
-Participants
-</h2>
-
-<p
-    class="
-        mt-1
-        text-xs
-        leading-5
-        text-gray-400
-    "
->
-Add each participant one by one.
-</p>
-
-</div>
-
-
-<div
-    class="
-        px-3
-        py-2
-        rounded-xl
-        bg-emerald-50
-        text-emerald-700
-        text-xs
-        font-black
-        whitespace-nowrap
-    "
->
-
-<span
-    x-text="savedGuests.length"
-></span>
-
-<span> / </span>
-
-<span
-    x-text="selectedDate ? selectedDate.available : 0"
-></span>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SAVED PARTICIPANTS
-===================================================== -->
-
-<div
-    x-show="savedGuests.length"
-    x-cloak
-    class="mt-5 space-y-2"
->
-
-<template
-    x-for="(guest,index) in savedGuests"
-    :key="index"
->
-
-<div class="savedGuest">
-
-<div
-    class="
-        flex
-        items-center
-        justify-between
-        gap-3
-    "
->
-
-<div class="flex items-center gap-3">
-
-<div class="savedCheck">
-✓
-</div>
-
-<div>
-
-<p
-    class="
-        text-sm
-        font-black
-        text-[#082C3D]
-    "
-    x-text="guest.name"
-></p>
-
-<p
-    class="
-        mt-1
-        text-[10px]
-        text-gray-500
-    "
->
-
-<span
-    x-text="guest.age+' yrs'"
-></span>
-
-<span> • </span>
-
-<span
-    x-text="guest.gender"
-></span>
-
-<span> • </span>
-
-<span
-    x-text="guest.meal"
-></span>
-
-</p>
-
-</div>
-
-</div>
-
-
-<div class="text-right">
-
-<p
-    class="
-        text-xs
-        font-black
-    "
-    x-text="guest.phone"
-></p>
-
-<p
-    x-show="guest.meal==='Non-Veg'"
-    class="
-        mt-1
-        text-[9px]
-        text-orange-600
-        font-bold
-    "
->
-+₹100
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</template>
-
-</div>
-
-
-
-<!-- =====================================================
-     CURRENT USER FORM
-===================================================== -->
-
-<div
-    x-show="
-        selectedDate &&
-        savedGuests.length <
-        selectedDate.available
-    "
-    x-cloak
-    class="
-        mt-5
-        rounded-2xl
-        border
-        border-gray-200
-        bg-[#fafcfb]
-        p-5
-    "
->
-
-<div
-    class="
-        flex
-        items-center
-        gap-3
-        mb-5
-    "
->
-
-<div
-    class="
-        w-9
-        h-9
-        rounded-xl
-        bg-[#082C3D]
-        text-white
-        flex
-        items-center
-        justify-center
-        text-xs
-        font-black
-    "
-    x-text="savedGuests.length+1"
-></div>
-
-<div>
-
-<h3 class="text-sm font-black">
-Participant <span x-text="savedGuests.length+1"></span>
-</h3>
-
-<p class="text-[10px] text-gray-400">
-Enter details and save
-</p>
-
-</div>
-
-</div>
-
-
-
-<!-- NAME -->
-
-<label class="formLabel">
-Full Name
-</label>
-
-<input
-    type="text"
-    class="formInput"
-    x-model="currentGuest.name"
-    placeholder="Enter full name"
-    autocomplete="name"
->
-
-
-<!-- AGE -->
-
-<div class="mt-4">
-
-<label class="formLabel">
-Age
-</label>
-
-<input
-    type="number"
-    class="formInput"
-    x-model="currentGuest.age"
-    placeholder="Enter age"
-    min="16"
-    max="100"
-    inputmode="numeric"
->
-
-</div>
-
-
-
-<!-- MOBILE -->
-
-<div class="mt-4">
-
-<label class="formLabel">
-Mobile Number
-</label>
-
-<input
-    type="tel"
-    class="formInput"
-    x-model="currentGuest.phone"
-    placeholder="10-digit mobile number"
-    maxlength="10"
-    inputmode="numeric"
-    autocomplete="tel"
->
-
-</div>
-
-
-
-<!-- GENDER -->
-
-<div class="mt-4">
-
-<label class="formLabel">
-Gender
-</label>
-
-
-<div class="choiceGrid">
-
-<button
-    type="button"
-    class="choiceButton"
-    @click="currentGuest.gender='Male'"
-    :class="
-        currentGuest.gender==='Male'
-        ? 'selected'
-        : ''
-    "
->
-♂ Male
-</button>
-
-
-<button
-    type="button"
-    class="choiceButton"
-    @click="currentGuest.gender='Female'"
-    :class="
-        currentGuest.gender==='Female'
-        ? 'selected'
-        : ''
-    "
->
-♀ Female
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- MEAL -->
-
-<div class="mt-4">
-
-<label class="formLabel">
-Meal Preference
-</label>
-
-
-<div class="choiceGrid">
-
-<button
-    type="button"
-    class="choiceButton"
-    @click="currentGuest.meal='Veg'"
-    :class="
-        currentGuest.meal==='Veg'
-        ? 'selected'
-        : ''
-    "
->
-🥗 Veg
-</button>
-
-
-<button
-    type="button"
-    class="choiceButton"
-    @click="currentGuest.meal='Non-Veg'"
-    :class="
-        currentGuest.meal==='Non-Veg'
-        ? 'selected'
-        : ''
-    "
->
-🍗 Non-Veg
-</button>
-
-</div>
-
-
-<p
-    class="
-        mt-2
-        text-[10px]
-        text-orange-600
-        font-semibold
-    "
->
-Non-Veg meal: ₹100 extra per participant.
-</p>
-
-</div>
-
-
-
-<!-- SAVE -->
-
-<button
-    type="button"
-    class="saveGuestButton mt-5"
-    @click="saveCurrentGuest()"
->
-Save Participant
-</button>
-
-</div>
-
-
-
-<!-- COMPLETED -->
-
-<div
-    x-show="
-        selectedDate &&
-        savedGuests.length === selectedDate.available
-    "
-    x-cloak
-    class="
-        mt-5
-        p-4
-        rounded-2xl
-        bg-emerald-50
-        border
-        border-emerald-100
-        text-emerald-700
-        text-sm
-        font-bold
-    "
->
-
-✓ All available seats for this date
-have been added.
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     PICKUP
-===================================================== -->
-
-<div class="mt-8">
-
-<h2 class="text-xl font-black">
-Pickup Location
-</h2>
-
-<p class="mt-1 text-xs text-gray-400">
-Select where you will board the bus.
-</p>
-
-
-<div class="mt-4 space-y-2">
-
-<template
-    x-for="stop in pickupStops"
-    :key="stop.id"
->
-
-<button
-    type="button"
-    class="pickupOption"
-    @click="selectedPickup=stop"
-    :class="
-        selectedPickup &&
-        selectedPickup.id===stop.id
-        ? 'selected'
-        : ''
-    "
->
-
-<div>
-
-<p
-    class="text-sm font-black"
-    x-text="stop.name"
-></p>
-
-</div>
-
-
-<span
-    class="text-xs font-black"
-    x-text="stop.time"
-></span>
-
-</button>
-
-</template>
-
-</div>
-
-
-<div class="notice mt-3">
-
-<strong>Pickup note:</strong>
-Please reach your selected pickup point
-at least <strong>20 minutes before</strong>
-the scheduled pickup time.
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     COUPON
-===================================================== -->
-
-<div class="mt-8">
-
-<h2 class="text-sm font-black">
-Coupon Code
-</h2>
-
-
-<div class="mt-3 flex gap-2">
-
-<input
-    type="text"
-    class="formInput"
-    x-model="couponCode"
-    placeholder="NEW5"
-    style="text-transform:uppercase"
->
-
-
-<button
-    type="button"
-    @click="applyCoupon()"
-    class="
-        px-5
-        rounded-[14px]
-        bg-[#082C3D]
-        text-white
-        text-xs
-        font-black
-    "
->
-Apply
-</button>
-
-</div>
-
-
-<p
-    x-show="couponMessage"
-    x-cloak
-    class="
-        mt-2
-        text-xs
-        font-bold
-    "
-    :class="
-        couponValid
-        ? 'text-emerald-600'
-        : 'text-red-500'
-    "
-    x-text="couponMessage"
-></p>
-
-</div>
-
-
-
-<!-- =====================================================
-     PRICE
-===================================================== -->
-
-<div class="summary mt-7">
-
-<div
-    class="
-        flex
-        justify-between
-        text-sm
-        text-white/60
-    "
->
-
-<span>
-Tickets
-</span>
-
-<span
-    class="font-bold text-white"
-    x-text="'₹'+formatMoney(ticketSubtotal)"
-></span>
-
-</div>
-
-
-<div
-    class="
-        mt-3
-        flex
-        justify-between
-        text-sm
-        text-orange-300
-    "
->
-
-<span>
-Non-Veg meals
-</span>
-
-<span
-    class="font-bold"
-    x-text="'₹'+formatMoney(nonVegTotal)"
-></span>
-
-</div>
-
-
-<div
-    x-show="discount>0"
-    x-cloak
-    class="
-        mt-3
-        flex
-        justify-between
-        text-sm
-        text-emerald-300
-    "
->
-
-<span>
-NEW5 discount
-</span>
-
-<span
-    class="font-bold"
-    x-text="'− ₹'+formatMoney(discount)"
-></span>
-
-</div>
-
-
-<div
-    class="
-        mt-5
-        pt-5
-        border-t
-        border-white/10
-        flex
-        items-center
-        justify-between
-    "
->
-
-<span class="font-black">
-Total
-</span>
-
-<span
-    class="
-        text-2xl
-        font-black
-        text-yellow-400
-    "
-    x-text="'₹'+formatMoney(total)"
-></span>
-
-</div>
-
-</div>
-
-
-<!-- PAYMENT -->
-
-<button
-    type="button"
-    class="payButton mt-5"
-    @click="proceedToPayment()"
-    :disabled="!canPay()"
->
-Proceed to UPI Payment
-</button>
-
-
-<p
-    class="
-        mt-3
-        text-center
-        text-[10px]
-        leading-5
-        text-gray-400
-    "
->
-Full advance payment is required to reserve seats.
-</p>
-
-</div>
-
-</aside>
-
-</div>
-
-</section>
-
-</div>
-
-</main>
-
-
-
-<!-- =====================================================
-     MOBILE BOTTOM PRICE
-===================================================== -->
-
-<div
-    x-show="!loading && !error && event"
-    x-cloak
-    class="mobileBottom"
->
-
-<div
-    class="
-        max-w-7xl
-        mx-auto
-        flex
-        items-center
-        gap-3
-    "
->
-
-<div class="flex-1">
-
-<p class="
-    text-[9px]
-    uppercase
-    tracking-widest
-    font-bold
-    text-gray-400
-">
-Total
-</p>
-
-<p
-    class="
-        text-xl
-        font-black
-        text-[#082C3D]
-    "
-    x-text="'₹'+formatMoney(total)"
-></p>
-
-</div>
-
-
-<button
-    type="button"
-    class="
-        payButton
-        max-w-[200px]
-    "
-    @click="proceedToPayment()"
-    :disabled="!canPay()"
->
-Pay Now
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<script>
-
-'use strict';
 
 
 /* =====================================================
-   SUPABASE
+   PAYMENT VALIDATION
 ===================================================== */
 
-const SUPABASE_URL =
-    'https://salaxcyxgwjqemryqwkq.supabase.co';
+function canPay(){
 
-const SUPABASE_KEY =
-    'sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO';
+    if(!state.selectedDate){
+        return false;
+    }
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
+
+    if(
+        state.guests.length<1
+    ){
+
+        return false;
+
+    }
+
+
+    if(
+        state.guests.length >
+        state.selectedDate.seats
+    ){
+
+        return false;
+
+    }
+
+
+    if(!state.pickup){
+        return false;
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   PAYMENT BUTTON
+===================================================== */
+
+function updatePaymentButton(){
+
+    const enabled =
+        canPay();
+
+
+    $("payBtn")
+        .disabled =
+        !enabled;
+
+
+    $("mobilePayBtn")
+        .disabled =
+        !enabled;
+
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+function proceedToPayment(){
+
+    if(!canPay()){
+
+        showToast(
+            "Complete participant details and select a pickup point.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    const ticketTotal =
+        state.guests.length *
+        Number(EVENT.price);
+
+
+    const nonVegTotal =
+        state.guests.filter(
+            guest =>
+                guest.meal==="Non-Veg"
+        ).length *
+        100;
+
+
+    const subtotal =
+        ticketTotal +
+        nonVegTotal;
+
+
+    const discount =
+        state.discount;
+
+
+    const total =
+        subtotal -
+        discount;
+
+
+    /*
+     * Complete booking object.
+     */
+
+    const booking={
+
+        event:{
+
+            title:
+                EVENT.title,
+
+            date:
+                state.selectedDate.date,
+
+            dateId:
+                state.selectedDate.id
+
+        },
+
+        participants:
+            state.guests,
+
+        pickup:
+            state.pickup,
+
+        pricing:{
+
+            pricePerPerson:
+                EVENT.price,
+
+            participants:
+                state.guests.length,
+
+            ticketTotal:
+                ticketTotal,
+
+            nonVegMeals:
+                state.guests.filter(
+                    guest =>
+                        guest.meal==="Non-Veg"
+                ).length,
+
+            nonVegTotal:
+                nonVegTotal,
+
+            discount:
+                discount,
+
+            finalTotal:
+                total
+
+        },
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "AJ_FINAL_BOOKING",
+        JSON.stringify(
+            booking
+        )
     );
 
 
+    sessionStorage.setItem(
+        "AJ_FINAL_BOOKING",
+        JSON.stringify(
+            booking
+        )
+    );
+
+
+    /*
+     * For now show the final booking
+     * information rather than sending
+     * the user to a fake payment URL.
+     */
+
+    showToast(
+        "Booking details saved. Total: " +
+        money(total)
+    );
+
+
+    /*
+     * You can replace this line with
+     * your real payment page later:
+     *
+     * window.location.href =
+     * "payment.html";
+     */
+
+}
+
 
 /* =====================================================
-   LOADER
+   LOCAL DRAFT
 ===================================================== */
 
-function removeLoader(){
+function saveDraft(){
 
-    const loader =
-        document.getElementById(
-            'pageLoader'
-        );
-
-    if(!loader){
+    if(!state.selectedDate){
         return;
     }
 
-    loader.classList.add('hide');
 
-    setTimeout(
-        function(){
+    const draft={
 
-            if(loader.parentNode){
-                loader.remove();
-            }
+        dateId:
+            state.selectedDate.id,
 
-        },
-        300
-    );
+        guests:
+            state.guests,
+
+        pickup:
+            state.pickup,
+
+        coupon:
+            state.coupon
+
+    };
+
+
+    try{
+
+        localStorage.setItem(
+            "AJ_BOOKING_DRAFT",
+            JSON.stringify(
+                draft
+            )
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            "Could not save draft.",
+            error
+        );
+
+    }
 
 }
 
-setTimeout(
-    removeLoader,
-    3000
-);
-
-
 
 /* =====================================================
-   BOOKING APP
+   RESTORE DRAFT
 ===================================================== */
 
-function bookingApp(){
+function restoreDraft(){
 
-return{
+    let raw;
 
 
-    loading:true,
+    try{
 
-    error:'',
-
-    event:null,
-
-    dates:[],
-
-    selectedDate:null,
-
-    selectedDateText:'Select date',
-
-    lowImage:'',
-
-
-    /* =================================================
-       CURRENT PARTICIPANT
-    ================================================= */
-
-    currentGuest:{
-
-        name:'',
-
-        age:'',
-
-        phone:'',
-
-        gender:'',
-
-        meal:'Veg'
-
-    },
-
-
-    /* =================================================
-       SAVED PARTICIPANTS
-    ================================================= */
-
-    savedGuests:[],
-
-
-    /* =================================================
-       PICKUP
-    ================================================= */
-
-    pickupStops:[
-
-        {
-            id:'pune-katraj',
-            name:'Katraj Main Bus Stop, Pune',
-            time:'11:00 PM'
-        },
-
-        {
-            id:'navale',
-            name:'Navale Bridge',
-            time:'11:15 PM'
-        },
-
-        {
-            id:'chandani',
-            name:'Chandani Chowk',
-            time:'11:30 PM'
-        },
-
-        {
-            id:'hinjewadi',
-            name:'Hinjewadi Chowk',
-            time:'11:45 PM'
-        },
-
-        {
-            id:'pirangut',
-            name:'Pirangut Chowk, Hinjewadi Phase 3',
-            time:'12:00 AM'
-        }
-
-    ],
-
-    selectedPickup:null,
-
-
-    /* =================================================
-       COUPON
-    ================================================= */
-
-    couponCode:'',
-
-    couponValid:false,
-
-    couponMessage:'',
-
-
-    /* =================================================
-       PRICES
-    ================================================= */
-
-    ticketSubtotal:0,
-
-    nonVegTotal:0,
-
-    subtotal:0,
-
-    discount:0,
-
-    total:0,
-
-
-    /* =================================================
-       COST INCLUDES
-    ================================================= */
-
-    costIncludes:[
-
-        'Transport by Non-AC Bus',
-
-        'Adventure insurance with travel cover',
-
-        '1 time tea, breakfast & lunch (Veg)',
-
-        'Safety equipment / gears',
-
-        '300+ ft adventurous rappelling',
-
-        'Basic first aid'
-
-    ],
-
-
-    /* =================================================
-       COST EXCLUDES
-    ================================================= */
-
-    costExcludes:[
-
-        'Cold drinks, mineral water, etc.',
-
-        'Dinner on Saturday and Sunday',
-
-        'Private orders of tea, breakfast, meals, etc.',
-
-        'Personal expenses of any kind',
-
-        'Any private or shared tempo / travel expenses to reach any railway station',
-
-        'Medical expenses other than first aid',
-
-        'Any other charges not mentioned in Cost Includes'
-
-    ],
-
-
-    /* =================================================
-       ATTRACTIONS
-    ================================================= */
-
-    attractions:[
-
-        'Most beautiful waterfall in Maharashtra',
-
-        '300+ ft adventurous rappelling',
-
-        'Enjoy the natural pool below the waterfalls',
-
-        'The water-pool under the Lingya Waterfall has crystal clear bluish-green water',
-
-        'Exploring the dense forest'
-
-    ],
-
-
-    /* =================================================
-       THINGS TO CARRY
-    ================================================= */
-
-    thingsToCarry:[
-
-        'Sanitizer, masks, and personal medicines',
-
-        '2–3 liters of water (must)',
-
-        'Head torch or normal torch with extra batteries (must)',
-
-        'Full sleeve T-shirts and full pants. For girls, full neck T-shirt (must)',
-
-        'Good trekking shoes and an extra pair of socks (must)',
-
-        'Warm clothes / shawl, towel, napkin and extra pair of clothes (must)',
-
-        'Raincoat / poncho (must)',
-
-        'Camera, cap etc. (optional)',
-
-        'Electrolyte packets as energy drinks',
-
-        'Carry eatables like fruits and dry fruits to munch on during trek and to avoid dehydration',
-
-        'A haversack to put in all the things (optional)',
-
-        'A good stick for support (optional)'
-
-    ],
-
-
-    /* =================================================
-       ITINERARY
-    ================================================= */
-
-    itinerary:[
-
-        {
-            id:1,
-            time:'03:00 AM',
-            text:'Reach base village (Dhamanohol).'
-        },
-
-        {
-            id:2,
-            time:'03:00 AM – 04:00 AM',
-            text:'Rest in bus.'
-        },
-
-        {
-            id:3,
-            time:'05:00 AM',
-            text:'Good morning. Complete your morning routine.'
-        },
-
-        {
-            id:4,
-            time:'05:15 AM',
-            text:'Enjoy your morning tea & breakfast.'
-        },
-
-        {
-            id:5,
-            time:'05:30 AM',
-            text:'Small introduction about the trek with the team and fellow participants. Our team of experts will guide you throughout.'
-        },
-
-        {
-            id:6,
-            time:'05:45 AM',
-            text:'Reach the Lingya Waterfall. Enjoy the swimming and beauty of nature.'
-        },
-
-        {
-            id:7,
-            time:'06:00 AM',
-            text:'Reach the Lingya Waterfall rappelling point.'
-        },
-
-        {
-            id:8,
-            time:'07:30 AM',
-            text:'Rappelling will begin. Participants will need to wait for their turn, and those who have finished will need others to complete.'
-        },
-
-        {
-            id:9,
-            time:'03:00 PM',
-            text:'Complete the activity and start trek towards the base village.'
-        },
-
-        {
-            id:10,
-            time:'04:30 PM',
-            text:'Reach the base village. Congratulations on completing the trek.'
-        },
-
-        {
-            id:11,
-            time:'04:30 PM – 05:30 PM',
-            text:'Lunch will be served at local villagers house.'
-        },
-
-        {
-            id:12,
-            time:'05:30 PM',
-            text:'Begin the journey to the city. Heart-warming memories of the adventure will occupy your mind on the way to Pune.'
-        },
-
-        {
-            id:13,
-            time:'11:00 PM',
-            text:'Reach Pune. We will follow the same route on the return journey.'
-        }
-
-    ],
-
-
-    /* =================================================
-       INIT
-    ================================================= */
-
-    async init(){
-
-        try{
-
-            let saved =
-                localStorage.getItem(
-                    'AJ_SELECTED_EVENT'
-                );
-
-
-            if(!saved){
-
-                saved =
-                    sessionStorage.getItem(
-                        'AJ_SELECTED_EVENT'
-                    );
-
-            }
-
-
-            /*
-             * GitHub fallback:
-             *
-             * book.html?event=ID
-             */
-
-            if(!saved){
-
-                const params =
-                    new URLSearchParams(
-                        window.location.search
-                    );
-
-                const id =
-                    params.get('event');
-
-
-                if(id){
-
-                    saved =
-                        JSON.stringify({
-                            id:id
-                        });
-
-                }
-
-            }
-
-
-            if(!saved){
-
-                throw new Error(
-                    'No adventure selected.'
-                );
-
-            }
-
-
-            let selected;
-
-            try{
-
-                selected =
-                    JSON.parse(saved);
-
-            }
-            catch(e){
-
-                throw new Error(
-                    'Invalid adventure selection.'
-                );
-
-            }
-
-
-            if(
-                !selected ||
-                !selected.id
-            ){
-
-                throw new Error(
-                    'Invalid adventure selection.'
-                );
-
-            }
-
-
-            /*
-             * Load selected event.
-             */
-
-            await this.loadEvent(
-                selected
+        raw =
+            localStorage.getItem(
+                "AJ_BOOKING_DRAFT"
             );
 
+    }
+    catch(error){
 
-            /*
-             * Default pickup.
-             */
+        return;
 
-            this.selectedPickup =
-                this.pickupStops[0];
-
-
-            /*
-             * Restore draft if same event.
-             */
-
-            this.restoreDraft();
+    }
 
 
-            this.loading=false;
+    if(!raw){
+        return;
+    }
 
-            removeLoader();
 
-        }
-        catch(error){
+    try{
 
-            console.error(
-                error
+        const draft =
+            JSON.parse(
+                raw
             );
-
-            this.error =
-                error.message ||
-                'Unable to load adventure.';
-
-            this.loading=false;
-
-            removeLoader();
-
-        }
-
-    },
-
-
-    /* =================================================
-       LOAD EVENT
-    ================================================= */
-
-    async loadEvent(selected){
-
-        let data=null;
-
-
-        /*
-         * First try Supabase.
-         */
-
-        try{
-
-            const result =
-                await supabaseClient
-
-                    .from('expeditions')
-
-                    .select('*')
-
-                    .eq(
-                        'id',
-                        selected.id
-                    )
-
-                    .maybeSingle();
-
-
-            if(result.error){
-
-                console.warn(
-                    'Supabase event:',
-                    result.error
-                );
-
-            }
-            else{
-
-                data=result.data;
-
-            }
-
-        }
-        catch(error){
-
-            console.warn(
-                'Event query:',
-                error
-            );
-
-        }
-
-
-        /*
-         * If database event is unavailable,
-         * use selected event from localStorage.
-         */
-
-        if(!data){
-
-            data={
-
-                id:selected.id,
-
-                title:
-                    selected.title ||
-                    'Lingya Waterfall Rappelling',
-
-                slug:
-                    selected.slug ||
-                    'lingya-waterfall',
-
-                category:
-                    selected.category ||
-                    'Rappelling',
-
-                price:
-                    Number(
-                        selected.price ||
-                        2500
-                    ),
-
-                image_url:
-                    selected.image_url ||
-                    selected.img ||
-                    '',
-
-                is_open:true
-
-            };
-
-        }
 
 
         if(
-            data.is_open===false
+            !draft ||
+            !draft.dateId
         ){
 
-            throw new Error(
-                'Booking for this adventure is currently closed.'
-            );
+            return;
 
         }
 
 
-        this.event=data;
-
-
-        this.lowImage =
-            this.getLowImage(
-                data.image_url
+        const date =
+            EVENT.dates.find(
+                x =>
+                    x.id===
+                    draft.dateId
             );
 
-
-        /*
-         * Load dates.
-         */
-
-        await this.loadDates(
-            data.id
-        );
-
-    },
-
-
-    /* =================================================
-       LOAD DATES
-    ================================================= */
-
-    async loadDates(expeditionId){
-
-        let rows=[];
-
-
-        try{
-
-            const result =
-                await supabaseClient
-
-                    .from(
-                        'expedition_dates'
-                    )
-
-                    .select('*')
-
-                    .eq(
-                        'expedition_id',
-                        expeditionId
-                    )
-
-                    .gte(
-                        'event_date',
-                        this.today()
-                    )
-
-                    .order(
-                        'event_date',
-                        {
-                            ascending:true
-                        }
-                    );
-
-
-            if(
-                result.error
-            ){
-
-                throw result.error;
-
-            }
-
-
-            rows =
-                result.data || [];
-
-        }
-        catch(error){
-
-            console.error(
-                'Date loading:',
-                error
-            );
-
-            /*
-             * Do not invent seats.
-             * If DB is unavailable, tell user.
-             */
-
-            throw new Error(
-                'Unable to load available seats for this adventure.'
-            );
-
-        }
-
-
-        this.dates =
-            rows.map(
-                row=>{
-
-                    const total =
-                        Number(
-                            row.total_seats ||
-                            0
-                        );
-
-
-                    const reserved =
-                        Number(
-                            row.reserved_seats ||
-                            0
-                        );
-
-
-                    /*
-                     * NULL is treated as OPEN.
-                     */
-
-                    const open =
-                        row.is_open !== false;
-
-
-                    return{
-
-                        ...row,
-
-                        is_open:open,
-
-                        available:
-                            Math.max(
-                                0,
-                                total -
-                                reserved
-                            )
-
-                    };
-
-                }
-            );
-
-
-        /*
-         * Remove dates with zero seats
-         * from selectable state, but keep
-         * them visible as closed.
-         */
-
-
-        const first =
-            this.dates.find(
-                date =>
-                    date.is_open &&
-                    date.available>0
-            );
-
-
-        if(first){
-
-            this.selectDate(
-                first
-            );
-
-        }
-
-    },
-
-
-    /* =================================================
-       SELECT DATE
-    ================================================= */
-
-    selectDate(date){
 
         if(!date){
             return;
         }
 
 
-        if(
-            date.is_open===false ||
-            date.available<=0
-        ){
-
-            return;
-
-        }
-
-
         /*
-         * New date = new participant list.
+         * Restore only up to the
+         * configured seat limit.
          */
 
-        this.selectedDate=date;
-
-        this.selectedDateText =
-            this.formatDate(
-                date.event_date
-            );
+        state.selectedDate =
+            date;
 
 
-        this.savedGuests=[];
-
-
-        this.resetCurrentGuest();
-
-
-        this.recalculate();
-
-    },
-
-
-    /* =================================================
-       RESET CURRENT GUEST
-    ================================================= */
-
-    resetCurrentGuest(){
-
-        this.currentGuest={
-
-            name:'',
-
-            age:'',
-
-            phone:'',
-
-            gender:'',
-
-            meal:'Veg'
-
-        };
-
-    },
-
-
-    /* =================================================
-       SAVE CURRENT GUEST
-    ================================================= */
-
-    saveCurrentGuest(){
-
-        if(
-            !this.selectedDate
-        ){
-
-            alert(
-                'Please select a date first.'
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * SEAT LIMIT
-         *
-         * No artificial 10-user limit.
-         */
-
-        if(
-            this.savedGuests.length >=
-            this.selectedDate.available
-        ){
-
-            alert(
-                'All available seats for this date have been selected.'
-            );
-
-            return;
-
-        }
-
-
-        const guest={
-
-            name:
-                String(
-                    this.currentGuest.name ||
-                    ''
-                ).trim(),
-
-            age:
-                Number(
-                    this.currentGuest.age
-                ),
-
-            phone:
-                String(
-                    this.currentGuest.phone ||
-                    ''
-                ).replace(
-                    /\D/g,
-                    ''
-                ),
-
-            gender:
-                this.currentGuest.gender,
-
-            meal:
-                this.currentGuest.meal || 'Veg'
-
-        };
-
-
-        /*
-         * NAME
-         */
-
-        if(
-            guest.name.length<2
-        ){
-
-            alert(
-                'Please enter the participant name.'
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * AGE
-         */
-
-        if(
-            !guest.age ||
-            guest.age<16
-        ){
-
-            alert(
-                'Participants below 16 years are not allowed.'
-            );
-
-            return;
-
-        }
-
-
-        if(
-            guest.age>100
-        ){
-
-            alert(
-                'Please enter a valid age.'
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * PHONE
-         */
-
-        if(
-            !/^[0-9]{10}$/.test(
-                guest.phone
+        state.guests =
+            Array.isArray(
+                draft.guests
             )
-        ){
-
-            alert(
-                'Please enter a valid 10-digit mobile number.'
-            );
-
-            return;
-
-        }
+            ? draft.guests.slice(
+                0,
+                date.seats
+            )
+            : [];
 
 
-        /*
-         * GENDER
-         */
+        state.pickup =
+            draft.pickup ||
+            null;
 
-        if(
-            guest.gender!=='Male' &&
-            guest.gender!=='Female'
-        ){
 
-            alert(
-                'Please select Male or Female.'
-            );
-
-            return;
-
-        }
+        state.coupon =
+            draft.coupon ||
+            "";
 
 
         /*
-         * MEAL
+         * Select date UI.
          */
 
-        if(
-            guest.meal!=='Veg' &&
-            guest.meal!=='Non-Veg'
-        ){
+        document
+            .querySelectorAll(".date-btn")
+            .forEach(
+                button => {
 
-            alert(
-                'Please select meal preference.'
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * SAVE
-         */
-
-        this.savedGuests.push(
-            guest
-        );
-
-
-        /*
-         * Clear form for next person.
-         */
-
-        this.resetCurrentGuest();
-
-
-        /*
-         * Recalculate price.
-         */
-
-        this.recalculate();
-
-
-        /*
-         * Save continuously.
-         */
-
-        this.saveDraft();
-
-
-        /*
-         * Scroll to the next form.
-         */
-
-        this.$nextTick(
-            ()=>{
-
-                const form =
-                    document.querySelector(
-                        '.saveGuestButton'
+                    button.classList.toggle(
+                        "selected",
+                        button.dataset.id===
+                        date.id
                     );
-
-                if(form){
-
-                    form.scrollIntoView({
-                        behavior:'smooth',
-                        block:'center'
-                    });
 
                 }
-
-            }
-        );
-
-    },
+            );
 
 
-    /* =================================================
-       REMOVE GUEST
-    ================================================= */
-
-    removeGuest(index){
-
-        this.savedGuests.splice(
-            index,
-            1
-        );
+        $("participantArea")
+            .style
+            .display="block";
 
 
-        this.recalculate();
-
-        this.saveDraft();
-
-    },
-
-
-    /* =================================================
-       COUPON
-    ================================================= */
-
-    applyCoupon(){
-
-        const code =
-            String(
-                this.couponCode ||
-                ''
-            )
-            .trim()
-            .toUpperCase();
-
-
-        if(
-            code==='NEW5'
-        ){
-
-            this.couponCode='NEW5';
-
-            this.couponValid=true;
-
-            this.couponMessage=
-                'NEW5 applied — flat 5% discount.';
-
-        }
-        else{
-
-            this.couponValid=false;
-
-            this.discount=0;
-
-            this.couponMessage=
-                code
-                ? 'Invalid coupon code.'
-                : '';
-
-        }
-
-
-        this.recalculate();
-
-    },
-
-
-    /* =================================================
-       PRICE
-    ================================================= */
-
-    recalculate(){
-
-        const price =
-            Number(
-                this.event?.price ||
-                0
+        $("heroDate").textContent =
+            formatDate(
+                date.date
             );
 
 
         /*
-         * Ticket price.
+         * Restore pickup UI.
          */
 
-        this.ticketSubtotal =
-            price *
-            this.savedGuests.length;
+        if(state.pickup){
 
+            document
+                .querySelectorAll(".pickup")
+                .forEach(
+                    button => {
 
-        /*
-         * Non-veg:
-         *
-         * ₹100 each.
-         */
+                        button.classList.toggle(
+                            "selected",
+                            button.dataset.pickup===
+                            state.pickup.name
+                        );
 
-        this.nonVegTotal =
-            this.savedGuests.filter(
-                guest =>
-                    guest.meal==='Non-Veg'
-            ).length *
-            100;
-
-
-        this.subtotal =
-            this.ticketSubtotal +
-            this.nonVegTotal;
-
-
-        /*
-         * NEW5:
-         *
-         * 5% on final applicable
-         * booking amount.
-         */
-
-        if(
-            this.couponValid &&
-            this.couponCode==='NEW5'
-        ){
-
-            this.discount =
-                Math.round(
-                    this.subtotal *
-                    0.05
+                    }
                 );
 
         }
-        else{
-
-            this.discount=0;
-
-        }
-
-
-        this.total =
-            Math.max(
-                0,
-                this.subtotal -
-                this.discount
-            );
-
-    },
-
-
-    /* =================================================
-       CAN PAY
-    ================================================= */
-
-    canPay(){
-
-        if(
-            !this.event ||
-            !this.selectedDate
-        ){
-
-            return false;
-
-        }
 
 
         /*
-         * Must have at least one
-         * registered participant.
+         * Restore coupon.
          */
 
         if(
-            this.savedGuests.length<1
+            state.coupon==="NEW5"
         ){
 
-            return false;
+            $("couponInput")
+                .value="NEW5";
+
+            $("couponMessage")
+                .style
+                .color="#159665";
+
+            $("couponMessage")
+                .textContent =
+                "NEW5 applied — 5% discount.";
 
         }
 
 
-        /*
-         * Every selected participant
-         * has valid information.
-         */
-
-        if(
-            this.savedGuests.length >
-            this.selectedDate.available
-        ){
-
-            return false;
-
-        }
+        renderGuests();
 
 
         if(
-            !this.selectedPickup
+            state.guests.length >=
+            date.seats
         ){
 
-            return false;
+            $("guestForm")
+                .style
+                .display="none";
+
+            $("completeMessage")
+                .style
+                .display="block";
 
         }
 
 
-        return true;
+        updateSummary();
 
-    },
+        renderDates();
 
+        updatePaymentButton();
 
-    /* =================================================
-       SAVE DRAFT
-    ================================================= */
+    }
+    catch(error){
 
-    saveDraft(){
-
-        if(
-            !this.event ||
-            !this.selectedDate
-        ){
-
-            return;
-
-        }
-
-
-        const draft={
-
-            event_id:
-                this.event.id,
-
-            event_name:
-                this.event.title,
-
-            date_id:
-                this.selectedDate.id,
-
-            event_date:
-                this.selectedDate.event_date,
-
-            guests:
-                this.savedGuests,
-
-            pickup:
-                this.selectedPickup,
-
-            coupon:
-                this.couponValid
-                ? 'NEW5'
-                : null,
-
-            ticket_subtotal:
-                this.ticketSubtotal,
-
-            nonveg_total:
-                this.nonVegTotal,
-
-            discount:
-                this.discount,
-
-            total:
-                this.total,
-
-            updated_at:
-                new Date().toISOString()
-
-        };
-
-
-        try{
-
-            localStorage.setItem(
-                'AJ_BOOKING_DRAFT',
-                JSON.stringify(
-                    draft
-                )
-            );
-
-            sessionStorage.setItem(
-                'AJ_BOOKING_DRAFT',
-                JSON.stringify(
-                    draft
-                )
-            );
-
-        }
-        catch(error){
-
-            console.warn(
-                'Draft storage:',
-                error
-            );
-
-        }
-
-    },
-
-
-    /* =================================================
-       RESTORE DRAFT
-    ================================================= */
-
-    restoreDraft(){
-
-        let saved=null;
-
-
-        try{
-
-            saved =
-                localStorage.getItem(
-                    'AJ_BOOKING_DRAFT'
-                );
-
-        }
-        catch(error){}
-
-
-        if(!saved){
-            return;
-        }
-
-
-        try{
-
-            const draft =
-                JSON.parse(
-                    saved
-                );
-
-
-            if(
-                !draft ||
-                draft.event_id !==
-                this.event.id
-            ){
-
-                return;
-
-            }
-
-
-            /*
-             * Only restore if date still exists.
-             */
-
-            const date =
-                this.dates.find(
-                    d =>
-                        String(d.id) ===
-                        String(draft.date_id)
-                );
-
-
-            if(!date){
-                return;
-            }
-
-
-            /*
-             * Make sure restored guest
-             * count does not exceed
-             * CURRENT availability.
-             */
-
-            if(
-                Array.isArray(
-                    draft.guests
-                )
-            ){
-
-                this.savedGuests =
-                    draft.guests.slice(
-                        0,
-                        date.available
-                    );
-
-            }
-
-
-            this.selectedDate =
-                date;
-
-
-            this.selectedDateText =
-                this.formatDate(
-                    date.event_date
-                );
-
-
-            if(
-                draft.coupon==='NEW5'
-            ){
-
-                this.couponCode='NEW5';
-
-                this.couponValid=true;
-
-                this.couponMessage=
-                    'NEW5 applied — flat 5% discount.';
-
-            }
-
-
-            if(
-                draft.pickup
-            ){
-
-                const pickup =
-                    this.pickupStops.find(
-                        stop =>
-                            stop.id ===
-                            draft.pickup.id
-                    );
-
-
-                if(pickup){
-
-                    this.selectedPickup =
-                        pickup;
-
-                }
-
-            }
-
-
-            this.recalculate();
-
-        }
-        catch(error){
-
-            console.warn(
-                'Draft restore:',
-                error
-            );
-
-        }
-
-    },
-
-
-    /* =================================================
-       PAYMENT
-    ================================================= */
-
-    proceedToPayment(){
-
-        if(
-            !this.canPay()
-        ){
-
-            alert(
-                'Please complete participant details and select a pickup location.'
-            );
-
-            return;
-
-        }
-
-
-        this.saveDraft();
-
-
-        /*
-         * Store a final payment object.
-         */
-
-        const paymentData={
-
-            event_id:
-                this.event.id,
-
-            event_name:
-                this.event.title,
-
-            event_date:
-                this.selectedDate.event_date,
-
-            date_id:
-                this.selectedDate.id,
-
-            participants:
-                this.savedGuests,
-
-            pickup:
-                this.selectedPickup,
-
-            coupon:
-                this.couponValid
-                ? 'NEW5'
-                : null,
-
-            ticket_amount:
-                this.ticketSubtotal,
-
-            nonveg_amount:
-                this.nonVegTotal,
-
-            discount:
-                this.discount,
-
-            payable:
-                this.total,
-
-            created_at:
-                new Date().toISOString()
-
-        };
-
-
-        localStorage.setItem(
-            'AJ_PAYMENT_DATA',
-            JSON.stringify(
-                paymentData
-            )
-        );
-
-
-        sessionStorage.setItem(
-            'AJ_PAYMENT_DATA',
-            JSON.stringify(
-                paymentData
-            )
-        );
-
-
-        /*
-         * Payment page can be connected here.
-         *
-         * Until a real UPI ID/payment page
-         * is configured, don't send the user
-         * to a fake payment destination.
-         */
-
-        alert(
-            'Booking details saved.\n\n' +
-            'Participants: ' +
-            this.savedGuests.length +
-            '\n' +
-            'Total: ₹' +
-            this.formatMoney(this.total) +
-            '\n\n' +
-            'UPI payment gateway is ready to be connected.'
-        );
-
-    },
-
-
-    /* =================================================
-       LOW IMAGE
-    ================================================= */
-
-    getLowImage(url){
-
-        if(!url){
-            return '';
-        }
-
-
-        const marker =
-            '/view/images/';
-
-
-        const position =
-            url.indexOf(
-                marker
-            );
-
-
-        if(position===-1){
-
-            return url;
-
-        }
-
-
-        const base =
-            url.substring(
-                0,
-                position +
-                marker.length
-            );
-
-
-        const file =
-            url.substring(
-                position +
-                marker.length
-            );
-
-
-        return (
-            base +
-            'low/' +
-            file
-        );
-
-    },
-
-
-    /* =================================================
-       MONEY
-    ================================================= */
-
-    formatMoney(value){
-
-        return Number(
-            value || 0
-        ).toLocaleString(
-            'en-IN'
-        );
-
-    },
-
-
-    /* =================================================
-       DATE
-    ================================================= */
-
-    formatDate(value){
-
-        if(!value){
-            return 'Date TBA';
-        }
-
-
-        const date =
-            new Date(
-                value +
-                'T00:00:00'
-            );
-
-
-        return date.toLocaleDateString(
-            'en-IN',
-            {
-                weekday:'short',
-                day:'2-digit',
-                month:'short',
-                year:'numeric'
-            }
-        );
-
-    },
-
-
-    /* =================================================
-       TODAY
-    ================================================= */
-
-    today(){
-
-        const d =
-            new Date();
-
-
-        return (
-
-            d.getFullYear() +
-            '-' +
-
-            String(
-                d.getMonth()+1
-            ).padStart(
-                2,
-                '0'
-            ) +
-
-            '-' +
-
-            String(
-                d.getDate()
-            ).padStart(
-                2,
-                '0'
-            )
-
+        console.warn(
+            "Draft restore failed.",
+            error
         );
 
     }
 
-};
+}
+
+
+/* =====================================================
+   FORMAT MONEY
+===================================================== */
+
+function money(value){
+
+    return "₹" +
+        Number(
+            value || 0
+        ).toLocaleString(
+            "en-IN"
+        );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(value){
+
+    const date =
+        new Date(
+            value +
+            "T00:00:00"
+        );
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function showToast(
+    message,
+    error=false
+){
+
+    const toast =
+        $("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.toggle(
+        "error",
+        error
+    );
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2600
+        );
 
 }
 
