@@ -1026,10 +1026,9 @@ x-for="(ad,index) in adventures"
 >
 
 <a
-:x-href="ad.url"
-:href="ad.url"
-class="event-card card-enter block aspect-[4/5.25]"
-:style="'animation-delay:'+(index*70)+'ms'"
+    href="book.html"
+    @click="selectEvent(ad, $event)"
+    class="event-card block aspect-[4/5.25]"
 >
 
 
