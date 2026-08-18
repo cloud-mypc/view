@@ -1341,7 +1341,26 @@ return{
                     SUPABASE_KEY
                 );
 
+selectEvent(ad, event) {
 
+    event.preventDefault();
+
+    const eventData = {
+        id: ad.id,
+        slug: ad.slug || '',
+        title: ad.title || '',
+        category: ad.category || '',
+        price: ad.price || 0,
+        img: ad.highImg || ad.img || ''
+    };
+
+    localStorage.setItem(
+        'AJ_SELECTED_EVENT',
+        JSON.stringify(eventData)
+    );
+
+    window.location.href = 'book.html';
+}
             /*
              * Restore cached cards FIRST.
              */
