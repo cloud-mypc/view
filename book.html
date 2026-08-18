@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<title>Adventure Junction | Book Your Adventure</title>
+<title>Adventure Junction | Book Adventure</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@ html{
 }
 
 body{
-    font-family:"Outfit",Arial,sans-serif;
+    font-family:"Outfit",sans-serif;
     background:#f5f7f6;
     color:#082c3d;
     overflow-x:hidden;
@@ -43,22 +43,17 @@ a{
     color:inherit;
 }
 
-img{
-    max-width:100%;
-    display:block;
-}
-
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 .header{
     position:fixed;
     top:0;
     left:0;
     right:0;
-    z-index:9999;
     height:72px;
+    z-index:9999;
     background:rgba(255,255,255,.94);
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
@@ -66,7 +61,7 @@ img{
 }
 
 .header-inner{
-    width:min(1200px,calc(100% - 32px));
+    width:min(1200px,calc(100% - 30px));
     height:100%;
     margin:auto;
     display:flex;
@@ -81,12 +76,11 @@ img{
 }
 
 .logo-img{
-    width:44px;
-    height:44px;
+    width:43px;
+    height:43px;
     border-radius:50%;
     overflow:hidden;
     background:#082c3d;
-    flex-shrink:0;
 }
 
 .logo-img img{
@@ -96,72 +90,72 @@ img{
 }
 
 .logo-title{
-    font-size:18px;
-    font-weight:900;
+    font-size:17px;
     line-height:1;
+    font-weight:900;
     letter-spacing:-.04em;
 }
 
 .logo-sub{
     margin-top:5px;
-    color:#8b969b;
-    font-size:9px;
+    color:#8a969b;
+    font-size:8px;
     font-weight:800;
-    letter-spacing:.18em;
+    letter-spacing:.17em;
     text-transform:uppercase;
 }
 
 .nav{
     display:flex;
     align-items:center;
-    gap:5px;
+    gap:4px;
 }
 
 .nav a{
-    padding:11px 15px;
+    padding:11px 14px;
     border-radius:12px;
     color:#66747a;
-    font-size:12px;
-    font-weight:700;
+    font-size:11px;
+    font-weight:800;
 }
 
 .nav a:hover{
-    background:#f3f5f4;
+    background:#f2f5f4;
     color:#082c3d;
 }
 
-.explore{
-    background:#082c3d !important;
-    color:white !important;
+.nav .explore{
+    background:#082c3d;
+    color:#fff;
 }
 
-.mobile-menu-btn{
+.menu-btn{
     display:none;
     width:42px;
     height:42px;
     border:0;
     border-radius:12px;
-    background:#f2f5f4;
-    font-size:20px;
+    background:#f1f4f3;
+    font-size:19px;
 }
 
 .mobile-nav{
     display:none;
 }
 
-/* =====================================================
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .hero{
-    position:relative;
-    min-height:430px;
     margin-top:72px;
+    height:390px;
+    position:relative;
     overflow:hidden;
-    background:#061e28;
+    background:#082c3d;
 }
 
-.hero img{
+.hero-image{
     position:absolute;
     inset:0;
     width:100%;
@@ -175,658 +169,703 @@ img{
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,.05),
-            rgba(0,0,0,.12) 35%,
-            rgba(2,15,21,.52) 68%,
-            rgba(2,15,21,.98) 100%
+            rgba(0,0,0,.02),
+            rgba(0,0,0,.10) 35%,
+            rgba(0,12,18,.58) 72%,
+            rgba(0,12,18,.96)
         );
 }
 
-.hero-content{
+.hero-inner{
     position:relative;
     z-index:2;
-    width:min(1200px,calc(100% - 32px));
-    min-height:430px;
+    width:min(1200px,calc(100% - 30px));
+    height:100%;
     margin:auto;
     display:flex;
     align-items:flex-end;
-    padding:35px 0 42px;
+    padding-bottom:36px;
 }
 
-.badge{
+.hero-badge{
     display:inline-flex;
     align-items:center;
-    gap:8px;
+    gap:7px;
     padding:7px 12px;
     border-radius:50px;
-    background:rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.18);
-    color:white;
-    font-size:9px;
+    color:#fff;
+    background:rgba(0,0,0,.32);
+    border:1px solid rgba(255,255,255,.2);
+    font-size:8px;
     font-weight:900;
-    letter-spacing:.18em;
+    letter-spacing:.16em;
     text-transform:uppercase;
     backdrop-filter:blur(10px);
 }
 
-.badge-dot{
+.hero-dot{
     width:7px;
     height:7px;
     border-radius:50%;
     background:#ffc400;
 }
 
-.hero h1{
-    margin-top:17px;
-    max-width:850px;
-    color:white;
-    font-size:clamp(38px,6vw,66px);
+.hero-title{
+    margin-top:15px;
+    color:#fff;
+    font-size:clamp(38px,6vw,62px);
     line-height:.94;
-    letter-spacing:-.055em;
     font-weight:900;
+    letter-spacing:-.055em;
 }
 
 .hero-meta{
-    margin-top:18px;
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:7px;
+    margin-top:16px;
 }
 
 .hero-meta span{
-    padding:9px 13px;
-    border-radius:12px;
-    background:rgba(0,0,0,.32);
-    color:white;
-    font-size:11px;
-    font-weight:700;
-    backdrop-filter:blur(10px);
+    padding:8px 11px;
+    border-radius:10px;
+    color:#fff;
+    background:rgba(0,0,0,.34);
+    font-size:9px;
+    font-weight:800;
+    backdrop-filter:blur(8px);
 }
 
-/* =====================================================
+/* =========================================================
    MAIN
-===================================================== */
+========================================================= */
 
 .container{
-    width:min(1200px,calc(100% - 32px));
+    width:min(1200px,calc(100% - 30px));
     margin:auto;
 }
 
 .main{
-    padding:30px 0 110px;
+    padding:25px 0 100px;
 }
 
-.grid{
+.layout{
     display:grid;
     grid-template-columns:minmax(0,1fr) 390px;
-    gap:28px;
+    gap:25px;
     align-items:start;
 }
 
 .left{
     display:flex;
     flex-direction:column;
-    gap:22px;
+    gap:15px;
 }
 
 .card{
-    background:white;
-    border:1px solid #e7ece9;
-    border-radius:24px;
-    padding:24px;
-    box-shadow:0 10px 30px rgba(8,44,61,.045);
+    background:#fff;
+    border:1px solid #e5ebe8;
+    border-radius:21px;
+    box-shadow:0 8px 28px rgba(8,44,61,.04);
+}
+
+.card-padding{
+    padding:20px;
 }
 
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    gap:9px;
 }
 
 .stat{
-    background:white;
-    border:1px solid #e7ece9;
-    border-radius:17px;
-    padding:17px;
+    background:#fff;
+    border:1px solid #e5ebe8;
+    border-radius:16px;
+    padding:15px;
 }
 
 .stat-label{
-    color:#98a2a6;
-    font-size:8px;
-    font-weight:800;
-    letter-spacing:.16em;
+    color:#9ba5a8;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:.15em;
     text-transform:uppercase;
 }
 
 .stat-value{
-    margin-top:8px;
-    font-size:14px;
+    margin-top:7px;
+    font-size:13px;
     font-weight:900;
 }
 
-/* =====================================================
-   INFORMATION
-===================================================== */
+/* =========================================================
+   COMPACT INFORMATION
+========================================================= */
 
-.section-title{
+.info-details{
+    overflow:hidden;
+}
+
+.info-details summary{
+    list-style:none;
+    padding:18px 20px;
     display:flex;
     align-items:center;
-    gap:10px;
-    font-size:20px;
+    justify-content:space-between;
+    gap:12px;
+    cursor:pointer;
+    font-size:15px;
     font-weight:900;
-    letter-spacing:-.02em;
 }
 
-.section-icon{
-    width:34px;
-    height:34px;
-    border-radius:11px;
+.info-details summary::-webkit-details-marker{
+    display:none;
+}
+
+.info-details summary::after{
+    content:"+";
+    width:27px;
+    height:27px;
+    border-radius:9px;
+    background:#f2f5f4;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#eef3ff;
-    font-size:15px;
+    font-size:17px;
+    flex-shrink:0;
 }
 
-.description{
-    margin-top:18px;
-    color:#5c696f;
-    font-size:14px;
-    line-height:1.85;
+.info-details[open] summary::after{
+    content:"−";
 }
 
-.list{
-    margin-top:19px;
+.info-content{
+    padding:0 20px 20px;
+    color:#647177;
+    font-size:12px;
+    line-height:1.75;
+}
+
+.info-content p{
+    margin-bottom:10px;
+}
+
+.info-list{
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:7px;
 }
 
-.list-item{
+.info-item{
     display:flex;
+    gap:8px;
     align-items:flex-start;
-    gap:10px;
-    color:#5b686e;
-    font-size:14px;
-    line-height:1.65;
 }
 
-.bullet{
-    width:8px;
-    height:8px;
-    margin-top:7px;
-    flex-shrink:0;
-    border-radius:50%;
-    background:#ffc400;
+.info-item::before{
+    content:"•";
+    color:#ffc400;
+    font-size:17px;
+    line-height:1;
 }
 
-.timeline{
-    margin-top:20px;
-    border-left:2px solid #e6ece9;
-}
-
-.timeline-item{
-    position:relative;
-    padding:0 0 24px 25px;
-}
-
-.timeline-item:last-child{
-    padding-bottom:0;
-}
-
-.timeline-dot{
-    position:absolute;
-    left:-7px;
-    top:3px;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#ffc400;
-    border:3px solid white;
-    box-shadow:0 0 0 1px #ffc400;
-}
-
-.timeline-time{
-    font-size:12px;
-    font-weight:900;
-}
-
-.timeline-text{
-    margin-top:4px;
-    color:#667278;
-    font-size:14px;
-    line-height:1.65;
-}
-
-.notice{
-    padding:16px;
-    border-radius:17px;
-    background:#fff7dc;
-    border:1px solid #f1dd94;
-    color:#705708;
-    font-size:13px;
-    line-height:1.65;
-}
-
-.warning{
-    padding:16px;
-    border-radius:17px;
-    background:#fff0f0;
-    border:1px solid #f0d0d0;
-    color:#8b3434;
-    font-size:13px;
-    line-height:1.65;
-}
-
-/* =====================================================
-   BOOKING PANEL
-===================================================== */
+/* =========================================================
+   BOOKING
+========================================================= */
 
 .booking{
     position:sticky;
-    top:92px;
+    top:90px;
+}
+
+.booking-card{
+    padding:21px;
 }
 
 .booking-title{
-    font-size:21px;
+    font-size:20px;
     font-weight:900;
+    letter-spacing:-.025em;
 }
 
 .booking-sub{
-    margin-top:4px;
+    margin-top:3px;
     color:#99a3a7;
-    font-size:11px;
+    font-size:9px;
+    line-height:1.5;
 }
 
-.date-list{
-    margin-top:17px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-box{
+    margin-top:18px;
 }
 
-.date-btn{
+.date-button{
     width:100%;
     padding:16px;
-    border:1px solid #e1e7e4;
+    border:1.5px solid #f0c300;
     border-radius:17px;
-    background:white;
-    text-align:left;
-    transition:.2s;
-}
-
-.date-btn:hover{
-    transform:translateY(-1px);
-    border-color:#f3c400;
-}
-
-.date-btn.selected{
     background:#fffbea;
-    border-color:#f3c400;
-    box-shadow:0 8px 25px rgba(255,193,7,.10);
+    text-align:left;
 }
 
 .date-row{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.date-name{
-    font-size:13px;
+.date-main{
+    font-size:14px;
     font-weight:900;
 }
 
-.date-event{
+.date-sub{
     margin-top:4px;
-    color:#9aa4a8;
-    font-size:9px;
-}
-
-.seats{
-    color:#159665;
-    font-size:12px;
-    font-weight:900;
-    text-align:right;
-}
-
-.seats-label{
-    margin-top:3px;
-    color:#a2abad;
+    color:#929d9f;
     font-size:8px;
     font-weight:700;
 }
 
-.closed{
-    opacity:.45;
-    pointer-events:none;
+.date-seats{
+    text-align:right;
 }
 
-/* =====================================================
-   PARTICIPANTS
-===================================================== */
+.date-seats-number{
+    color:#119261;
+    font-size:13px;
+    font-weight:900;
+}
 
-.participant-head{
-    margin-top:28px;
+.date-seats-label{
+    margin-top:2px;
+    color:#9aa5a8;
+    font-size:7px;
+    font-weight:800;
+}
+
+/* =========================================================
+   STEPS
+========================================================= */
+
+.step{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #edf0ef;
+}
+
+.step-head{
     display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:12px;
+    align-items:center;
+    gap:10px;
 }
 
-.participant-count{
-    padding:8px 11px;
-    border-radius:12px;
-    background:#ecfaf4;
-    color:#12875b;
+.step-number{
+    width:29px;
+    height:29px;
+    border-radius:10px;
+    background:#082c3d;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    font-weight:900;
+}
+
+.step-title{
+    font-size:13px;
+    font-weight:900;
+}
+
+.step-caption{
+    margin-top:2px;
+    color:#9ca6a9;
+    font-size:8px;
+}
+
+/* =========================================================
+   GUEST COUNTER
+========================================================= */
+
+.counter{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:14px;
+    border:1px solid #e2e8e5;
+    border-radius:16px;
+    background:#fafcfb;
+}
+
+.counter-label{
     font-size:11px;
     font-weight:900;
 }
 
-.saved-list{
-    margin-top:16px;
+.counter-label small{
+    display:block;
+    margin-top:3px;
+    color:#9aa4a8;
+    font-size:8px;
+    font-weight:600;
+}
+
+.counter-controls{
     display:flex;
-    flex-direction:column;
-    gap:8px;
+    align-items:center;
+    gap:10px;
 }
 
-.saved{
-    padding:14px;
-    border:1px solid #dcefe5;
-    border-radius:17px;
-    background:#f8fffb;
+.counter-btn{
+    width:39px;
+    height:39px;
+    border:1px solid #dfe6e3;
+    border-radius:12px;
+    background:#fff;
+    color:#082c3d;
+    font-size:21px;
+    font-weight:600;
 }
 
-.saved-row{
+.counter-btn:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.counter-number{
+    min-width:25px;
+    text-align:center;
+    font-size:18px;
+    font-weight:900;
+}
+
+/* =========================================================
+   GUEST PROGRESS
+========================================================= */
+
+.guest-progress{
+    margin-top:12px;
+}
+
+.progress-top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    gap:12px;
+    color:#899498;
+    font-size:8px;
+    font-weight:800;
 }
 
-.saved-left{
+.progress-bar{
+    height:6px;
+    margin-top:6px;
+    border-radius:20px;
+    background:#edf1ef;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#18a56c;
+    border-radius:20px;
+    transition:.25s;
+}
+
+/* =========================================================
+   PARTICIPANT FORM
+========================================================= */
+
+.guest-form{
+    margin-top:14px;
+    padding:16px;
+    border-radius:18px;
+    border:1px solid #e1e7e4;
+    background:#fafcfb;
+}
+
+.guest-form-title{
     display:flex;
     align-items:center;
-    gap:11px;
-    min-width:0;
+    gap:9px;
 }
 
-.check{
+.guest-icon{
     width:31px;
     height:31px;
-    border-radius:50%;
-    background:#17a66b;
-    color:white;
+    border-radius:10px;
+    background:#082c3d;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:14px;
+    font-size:10px;
     font-weight:900;
-    flex-shrink:0;
 }
 
-.saved-name{
+.guest-title{
     font-size:12px;
     font-weight:900;
 }
 
-.saved-meta{
-    margin-top:3px;
-    color:#778388;
-    font-size:9px;
-}
-
-.saved-phone{
-    color:#526168;
-    font-size:10px;
-    font-weight:700;
-    text-align:right;
-}
-
-.nonveg-price{
-    margin-top:3px;
-    color:#e87820;
-    font-size:9px;
-    font-weight:800;
-}
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.form{
-    margin-top:15px;
-    padding:18px;
-    border:1px solid #e1e7e4;
-    border-radius:20px;
-    background:#fafcfb;
-}
-
-.form-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
-}
-
-.number{
-    width:35px;
-    height:35px;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#082c3d;
-    color:white;
-    font-size:11px;
-    font-weight:900;
-}
-
-.form-title{
-    font-size:13px;
-    font-weight:900;
-}
-
-.form-sub{
+.guest-subtitle{
     margin-top:2px;
     color:#9ba5a8;
-    font-size:9px;
+    font-size:8px;
 }
 
 .field{
-    margin-top:14px;
+    margin-top:13px;
 }
 
 .label{
     display:block;
-    margin-bottom:7px;
+    margin-bottom:6px;
     color:#526168;
-    font-size:10px;
+    font-size:8px;
     font-weight:900;
+    letter-spacing:.02em;
 }
 
 .input{
     width:100%;
-    height:49px;
-    padding:0 14px;
+    height:45px;
+    padding:0 12px;
     border:1px solid #dce4e0;
-    border-radius:14px;
+    border-radius:13px;
     outline:none;
-    background:white;
+    background:#fff;
     color:#082c3d;
-    font-size:13px;
+    font-size:12px;
 }
 
 .input:focus{
-    border-color:#f2c300;
-    box-shadow:0 0 0 4px rgba(255,193,7,.11);
+    border-color:#f0c300;
+    box-shadow:0 0 0 3px rgba(255,196,0,.10);
+}
+
+.input.invalid{
+    border-color:#dc5a5a;
+    background:#fff8f8;
+}
+
+.age-warning{
+    display:none;
+    margin-top:6px;
+    padding:8px 10px;
+    border-radius:10px;
+    background:#fff0f0;
+    color:#a13939;
+    font-size:8px;
+    line-height:1.45;
+    font-weight:800;
+}
+
+.age-warning.show{
+    display:block;
 }
 
 .choice-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:9px;
+    gap:7px;
 }
 
 .choice{
-    min-height:48px;
-    border:1px solid #dfe6e2;
-    border-radius:14px;
-    background:white;
+    min-height:44px;
+    border:1px solid #dce4e0;
+    border-radius:13px;
+    background:#fff;
     color:#68757a;
-    font-size:11px;
+    font-size:10px;
     font-weight:900;
 }
 
 .choice.selected{
     border-color:#f0c300;
-    background:#fff9d4;
+    background:#fff9d8;
     color:#082c3d;
 }
 
-.extra-note{
-    margin-top:7px;
-    color:#e77922;
-    font-size:9px;
-    line-height:1.5;
-    font-weight:700;
-}
-
-.save-btn{
-    width:100%;
-    height:52px;
-    margin-top:18px;
-    border:0;
-    border-radius:15px;
-    background:linear-gradient(145deg,#ffe66d,#ffc400,#efa900);
-    color:#071b24;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    box-shadow:0 4px 0 #b97c00;
-    transition:.2s;
-}
-
-.save-btn:hover{
-    transform:translateY(-1px);
-}
-
-.complete{
-    margin-top:15px;
-    padding:15px;
-    border-radius:16px;
-    background:#eafaf2;
-    border:1px solid #cfeede;
-    color:#13885c;
-    font-size:12px;
-    line-height:1.55;
+.meal-note{
+    margin-top:5px;
+    color:#df7720;
+    font-size:8px;
+    line-height:1.4;
     font-weight:800;
 }
 
-/* =====================================================
-   PICKUP
-===================================================== */
-
-.pickup-list{
+.save-guest{
+    width:100%;
+    height:47px;
     margin-top:15px;
+    border:0;
+    border-radius:13px;
+    background:linear-gradient(145deg,#ffe66d,#ffc400,#efa900);
+    color:#071b24;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    box-shadow:0 3px 0 #b97c00;
+}
+
+.save-guest:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+/* =========================================================
+   SAVED GUESTS
+========================================================= */
+
+.saved-list{
+    margin-top:12px;
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:7px;
 }
 
-.pickup{
-    width:100%;
-    padding:14px;
-    border:1px solid #e1e7e4;
-    border-radius:15px;
-    background:white;
-    text-align:left;
+.saved-guest{
+    padding:11px 12px;
+    border-radius:14px;
+    border:1px solid #d7eee2;
+    background:#f7fffa;
 }
 
-.pickup.selected{
-    border-color:#f2c300;
-    background:#fffbea;
-}
-
-.pickup-row{
+.saved-row{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
 }
 
+.saved-left{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.saved-check{
+    width:26px;
+    height:26px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#16a269;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+}
+
+.saved-name{
+    font-size:10px;
+    font-weight:900;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.saved-meta{
+    margin-top:2px;
+    color:#768388;
+    font-size:7px;
+}
+
+.saved-price{
+    color:#dd7724;
+    font-size:8px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+/* =========================================================
+   PICKUP
+========================================================= */
+
+.pickup-section{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #edf0ef;
+}
+
+.pickup-list{
+    margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.pickup-button{
+    width:100%;
+    padding:12px;
+    border:1px solid #e0e6e3;
+    border-radius:13px;
+    background:#fff;
+    text-align:left;
+}
+
+.pickup-button.selected{
+    border-color:#f0c300;
+    background:#fffbea;
+}
+
+.pickup-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
 .pickup-name{
-    font-size:11px;
+    font-size:9px;
     font-weight:900;
 }
 
 .pickup-time{
     color:#68757a;
-    font-size:10px;
+    font-size:8px;
     font-weight:900;
 }
 
-/* =====================================================
-   COUPON
-===================================================== */
-
-.coupon{
-    display:flex;
-    gap:8px;
-    margin-top:13px;
-}
-
-.coupon .input{
-    flex:1;
-}
-
-.coupon-btn{
-    width:75px;
-    border:0;
-    border-radius:14px;
-    background:#082c3d;
-    color:white;
-    font-size:10px;
-    font-weight:900;
-}
-
-.coupon-message{
-    margin-top:7px;
-    font-size:10px;
-    font-weight:800;
-}
-
-/* =====================================================
+/* =========================================================
    SUMMARY
-===================================================== */
+========================================================= */
 
 .summary{
-    margin-top:20px;
-    padding:20px;
-    border-radius:22px;
+    margin-top:18px;
+    padding:17px;
+    border-radius:18px;
     background:linear-gradient(145deg,#061e28,#0a3547);
-    color:white;
-    box-shadow:0 16px 35px rgba(8,44,61,.15);
+    color:#fff;
 }
 
 .summary-row{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:15px;
-    margin-bottom:11px;
-    color:rgba(255,255,255,.63);
-    font-size:12px;
+    align-items:center;
+    margin-bottom:9px;
+    color:rgba(255,255,255,.62);
+    font-size:10px;
 }
 
 .summary-row strong{
-    color:white;
+    color:#fff;
 }
 
 .summary-row.orange{
-    color:#ffba79;
+    color:#ffb879;
 }
 
 .summary-row.green{
@@ -837,97 +876,126 @@ img{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:15px;
-    padding-top:16px;
-    margin-top:15px;
-    border-top:1px solid rgba(255,255,255,.11);
+    margin-top:13px;
+    padding-top:13px;
+    border-top:1px solid rgba(255,255,255,.1);
 }
 
 .total-label{
-    font-size:13px;
+    font-size:11px;
     font-weight:900;
 }
 
 .total-value{
     color:#ffd333;
-    font-size:25px;
+    font-size:23px;
     font-weight:900;
 }
 
-.pay-btn{
+.pay-button{
     width:100%;
-    height:53px;
-    margin-top:15px;
+    height:49px;
+    margin-top:13px;
     border:0;
-    border-radius:15px;
+    border-radius:13px;
     background:linear-gradient(145deg,#ffe66d,#ffc400,#efa900);
     color:#071b24;
-    font-size:10px;
+    font-size:9px;
     font-weight:900;
-    letter-spacing:.1em;
+    letter-spacing:.08em;
     text-transform:uppercase;
-    box-shadow:0 4px 0 #b97c00;
+    box-shadow:0 3px 0 #b97c00;
 }
 
-.pay-btn:disabled{
-    opacity:.45;
+.pay-button:disabled{
+    opacity:.4;
     cursor:not-allowed;
 }
 
-.payment-note{
-    margin-top:10px;
-    color:#9ca8ac;
+/* =========================================================
+   IMPORTANT NOTES
+========================================================= */
+
+.notes{
+    margin-top:20px;
+}
+
+.note{
+    display:flex;
+    gap:9px;
+    align-items:flex-start;
+    padding:10px 11px;
+    border-radius:12px;
+    margin-top:7px;
     font-size:9px;
     line-height:1.5;
-    text-align:center;
 }
 
-/* =====================================================
-   BOTTOM MOBILE
-===================================================== */
-
-.mobile-bottom{
-    display:none;
+.note-icon{
+    flex-shrink:0;
+    font-size:12px;
 }
 
-/* =====================================================
+.note.warning{
+    color:#8b3434;
+    background:#fff1f1;
+    border:1px solid #f0d4d4;
+}
+
+.note.yellow{
+    color:#725a0c;
+    background:#fff8dd;
+    border:1px solid #efdfa5;
+}
+
+.note.blue{
+    color:#225d79;
+    background:#eef8fc;
+    border:1px solid #d2eaf4;
+}
+
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 .toast{
     position:fixed;
     left:50%;
     bottom:25px;
-    transform:translate(-50%,120px);
     z-index:99999;
-    max-width:calc(100% - 30px);
-    padding:13px 17px;
-    border-radius:14px;
+    max-width:calc(100% - 28px);
+    padding:12px 16px;
+    border-radius:13px;
     background:#082c3d;
-    color:white;
-    font-size:11px;
-    font-weight:700;
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    color:#fff;
+    font-size:10px;
+    font-weight:800;
     opacity:0;
-    transition:.3s;
+    transform:translate(-50%,100px);
+    transition:.25s;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
 }
 
 .toast.show{
-    transform:translate(-50%,0);
     opacity:1;
+    transform:translate(-50%,0);
 }
 
 .toast.error{
-    background:#a83c3c;
+    background:#a43d3d;
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-total{
+    display:none;
+}
 
 @media(max-width:900px){
 
-    .grid{
+    .layout{
         grid-template-columns:1fr;
     }
 
@@ -939,20 +1007,20 @@ img{
         display:none;
     }
 
-    .mobile-menu-btn{
+    .menu-btn{
         display:block;
     }
 
     .mobile-nav{
         position:absolute;
         top:72px;
-        left:16px;
-        right:16px;
-        padding:10px;
-        border-radius:18px;
-        background:white;
-        border:1px solid #e8ecea;
-        box-shadow:0 20px 45px rgba(0,0,0,.12);
+        left:15px;
+        right:15px;
+        padding:9px;
+        border-radius:16px;
+        background:#fff;
+        border:1px solid #e5ebe8;
+        box-shadow:0 20px 40px rgba(0,0,0,.12);
     }
 
     .mobile-nav.show{
@@ -961,9 +1029,9 @@ img{
 
     .mobile-nav a{
         display:block;
-        padding:13px;
-        border-radius:12px;
-        font-size:12px;
+        padding:12px;
+        border-radius:10px;
+        font-size:11px;
         font-weight:800;
     }
 
@@ -971,87 +1039,49 @@ img{
 
 @media(max-width:650px){
 
-    .header-inner,
     .container,
-    .hero-content{
-        width:min(100% - 24px,1200px);
+    .header-inner,
+    .hero-inner{
+        width:calc(100% - 24px);
     }
 
     .hero{
-        min-height:370px;
+        height:350px;
     }
 
-    .hero-content{
-        min-height:370px;
-        padding-bottom:30px;
-    }
-
-    .hero h1{
-        font-size:42px;
-    }
-
-    .main{
-        padding-top:20px;
+    .hero-title{
+        font-size:41px;
     }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .card{
-        padding:19px;
-        border-radius:20px;
+    .stat{
+        padding:13px;
     }
 
-    .mobile-bottom{
-        position:fixed;
-        left:0;
-        right:0;
-        bottom:0;
-        z-index:9000;
-        display:flex;
-        align-items:center;
+    .main{
+        padding-top:17px;
+    }
+
+    .booking-card{
+        padding:17px;
+    }
+
+    .left{
         gap:12px;
-        padding:10px 13px calc(10px + env(safe-area-inset-bottom));
-        background:rgba(255,255,255,.96);
-        border-top:1px solid #e5eae7;
-        backdrop-filter:blur(18px);
     }
 
-    .mobile-total{
-        flex:1;
+}
+
+@media(max-width:400px){
+
+    .hero-title{
+        font-size:37px;
     }
 
-    .mobile-total-label{
-        color:#9ba5a8;
-        font-size:8px;
-        font-weight:900;
-        letter-spacing:.13em;
-        text-transform:uppercase;
-    }
-
-    .mobile-total-value{
-        margin-top:2px;
-        font-size:20px;
-        font-weight:900;
-    }
-
-    .mobile-pay{
-        width:150px;
-        height:48px;
-        border:0;
-        border-radius:14px;
-        background:#ffc400;
-        color:#071b24;
-        font-size:10px;
-        font-weight:900;
-    }
-
-    .mobile-pay:disabled{
-        opacity:.45;
-    }
-
-    .hero-meta span{
+    .choice{
         font-size:9px;
     }
 
@@ -1061,9 +1091,9 @@ img{
 
 <body>
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-===================================================== -->
+========================================================= -->
 
 <header class="header">
 
@@ -1072,7 +1102,6 @@ img{
         <a href="./index.html" class="logo">
 
             <div class="logo-img">
-
                 <img
                     src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
                     alt="Adventure Junction"
@@ -1081,11 +1110,9 @@ img{
                         this.src='https://cloud-mypc.github.io/view/images/Icon.png';
                     "
                 >
-
             </div>
 
             <div>
-
                 <div class="logo-title">
                     Adventure Junction
                 </div>
@@ -1093,7 +1120,6 @@ img{
                 <div class="logo-sub">
                     Climbing • Rappelling
                 </div>
-
             </div>
 
         </a>
@@ -1124,10 +1150,9 @@ img{
 
 
         <button
-            class="mobile-menu-btn"
+            class="menu-btn"
             id="menuBtn"
             type="button"
-            aria-label="Menu"
         >
             ☰
         </button>
@@ -1152,54 +1177,47 @@ img{
             About Us
         </a>
 
-        <a
-            href="https://www.instagram.com/adventure__junction"
-            target="_blank"
-            rel="noopener"
-        >
-            Instagram
-        </a>
-
     </div>
 
 </header>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-===================================================== -->
+========================================================= -->
 
 <section class="hero">
 
     <img
+        class="hero-image"
         id="heroImage"
-        src=""
+        src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1800&q=85"
         alt="Lingya Waterfall"
     >
 
     <div class="hero-overlay"></div>
 
-    <div class="hero-content">
+    <div class="hero-inner">
 
         <div>
 
-            <div class="badge">
+            <div class="hero-badge">
 
-                <span class="badge-dot"></span>
+                <span class="hero-dot"></span>
 
-                Rappelling Adventure
+                Adventure Booking
 
             </div>
 
 
-            <h1 id="eventTitle">
+            <h1 class="hero-title">
                 Lingya Waterfall
             </h1>
 
 
             <div class="hero-meta">
 
-                <span id="heroDate">
+                <span>
                     23 Aug 2026
                 </span>
 
@@ -1220,20 +1238,20 @@ img{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      MAIN
-===================================================== -->
+========================================================= -->
 
 <main class="main">
 
 <div class="container">
 
-<div class="grid">
+<div class="layout">
 
 
-<!-- =====================================================
-     LEFT
-===================================================== -->
+<!-- =========================================================
+     LEFT INFORMATION
+========================================================= -->
 
 <div class="left">
 
@@ -1241,32 +1259,6 @@ img{
 <!-- STATS -->
 
 <div class="stats">
-
-    <div class="stat">
-
-        <div class="stat-label">
-            Grade
-        </div>
-
-        <div class="stat-value">
-            Easy
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-label">
-            Endurance
-        </div>
-
-        <div class="stat-value">
-            Medium
-        </div>
-
-    </div>
-
 
     <div class="stat">
 
@@ -1284,661 +1276,444 @@ img{
     <div class="stat">
 
         <div class="stat-label">
-            Fee / Person
+            Location
         </div>
+
+        <div class="stat-value">
+            Maharashtra
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Date
+        </div>
+
+        <div class="stat-value">
+            23 Aug
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Base Meal
+        </div>
+
+        <div class="stat-value">
+            Veg
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        🌿 About Lingya Waterfall
+    </summary>
+
+    <div class="info-content">
+
+        <p>
+            <strong>Lingya Waterfall</strong> is a stunning
+            natural attraction located around 13.5 km ahead
+            of Lavasa city in Maharashtra.
+        </p>
+
+        <p>
+            The waterfall derives its name from the prominent
+            pinnacle nearby, known as Lingya, which has
+            significant cultural and spiritual value for
+            the local community.
+        </p>
+
+        <p>
+            Surrounded by lush greenery and vibrant flora,
+            the waterfall becomes especially breathtaking
+            during the monsoon season.
+        </p>
+
+        <p>
+            The area offers an excellent combination of
+            trekking, nature, photography, swimming and
+            adventurous rappelling.
+        </p>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     MAJOR ATTRACTIONS
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        🏔️ Major Attractions
+    </summary>
+
+    <div class="info-content">
+
+        <div class="info-list">
+
+            <div class="info-item">
+                Most beautiful waterfall experience in Maharashtra.
+            </div>
+
+            <div class="info-item">
+                300+ ft adventurous rappelling.
+            </div>
+
+            <div class="info-item">
+                Natural pool below the waterfall.
+            </div>
+
+            <div class="info-item">
+                Crystal-clear bluish-green water.
+            </div>
+
+            <div class="info-item">
+                Exploring the dense forest.
+            </div>
+
+        </div>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     ITINERARY
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        🕒 Itinerary
+    </summary>
+
+    <div class="info-content">
+
+        <div class="info-list">
+
+            <div class="info-item">
+                <strong>03:00 AM</strong> — Reach base village.
+            </div>
+
+            <div class="info-item">
+                <strong>03:00–04:00 AM</strong> — Rest in bus.
+            </div>
+
+            <div class="info-item">
+                <strong>05:00 AM</strong> — Morning routine.
+            </div>
+
+            <div class="info-item">
+                <strong>05:15 AM</strong> — Morning tea & breakfast.
+            </div>
+
+            <div class="info-item">
+                <strong>05:30 AM</strong> — Trek introduction with team and participants.
+            </div>
+
+            <div class="info-item">
+                <strong>05:45 AM</strong> — Reach Lingya Waterfall.
+            </div>
+
+            <div class="info-item">
+                <strong>06:00 AM</strong> — Reach rappelling point.
+            </div>
+
+            <div class="info-item">
+                <strong>07:30 AM</strong> — Rappelling begins.
+            </div>
+
+            <div class="info-item">
+                <strong>03:00 PM</strong> — Complete activity and trek towards base village.
+            </div>
+
+            <div class="info-item">
+                <strong>04:30 PM</strong> — Reach base village.
+            </div>
+
+            <div class="info-item">
+                <strong>04:30–05:30 PM</strong> — Lunch at local villager's house.
+            </div>
+
+            <div class="info-item">
+                <strong>05:30 PM</strong> — Journey back to the city.
+            </div>
+
+            <div class="info-item">
+                <strong>11:00 PM</strong> — Reach Pune.
+            </div>
+
+        </div>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     COST INCLUDES
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        💳 Cost Includes
+    </summary>
+
+    <div class="info-content">
+
+        <div class="info-list">
+
+            <div class="info-item">
+                Transport by Non-AC Bus.
+            </div>
+
+            <div class="info-item">
+                Adventure insurance with travel cover.
+            </div>
+
+            <div class="info-item">
+                One-time tea, breakfast & Veg lunch.
+            </div>
+
+            <div class="info-item">
+                Safety equipment / gears.
+            </div>
+
+            <div class="info-item">
+                300+ ft adventurous rappelling.
+            </div>
+
+            <div class="info-item">
+                Basic first aid.
+            </div>
+
+        </div>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     COST EXCLUDES
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        🚫 Cost Excludes
+    </summary>
+
+    <div class="info-content">
+
+        <div class="info-list">
+
+            <div class="info-item">
+                Cold drinks, mineral water, etc.
+            </div>
+
+            <div class="info-item">
+                Dinner on Saturday and Sunday.
+            </div>
+
+            <div class="info-item">
+                Private orders of tea, breakfast, meals, etc.
+            </div>
+
+            <div class="info-item">
+                Personal expenses of any kind.
+            </div>
+
+            <div class="info-item">
+                Private/shared travel expenses to reach railway stations.
+            </div>
+
+            <div class="info-item">
+                Medical expenses other than first aid.
+            </div>
+
+            <div class="info-item">
+                Any other charges not mentioned in Cost Includes.
+            </div>
+
+        </div>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     THINGS TO CARRY
+========================================================= -->
+
+<details class="card info-details">
+
+    <summary>
+        🎒 Things to Carry
+    </summary>
+
+    <div class="info-content">
+
+        <div class="info-list">
+
+            <div class="info-item">
+                Sanitizer, masks and personal medicines.
+            </div>
+
+            <div class="info-item">
+                2–3 litres of water (Must).
+            </div>
+
+            <div class="info-item">
+                Head torch / normal torch with extra batteries (Must).
+            </div>
+
+            <div class="info-item">
+                Full-sleeve T-shirt and full pants (Must).
+            </div>
+
+            <div class="info-item">
+                Good trekking shoes + extra pair of socks (Must).
+            </div>
+
+            <div class="info-item">
+                Warm clothes / shawl, towel, napkin and extra clothes.
+            </div>
+
+            <div class="info-item">
+                Raincoat / poncho (Must).
+            </div>
+
+            <div class="info-item">
+                Camera / cap etc. (Optional).
+            </div>
+
+            <div class="info-item">
+                Electrolyte packets.
+            </div>
+
+            <div class="info-item">
+                Fruits / dry fruits for the trek.
+            </div>
+
+            <div class="info-item">
+                Haversack for carrying belongings (Optional).
+            </div>
+
+            <div class="info-item">
+                Trekking/support stick (Optional).
+            </div>
+
+        </div>
+
+    </div>
+
+</details>
+
+
+<!-- =========================================================
+     IMPORTANT NOTES
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-padding">
 
         <div
-            class="stat-value"
-            id="statPrice"
+            style="
+                font-size:15px;
+                font-weight:900;
+            "
         >
-            ₹0
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            🌿
-        </span>
-
-        Brief Information About Lingya Waterfall
-
-    </h2>
-
-
-    <p class="description">
-
-        <strong>Name: Lingya Waterfall.</strong>
-
-        Lingya Ghat Waterfall is a stunning natural
-        attraction located just 13.5 km ahead of
-        Lavasa city in Maharashtra.
-
-        The waterfall derives its name from the
-        prominent pinnacle nearby, known as Lingya,
-        which holds significant cultural and spiritual
-        value for the local community.
-
-        This striking formation is often revered and
-        worshipped by the villagers of Dhamanohol,
-        the base village for the waterfall.
-
-        Surrounded by lush greenery and vibrant flora,
-        the waterfall is especially breathtaking during
-        the monsoon season when it transforms into a
-        powerful cascade, drawing visitors for its
-        scenic beauty and serene atmosphere.
-
-        The area is perfect for nature enthusiasts,
-        offering opportunities for trekking,
-        birdwatching and photography.
-
-    </p>
-
-</section>
-
-
-<!-- =====================================================
-     COST INCLUDES
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Cost Includes
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Transport (by Non-AC Bus)</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Adventure insurance (with travel cover)</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>1 Time Tea, Breakfast & Lunch (Veg)</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Safety Equipment / Gears</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>300+ ft Adventurous Rappelling</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Basic First Aid</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     COST EXCLUDES
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Cost Excludes
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Cold drinks, Mineral water, etc.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Dinner on Saturday and Sunday.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Private orders of Tea, Breakfast, Meals, etc.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Personal expenses of any kind.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Any private or shared tempo / travel expenses to reach any railway station.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Medical expenses other than “First aid”.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Any other charges not mentioned in “Cost Includes”.</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ATTRACTIONS
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Major Attractions
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Most Beautiful Waterfall in Maharashtra</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>300+ ft Adventurous Rappelling.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Enjoy the natural pool below the waterfalls.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>The water-pool under the Lingya Waterfall has crystal clear bluish-green water.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Exploring the dense forest.</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PICKUP INFORMATION
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Pickup Points & Time
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-
-            <span>
-                <strong>11:00 PM</strong> :
-                Katraj Main Bus Stop, Pune
-            </span>
+            ⚠️ Important Notes
         </div>
 
 
-        <div class="list-item">
-            <span class="bullet"></span>
+        <div class="notes">
 
-            <span>
-                <strong>11:15 PM</strong> :
-                Navale Bridge
-            </span>
-        </div>
+            <div class="note warning">
 
+                <div class="note-icon">
+                    🐝
+                </div>
 
-        <div class="list-item">
-            <span class="bullet"></span>
+                <div>
+                    <strong>Do not use perfumes.</strong>
+                    Strong fragrances can attract honeybees
+                    in the jungle and may create a serious
+                    safety risk.
+                </div>
 
-            <span>
-                <strong>11:30 PM</strong> :
-                Chandani Chowk
-            </span>
-        </div>
-
-
-        <div class="list-item">
-            <span class="bullet"></span>
-
-            <span>
-                <strong>11:45 PM</strong> :
-                Hinjewadi Chowk
-            </span>
-        </div>
-
-
-        <div class="list-item">
-            <span class="bullet"></span>
-
-            <span>
-                <strong>12:00 AM</strong> :
-                Pirangut Chowk, Hinjewadi Phase 3
-            </span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ITINERARY
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Itinerary
-
-    </h2>
-
-
-    <div class="timeline">
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                03:00 AM
             </div>
-            <div class="timeline-text">
-                Reach base village (Dhamnho[l]/Dhamanohol).
+
+
+            <div class="note warning">
+
+                <div class="note-icon">
+                    💍
+                </div>
+
+                <div>
+                    <strong>Do not wear gold or carry valuables.</strong>
+                    Avoid carrying unnecessary valuables
+                    during the adventure.
+                </div>
+
             </div>
-        </div>
 
 
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                03:00 AM – 04:00 AM
+            <div class="note blue">
+
+                <div class="note-icon">
+                    📢
+                </div>
+
+                <div>
+                    <strong>Inform your friends & family.</strong>
+                    Share your trip details and travel plan
+                    with someone close to you before leaving.
+                </div>
+
             </div>
-            <div class="timeline-text">
-                Rest in bus.
+
+
+            <div class="note yellow">
+
+                <div class="note-icon">
+                    🍗
+                </div>
+
+                <div>
+                    Veg meal is included in the base price.
+                    <strong>Non-Veg meal costs ₹100 extra
+                    per participant.</strong>
+                </div>
+
             </div>
+
         </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                05:00 AM
-            </div>
-            <div class="timeline-text">
-                Good morning. Complete your morning routine.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                05:15 AM
-            </div>
-            <div class="timeline-text">
-                Enjoy your morning tea & breakfast.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                05:30 AM
-            </div>
-            <div class="timeline-text">
-                We will have small introduction about trek
-                with the team and fellow participants.
-                Our team of experts will guide you through.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                05:45 AM
-            </div>
-            <div class="timeline-text">
-                We will reach the Lingya Waterfall.
-                Enjoy the swimming and beauty of nature.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                06:00 AM
-            </div>
-            <div class="timeline-text">
-                We will reach the Lingya Waterfall
-                Rappelling point.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                07:30 AM
-            </div>
-            <div class="timeline-text">
-                Rappelling will begin. Participants will
-                need to wait for their turn, and those who
-                have finished will need others to complete.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                03:00 PM
-            </div>
-            <div class="timeline-text">
-                We will complete the activity and start
-                trek towards base village.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                04:30 PM
-            </div>
-            <div class="timeline-text">
-                Reach the Base village. Congratulations
-                on completing the trek.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                04:30 PM – 05:30 PM
-            </div>
-            <div class="timeline-text">
-                Lunch will be served at local villagers house.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                05:30 PM
-            </div>
-            <div class="timeline-text">
-                We will begin our journey to the city.
-                Till this time, heart-whelming memories
-                of the adventure will occupy your mind
-                on the way to Pune.
-            </div>
-        </div>
-
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-time">
-                11:00 PM
-            </div>
-            <div class="timeline-text">
-                Reach Pune. We will follow the same route
-                on the return journey.
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     THINGS TO CARRY
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            🎒
-        </span>
-
-        Things to be Carried
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Sanitizer, masks, and personal medicines.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>2–3 liters of water (must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Head Torch or normal Torch with extra batteries (Must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Full sleeve T-shirts and full pant. For girls full neck T-shirt (Must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Good trekking shoes, extra pair of socks (Must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Warm clothes / shawl, towel, a napkin, extra pair of clothes (Must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Raincoat / poncho (must).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Camera, Cap etc. (Optional).</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Electrolyte packets as energy drinks.</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>
-                Carry eatable like fruits, dry fruits to munch
-                on during trek and to avoid dehydration.
-            </span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>
-                A haversack to put in all the things. (Optional)
-            </span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>
-                Good to have stick for support. (Optional)
-            </span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     OTHER INFORMATION
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Other Information
-
-    </h2>
-
-
-    <div class="list">
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Max. Number of Participants: 25</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>First Come First Priority*</span>
-        </div>
-
-        <div class="list-item">
-            <span class="bullet"></span>
-            <span>Last Date Of Enrollment: 2026 (Saturday)</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     NOTES
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="section-title">
-
-        <span class="section-icon">
-            ▶
-        </span>
-
-        Important Note
-
-    </h2>
-
-
-    <div class="warning" style="margin-top:18px;">
-
-        <strong>
-            ADVANCE FULL PAYMENT IS COMPULSORY
-            TO RESERVE SEATS.
-        </strong>
-
-    </div>
-
-
-    <div class="notice" style="margin-top:12px;">
-
-        <strong>
-            Age restriction:
-        </strong>
-
-        Participants below
-        <strong>16 years are not allowed.</strong>
-
-    </div>
-
-
-    <div class="notice" style="margin-top:12px;">
-
-        <strong>
-            Meal:
-        </strong>
-
-        Veg meal is included in the base price.
-        Non-Veg meal costs an additional
-        <strong>₹100 per participant.</strong>
 
     </div>
 
@@ -1947,73 +1722,236 @@ img{
 </div>
 
 
-<!-- =====================================================
-     RIGHT BOOKING
-===================================================== -->
+<!-- =========================================================
+     RIGHT BOOKING PANEL
+========================================================= -->
 
 <aside class="booking">
 
-<section class="card">
+<section class="card booking-card">
 
     <div class="booking-title">
-        Book Your Seats
+        Book Your Adventure
     </div>
 
     <div class="booking-sub">
-        Select date and add participants one by one.
+        Complete each step to reserve your seats.
     </div>
 
 
-    <!-- =================================================
-         DATES
-    ================================================= -->
+    <!-- =====================================================
+         STEP 1 — DATE
+    ===================================================== -->
 
-    <div class="date-list" id="dateList">
-        <!-- generated by JS -->
-    </div>
+    <div class="step">
 
+        <div class="step-head">
 
-    <!-- =================================================
-         PARTICIPANTS
-    ================================================= -->
-
-    <div
-        id="participantArea"
-        style="display:none;"
-    >
-
-        <div class="participant-head">
+            <div class="step-number">
+                1
+            </div>
 
             <div>
 
-                <div class="booking-title">
-                    Participants
+                <div class="step-title">
+                    Select Date
                 </div>
 
-                <div class="booking-sub">
-                    Save one participant before adding the next.
+                <div class="step-caption">
+                    One adventure date available
                 </div>
-
-            </div>
-
-            <div class="participant-count">
-
-                <span id="guestCount">
-                    0
-                </span>
-
-                /
-
-                <span id="availableCount">
-                    0
-                </span>
 
             </div>
 
         </div>
 
 
-        <!-- SAVED GUESTS -->
+        <div class="date-box">
+
+            <button
+                type="button"
+                class="date-button"
+                id="dateButton"
+            >
+
+                <div class="date-row">
+
+                    <div>
+
+                        <div class="date-main">
+                            23 August 2026
+                        </div>
+
+                        <div class="date-sub">
+                            Lingya Waterfall • Sunday
+                        </div>
+
+                    </div>
+
+
+                    <div class="date-seats">
+
+                        <div
+                            class="date-seats-number"
+                            id="dateSeats"
+                        >
+                            15
+                        </div>
+
+                        <div class="date-seats-label">
+                            SEATS AVAILABLE
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STEP 2 — GUEST COUNT
+    ===================================================== -->
+
+    <div
+        class="step"
+        id="guestStep"
+        style="display:none;"
+    >
+
+        <div class="step-head">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <div>
+
+                <div class="step-title">
+                    Number of Guests
+                </div>
+
+                <div class="step-caption">
+                    Select how many people are joining
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="counter">
+
+            <div class="counter-label">
+
+                Total Guests
+
+                <small>
+                    Maximum 100 or available seats
+                </small>
+
+            </div>
+
+
+            <div class="counter-controls">
+
+                <button
+                    type="button"
+                    class="counter-btn"
+                    id="minusBtn"
+                >
+                    −
+                </button>
+
+
+                <div
+                    class="counter-number"
+                    id="guestCount"
+                >
+                    1
+                </div>
+
+
+                <button
+                    type="button"
+                    class="counter-btn"
+                    id="plusBtn"
+                >
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STEP 3 — PARTICIPANTS
+    ===================================================== -->
+
+    <div
+        class="step"
+        id="participantStep"
+        style="display:none;"
+    >
+
+        <div class="step-head">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <div>
+
+                <div class="step-title">
+                    Participant Details
+                </div>
+
+                <div class="step-caption">
+                    Add each participant one by one
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="guest-progress">
+
+            <div class="progress-top">
+
+                <span>
+                    Participant progress
+                </span>
+
+                <span id="progressText">
+                    0 / 1
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVED PARTICIPANTS -->
 
         <div
             class="saved-list"
@@ -2022,30 +1960,30 @@ img{
         </div>
 
 
-        <!-- CURRENT FORM -->
+        <!-- CURRENT PARTICIPANT -->
 
         <div
-            class="form"
+            class="guest-form"
             id="guestForm"
         >
 
-            <div class="form-head">
+            <div class="guest-form-title">
 
                 <div
-                    class="number"
-                    id="guestNumber"
+                    class="guest-icon"
+                    id="currentGuestNumber"
                 >
                     1
                 </div>
 
                 <div>
 
-                    <div class="form-title">
-                        Participant <span id="guestNumberText">1</span>
+                    <div class="guest-title">
+                        Participant <span id="currentGuestText">1</span>
                     </div>
 
-                    <div class="form-sub">
-                        Enter details and save
+                    <div class="guest-subtitle">
+                        Enter details and save to continue
                     </div>
 
                 </div>
@@ -2058,14 +1996,14 @@ img{
             <div class="field">
 
                 <label class="label">
-                    Full Name *
+                    FULL NAME *
                 </label>
 
                 <input
-                    id="guestName"
                     class="input"
+                    id="guestName"
                     type="text"
-                    placeholder="Enter full name"
+                    placeholder="Enter participant's full name"
                     autocomplete="name"
                 >
 
@@ -2077,12 +2015,12 @@ img{
             <div class="field">
 
                 <label class="label">
-                    Age *
+                    AGE *
                 </label>
 
                 <input
-                    id="guestAge"
                     class="input"
+                    id="guestAge"
                     type="number"
                     min="16"
                     max="100"
@@ -2090,20 +2028,29 @@ img{
                     placeholder="Enter age"
                 >
 
+
+                <div
+                    class="age-warning"
+                    id="ageWarning"
+                >
+                    ⚠️ Participants below 16 years are not allowed.
+                    This participant cannot be submitted.
+                </div>
+
             </div>
 
 
-            <!-- PHONE -->
+            <!-- MOBILE -->
 
             <div class="field">
 
                 <label class="label">
-                    Mobile Number *
+                    MOBILE NUMBER *
                 </label>
 
                 <input
-                    id="guestPhone"
                     class="input"
+                    id="guestPhone"
                     type="tel"
                     maxlength="10"
                     inputmode="numeric"
@@ -2119,8 +2066,9 @@ img{
             <div class="field">
 
                 <label class="label">
-                    Gender *
+                    GENDER *
                 </label>
+
 
                 <div class="choice-grid">
 
@@ -2131,6 +2079,7 @@ img{
                     >
                         ♂ Male
                     </button>
+
 
                     <button
                         type="button"
@@ -2150,8 +2099,9 @@ img{
             <div class="field">
 
                 <label class="label">
-                    Meal Preference *
+                    MEAL PREFERENCE *
                 </label>
+
 
                 <div class="choice-grid">
 
@@ -2163,6 +2113,7 @@ img{
                         🥗 Veg
                     </button>
 
+
                     <button
                         type="button"
                         class="choice"
@@ -2173,8 +2124,9 @@ img{
 
                 </div>
 
-                <div class="extra-note">
-                    Note: Non-Veg meal costs ₹100 extra per participant.
+
+                <div class="meal-note">
+                    Non-Veg meal: +₹100 per participant.
                 </div>
 
             </div>
@@ -2184,7 +2136,7 @@ img{
 
             <button
                 type="button"
-                class="save-btn"
+                class="save-guest"
                 id="saveGuestBtn"
             >
                 Save Participant
@@ -2193,196 +2145,207 @@ img{
         </div>
 
 
+        <!-- COMPLETE -->
+
         <div
-            class="complete"
-            id="completeMessage"
-            style="display:none;"
+            id="participantsComplete"
+            style="
+                display:none;
+                margin-top:12px;
+                padding:12px;
+                border-radius:13px;
+                background:#eafaf2;
+                border:1px solid #cfeede;
+                color:#13885c;
+                font-size:9px;
+                line-height:1.5;
+                font-weight:800;
+            "
         >
-            ✓ All available seats for this date have been added.
+            ✓ All participant details have been saved.
         </div>
 
+    </div>
 
-        <!-- =================================================
-             PICKUP
-        ================================================= -->
 
-        <div style="margin-top:28px;">
+    <!-- =====================================================
+         STEP 4 — PICKUP
+    ===================================================== -->
 
-            <div class="booking-title">
-                Pickup Location
+    <div
+        class="step"
+        id="pickupStep"
+        style="display:none;"
+    >
+
+        <div class="step-head">
+
+            <div class="step-number">
+                4
             </div>
 
-            <div class="booking-sub">
-                Select your boarding point.
-            </div>
+            <div>
 
+                <div class="step-title">
+                    Pickup Point
+                </div>
 
-            <div class="pickup-list">
-
-                <button
-                    type="button"
-                    class="pickup"
-                    data-pickup="Katraj Main Bus Stop, Pune"
-                    data-time="11:00 PM"
-                >
-
-                    <div class="pickup-row">
-
-                        <span class="pickup-name">
-                            Katraj Main Bus Stop, Pune
-                        </span>
-
-                        <span class="pickup-time">
-                            11:00 PM
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="pickup"
-                    data-pickup="Navale Bridge"
-                    data-time="11:15 PM"
-                >
-
-                    <div class="pickup-row">
-
-                        <span class="pickup-name">
-                            Navale Bridge
-                        </span>
-
-                        <span class="pickup-time">
-                            11:15 PM
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="pickup"
-                    data-pickup="Chandani Chowk"
-                    data-time="11:30 PM"
-                >
-
-                    <div class="pickup-row">
-
-                        <span class="pickup-name">
-                            Chandani Chowk
-                        </span>
-
-                        <span class="pickup-time">
-                            11:30 PM
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="pickup"
-                    data-pickup="Hinjewadi Chowk"
-                    data-time="11:45 PM"
-                >
-
-                    <div class="pickup-row">
-
-                        <span class="pickup-name">
-                            Hinjewadi Chowk
-                        </span>
-
-                        <span class="pickup-time">
-                            11:45 PM
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="pickup"
-                    data-pickup="Pirangut Chowk, Hinjewadi Phase 3"
-                    data-time="12:00 AM"
-                >
-
-                    <div class="pickup-row">
-
-                        <span class="pickup-name">
-                            Pirangut Chowk, Hinjewadi Phase 3
-                        </span>
-
-                        <span class="pickup-time">
-                            12:00 AM
-                        </span>
-
-                    </div>
-
-                </button>
+                <div class="step-caption">
+                    Select your boarding point
+                </div>
 
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             COUPON
-        ================================================= -->
+        <div class="pickup-list">
 
-        <div style="margin-top:27px;">
+            <button
+                type="button"
+                class="pickup-button"
+                data-name="Katraj Main Bus Stop, Pune"
+                data-time="11:00 PM"
+            >
 
-            <div class="booking-title" style="font-size:14px;">
-                Coupon Code
-            </div>
+                <div class="pickup-row">
 
-            <div class="coupon">
+                    <span class="pickup-name">
+                        Katraj Main Bus Stop, Pune
+                    </span>
 
-                <input
-                    id="couponInput"
-                    class="input"
-                    type="text"
-                    placeholder="Enter coupon"
-                >
+                    <span class="pickup-time">
+                        11:00 PM
+                    </span>
 
-                <button
-                    type="button"
-                    class="coupon-btn"
-                    id="couponBtn"
-                >
-                    APPLY
-                </button>
+                </div>
 
-            </div>
+            </button>
 
-            <div
-                id="couponMessage"
-                class="coupon-message"
-            ></div>
+
+            <button
+                type="button"
+                class="pickup-button"
+                data-name="Navale Bridge"
+                data-time="11:15 PM"
+            >
+
+                <div class="pickup-row">
+
+                    <span class="pickup-name">
+                        Navale Bridge
+                    </span>
+
+                    <span class="pickup-time">
+                        11:15 PM
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="pickup-button"
+                data-name="Chandani Chowk"
+                data-time="11:30 PM"
+            >
+
+                <div class="pickup-row">
+
+                    <span class="pickup-name">
+                        Chandani Chowk
+                    </span>
+
+                    <span class="pickup-time">
+                        11:30 PM
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="pickup-button"
+                data-name="Hinjewadi Chowk"
+                data-time="11:45 PM"
+            >
+
+                <div class="pickup-row">
+
+                    <span class="pickup-name">
+                        Hinjewadi Chowk
+                    </span>
+
+                    <span class="pickup-time">
+                        11:45 PM
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="pickup-button"
+                data-name="Pirangut Chowk, Hinjewadi Phase 3"
+                data-time="12:00 AM"
+            >
+
+                <div class="pickup-row">
+
+                    <span class="pickup-name">
+                        Pirangut Chowk, Hinjewadi Phase 3
+                    </span>
+
+                    <span class="pickup-time">
+                        12:00 AM
+                    </span>
+
+                </div>
+
+            </button>
 
         </div>
 
+    </div>
 
-        <!-- =================================================
-             SUMMARY
-        ================================================= -->
+
+    <!-- =====================================================
+         SUMMARY
+    ===================================================== -->
+
+    <div
+        id="summaryArea"
+        style="display:none;"
+    >
 
         <div class="summary">
 
             <div class="summary-row">
 
                 <span>
-                    Tickets
+                    Guests
                 </span>
 
-                <strong id="ticketPrice">
+                <strong id="summaryGuests">
+                    1
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Adventure Fee
+                </span>
+
+                <strong id="summaryTickets">
                     ₹0
                 </strong>
 
@@ -2395,25 +2358,8 @@ img{
                     Non-Veg Meals
                 </span>
 
-                <strong id="nonVegPrice">
+                <strong id="summaryNonVeg">
                     ₹0
-                </strong>
-
-            </div>
-
-
-            <div
-                class="summary-row green"
-                id="discountRow"
-                style="display:none;"
-            >
-
-                <span>
-                    NEW5 Discount
-                </span>
-
-                <strong id="discountPrice">
-                    -₹0
                 </strong>
 
             </div>
@@ -2422,12 +2368,12 @@ img{
             <div class="total">
 
                 <div class="total-label">
-                    Total
+                    Final Total
                 </div>
 
                 <div
                     class="total-value"
-                    id="totalPrice"
+                    id="summaryTotal"
                 >
                     ₹0
                 </div>
@@ -2439,18 +2385,12 @@ img{
 
         <button
             type="button"
-            class="pay-btn"
-            id="payBtn"
+            class="pay-button"
+            id="payButton"
             disabled
         >
             Proceed to Payment
         </button>
-
-
-        <div class="payment-note">
-            Advance full payment is compulsory
-            to reserve seats.
-        </div>
 
     </div>
 
@@ -2465,41 +2405,9 @@ img{
 </main>
 
 
-<!-- =====================================================
-     MOBILE TOTAL
-===================================================== -->
-
-<div class="mobile-bottom">
-
-    <div class="mobile-total">
-
-        <div class="mobile-total-label">
-            Total
-        </div>
-
-        <div
-            class="mobile-total-value"
-            id="mobileTotal"
-        >
-            ₹0
-        </div>
-
-    </div>
-
-
-    <button
-        type="button"
-        class="mobile-pay"
-        id="mobilePayBtn"
-        disabled
-    >
-        PAY NOW
-    </button>
-
-</div>
-
-
-<!-- TOAST -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
 <div
     class="toast"
@@ -2510,148 +2418,98 @@ img{
 <script>
 "use strict";
 
-/* =====================================================
-   EVENT CONFIGURATION
-   =====================================================
-
-   IMPORTANT:
-
-   This is now the source of truth for available seats.
-
-   To make 23 Aug have 25 seats, change:
-
-       seats:15
-
-   to:
-
-       seats:25
-
-   There is NO 10-user limit in this code.
-===================================================== */
+/* =========================================================
+   EVENT CONFIG
+========================================================= */
 
 const EVENT = {
 
     title:
         "Lingya Waterfall Rappelling",
 
+    date:
+        "2026-08-23",
+
+    seats:
+        15,
+
+    /*
+     * Change this to 25, 50, 100 etc.
+     * if the adventure has more seats.
+     */
+
     price:
         2500,
 
-    image:
-        "https://cloud-mypc.github.io/view/images/lingya-waterfall.jpg",
-
-    dates:[
-
-        {
-            id:"lingya-23-08-2026",
-
-            date:"2026-08-23",
-
-            seats:15
-
-        }
-
-    ]
+    maxGuests:
+        100
 
 };
 
 
-/* =====================================================
-   APPLICATION STATE
-===================================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
 const state = {
 
-    selectedDate:null,
+    dateSelected:false,
+
+    guestQuantity:1,
 
     guests:[],
 
-    gender:"",
+    currentGender:"",
 
-    meal:"Veg",
+    currentMeal:"Veg",
 
-    pickup:null,
-
-    coupon:"",
-
-    discount:0
+    pickup:null
 
 };
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================================================
+   DOM
+========================================================= */
 
 const $ = id =>
     document.getElementById(id);
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* =========================================================
+   START
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function(){
-
-        initialize();
-
-    }
+    init
 );
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+function init(){
 
-function initialize(){
+    setupMenu();
 
-    /*
-     * Set event information.
-     */
+    setupDate();
 
-    $("eventTitle").textContent =
-        EVENT.title;
+    setupCounter();
 
-    $("statPrice").textContent =
-        money(EVENT.price);
+    setupGuestForm();
 
+    setupPickup();
 
-    /*
-     * Hero image.
-     */
+    updateGuestCounter();
 
-    const hero =
-        $("heroImage");
+    updateSummary();
 
-    hero.src =
-        EVENT.image;
-
-    hero.onerror =
-        function(){
-
-            /*
-             * If the exact event image isn't found,
-             * use a reliable waterfall image.
-             */
-
-            this.src =
-                "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1800&q=85";
-
-        };
+}
 
 
-    /*
-     * Render dates.
-     */
+/* =========================================================
+   MENU
+========================================================= */
 
-    renderDates();
-
-
-    /*
-     * Menu.
-     */
+function setupMenu(){
 
     $("menuBtn").addEventListener(
         "click",
@@ -2664,6 +2522,232 @@ function initialize(){
         }
     );
 
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function setupDate(){
+
+    $("dateButton").addEventListener(
+        "click",
+        selectDate
+    );
+
+}
+
+
+function selectDate(){
+
+    state.dateSelected=true;
+
+
+    /*
+     * Always start with ONE guest.
+     */
+
+    state.guestQuantity=1;
+
+    state.guests=[];
+
+    state.currentGender="";
+
+    state.currentMeal="Veg";
+
+    state.pickup=null;
+
+
+    $("guestStep")
+        .style
+        .display="block";
+
+
+    $("participantStep")
+        .style
+        .display="block";
+
+
+    $("pickupStep")
+        .style
+        .display="none";
+
+
+    $("summaryArea")
+        .style
+        .display="none";
+
+
+    resetGuestForm();
+
+    updateGuestCounter();
+
+    renderSavedGuests();
+
+    updateProgress();
+
+    updateSummary();
+
+
+    showToast(
+        "23 August selected. Add your guests."
+    );
+
+
+    /*
+     * Mobile scroll.
+     */
+
+    if(window.innerWidth<=900){
+
+        setTimeout(
+            function(){
+
+                $("guestStep")
+                    .scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+            },
+            100
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GUEST COUNTER
+========================================================= */
+
+function setupCounter(){
+
+    $("minusBtn").addEventListener(
+        "click",
+        function(){
+
+            if(
+                state.guestQuantity>1
+            ){
+
+                /*
+                 * Don't remove already
+                 * completed participants.
+                 */
+
+                if(
+                    state.guestQuantity<=
+                    state.guests.length
+                ){
+
+                    showToast(
+                        "Remove the last saved participant before reducing the guest count.",
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                state.guestQuantity--;
+
+                updateGuestCounter();
+
+                updateProgress();
+
+                updateSummary();
+
+            }
+
+        }
+    );
+
+
+    $("plusBtn").addEventListener(
+        "click",
+        function(){
+
+            const maximum =
+                Math.min(
+                    EVENT.seats,
+                    EVENT.maxGuests
+                );
+
+
+            if(
+                state.guestQuantity>=
+                maximum
+            ){
+
+                showToast(
+                    "Maximum " +
+                    maximum +
+                    " guests can be selected.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            state.guestQuantity++;
+
+            updateGuestCounter();
+
+            updateProgress();
+
+            updateSummary();
+
+        }
+    );
+
+}
+
+
+function updateGuestCounter(){
+
+    $("guestCount").textContent =
+        state.guestQuantity;
+
+
+    const maximum =
+        Math.min(
+            EVENT.seats,
+            EVENT.maxGuests
+        );
+
+
+    $("minusBtn").disabled =
+        state.guestQuantity<=1;
+
+
+    $("plusBtn").disabled =
+        state.guestQuantity>=maximum;
+
+
+    $("dateSeats").textContent =
+        Math.max(
+            0,
+            EVENT.seats -
+            state.guestQuantity
+        );
+
+
+    updateCurrentGuest();
+
+}
+
+
+/* =========================================================
+   GUEST FORM
+========================================================= */
+
+function setupGuestForm(){
 
     /*
      * Gender.
@@ -2673,9 +2757,11 @@ function initialize(){
         "click",
         function(){
 
-            state.gender="Male";
+            state.currentGender="Male";
 
             updateChoices();
+
+            validateGuestLive();
 
         }
     );
@@ -2685,9 +2771,11 @@ function initialize(){
         "click",
         function(){
 
-            state.gender="Female";
+            state.currentGender="Female";
 
             updateChoices();
+
+            validateGuestLive();
 
         }
     );
@@ -2701,9 +2789,11 @@ function initialize(){
         "click",
         function(){
 
-            state.meal="Veg";
+            state.currentMeal="Veg";
 
             updateChoices();
+
+            updateSummary();
 
         }
     );
@@ -2713,16 +2803,18 @@ function initialize(){
         "click",
         function(){
 
-            state.meal="Non-Veg";
+            state.currentMeal="Non-Veg";
 
             updateChoices();
+
+            updateSummary();
 
         }
     );
 
 
     /*
-     * Save participant.
+     * Save.
      */
 
     $("saveGuestBtn").addEventListener(
@@ -2732,83 +2824,33 @@ function initialize(){
 
 
     /*
-     * Coupon.
+     * Live age verification.
      */
 
-    $("couponBtn").addEventListener(
-        "click",
-        applyCoupon
+    $("guestAge").addEventListener(
+        "input",
+        validateGuestLive
+    );
+
+
+    $("guestAge").addEventListener(
+        "change",
+        validateGuestLive
     );
 
 
     /*
-     * Pickup.
+     * Name.
      */
 
-    document
-        .querySelectorAll(".pickup")
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    function(){
-
-                        document
-                            .querySelectorAll(".pickup")
-                            .forEach(
-                                x =>
-                                    x.classList.remove(
-                                        "selected"
-                                    )
-                            );
-
-
-                        this.classList.add(
-                            "selected"
-                        );
-
-
-                        state.pickup={
-
-                            name:
-                                this.dataset.pickup,
-
-                            time:
-                                this.dataset.time
-
-                        };
-
-
-                        saveDraft();
-
-                        updatePaymentButton();
-
-                    }
-                );
-
-            }
-        );
-
-
-    /*
-     * Payment buttons.
-     */
-
-    $("payBtn").addEventListener(
-        "click",
-        proceedToPayment
-    );
-
-
-    $("mobilePayBtn").addEventListener(
-        "click",
-        proceedToPayment
+    $("guestName").addEventListener(
+        "input",
+        validateGuestLive
     );
 
 
     /*
-     * Numeric phone field.
+     * Phone.
      */
 
     $("guestPhone").addEventListener(
@@ -2826,114 +2868,7 @@ function initialize(){
                     10
                 );
 
-        }
-    );
-
-
-    /*
-     * Try to restore previous draft.
-     */
-
-    restoreDraft();
-
-}
-
-
-/* =====================================================
-   RENDER DATES
-===================================================== */
-
-function renderDates(){
-
-    const container =
-        $("dateList");
-
-
-    container.innerHTML="";
-
-
-    EVENT.dates.forEach(
-        date => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type="button";
-
-            button.className =
-                "date-btn";
-
-
-            button.dataset.id =
-                date.id;
-
-
-            const available =
-                getAvailableSeats(
-                    date
-                );
-
-
-            if(available<=0){
-
-                button.classList.add(
-                    "closed"
-                );
-
-            }
-
-
-            button.innerHTML = `
-
-                <div class="date-row">
-
-                    <div>
-
-                        <div class="date-name">
-                            ${formatDate(date.date)}
-                        </div>
-
-                        <div class="date-event">
-                            Lingya Waterfall
-                        </div>
-
-                    </div>
-
-                    <div>
-
-                        <div class="seats">
-                            ${available} seats
-                        </div>
-
-                        <div class="seats-label">
-                            available
-                        </div>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    selectDate(
-                        date.id
-                    );
-
-                }
-            );
-
-
-            container.appendChild(
-                button
-            );
+            validateGuestLive();
 
         }
     );
@@ -2941,217 +2876,124 @@ function renderDates(){
 }
 
 
-/* =====================================================
-   SELECT DATE
-===================================================== */
+/* =========================================================
+   CURRENT GUEST NUMBER
+========================================================= */
 
-function selectDate(id){
+function updateCurrentGuest(){
 
-    const date =
-        EVENT.dates.find(
-            x => x.id===id
-        );
+    const next =
+        state.guests.length+1;
 
 
-    if(!date){
-        return;
-    }
+    $("currentGuestNumber").textContent =
+        next;
 
 
-    const available =
-        getAvailableSeats(
-            date
-        );
-
-
-    if(available<=0){
-
-        showToast(
-            "No seats are available for this date.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * New date = reset current booking.
-     */
-
-    state.selectedDate =
-        date;
-
-    state.guests=[];
-
-    state.gender="";
-
-    state.meal="Veg";
-
-    state.pickup=null;
-
-    state.coupon="";
-
-    state.discount=0;
-
-
-    /*
-     * Reset fields.
-     */
-
-    resetGuestForm();
-
-
-    /*
-     * Highlight date.
-     */
-
-    document
-        .querySelectorAll(".date-btn")
-        .forEach(
-            button => {
-
-                button.classList.toggle(
-                    "selected",
-                    button.dataset.id===id
-                );
-
-            }
-        );
-
-
-    /*
-     * Show booking area.
-     */
-
-    $("participantArea")
-        .style
-        .display="block";
-
-
-    $("heroDate").textContent =
-        formatDate(
-            date.date
-        );
-
-
-    $("availableCount").textContent =
-        available;
-
-
-    renderGuests();
-
-    updateSummary();
-
-    updatePaymentButton();
-
-    saveDraft();
-
-
-    /*
-     * Scroll booking panel into view
-     * on mobile.
-     */
-
-    if(window.innerWidth<=900){
-
-        setTimeout(
-            function(){
-
-                $("participantArea")
-                    .scrollIntoView({
-                        behavior:"smooth",
-                        block:"start"
-                    });
-
-            },
-            100
-        );
-
-    }
+    $("currentGuestText").textContent =
+        next;
 
 }
 
 
-/* =====================================================
-   AVAILABLE SEATS
-===================================================== */
+/* =========================================================
+   LIVE VALIDATION
+========================================================= */
 
-function getAvailableSeats(date){
+function validateGuestLive(){
+
+    const age =
+        Number(
+            $("guestAge").value
+        );
+
+
+    const warning =
+        $("ageWarning");
+
 
     /*
-     * This calculates seats for the current
-     * browser booking session.
-
-     * IMPORTANT:
-     *
-     * The maximum participants is ALWAYS
-     * the configured seats value.
-     *
-     * There is NO hardcoded 10 here.
+     * Age below 16.
      */
 
-    if(!date){
-        return 0;
+    if(
+        $("guestAge").value !== "" &&
+        age < 16
+    ){
+
+        warning.classList.add(
+            "show"
+        );
+
+        $("guestAge")
+            .classList
+            .add("invalid");
+
+    }
+    else{
+
+        warning.classList.remove(
+            "show"
+        );
+
+        $("guestAge")
+            .classList
+            .remove("invalid");
+
     }
 
 
-    const alreadySelected =
-        state.selectedDate &&
-        state.selectedDate.id===date.id
-            ? state.guests.length
-            : 0;
+    /*
+     * Disable save immediately
+     * if age is invalid.
+     */
+
+    if(
+        $("guestAge").value !== "" &&
+        age < 16
+    ){
+
+        $("saveGuestBtn")
+            .disabled=true;
+
+        return false;
+
+    }
 
 
-    return Math.max(
-        0,
-        Number(date.seats) -
-        alreadySelected
-    );
+    $("saveGuestBtn")
+        .disabled=false;
+
+
+    return true;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SAVE GUEST
-===================================================== */
+========================================================= */
 
 function saveGuest(){
 
-    if(!state.selectedDate){
-
-        showToast(
-            "Please select a date first.",
-            true
-        );
-
-        return;
-
-    }
-
-
     /*
-     * IMPORTANT:
-     *
-     * Maximum = available seats.
-     *
-     * Not 10.
+     * Hard safety limit.
      */
 
-    const totalSeats =
-        Number(
-            state.selectedDate.seats
+    const maximum =
+        Math.min(
+            EVENT.seats,
+            EVENT.maxGuests
         );
 
 
     if(
-        state.guests.length >=
-        totalSeats
+        state.guests.length>=
+        maximum
     ){
 
         showToast(
-            "All available seats are already selected.",
+            "Maximum guest limit reached.",
             true
         );
 
@@ -3183,13 +3025,15 @@ function saveGuest(){
 
 
     /*
-     * Validate name.
+     * Name.
      */
 
-    if(name.length<2){
+    if(
+        name.length<2
+    ){
 
         showToast(
-            "Please enter the participant's full name.",
+            "Please enter the full name.",
             true
         );
 
@@ -3201,7 +3045,7 @@ function saveGuest(){
 
 
     /*
-     * Validate age.
+     * Age.
      */
 
     if(
@@ -3234,7 +3078,7 @@ function saveGuest(){
 
 
     /*
-     * Validate phone.
+     * Phone.
      */
 
     if(
@@ -3244,7 +3088,7 @@ function saveGuest(){
     ){
 
         showToast(
-            "Please enter a valid 10-digit mobile number.",
+            "Enter a valid 10-digit mobile number.",
             true
         );
 
@@ -3256,12 +3100,12 @@ function saveGuest(){
 
 
     /*
-     * Validate gender.
+     * Gender.
      */
 
     if(
-        state.gender!=="Male" &&
-        state.gender!=="Female"
+        state.currentGender!=="Male" &&
+        state.currentGender!=="Female"
     ){
 
         showToast(
@@ -3275,16 +3119,16 @@ function saveGuest(){
 
 
     /*
-     * Validate meal.
+     * Meal.
      */
 
     if(
-        state.meal!=="Veg" &&
-        state.meal!=="Non-Veg"
+        state.currentMeal!=="Veg" &&
+        state.currentMeal!=="Non-Veg"
     ){
 
         showToast(
-            "Please select Veg or Non-Veg.",
+            "Please select a meal.",
             true
         );
 
@@ -3294,10 +3138,10 @@ function saveGuest(){
 
 
     /*
-     * Create participant.
+     * Add participant.
      */
 
-    const guest={
+    state.guests.push({
 
         name:name,
 
@@ -3305,233 +3149,122 @@ function saveGuest(){
 
         phone:phone,
 
-        gender:state.gender,
+        gender:state.currentGender,
 
-        meal:state.meal
+        meal:state.currentMeal
 
-    };
-
-
-    /*
-     * Save.
-     */
-
-    state.guests.push(
-        guest
-    );
+    });
 
 
     /*
-     * Reset current form.
+     * Reset form.
      */
 
     resetGuestForm();
 
 
     /*
-     * Render saved participant.
+     * Render.
      */
 
-    renderGuests();
+    renderSavedGuests();
 
-
-    /*
-     * Update prices.
-     */
+    updateProgress();
 
     updateSummary();
 
-
-    /*
-     * Save draft.
-     */
-
-    saveDraft();
+    updateGuestCounter();
 
 
-    /*
-     * Show success.
-     */
-
-    showToast(
-        "Participant " +
-        state.guests.length +
-        " saved successfully."
-    );
+    const completed =
+        state.guests.length>=
+        state.guestQuantity;
 
 
-    /*
-     * Refresh date seat display.
-     */
+    if(completed){
 
-    renderDates();
-
-
-    /*
-     * Keep selected date highlighted.
-     */
-
-    document
-        .querySelectorAll(".date-btn")
-        .forEach(
-            button => {
-
-                if(
-                    button.dataset.id ===
-                    state.selectedDate.id
-                ){
-
-                    button.classList.add(
-                        "selected"
-                    );
-
-                }
-
-            }
-        );
-
-
-    /*
-     * Update form number.
-     */
-
-    $("guestNumber").textContent =
-        state.guests.length + 1;
-
-    $("guestNumberText").textContent =
-        state.guests.length + 1;
-
-
-    /*
-     * If all seats are filled,
-     * hide the form.
-     */
-
-    if(
-        state.guests.length >=
-        state.selectedDate.seats
-    ){
+        /*
+         * All requested guests
+         * are complete.
+         */
 
         $("guestForm")
             .style
             .display="none";
 
 
-        $("completeMessage")
+        $("participantsComplete")
             .style
             .display="block";
 
-    }
+
+        $("pickupStep")
+            .style
+            .display="block";
 
 
-    updatePaymentButton();
-
-}
-
-
-/* =====================================================
-   RENDER GUESTS
-===================================================== */
-
-function renderGuests(){
-
-    const container =
-        $("savedList");
+        $("summaryArea")
+            .style
+            .display="block";
 
 
-    container.innerHTML="";
+        showToast(
+            "All participant details saved. Select pickup point."
+        );
 
 
-    state.guests.forEach(
-        (guest,index) => {
+        if(window.innerWidth<=900){
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+            setTimeout(
+                function(){
 
+                    $("pickupStep")
+                        .scrollIntoView({
+                            behavior:"smooth",
+                            block:"start"
+                        });
 
-            div.className =
-                "saved";
-
-
-            div.innerHTML = `
-
-                <div class="saved-row">
-
-                    <div class="saved-left">
-
-                        <div class="check">
-                            ✓
-                        </div>
-
-                        <div>
-
-                            <div class="saved-name">
-                                ${escapeHTML(guest.name)}
-                            </div>
-
-                            <div class="saved-meta">
-                                ${guest.age} yrs
-                                •
-                                ${escapeHTML(guest.gender)}
-                                •
-                                ${escapeHTML(guest.meal)}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="saved-phone">
-                            ${escapeHTML(guest.phone)}
-                        </div>
-
-                        ${
-                            guest.meal==="Non-Veg"
-                            ? `
-                                <div class="nonveg-price">
-                                    +₹100
-                                </div>
-                              `
-                            : ""
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                div
+                },
+                150
             );
 
         }
-    );
-
-
-    $("guestCount").textContent =
-        state.guests.length;
-
-
-    if(state.selectedDate){
-
-        $("availableCount").textContent =
-            state.selectedDate.seats;
 
     }
+    else{
+
+        /*
+         * Next participant appears
+         * automatically.
+         */
+
+        $("guestForm")
+            .style
+            .display="block";
+
+
+        $("participantsComplete")
+            .style
+            .display="none";
+
+
+        showToast(
+            "Participant " +
+            state.guests.length +
+            " saved ✓"
+        );
+
+    }
+
+
+    updateCurrentGuest();
 
 }
 
 
-/* =====================================================
-   RESET GUEST FORM
-===================================================== */
+/* =========================================================
+   RESET CURRENT FORM
+========================================================= */
 
 function resetGuestForm(){
 
@@ -3542,40 +3275,31 @@ function resetGuestForm(){
     $("guestPhone").value="";
 
 
-    state.gender="";
+    state.currentGender="";
 
-    state.meal="Veg";
+    state.currentMeal="Veg";
+
+
+    $("ageWarning")
+        .classList
+        .remove("show");
+
+
+    $("guestAge")
+        .classList
+        .remove("invalid");
 
 
     updateChoices();
 
-
-    $("guestForm")
-        .style
-        .display="block";
-
-
-    $("completeMessage")
-        .style
-        .display="none";
-
-
-    const next =
-        state.guests.length+1;
-
-
-    $("guestNumber").textContent =
-        next;
-
-    $("guestNumberText").textContent =
-        next;
+    updateCurrentGuest();
 
 }
 
 
-/* =====================================================
-   CHOICE BUTTONS
-===================================================== */
+/* =========================================================
+   CHOICES
+========================================================= */
 
 function updateChoices(){
 
@@ -3583,7 +3307,7 @@ function updateChoices(){
         .classList
         .toggle(
             "selected",
-            state.gender==="Male"
+            state.currentGender==="Male"
         );
 
 
@@ -3591,7 +3315,7 @@ function updateChoices(){
         .classList
         .toggle(
             "selected",
-            state.gender==="Female"
+            state.currentGender==="Female"
         );
 
 
@@ -3599,7 +3323,7 @@ function updateChoices(){
         .classList
         .toggle(
             "selected",
-            state.meal==="Veg"
+            state.currentMeal==="Veg"
         );
 
 
@@ -3607,21 +3331,300 @@ function updateChoices(){
         .classList
         .toggle(
             "selected",
-            state.meal==="Non-Veg"
+            state.currentMeal==="Non-Veg"
         );
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   SAVED PARTICIPANTS
+========================================================= */
+
+function renderSavedGuests(){
+
+    const list =
+        $("savedList");
+
+
+    list.innerHTML="";
+
+
+    state.guests.forEach(
+        function(guest,index){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className=
+                "saved-guest";
+
+
+            item.innerHTML=`
+
+                <div class="saved-row">
+
+                    <div class="saved-left">
+
+                        <div class="saved-check">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <div class="saved-name">
+                                ${escapeHTML(guest.name)}
+                            </div>
+
+                            <div class="saved-meta">
+                                Guest ${index+1}
+                                •
+                                ${guest.age} yrs
+                                •
+                                ${guest.gender}
+                                •
+                                ${guest.meal}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="saved-price">
+
+                        ${
+                            guest.meal==="Non-Veg"
+                            ? "+₹100"
+                            : "Veg"
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(){
+
+    const total =
+        state.guestQuantity;
+
+
+    const completed =
+        state.guests.length;
+
+
+    $("progressText").textContent =
+        completed +
+        " / " +
+        total;
+
+
+    const percent =
+        total>0
+        ? Math.min(
+            100,
+            (completed/total)*100
+        )
+        : 0;
+
+
+    $("progressFill")
+        .style
+        .width =
+        percent+"%";
+
+}
+
+
+/* =========================================================
+   PICKUP
+========================================================= */
+
+function setupPickup(){
+
+    document
+        .querySelectorAll(".pickup-button")
+        .forEach(
+            function(button){
+
+                button.addEventListener(
+                    "click",
+                    function(){
+
+                        document
+                            .querySelectorAll(".pickup-button")
+                            .forEach(
+                                x =>
+                                    x.classList
+                                    .remove(
+                                        "selected"
+                                    )
+                            );
+
+
+                        this.classList.add(
+                            "selected"
+                        );
+
+
+                        state.pickup={
+
+                            name:
+                                this.dataset.name,
+
+                            time:
+                                this.dataset.time
+
+                        };
+
+
+                        updateSummary();
+
+                        showToast(
+                            "Pickup point selected."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
    SUMMARY
-===================================================== */
+========================================================= */
 
 function updateSummary(){
 
+    const guests =
+        state.guests.length;
+
+
+    const tickets =
+        guests *
+        EVENT.price;
+
+
+    const nonVegCount =
+        state.guests.filter(
+            function(guest){
+
+                return guest.meal===
+                    "Non-Veg";
+
+            }
+        ).length;
+
+
+    const nonVeg =
+        nonVegCount *
+        100;
+
+
+    const total =
+        tickets+
+        nonVeg;
+
+
+    $("summaryGuests").textContent =
+        state.guestQuantity;
+
+
+    $("summaryTickets").textContent =
+        money(tickets);
+
+
+    $("summaryNonVeg").textContent =
+        money(nonVeg);
+
+
+    $("summaryTotal").textContent =
+        money(total);
+
+
+    /*
+     * Payment is enabled only after
+     * all requested guests + pickup.
+     */
+
+    const ready =
+        state.guests.length===
+        state.guestQuantity &&
+        state.guestQuantity>0 &&
+        state.pickup!==null;
+
+
+    $("payButton").disabled =
+        !ready;
+
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+$("payButton").addEventListener(
+    "click",
+    proceedPayment
+);
+
+
+function proceedPayment(){
+
+    if(
+        state.guests.length !==
+        state.guestQuantity
+    ){
+
+        showToast(
+            "Please complete all participant details.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    if(!state.pickup){
+
+        showToast(
+            "Please select a pickup point.",
+            true
+        );
+
+        return;
+
+    }
+
+
     const ticketTotal =
         state.guests.length *
-        Number(EVENT.price);
+        EVENT.price;
 
 
     const nonVegCount =
@@ -3636,251 +3639,13 @@ function updateSummary(){
         100;
 
 
-    let subtotal =
-        ticketTotal +
+    const finalTotal =
+        ticketTotal+
         nonVegTotal;
-
-
-    let discount=0;
-
-
-    if(
-        state.coupon ===
-        "NEW5"
-    ){
-
-        discount =
-            Math.round(
-                subtotal *
-                .05
-            );
-
-    }
-
-
-    const total =
-        Math.max(
-            0,
-            subtotal-discount
-        );
-
-
-    state.discount =
-        discount;
-
-
-    $("ticketPrice").textContent =
-        money(ticketTotal);
-
-
-    $("nonVegPrice").textContent =
-        money(nonVegTotal);
-
-
-    $("totalPrice").textContent =
-        money(total);
-
-
-    $("mobileTotal").textContent =
-        money(total);
-
-
-    if(discount>0){
-
-        $("discountRow")
-            .style
-            .display="flex";
-
-        $("discountPrice").textContent =
-            "-"+money(discount);
-
-    }
-    else{
-
-        $("discountRow")
-            .style
-            .display="none";
-
-    }
-
-
-    updatePaymentButton();
-
-}
-
-
-/* =====================================================
-   COUPON
-===================================================== */
-
-function applyCoupon(){
-
-    const input =
-        $("couponInput")
-        .value
-        .trim()
-        .toUpperCase();
-
-
-    if(
-        input==="NEW5"
-    ){
-
-        state.coupon="NEW5";
-
-
-        $("couponMessage")
-            .style
-            .color="#159665";
-
-
-        $("couponMessage")
-            .textContent =
-            "NEW5 applied — 5% discount.";
-
-        showToast(
-            "Coupon applied."
-        );
-
-    }
-    else{
-
-        state.coupon="";
-
-
-        $("couponMessage")
-            .style
-            .color="#b33b3b";
-
-
-        $("couponMessage")
-            .textContent =
-            "Invalid coupon code.";
-
-        showToast(
-            "Invalid coupon code.",
-            true
-        );
-
-    }
-
-
-    updateSummary();
-
-    saveDraft();
-
-}
-
-
-/* =====================================================
-   PAYMENT VALIDATION
-===================================================== */
-
-function canPay(){
-
-    if(!state.selectedDate){
-        return false;
-    }
-
-
-    if(
-        state.guests.length<1
-    ){
-
-        return false;
-
-    }
-
-
-    if(
-        state.guests.length >
-        state.selectedDate.seats
-    ){
-
-        return false;
-
-    }
-
-
-    if(!state.pickup){
-        return false;
-    }
-
-
-    return true;
-
-}
-
-
-/* =====================================================
-   PAYMENT BUTTON
-===================================================== */
-
-function updatePaymentButton(){
-
-    const enabled =
-        canPay();
-
-
-    $("payBtn")
-        .disabled =
-        !enabled;
-
-
-    $("mobilePayBtn")
-        .disabled =
-        !enabled;
-
-}
-
-
-/* =====================================================
-   PAYMENT
-===================================================== */
-
-function proceedToPayment(){
-
-    if(!canPay()){
-
-        showToast(
-            "Complete participant details and select a pickup point.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    const ticketTotal =
-        state.guests.length *
-        Number(EVENT.price);
-
-
-    const nonVegTotal =
-        state.guests.filter(
-            guest =>
-                guest.meal==="Non-Veg"
-        ).length *
-        100;
-
-
-    const subtotal =
-        ticketTotal +
-        nonVegTotal;
-
-
-    const discount =
-        state.discount;
-
-
-    const total =
-        subtotal -
-        discount;
 
 
     /*
-     * Complete booking object.
+     * Store booking information.
      */
 
     const booking={
@@ -3891,12 +3656,12 @@ function proceedToPayment(){
                 EVENT.title,
 
             date:
-                state.selectedDate.date,
-
-            dateId:
-                state.selectedDate.id
+                EVENT.date
 
         },
+
+        totalGuests:
+            state.guestQuantity,
 
         participants:
             state.guests,
@@ -3906,29 +3671,20 @@ function proceedToPayment(){
 
         pricing:{
 
-            pricePerPerson:
+            basePrice:
                 EVENT.price,
-
-            participants:
-                state.guests.length,
 
             ticketTotal:
                 ticketTotal,
 
-            nonVegMeals:
-                state.guests.filter(
-                    guest =>
-                        guest.meal==="Non-Veg"
-                ).length,
+            nonVegGuests:
+                nonVegCount,
 
             nonVegTotal:
                 nonVegTotal,
 
-            discount:
-                discount,
-
             finalTotal:
-                total
+                finalTotal
 
         },
 
@@ -3939,7 +3695,7 @@ function proceedToPayment(){
 
 
     localStorage.setItem(
-        "AJ_FINAL_BOOKING",
+        "AJ_BOOKING",
         JSON.stringify(
             booking
         )
@@ -3947,7 +3703,7 @@ function proceedToPayment(){
 
 
     sessionStorage.setItem(
-        "AJ_FINAL_BOOKING",
+        "AJ_BOOKING",
         JSON.stringify(
             booking
         )
@@ -3955,20 +3711,18 @@ function proceedToPayment(){
 
 
     /*
-     * For now show the final booking
-     * information rather than sending
-     * the user to a fake payment URL.
+     * Change this to your real payment
+     * page when ready.
      */
 
     showToast(
-        "Booking details saved. Total: " +
-        money(total)
+        "Booking saved. Total " +
+        money(finalTotal)
     );
 
 
     /*
-     * You can replace this line with
-     * your real payment page later:
+     * Example:
      *
      * window.location.href =
      * "payment.html";
@@ -3977,268 +3731,15 @@ function proceedToPayment(){
 }
 
 
-/* =====================================================
-   LOCAL DRAFT
-===================================================== */
-
-function saveDraft(){
-
-    if(!state.selectedDate){
-        return;
-    }
-
-
-    const draft={
-
-        dateId:
-            state.selectedDate.id,
-
-        guests:
-            state.guests,
-
-        pickup:
-            state.pickup,
-
-        coupon:
-            state.coupon
-
-    };
-
-
-    try{
-
-        localStorage.setItem(
-            "AJ_BOOKING_DRAFT",
-            JSON.stringify(
-                draft
-            )
-        );
-
-    }
-    catch(error){
-
-        console.warn(
-            "Could not save draft.",
-            error
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   RESTORE DRAFT
-===================================================== */
-
-function restoreDraft(){
-
-    let raw;
-
-
-    try{
-
-        raw =
-            localStorage.getItem(
-                "AJ_BOOKING_DRAFT"
-            );
-
-    }
-    catch(error){
-
-        return;
-
-    }
-
-
-    if(!raw){
-        return;
-    }
-
-
-    try{
-
-        const draft =
-            JSON.parse(
-                raw
-            );
-
-
-        if(
-            !draft ||
-            !draft.dateId
-        ){
-
-            return;
-
-        }
-
-
-        const date =
-            EVENT.dates.find(
-                x =>
-                    x.id===
-                    draft.dateId
-            );
-
-
-        if(!date){
-            return;
-        }
-
-
-        /*
-         * Restore only up to the
-         * configured seat limit.
-         */
-
-        state.selectedDate =
-            date;
-
-
-        state.guests =
-            Array.isArray(
-                draft.guests
-            )
-            ? draft.guests.slice(
-                0,
-                date.seats
-            )
-            : [];
-
-
-        state.pickup =
-            draft.pickup ||
-            null;
-
-
-        state.coupon =
-            draft.coupon ||
-            "";
-
-
-        /*
-         * Select date UI.
-         */
-
-        document
-            .querySelectorAll(".date-btn")
-            .forEach(
-                button => {
-
-                    button.classList.toggle(
-                        "selected",
-                        button.dataset.id===
-                        date.id
-                    );
-
-                }
-            );
-
-
-        $("participantArea")
-            .style
-            .display="block";
-
-
-        $("heroDate").textContent =
-            formatDate(
-                date.date
-            );
-
-
-        /*
-         * Restore pickup UI.
-         */
-
-        if(state.pickup){
-
-            document
-                .querySelectorAll(".pickup")
-                .forEach(
-                    button => {
-
-                        button.classList.toggle(
-                            "selected",
-                            button.dataset.pickup===
-                            state.pickup.name
-                        );
-
-                    }
-                );
-
-        }
-
-
-        /*
-         * Restore coupon.
-         */
-
-        if(
-            state.coupon==="NEW5"
-        ){
-
-            $("couponInput")
-                .value="NEW5";
-
-            $("couponMessage")
-                .style
-                .color="#159665";
-
-            $("couponMessage")
-                .textContent =
-                "NEW5 applied — 5% discount.";
-
-        }
-
-
-        renderGuests();
-
-
-        if(
-            state.guests.length >=
-            date.seats
-        ){
-
-            $("guestForm")
-                .style
-                .display="none";
-
-            $("completeMessage")
-                .style
-                .display="block";
-
-        }
-
-
-        updateSummary();
-
-        renderDates();
-
-        updatePaymentButton();
-
-    }
-    catch(error){
-
-        console.warn(
-            "Draft restore failed.",
-            error
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   FORMAT MONEY
-===================================================== */
+/* =========================================================
+   MONEY
+========================================================= */
 
 function money(value){
 
-    return "₹" +
+    return "₹"+
         Number(
-            value || 0
+            value||0
         ).toLocaleString(
             "en-IN"
         );
@@ -4246,39 +3747,14 @@ function money(value){
 }
 
 
-/* =====================================================
-   FORMAT DATE
-===================================================== */
-
-function formatDate(value){
-
-    const date =
-        new Date(
-            value +
-            "T00:00:00"
-        );
-
-
-    return date.toLocaleDateString(
-        "en-IN",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
 function escapeHTML(value){
 
     return String(
-        value || ""
+        value||""
     )
     .replace(
         /&/g,
@@ -4304,9 +3780,9 @@ function escapeHTML(value){
 }
 
 
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 let toastTimer;
 
