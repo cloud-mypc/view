@@ -1,0 +1,2811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+>
+
+<title>Book Adventure — Adventure Junction</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+></script>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+>
+
+<script>
+
+tailwind.config = {
+
+    theme: {
+
+        extend: {
+
+            fontFamily: {
+                sans: ['"Outfit"','sans-serif']
+            },
+
+            colors: {
+
+                navy: '#082C3D',
+
+                gold: '#FFC400',
+
+                green: '#059669'
+
+            }
+
+        }
+
+    }
+
+};
+
+</script>
+
+
+<style>
+
+[x-cloak] {
+    display:none!important;
+}
+
+html {
+    scroll-behavior:smooth;
+}
+
+body {
+    overflow-x:hidden;
+}
+
+.glass {
+
+    background:
+        rgba(255,255,255,.82);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+}
+
+.hero-image {
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(4,20,28,.15),
+            rgba(4,20,28,.92)
+        );
+
+}
+
+.date-card {
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.date-card:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+.date-selected {
+
+    border-color:#082C3D!important;
+
+    box-shadow:
+        0 12px 30px
+        rgba(8,44,61,.14);
+
+}
+
+.step-card {
+
+    animation:
+        fadeIn .3s ease;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.payment-button {
+
+    box-shadow:
+        0 6px 0 #b77d00,
+        0 14px 30px
+        rgba(255,193,0,.22);
+
+}
+
+</style>
+
+</head>
+
+
+<body
+class="bg-[#F5F7F6] text-[#082C3D] font-sans antialiased"
+x-data="bookingApp()"
+x-init="init()"
+>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header
+class="sticky top-0 z-50
+       bg-white/90
+       backdrop-blur-xl
+       border-b border-black/5"
+>
+
+<div
+class="max-w-6xl mx-auto
+       px-4 sm:px-6
+       h-[68px]
+       flex items-center justify-between"
+>
+
+<a
+href="/"
+class="flex items-center gap-3"
+>
+
+<div
+class="w-10 h-10
+       rounded-full
+       overflow-hidden
+       bg-[#092C3D]"
+>
+
+<img
+src="https://cloud-mypc.github.io/view/images/low/Icon.png"
+alt="Adventure Junction"
+class="w-full h-full object-cover"
+>
+
+</div>
+
+<div>
+
+<div
+class="font-black
+       text-[16px]
+       leading-none"
+>
+Adventure Junction
+</div>
+
+<div
+class="text-[8px]
+       uppercase
+       tracking-[.2em]
+       font-bold
+       text-gray-400
+       mt-1"
+>
+India
+</div>
+
+</div>
+
+</a>
+
+
+<div
+class="text-[10px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-gray-400"
+>
+Secure Booking
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+x-show="loading"
+x-cloak
+class="min-h-[70vh]
+       flex items-center
+       justify-center"
+>
+
+<div class="text-center">
+
+<div
+class="w-10 h-10
+       border-4
+       border-gray-200
+       border-t-[#082C3D]
+       rounded-full
+       animate-spin
+       mx-auto"
+></div>
+
+<p
+class="mt-4
+       text-sm
+       font-semibold
+       text-gray-500"
+>
+Loading adventure...
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ERROR
+===================================================== -->
+
+<div
+x-show="!loading && error"
+x-cloak
+class="max-w-lg
+       mx-auto
+       px-5
+       py-20
+       text-center"
+>
+
+<div
+class="w-14 h-14
+       rounded-2xl
+       bg-red-50
+       text-red-500
+       flex items-center
+       justify-center
+       mx-auto"
+>
+
+<svg
+class="w-7 h-7"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M12 9v4m0 4h.01M10.3 3.6l-8 14A2 2 0 004 20.6h16a2 2 0 001.7-3l-8-14a2 2 0 00-3.4 0z"
+/>
+
+</svg>
+
+</div>
+
+<h2
+class="mt-5
+       text-2xl
+       font-black"
+x-text="error"
+></h2>
+
+<a
+href="/"
+class="inline-flex
+       mt-6
+       px-5 py-3
+       rounded-xl
+       bg-[#082C3D]
+       text-white
+       text-sm
+       font-bold"
+>
+Back to Adventure Junction
+</a>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main
+x-show="!loading && !error"
+x-cloak
+class="pb-24"
+>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+class="relative
+       min-h-[430px]
+       md:min-h-[520px]
+       overflow-hidden"
+>
+
+<img
+:src="event.image_url"
+:alt="event.title"
+class="absolute inset-0
+       w-full h-full
+       object-cover"
+>
+
+<div
+class="absolute inset-0 hero-image"
+></div>
+
+
+<div
+class="relative
+       max-w-6xl mx-auto
+       px-5 sm:px-6
+       pt-28 pb-12
+       min-h-[430px]
+       md:min-h-[520px]
+       flex flex-col
+       justify-end"
+>
+
+<div
+class="max-w-3xl"
+>
+
+<div
+class="inline-flex
+       items-center
+       gap-2
+       px-3 py-1.5
+       rounded-full
+       bg-white/15
+       backdrop-blur-xl
+       border border-white/20
+       text-white
+       text-[9px]
+       font-black
+       uppercase
+       tracking-[.18em]"
+>
+
+<span
+class="w-2 h-2
+       rounded-full
+       bg-yellow-400"
+></span>
+
+<span
+x-text="event.category || 'Adventure'"
+></span>
+
+</div>
+
+
+<h1
+class="mt-4
+       text-4xl
+       sm:text-5xl
+       md:text-6xl
+       font-black
+       tracking-[-.05em]
+       leading-[.95]
+       text-white"
+x-text="event.title"
+></h1>
+
+
+<p
+class="mt-5
+       text-sm
+       sm:text-base
+       text-white/75
+       max-w-2xl"
+x-text="event.description"
+></p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EVENT DETAILS
+===================================================== -->
+
+<section
+class="max-w-6xl mx-auto
+       px-5 sm:px-6
+       -mt-8
+       relative z-10"
+>
+
+<div
+class="glass
+       rounded-3xl
+       border border-white
+       shadow-[0_20px_60px_rgba(8,44,61,.12)]
+       p-5 sm:p-7"
+>
+
+
+<div
+class="grid
+       grid-cols-2
+       md:grid-cols-5
+       gap-3"
+>
+
+
+<div
+class="rounded-2xl
+       bg-gray-50
+       p-4"
+>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-gray-400"
+>
+Grade
+</p>
+
+<p
+class="mt-1
+       font-black"
+x-text="event.grade || 'Easy'"
+></p>
+
+</div>
+
+
+<div
+class="rounded-2xl
+       bg-gray-50
+       p-4"
+>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-gray-400"
+>
+Endurance
+</p>
+
+<p
+class="mt-1
+       font-black"
+x-text="event.endurance || 'Medium'"
+></p>
+
+</div>
+
+
+<div
+class="rounded-2xl
+       bg-gray-50
+       p-4"
+>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-gray-400"
+>
+Height
+</p>
+
+<p
+class="mt-1
+       font-black"
+x-text="event.height || '120ft'"
+></p>
+
+</div>
+
+
+<div
+class="rounded-2xl
+       bg-gray-50
+       p-4"
+>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-gray-400"
+>
+Starting Fee
+</p>
+
+<p
+class="mt-1
+       font-black"
+x-text="'₹' + formatMoney(event.price)"
+></p>
+
+</div>
+
+
+<div
+class="rounded-2xl
+       bg-emerald-50
+       p-4"
+>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-emerald-600"
+>
+Seats
+</p>
+
+<p
+class="mt-1
+       font-black
+       text-emerald-700"
+>
+<span x-text="selectedSeats"></span>
+available
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BOOKING AREA
+===================================================== -->
+
+<section
+class="max-w-6xl mx-auto
+       px-5 sm:px-6
+       pt-12"
+>
+
+<div
+class="grid
+       lg:grid-cols-[1.25fr_.75fr]
+       gap-8"
+>
+
+
+<!-- LEFT -->
+
+<div>
+
+
+<!-- DATE -->
+
+<div
+class="step-card
+       bg-white
+       rounded-3xl
+       border border-gray-100
+       shadow-sm
+       p-5 sm:p-7"
+>
+
+<div
+class="flex
+       items-center
+       justify-between"
+>
+
+<div>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-600"
+>
+Step 1
+</p>
+
+<h2
+class="mt-1
+       text-xl
+       font-black"
+>
+Choose your date
+</h2>
+
+</div>
+
+<div
+class="w-10 h-10
+       rounded-xl
+       bg-[#082C3D]
+       text-white
+       flex items-center
+       justify-center"
+>
+
+<svg
+class="w-5 h-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<rect
+x="3"
+y="4"
+width="18"
+height="18"
+rx="2"
+/>
+
+<path
+d="M16 2v4M8 2v4M3 10h18"
+/>
+
+</svg>
+
+</div>
+
+</div>
+
+
+<div
+class="mt-6
+       grid
+       grid-cols-2
+       sm:grid-cols-3
+       gap-3"
+>
+
+<template
+x-for="date in dates"
+:key="date.id"
+>
+
+<button
+type="button"
+@click="selectDate(date)"
+:disabled="!date.open || date.available < 1"
+:class="selectedDate && selectedDate.id === date.id ? 'date-selected bg-white' : 'bg-gray-50'"
+class="date-card
+       text-left
+       rounded-2xl
+       border border-gray-100
+       p-4
+       disabled:opacity-40
+       disabled:cursor-not-allowed"
+>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.16em]
+       font-bold
+       text-gray-400"
+x-text="formatDate(date.event_date)"
+></p>
+
+<p
+class="mt-1
+       text-lg
+       font-black"
+x-text="formatDateShort(date.event_date)"
+></p>
+
+<div
+class="mt-3
+       flex items-center
+       justify-between"
+>
+
+<span
+class="text-[10px]
+       font-bold
+       text-emerald-600"
+x-text="date.available + ' seats'"
+></span>
+
+<span
+x-show="date.available < 3"
+class="text-[8px]
+       font-black
+       uppercase
+       text-orange-500"
+>
+Few left
+</span>
+
+</div>
+
+</button>
+
+</template>
+
+</div>
+
+</div>
+
+
+
+<!-- GUESTS -->
+
+<div
+x-show="selectedDate"
+x-cloak
+class="step-card
+       mt-5
+       bg-white
+       rounded-3xl
+       border border-gray-100
+       shadow-sm
+       p-5 sm:p-7"
+>
+
+<div>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-600"
+>
+Step 2
+</p>
+
+<h2
+class="mt-1
+       text-xl
+       font-black"
+>
+How many guests?
+</h2>
+
+</div>
+
+
+<div
+class="mt-5
+       flex items-center
+       justify-between
+       rounded-2xl
+       bg-gray-50
+       p-4"
+>
+
+<div>
+
+<p
+class="font-bold"
+>
+Guests
+</p>
+
+<p
+class="text-xs
+       text-gray-400"
+>
+Maximum 20 people
+</p>
+
+</div>
+
+
+<div
+class="flex
+       items-center
+       gap-4"
+>
+
+<button
+type="button"
+@click="changeGuests(-1)"
+class="w-11 h-11
+       rounded-xl
+       bg-white
+       border border-gray-200
+       flex items-center
+       justify-center
+       text-xl
+       font-black"
+>
+−
+</button>
+
+
+<span
+class="w-8
+       text-center
+       text-xl
+       font-black"
+x-text="guestCount"
+></span>
+
+
+<button
+type="button"
+@click="changeGuests(1)"
+class="w-11 h-11
+       rounded-xl
+       bg-[#082C3D]
+       text-white
+       flex items-center
+       justify-center
+       text-xl
+       font-black"
+>
++
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- GUEST DETAILS -->
+
+<div
+x-show="selectedDate"
+x-cloak
+class="step-card
+       mt-5
+       bg-white
+       rounded-3xl
+       border border-gray-100
+       shadow-sm
+       p-5 sm:p-7"
+>
+
+<div>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-600"
+>
+Step 3
+</p>
+
+<h2
+class="mt-1
+       text-xl
+       font-black"
+>
+Guest details
+</h2>
+
+<p
+class="mt-1
+       text-xs
+       text-gray-400"
+>
+Enter the name and mobile number for each guest.
+</p>
+
+</div>
+
+
+<div
+class="mt-6
+       space-y-4"
+>
+
+<template
+x-for="(guest,index) in guests"
+:key="index"
+>
+
+<div
+class="rounded-2xl
+       border border-gray-100
+       bg-gray-50
+       p-4"
+>
+
+<div
+class="flex
+       items-center
+       gap-3
+       mb-4"
+>
+
+<div
+class="w-9 h-9
+       rounded-xl
+       bg-[#082C3D]
+       text-white
+       flex items-center
+       justify-center
+       text-xs
+       font-black"
+x-text="index + 1"
+></div>
+
+<div>
+
+<p
+class="text-sm
+       font-black"
+x-text="'Guest ' + (index + 1)"
+></p>
+
+<p
+class="text-[10px]
+       text-gray-400"
+>
+Traveller information
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="grid
+       sm:grid-cols-2
+       gap-3"
+>
+
+<div>
+
+<label
+class="text-[10px]
+       font-bold
+       text-gray-500"
+>
+Full name
+</label>
+
+<input
+x-model="guest.name"
+type="text"
+autocomplete="name"
+placeholder="Manoranjan"
+class="mt-1
+       w-full
+       px-4 py-3
+       rounded-xl
+       bg-white
+       border border-gray-200
+       outline-none
+       focus:ring-2
+       focus:ring-yellow-400"
+>
+
+</div>
+
+
+<div>
+
+<label
+class="text-[10px]
+       font-bold
+       text-gray-500"
+>
+Mobile number
+</label>
+
+<div
+class="mt-1
+       flex"
+>
+
+<span
+class="px-3
+       flex items-center
+       rounded-l-xl
+       bg-gray-100
+       border border-r-0
+       border-gray-200
+       text-sm
+       font-bold"
+>
++91
+</span>
+
+<input
+x-model="guest.phone"
+type="tel"
+inputmode="numeric"
+maxlength="10"
+placeholder="9040214164"
+class="w-full
+       px-3 py-3
+       rounded-r-xl
+       bg-white
+       border border-gray-200
+       outline-none
+       focus:ring-2
+       focus:ring-yellow-400"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</template>
+
+</div>
+
+</div>
+
+
+
+<!-- PICKUP -->
+
+<div
+x-show="selectedDate"
+x-cloak
+class="step-card
+       mt-5
+       bg-white
+       rounded-3xl
+       border border-gray-100
+       shadow-sm
+       p-5 sm:p-7"
+>
+
+<div>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-600"
+>
+Step 4
+</p>
+
+<h2
+class="mt-1
+       text-xl
+       font-black"
+>
+Choose pickup location
+</h2>
+
+</div>
+
+
+<div
+class="mt-5
+       space-y-3"
+>
+
+<template
+x-for="stop in pickupStops"
+:key="stop.id"
+>
+
+<label
+class="flex
+       items-center
+       justify-between
+       gap-4
+       rounded-2xl
+       border border-gray-100
+       bg-gray-50
+       p-4
+       cursor-pointer
+       hover:bg-white
+       hover:border-gray-200"
+>
+
+<div
+class="flex
+       items-center
+       gap-3"
+>
+
+<input
+type="radio"
+name="pickup"
+:value="stop.id"
+x-model="pickupStopId"
+class="w-4 h-4 accent-[#082C3D]"
+>
+
+<div>
+
+<p
+class="font-black
+       text-sm"
+x-text="stop.stop_name"
+></p>
+
+<p
+class="text-xs
+       text-gray-400"
+>
+Pickup at
+<span
+x-text="stop.pickup_time"
+></span>
+</p>
+
+</div>
+
+</div>
+
+<svg
+class="w-5 h-5
+       text-gray-300"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+d="M9 18l6-6-6-6"
+/>
+
+</svg>
+
+</label>
+
+</template>
+
+</div>
+
+
+<div
+class="mt-4
+       rounded-2xl
+       bg-yellow-50
+       border border-yellow-100
+       p-4"
+>
+
+<p
+class="text-xs
+       font-bold
+       text-yellow-800"
+>
+Important
+</p>
+
+<p
+class="mt-1
+       text-xs
+       leading-relaxed
+       text-yellow-700"
+>
+Please reach your selected pickup stop at least
+<strong>20 minutes before</strong> the departure time.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- NOTES -->
+
+<div
+x-show="selectedDate"
+x-cloak
+class="step-card
+       mt-5
+       bg-white
+       rounded-3xl
+       border border-gray-100
+       shadow-sm
+       p-5 sm:p-7"
+>
+
+<label
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-gray-500"
+>
+Additional note
+</label>
+
+<textarea
+x-model="notes"
+rows="3"
+placeholder="Any information we should know?"
+class="mt-3
+       w-full
+       px-4 py-3
+       rounded-2xl
+       border border-gray-200
+       outline-none
+       resize-none
+       focus:ring-2
+       focus:ring-yellow-400"
+></textarea>
+
+</div>
+
+</div>
+
+
+
+<!-- RIGHT SUMMARY -->
+
+<aside
+class="lg:sticky
+       lg:top-24
+       h-fit"
+>
+
+<div
+class="bg-[#082C3D]
+       rounded-3xl
+       text-white
+       p-5 sm:p-7
+       shadow-[0_25px_70px_rgba(8,44,61,.22)]"
+>
+
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-400"
+>
+Your Adventure
+</p>
+
+
+<h2
+class="mt-2
+       text-2xl
+       font-black
+       leading-tight"
+x-text="event.title"
+></h2>
+
+
+<div
+class="mt-5
+       rounded-2xl
+       bg-white/10
+       border border-white/10
+       p-4"
+>
+
+<div
+class="flex
+       justify-between
+       text-sm"
+>
+
+<span
+class="text-white/60"
+>
+Date
+</span>
+
+<strong
+x-text="selectedDate ? formatDate(selectedDate.event_date) : 'Select date'"
+></strong>
+
+</div>
+
+
+<div
+class="mt-3
+       flex
+       justify-between
+       text-sm"
+>
+
+<span
+class="text-white/60"
+>
+Guests
+</span>
+
+<strong
+x-text="guestCount"
+></strong>
+
+</div>
+
+
+<div
+class="mt-3
+       flex
+       justify-between
+       text-sm"
+>
+
+<span
+class="text-white/60"
+>
+Price / guest
+</span>
+
+<strong
+x-text="'₹' + formatMoney(event.price)"
+></strong>
+
+</div>
+
+</div>
+
+
+
+<!-- COUPON -->
+
+<div class="mt-5">
+
+<label
+class="text-[9px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-white/50"
+>
+Coupon code
+</label>
+
+<div
+class="mt-2
+       flex
+       gap-2"
+>
+
+<input
+x-model="couponInput"
+type="text"
+placeholder="NEW5"
+class="min-w-0
+       flex-1
+       px-4 py-3
+       rounded-xl
+       bg-white/10
+       border border-white/10
+       text-white
+       placeholder:text-white/30
+       uppercase
+       outline-none"
+>
+
+<button
+type="button"
+@click="applyCoupon()"
+class="px-4
+       rounded-xl
+       bg-white
+       text-[#082C3D]
+       text-xs
+       font-black"
+>
+Apply
+</button>
+
+</div>
+
+
+<p
+x-show="couponMessage"
+x-text="couponMessage"
+class="mt-2
+       text-xs
+       font-bold"
+:class="couponValid ? 'text-emerald-300' : 'text-red-300'"
+></p>
+
+</div>
+
+
+
+<div
+class="mt-6
+       pt-5
+       border-t border-white/10"
+>
+
+<div
+class="flex
+       justify-between
+       text-sm"
+>
+
+<span
+class="text-white/55"
+>
+Subtotal
+</span>
+
+<span
+x-text="'₹' + formatMoney(subtotal)"
+></span>
+
+</div>
+
+
+<div
+x-show="discount > 0"
+class="mt-2
+       flex
+       justify-between
+       text-sm"
+>
+
+<span
+class="text-emerald-300"
+>
+NEW5 Discount
+</span>
+
+<span
+class="text-emerald-300"
+x-text="'−₹' + formatMoney(discount)"
+></span>
+
+</div>
+
+
+<div
+class="mt-5
+       flex
+       items-end
+       justify-between"
+>
+
+<div>
+
+<p
+class="text-[8px]
+       uppercase
+       tracking-[.18em]
+       font-bold
+       text-white/40"
+>
+Total Payment
+</p>
+
+<p
+class="mt-1
+       text-3xl
+       font-black
+       text-yellow-400"
+x-text="'₹' + formatMoney(total)"
+></p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+type="button"
+@click="continueToPayment()"
+:disabled="saving"
+class="payment-button
+       w-full
+       mt-6
+       py-4
+       rounded-xl
+       bg-gradient-to-r
+       from-yellow-300
+       via-yellow-400
+       to-yellow-500
+       text-[#082C3D]
+       font-black
+       text-sm
+       disabled:opacity-50"
+>
+
+<span
+x-text="saving ? 'Creating booking...' : 'Continue to UPI Payment'"
+></span>
+
+</button>
+
+
+<p
+class="mt-3
+       text-[9px]
+       text-center
+       text-white/35"
+>
+Secure booking • UPI payment
+</p>
+
+</div>
+
+</aside>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     PAYMENT MODAL
+===================================================== -->
+
+<div
+x-show="paymentOpen"
+x-cloak
+class="fixed inset-0
+       z-[100]
+       bg-black/60
+       backdrop-blur-md
+       flex items-end sm:items-center
+       justify-center"
+>
+
+<div
+@click.outside="paymentOpen=false"
+class="w-full sm:max-w-md
+       bg-white
+       rounded-t-[30px]
+       sm:rounded-[30px]
+       p-6
+       max-h-[90vh]
+       overflow-y-auto"
+>
+
+
+<div
+class="flex
+       items-center
+       justify-between"
+>
+
+<div>
+
+<p
+class="text-[9px]
+       uppercase
+       tracking-[.2em]
+       font-black
+       text-yellow-600"
+>
+Final Step
+</p>
+
+<h2
+class="mt-1
+       text-2xl
+       font-black"
+>
+Pay via UPI
+</h2>
+
+</div>
+
+
+<button
+@click="paymentOpen=false"
+class="w-10 h-10
+       rounded-xl
+       bg-gray-100
+       flex items-center
+       justify-center"
+>
+
+<svg
+class="w-5 h-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+d="M6 6l12 12M18 6L6 18"
+/>
+
+</svg>
+
+</button>
+
+</div>
+
+
+<div
+class="mt-6
+       rounded-2xl
+       bg-gray-50
+       p-5"
+>
+
+<p
+class="text-xs
+       text-gray-400"
+>
+Booking
+</p>
+
+<p
+class="mt-1
+       font-black"
+x-text="bookingCode"
+></p>
+
+
+<div
+class="mt-4
+       flex justify-between"
+>
+
+<span
+class="text-sm
+       text-gray-400"
+>
+Amount
+</span>
+
+<strong
+class="text-2xl
+       font-black
+       text-[#082C3D]"
+x-text="'₹' + formatMoney(total)"
+></strong>
+
+</div>
+
+</div>
+
+
+<a
+:href="upiUrl"
+class="mt-5
+       flex items-center
+       justify-center
+       gap-2
+       w-full
+       py-4
+       rounded-xl
+       bg-[#082C3D]
+       text-white
+       font-black"
+>
+
+<svg
+class="w-5 h-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<rect
+x="3"
+y="5"
+width="18"
+height="14"
+rx="2"
+/>
+
+<path
+d="M7 9h10M7 13h5"
+/>
+
+</svg>
+
+Open UPI App
+
+</a>
+
+
+<div class="mt-5">
+
+<label
+class="text-xs
+       font-bold
+       text-gray-600"
+>
+UPI Transaction Reference
+</label>
+
+<input
+x-model="paymentReference"
+type="text"
+placeholder="Enter UPI reference number"
+class="mt-2
+       w-full
+       px-4 py-3
+       rounded-xl
+       border border-gray-200
+       outline-none
+       focus:ring-2
+       focus:ring-yellow-400"
+>
+
+</div>
+
+
+<button
+@click="submitPaymentReference()"
+:disabled="paymentSaving"
+class="w-full
+       mt-4
+       py-4
+       rounded-xl
+       bg-emerald-600
+       text-white
+       font-black"
+>
+
+<span
+x-text="paymentSaving ? 'Saving...' : 'I Have Paid'"
+></span>
+
+</button>
+
+
+<p
+class="mt-4
+       text-[10px]
+       leading-relaxed
+       text-gray-400
+       text-center"
+>
+After payment, enter the UPI transaction reference.
+Your booking remains pending until payment is verified.
+</p>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    'https://salaxcyxgwjqemryqwkx.supabase.co';
+
+const SUPABASE_PUBLISHABLE_KEY =
+    'sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO';
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/*
+===========================================================
+PUT YOUR REAL UPI ID HERE
+===========================================================
+*/
+
+const UPI_ID =
+    'YOUR_UPI_ID@upi';
+
+
+/* =========================================================
+   BOOKING APP
+========================================================= */
+
+function bookingApp() {
+
+return {
+
+    loading:true,
+
+    error:'',
+
+    event:null,
+
+    dates:[],
+
+    pickupStops:[],
+
+    selectedDate:null,
+
+    selectedSeats:0,
+
+    pickupStopId:null,
+
+    guestCount:1,
+
+    guests:[
+        {
+            name:'',
+            phone:''
+        }
+    ],
+
+    notes:'',
+
+    couponInput:'',
+
+    couponValid:false,
+
+    couponMessage:'',
+
+    discountPercent:0,
+
+    bookingId:null,
+
+    bookingCode:'',
+
+    paymentOpen:false,
+
+    paymentReference:'',
+
+    saving:false,
+
+    paymentSaving:false,
+
+
+    /* =====================================================
+       INIT
+    ===================================================== */
+
+    async init() {
+
+        const slug =
+            this.getSlug();
+
+
+        if (!slug) {
+
+            this.error =
+                'Adventure not found.';
+
+            this.loading=false;
+
+            return;
+
+        }
+
+
+        await this.loadEvent(
+            slug
+        );
+
+    },
+
+
+    /* =====================================================
+       GET SLUG
+    ===================================================== */
+
+    getSlug() {
+
+        const path =
+            window.location.pathname;
+
+
+        /*
+         * /book=hidden-waterfall
+         */
+
+        if (
+            path.startsWith('/book=')
+        ) {
+
+            return decodeURIComponent(
+                path.substring(6)
+            );
+
+        }
+
+
+        /*
+         * Also support:
+         *
+         * ?slug=hidden-waterfall
+         */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        return params.get('slug');
+
+    },
+
+
+    /* =====================================================
+       LOAD EVENT
+    ===================================================== */
+
+    async loadEvent(slug) {
+
+        try {
+
+            const {
+                data:event,
+                error:eventError
+            } =
+                await supabaseClient
+                .from('expeditions')
+                .select('*')
+                .eq(
+                    'slug',
+                    slug
+                )
+                .eq(
+                    'is_open',
+                    true
+                )
+                .single();
+
+
+            if (eventError) {
+
+                throw eventError;
+
+            }
+
+
+            this.event =
+                event;
+
+
+            /*
+             * Dates
+             */
+
+            const {
+                data:dates,
+                error:dateError
+            } =
+                await supabaseClient
+                .from('expedition_dates')
+                .select(`
+                    id,
+                    event_date,
+                    total_seats,
+                    reserved_seats,
+                    is_open
+                `)
+                .eq(
+                    'expedition_id',
+                    event.id
+                )
+                .gte(
+                    'event_date',
+                    this.today()
+                )
+                .order(
+                    'event_date',
+                    {
+                        ascending:true
+                    }
+                );
+
+
+            if (dateError) {
+
+                throw dateError;
+
+            }
+
+
+            this.dates =
+                (dates || [])
+                .map(
+                    date => ({
+
+                        ...date,
+
+                        available:
+                            Math.max(
+                                0,
+                                Number(
+                                    date.total_seats || 0
+                                ) -
+                                Number(
+                                    date.reserved_seats || 0
+                                )
+                            )
+
+                    })
+                )
+                .filter(
+                    date =>
+                        date.is_open &&
+                        date.available > 0
+                );
+
+
+            /*
+             * Pickup stops
+             */
+
+            const {
+                data:stops,
+                error:stopError
+            } =
+                await supabaseClient
+                .from('pickup_stops')
+                .select('*')
+                .eq(
+                    'expedition_id',
+                    event.id
+                )
+                .eq(
+                    'is_active',
+                    true
+                )
+                .order(
+                    'sort_order',
+                    {
+                        ascending:true
+                    }
+                );
+
+
+            if (stopError) {
+
+                throw stopError;
+
+            }
+
+
+            this.pickupStops =
+                stops || [];
+
+
+            /*
+             * Automatically select
+             * first available date.
+             */
+
+            if (
+                this.dates.length > 0
+            ) {
+
+                this.selectDate(
+                    this.dates[0]
+                );
+
+            }
+
+
+        } catch(error) {
+
+            console.error(
+                error
+            );
+
+
+            this.error =
+                'This adventure is currently unavailable.';
+
+        }
+
+
+        this.loading=false;
+
+    },
+
+
+    /* =====================================================
+       SELECT DATE
+    ===================================================== */
+
+    selectDate(date) {
+
+        this.selectedDate =
+            date;
+
+
+        this.selectedSeats =
+            date.available;
+
+
+        if (
+            this.guestCount >
+            date.available
+        ) {
+
+            this.guestCount =
+                date.available;
+
+            this.syncGuests();
+
+        }
+
+    },
+
+
+    /* =====================================================
+       GUEST COUNT
+    ===================================================== */
+
+    changeGuests(amount) {
+
+        if (!this.selectedDate) {
+            return;
+        }
+
+
+        const next =
+            this.guestCount +
+            amount;
+
+
+        if (next < 1) {
+            return;
+        }
+
+
+        if (
+            next >
+            Math.min(
+                20,
+                this.selectedDate.available
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        this.guestCount =
+            next;
+
+
+        this.syncGuests();
+
+    },
+
+
+    syncGuests() {
+
+        while (
+            this.guests.length <
+            this.guestCount
+        ) {
+
+            this.guests.push({
+
+                name:'',
+                phone:''
+
+            });
+
+        }
+
+
+        while (
+            this.guests.length >
+            this.guestCount
+        ) {
+
+            this.guests.pop();
+
+        }
+
+    },
+
+
+    /* =====================================================
+       COUPON
+    ===================================================== */
+
+    async applyCoupon() {
+
+        this.couponMessage =
+            '';
+
+        this.couponValid =
+            false;
+
+        this.discountPercent =
+            0;
+
+
+        const code =
+            this.couponInput
+            .trim()
+            .toUpperCase();
+
+
+        if (!code) {
+
+            this.couponMessage =
+                'Enter a coupon code.';
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from('coupons')
+            .select(
+                'code,discount_percent'
+            )
+            .eq(
+                'code',
+                code
+            )
+            .eq(
+                'is_active',
+                true
+            )
+            .maybeSingle();
+
+
+        if (
+            error ||
+            !data
+        ) {
+
+            this.couponMessage =
+                'Invalid or expired coupon.';
+
+            return;
+
+        }
+
+
+        this.couponValid =
+            true;
+
+
+        this.discountPercent =
+            Number(
+                data.discount_percent
+            );
+
+
+        this.couponInput =
+            data.code;
+
+
+        this.couponMessage =
+            `${this.discountPercent}% discount applied.`;
+
+    },
+
+
+    /* =====================================================
+       CALCULATIONS
+    ===================================================== */
+
+    get subtotal() {
+
+        return (
+            Number(
+                this.event?.price || 0
+            ) *
+            this.guestCount
+        );
+
+    },
+
+
+    get discount() {
+
+        return Math.round(
+            this.subtotal *
+            this.discountPercent /
+            100 *
+            100
+        ) / 100;
+
+    },
+
+
+    get total() {
+
+        return Math.max(
+            0,
+            this.subtotal -
+            this.discount
+        );
+
+    },
+
+
+    /* =====================================================
+       VALIDATE
+    ===================================================== */
+
+    validate() {
+
+        if (!this.selectedDate) {
+
+            alert(
+                'Please select an event date.'
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            !this.pickupStopId
+        ) {
+
+            alert(
+                'Please select a pickup location.'
+            );
+
+            return false;
+
+        }
+
+
+        for (
+            let i=0;
+            i<this.guests.length;
+            i++
+        ) {
+
+            const guest =
+                this.guests[i];
+
+
+            if (
+                !guest.name.trim()
+            ) {
+
+                alert(
+                    `Enter name for Guest ${i+1}.`
+                );
+
+                return false;
+
+            }
+
+
+            if (
+                !/^[0-9]{10}$/.test(
+                    guest.phone
+                )
+            ) {
+
+                alert(
+                    `Enter a valid 10-digit mobile number for Guest ${i+1}.`
+                );
+
+                return false;
+
+            }
+
+        }
+
+
+        return true;
+
+    },
+
+
+    /* =====================================================
+       CREATE BOOKING
+    ===================================================== */
+
+    async continueToPayment() {
+
+        if (
+            !this.validate()
+        ) {
+
+            return;
+
+        }
+
+
+        this.saving =
+            true;
+
+
+        try {
+
+            const mainGuest =
+                this.guests[0];
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                .rpc(
+                    'create_pending_booking',
+                    {
+
+                        p_expedition_id:
+                            this.event.id,
+
+                        p_expedition_date_id:
+                            this.selectedDate.id,
+
+                        p_pickup_stop_id:
+                            Number(
+                                this.pickupStopId
+                            ),
+
+                        p_guest_count:
+                            this.guestCount,
+
+                        p_contact_name:
+                            mainGuest.name,
+
+                        p_contact_phone:
+                            mainGuest.phone,
+
+                        p_coupon_code:
+                            this.couponValid
+                                ? this.couponInput
+                                : null,
+
+                        p_notes:
+                            this.notes || null
+
+                    }
+                );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            this.bookingId =
+                data.booking_id;
+
+
+            this.bookingCode =
+                data.booking_code;
+
+
+            /*
+             * Save guest details.
+             */
+
+            const guestRows =
+                this.guests.map(
+                    (guest,index) => ({
+
+                        booking_id:
+                            this.bookingId,
+
+                        guest_number:
+                            index + 1,
+
+                        full_name:
+                            guest.name.trim(),
+
+                        phone:
+                            guest.phone.trim()
+
+                    })
+                );
+
+
+            const {
+                error:guestError
+            } =
+                await supabaseClient
+                .from('booking_guests')
+                .insert(
+                    guestRows
+                );
+
+
+            if (guestError) {
+
+                throw guestError;
+
+            }
+
+
+            this.paymentOpen =
+                true;
+
+
+        } catch(error) {
+
+            console.error(
+                error
+            );
+
+
+            alert(
+                error.message ||
+                'Unable to create booking.'
+            );
+
+        }
+
+
+        this.saving =
+            false;
+
+    },
+
+
+    /* =====================================================
+       UPI URL
+    ===================================================== */
+
+    get upiUrl() {
+
+        const params =
+            new URLSearchParams({
+
+                pa:
+                    UPI_ID,
+
+                pn:
+                    'Adventure Junction',
+
+                am:
+                    this.total.toFixed(2),
+
+                cu:
+                    'INR',
+
+                tn:
+                    this.bookingCode ||
+                    this.event?.title ||
+                    'Adventure Booking'
+
+            });
+
+
+        return (
+            'upi://pay?' +
+            params.toString()
+        );
+
+    },
+
+
+    /* =====================================================
+       PAYMENT REFERENCE
+    ===================================================== */
+
+    async submitPaymentReference() {
+
+        if (
+            !this.paymentReference.trim()
+        ) {
+
+            alert(
+                'Enter your UPI transaction reference.'
+            );
+
+            return;
+
+        }
+
+
+        this.paymentSaving =
+            true;
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .from('bookings')
+            .update({
+
+                payment_reference:
+                    this.paymentReference.trim()
+
+            })
+            .eq(
+                'id',
+                this.bookingId
+            );
+
+
+        if (error) {
+
+            alert(
+                'Unable to save payment reference.'
+            );
+
+            this.paymentSaving =
+                false;
+
+            return;
+
+        }
+
+
+        this.paymentSaving =
+            false;
+
+
+        alert(
+            `Booking ${this.bookingCode} submitted successfully. Payment verification is pending.`
+        );
+
+
+        window.location.href =
+            '/';
+
+    },
+
+
+    /* =====================================================
+       DATE
+    ===================================================== */
+
+    today() {
+
+        const d =
+            new Date();
+
+
+        return (
+            d.getFullYear() +
+            '-' +
+            String(
+                d.getMonth()+1
+            ).padStart(2,'0') +
+            '-' +
+            String(
+                d.getDate()
+            ).padStart(2,'0')
+        );
+
+    },
+
+
+    formatDate(date) {
+
+        if (!date) {
+            return '';
+        }
+
+
+        return new Date(
+            date + 'T00:00:00'
+        ).toLocaleDateString(
+            'en-IN',
+            {
+                weekday:'short',
+                day:'2-digit',
+                month:'short',
+                year:'numeric'
+            }
+        );
+
+    },
+
+
+    formatDateShort(date) {
+
+        if (!date) {
+            return '';
+        }
+
+
+        return new Date(
+            date + 'T00:00:00'
+        ).toLocaleDateString(
+            'en-IN',
+            {
+                day:'2-digit',
+                month:'short'
+            }
+        );
+
+    },
+
+
+    formatMoney(value) {
+
+        return Number(
+            value || 0
+        ).toLocaleString(
+            'en-IN'
+        );
+
+    }
+
+};
+
+}
+
+</script>
+
+</body>
+</html>
