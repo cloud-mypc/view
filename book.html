@@ -1930,27 +1930,29 @@ return {
 
     async init() {
 
-        const slug =
-            this.getSlug();
+    const path = window.location.pathname;
 
+    /*
+     * BOOKING ROUTE
+     *
+     * /book=lingya-waterfall
+     */
+    if (path.startsWith('/book=')) {
 
-        if (!slug) {
-
-            this.error =
-                'Adventure not found.';
-
-            this.loading=false;
-
-            return;
-
-        }
-
-
-        await this.loadEvent(
-            slug
+        const slug = decodeURIComponent(
+            path.substring(6)
         );
 
-    },
+        window.location.href =
+            '/book.html?slug=' +
+            encodeURIComponent(slug);
+
+        return;
+    }
+
+    await this.loadAdventures();
+
+            },
 
 
     /* =====================================================
@@ -1959,23 +1961,31 @@ return {
 
     getSlug() {
 
-        const path =
-            window.location.pathname;
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
+    const slug =
+        params.get('slug');
 
-        /*
-         * /book=hidden-waterfall
-         */
+    if (slug) {
+        return slug;
+    }
 
-        if (
-            path.startsWith('/book=')
-        ) {
+    const path =
+        window.location.pathname;
 
-            return decodeURIComponent(
-                path.substring(6)
-            );
+    if (path.startsWith('/book=')) {
 
-        }
+        return decodeURIComponent(
+            path.substring(6)
+        );
+
+    }
+
+    return null;
+    }
 
 
         /*
