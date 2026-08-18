@@ -1,686 +1,2004 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Adventure Junction INDIA</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Alpine.js for SPA Routing & Interactions -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- Google Fonts: Outfit for a modern, geometric, professional look -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Outfit"', 'sans-serif'] },
-                    colors: {
-                        brandDark: '#111827',
-                        brandGray: '#F3F4F6',
-                        brandAccent: '#059669', // Forest Green
-                    }
-                }
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<title>Adventure Junction</title>
+
+<!-- CRITICAL CSS: renders BEFORE external libraries -->
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    overflow-x:hidden;
+    background:#f3f4f6;
+    color:#082C3D;
+    font-family:Arial,sans-serif;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+[x-cloak]{
+    display:none!important;
+}
+
+
+/* =====================================================
+   INSTANT PAGE LOADER
+===================================================== */
+
+#pageLoader{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#f7f8f6;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+}
+
+#pageLoader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+.loaderBox{
+
+    text-align:center;
+
+}
+
+
+.loaderCube{
+
+    width:54px;
+
+    height:54px;
+
+    margin:auto;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe66d,
+            #ffc400,
+            #f0a800
+        );
+
+    box-shadow:
+        0 6px 0 #b87900,
+        0 15px 30px rgba(255,193,7,.28);
+
+    animation:
+        loaderRotate .75s
+        cubic-bezier(.4,0,.2,1)
+        infinite;
+
+}
+
+
+@keyframes loaderRotate{
+
+    0%{
+        transform:
+            perspective(400px)
+            rotateX(0)
+            rotateY(0)
+            scale(.92);
+    }
+
+    50%{
+        transform:
+            perspective(400px)
+            rotateX(180deg)
+            rotateY(25deg)
+            scale(1);
+    }
+
+    100%{
+        transform:
+            perspective(400px)
+            rotateX(360deg)
+            rotateY(0)
+            scale(.92);
+    }
+
+}
+
+
+.loaderText{
+
+    margin-top:16px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.2em;
+
+    text-transform:uppercase;
+
+    color:#082C3D;
+
+}
+
+
+/* =====================================================
+   CARD CORE CSS
+===================================================== */
+
+.event-card{
+
+    position:relative;
+
+    isolation:isolate;
+
+    overflow:hidden;
+
+    transform:translate3d(0,0,0);
+
+    border-radius:30px;
+
+    background:#061e28;
+
+    box-shadow:
+        0 12px 35px rgba(8,44,61,.12);
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        box-shadow .5s ease;
+
+}
+
+
+.event-card:hover{
+
+    transform:
+        translate3d(0,-7px,0);
+
+    box-shadow:
+        0 28px 65px rgba(8,44,61,.24);
+
+}
+
+
+.event-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:4px;
+
+    z-index:30;
+
+    pointer-events:none;
+
+    border-radius:27px;
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+}
+
+
+.event-image{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    transition:
+        transform 1s cubic-bezier(.16,1,.3,1),
+        opacity .45s ease;
+
+}
+
+
+.event-card:hover .event-image{
+
+    transform:scale(1.055);
+
+}
+
+
+.low-image{
+
+    opacity:1;
+
+}
+
+
+.high-image{
+
+    opacity:0;
+
+}
+
+
+.high-image.loaded{
+
+    opacity:1;
+
+}
+
+
+.event-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.23),
+            rgba(0,0,0,.02) 38%,
+            rgba(3,18,25,.15) 54%,
+            rgba(3,18,25,.78) 78%,
+            rgba(3,18,25,.98)
+        );
+
+}
+
+
+.category-pill{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:8px 13px;
+
+    border-radius:999px;
+
+    background:rgba(6,29,39,.86);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    backdrop-filter:blur(16px);
+
+    -webkit-backdrop-filter:blur(16px);
+
+}
+
+
+.availability-pill{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:8px 12px;
+
+    border-radius:999px;
+
+    background:rgba(3,39,29,.86);
+
+    border:1px solid rgba(111,255,194,.24);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+.availability-low{
+
+    background:rgba(84,36,12,.9);
+
+    border-color:rgba(255,190,90,.28);
+
+}
+
+
+.availability-dot{
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:#5ff0ae;
+
+    box-shadow:
+        0 0 10px rgba(95,240,174,.85);
+
+}
+
+
+.availability-low .availability-dot{
+
+    background:#ffc15c;
+
+    box-shadow:
+        0 0 10px rgba(255,193,92,.75);
+
+}
+
+
+.bottom-panel{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,30,.96),
+            rgba(7,36,47,.94)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+}
+
+
+.book-button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:12px 17px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe66d,
+            #ffc400,
+            #f0a800
+        );
+
+    color:#071b24;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    box-shadow:
+        0 5px 0 #b87900,
+        0 10px 22px rgba(255,193,7,.25);
+
+}
+
+
+.card-enter{
+
+    animation:
+        cardEnter .5s
+        cubic-bezier(.16,1,.3,1)
+        both;
+
+}
+
+
+@keyframes cardEnter{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(15px)
+            scale(.985);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@media(max-width:640px){
+
+    .event-card{
+
+        aspect-ratio:4/5.25;
+
+    }
+
+}
+
+</style>
+
+
+<!-- Tailwind loaded AFTER page can render -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+
+tailwind.config={
+
+    theme:{
+
+        extend:{
+
+            fontFamily:{
+                sans:['"Outfit"','Arial','sans-serif']
+            },
+
+            colors:{
+
+                brandDark:'#111827',
+
+                brandGray:'#F3F4F6',
+
+                brandAccent:'#059669'
+
             }
+
         }
-    </script>
-    <style>
-        [x-cloak] { display: none !important; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .modal-enter { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-    </style>
+
+    }
+
+};
+
+</script>
+
+
+<link
+href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
 </head>
-<body class="bg-brandGray text-brandDark font-sans antialiased" x-data="adventureApp()">
 
-    <!-- TOP NAVIGATION -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-40 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Brand / Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer group" @click="goHome()">
-                    <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center border-2 border-yellow-400 overflow-hidden relative">
-                        <svg class="w-6 h-6 text-brandDark absolute bottom-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <div>
-                        <h1 class="text-lg font-extrabold tracking-tight leading-none group-hover:text-brandAccent transition-colors">AdventureJunction</h1>
-                        <span class="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">INDIA</span>
-                    </div>
-                </div>
-                
-                <!-- Nav Links & Social -->
-                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-600">
-                    <a href="#expeditions" class="hover:text-brandAccent transition-colors">Expeditions</a>
-                    <a href="#how-it-works" class="hover:text-brandAccent transition-colors">How It Works</a>
-                    <a href="#about" class="hover:text-brandAccent transition-colors">About Us</a>
-                </div>
 
-                <a href="https://www.instagram.com/adventure__junction" target="_blank" class="p-2 text-gray-500 hover:text-brandDark transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                </a>
-            </div>
-        </div>
-    </nav>
+<body
+class="bg-brandGray text-brandDark font-sans antialiased"
+x-data="adventureApp()"
+x-init="init()"
+>
 
-    <!-- MAIN WRAPPER -->
-    <main class="pt-16 pb-12 min-h-screen">
 
-        <!-- ========================================== -->
-        <!-- VIEW 1: HOME PAGE                          -->
-        <!-- ========================================== -->
-        <div x-show="view === 'home'" x-transition.opacity.duration.500ms>
-            
-            <!-- Hero Banner -->
-            <header class="relative bg-brandDark text-white overflow-hidden">
-                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40"></div>
-                <div class="relative max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center">
-                    <span class="px-4 py-1.5 rounded-full border border-white/35 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm bg-white/10">
-                        Maharashtra | Mumbai • Pune • Lonavala
-                    </span>
-                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 max-w-3xl">
-                        Exploring India's Hidden Forts & History
-                    </h2>
-                    <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mb-8">
-                        Trekking • Climbing • Rappelling. Discover places with no crowd around, managed by our certified technical team.
-                    </p>
-                    <a href="#expeditions" class="bg-brandAccent hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition-transform hover:-translate-y-0.5">
-                        Explore Expeditions
-                    </a>
-                </div>
-            </header>
+<!-- =====================================================
+     INSTANT LOADER
+===================================================== -->
 
-            <!-- Adventures Grid -->
-            <section id="expeditions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-                <div class="flex items-center justify-between mb-8 md:mb-12">
-                    <div>
-                        <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-1">Bookings Open</span>
-                        <h3 class="text-2xl md:text-3xl font-bold tracking-tight">Upcoming Expeditions</h3>
-                    </div>
-                </div>
+<div id="pageLoader">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <template x-for="ad in adventures" :key="ad.id">
-                        <div @click="openAdventure(ad)" class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 flex flex-col h-full">
-                            <div class="relative h-64 overflow-hidden">
-                                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
-                                <img :src="ad.img" :alt="ad.title" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute top-4 left-4 z-20 flex space-x-2">
-                                    <span class="bg-white/90 backdrop-blur-sm text-brandDark text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="ad.category"></span>
-                                </div>
-                                <div class="absolute bottom-4 left-4 z-20">
-                                    <span class="bg-brandDark/80 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-xl" x-text="'₹' + ad.price"></span>
-                                </div>
-                            </div>
-                            
-                            <div class="p-6 flex-1 flex flex-col">
-                                <h4 class="text-xl font-bold mb-2 group-hover:text-brandAccent transition-colors" x-text="ad.title"></h4>
-                                <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-                                    <span class="flex items-center space-x-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                        <span x-text="ad.location"></span>
-                                    </span>
-                                </div>
-                                <p class="text-gray-600 text-sm line-clamp-2 mt-auto" x-text="ad.shortDesc"></p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </section>
+    <div class="loaderBox">
 
-            <!-- HOW IT WORKS SECTION -->
-            <section id="how-it-works" class="bg-white py-20 border-y border-gray-200">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center max-w-2xl mx-auto mb-16">
-                        <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-2">Simple Process</span>
-                        <h3 class="text-3xl font-extrabold text-brandDark tracking-tight">How Adventure Junction Works</h3>
-                        <p class="text-gray-600 mt-2">From booking your slot to conquering the peak, here is how we make your expedition safe and seamless.</p>
-                    </div>
+        <div class="loaderCube"></div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
-                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">1</div>
-                            <h4 class="text-xl font-bold mb-3">Choose & Register</h4>
-                            <p class="text-sm text-gray-600 leading-relaxed">Select your preferred adventure, check batch dates, pick your pickup location, and secure your slot instantly online.</p>
-                        </div>
-                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
-                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">2</div>
-                            <h4 class="text-xl font-bold mb-3">Prep & Reporting</h4>
-                            <p class="text-sm text-gray-600 leading-relaxed">Receive exact reporting details and guidelines. Board our private transit from designated pickup points across Pune/Mumbai.</p>
-                        </div>
-                        <div class="bg-brandGray p-8 rounded-3xl relative border border-gray-100 flex flex-col items-center text-center">
-                            <div class="w-14 h-14 bg-brandAccent text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-emerald-900/10">3</div>
-                            <h4 class="text-xl font-bold mb-3">Conquer & Celebrate</h4>
-                            <p class="text-sm text-gray-600 leading-relaxed">Experience thrilling technical rappelling or climbing under expert supervision, enjoy authentic meals, and take home memories.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ABOUT US SECTION -->
-            <section id="about" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-brandDark text-white rounded-3xl p-8 md:p-16 overflow-hidden relative">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center opacity-15"></div>
-                    <div class="relative z-10 max-w-3xl">
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">About Adventure Junction</span>
-                        <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">Engineered for Thrill, Backed by Safety</h3>
-                        <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6 font-light">
-                            Adventure Junction India is dedicated to exploring uncharted terrains, historic forts, and hidden waterfalls across the Sahyadris. We specialize in high-endurance activities like waterfall rappelling, valley crossing, and technical rock climbing.
-                        </p>
-                        <p class="text-gray-300 text-base md:text-lg leading-relaxed font-light">
-                            Every expedition is rigorously managed by certified technical mountaineers, equipped with professional-grade safety gear, ensuring that adventure seekers can experience raw nature without compromising security.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
+        <div class="loaderText">
+            Adventure Junction
         </div>
 
-        <!-- ========================================== -->
-        <!-- VIEW 2: ADVENTURE DETAIL PAGE              -->
-        <!-- ========================================== -->
-        <div x-show="view === 'detail'" x-cloak x-transition.opacity.duration.500ms class="bg-white">
-            <template x-if="activeAd">
-                <div>
-                    <!-- Detail Hero -->
-                    <div class="relative w-full h-[50vh] md:h-[60vh] bg-black">
-                        <img :src="activeAd.img" class="absolute inset-0 w-full h-full object-cover opacity-70">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brandDark to-transparent"></div>
-                        
-                        <button @click="goHome()" class="absolute top-6 left-4 md:left-8 z-20 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        </button>
-                        
-                        <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 md:pb-16 max-w-7xl mx-auto">
-                            <span class="inline-block px-3 py-1 bg-brandAccent text-white text-xs font-bold uppercase tracking-wider rounded-md mb-3" x-text="activeAd.category"></span>
-                            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-2" x-text="activeAd.title"></h1>
-                            <div class="flex items-center space-x-3 text-sm text-gray-300 font-medium">
-                                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> <span x-text="activeAd.date"></span></span>
-                                <span>•</span>
-                                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg> <span x-text="activeAd.location"></span></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Layout -->
-                    <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 flex flex-col lg:flex-row gap-10">
-                        
-                        <!-- Left Column: Details -->
-                        <div class="w-full lg:w-2/3 space-y-10">
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-brandGray p-4 rounded-2xl">
-                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Grade</span>
-                                    <span class="font-bold text-brandDark" x-text="activeAd.grade"></span>
-                                </div>
-                                <div class="bg-brandGray p-4 rounded-2xl">
-                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Endurance</span>
-                                    <span class="font-bold text-brandDark" x-text="activeAd.endurance"></span>
-                                </div>
-                                <div class="bg-brandGray p-4 rounded-2xl" x-show="activeAd.height">
-                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Height</span>
-                                    <span class="font-bold text-brandDark" x-text="activeAd.height"></span>
-                                </div>
-                                <div class="bg-brandGray p-4 rounded-2xl">
-                                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold block mb-1">Fee</span>
-                                    <span class="font-bold text-brandDark" x-text="'₹' + activeAd.price"></span>
-                                </div>
-                            </div>
-
-                            <div class="prose prose-lg max-w-none text-gray-600">
-                                <p x-text="activeAd.fullDesc"></p>
-                            </div>
-
-                            <div>
-                                <h3 class="text-2xl font-bold mb-5 flex items-center"><svg class="w-6 h-6 mr-2 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Inclusions</h3>
-                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <template x-for="item in activeAd.inclusions">
-                                        <li class="flex items-start space-x-3 p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
-                                            <svg class="w-5 h-5 text-brandAccent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                            <span class="text-gray-700 text-sm font-medium" x-text="item"></span>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-
-                            <div x-show="activeAd.schedule.length > 0">
-                                <h3 class="text-2xl font-bold mb-6 flex items-center"><svg class="w-6 h-6 mr-2 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Itinerary</h3>
-                                <div class="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
-                                    <template x-for="(event, index) in activeAd.schedule">
-                                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                                            <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-brandAccent text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-[3px] md:ml-0"></div>
-                                            <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-brandGray p-4 rounded-2xl shadow-sm border border-gray-100">
-                                                <div class="flex items-center justify-between mb-1">
-                                                    <div class="font-bold text-brandDark" x-text="event.time"></div>
-                                                </div>
-                                                <div class="text-sm text-gray-600" x-text="event.activity"></div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 class="text-2xl font-bold mb-5 flex items-center"><svg class="w-6 h-6 mr-2 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> Important Guidelines</h3>
-                                <div class="bg-red-50 border border-red-100 p-5 rounded-2xl mb-4" x-show="activeAd.warning">
-                                    <p class="text-sm text-red-800 font-semibold flex items-start">
-                                        <svg class="w-5 h-5 mr-2 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                        <span x-text="activeAd.warning"></span>
-                                    </p>
-                                </div>
-                                <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
-                                    <template x-for="rule in activeAd.rules">
-                                        <li x-text="rule"></li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Right Column: Sticky Booking Widget (Desktop) -->
-                        <div class="hidden lg:block w-full lg:w-1/3">
-                            <div class="sticky top-24 bg-white border border-gray-200 shadow-xl rounded-3xl p-6">
-                                <div class="mb-6 pb-6 border-b border-gray-100">
-                                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">Total Fee</p>
-                                    <div class="flex items-end space-x-2">
-                                        <h4 class="text-4xl font-extrabold text-brandDark" x-text="'₹' + activeAd.price"></h4>
-                                        <span class="text-gray-500 pb-1">/ person</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-4 mb-6 text-sm text-gray-600">
-                                    <div class="flex justify-between items-center"><span class="flex items-center"><svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Duration:</span> <span class="font-semibold text-brandDark">1 Day</span></div>
-                                    <div class="flex justify-between items-center"><span class="flex items-center"><svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Group Size:</span> <span class="font-semibold text-brandDark">Limited</span></div>
-                                </div>
-                                <button @click="openModal()" class="w-full bg-brandDark hover:bg-black text-white py-4 rounded-xl font-bold text-lg transition-transform transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-black/20 flex justify-center items-center">
-                                    Book Tickets Now
-                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </template>
-        </div>
-
-    </main>
-
-    <!-- FOOTER WITH TRIP SUCCESS GALLERY & REVIEWS -->
-    <footer class="bg-brandDark text-white pt-16 pb-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Success Gallery / Trip Highlights -->
-            <div class="mb-16">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-1">Success Stories</span>
-                        <h3 class="text-2xl md:text-3xl font-bold">Recent Expedition Moments</h3>
-                    </div>
-                    <p class="text-sm text-gray-400 mt-2 md:mt-0">Captured live from our recent successful batch events across Maharashtra.</p>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="relative h-48 rounded-2xl overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Trek success">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Waterfall Rappelling Batch</span></div>
-                    </div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Summit success">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Sahyadri Ridge Trek</span></div>
-                    </div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Camp success">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Base Camp Morning</span></div>
-                    </div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Explorer group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4"><span class="text-xs font-semibold text-white">Team Summit Victory</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Main Content -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-gray-800 text-sm text-gray-400">
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center border-2 border-yellow-400 overflow-hidden relative">
-                            <svg class="w-5 h-5 text-brandDark absolute bottom-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        </div>
-                        <span class="text-white font-extrabold text-lg tracking-tight">AdventureJunction INDIA</span>
-                    </div>
-                    <p class="max-w-sm mb-4">Your trusted partner for expert-guided technical treks, waterfall rappelling, and hidden historical fort explorations across Maharashtra.</p>
-                </div>
-                <div>
-                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Quick Links</h5>
-                    <ul class="space-y-2">
-                        <li><a @click="goHome()" href="#expeditions" class="hover:text-white transition-colors">Expeditions</a></li>
-                        <li><a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a></li>
-                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Connect</h5>
-                    <p class="mb-2">Helpline / UPI: <strong>7038347776</strong></p>
-                    <a href="https://www.instagram.com/adventure__junction" target="_blank" class="inline-flex items-center space-x-2 text-white hover:text-emerald-400 transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                        <span>Instagram Community</span>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-                <p>&copy; 2026 Adventure Junction India. All rights reserved.</p>
-                <p class="mt-2 sm:mt-0">Certified Technical Team & Professional Safety Guides.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- MOBILE FLOATING BOOKING BAR -->
-    <div x-show="view === 'detail' && activeAd" x-cloak class="lg:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 p-4 pb-6 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-30">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-xs text-gray-500 font-medium">Fee</p>
-                <p class="text-xl font-extrabold text-brandDark" x-text="activeAd ? '₹' + activeAd.price : ''"></p>
-            </div>
-            <button @click="openModal()" class="bg-brandDark text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-black/20">
-                Book Now
-            </button>
-        </div>
     </div>
 
-    <!-- CUSTOM BOOKING MODAL -->
-    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-300">
-        <div @click.away="closeModal()" class="w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl relative flex flex-col max-h-[90vh] modal-enter">
-            
-            <button @click="closeModal()" class="absolute top-5 right-5 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-600 transition-colors z-10">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
+</div>
 
-            <div class="p-6 pb-4 border-b border-gray-100 shrink-0">
-                <span class="text-xs font-bold text-brandAccent uppercase tracking-widest block mb-1">Registration</span>
-                <h2 class="text-2xl font-bold text-brandDark pr-8 leading-tight" x-text="activeAd ? activeAd.title : ''"></h2>
-            </div>
 
-            <div class="p-6 overflow-y-auto no-scrollbar space-y-6">
-                
-                <!-- CUSTOM TICKET COUNTER -->
-                <div class="bg-brandGray p-5 rounded-2xl flex items-center justify-between border border-gray-200">
-                    <div>
-                        <h4 class="font-bold text-brandDark text-sm">Number of Tickets</h4>
-                        <p class="text-xs text-gray-500 mt-1">Book for friends & family</p>
-                    </div>
-                    <div class="flex items-center bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button @click="tickets > 1 ? tickets-- : null" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-brandDark transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
-                        </button>
-                        <div class="w-10 h-10 flex items-center justify-center font-bold text-brandDark bg-gray-50 border-x border-gray-200 text-lg" x-text="tickets"></div>
-                        <button @click="tickets++" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-brandDark transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                        </button>
-                    </div>
-                </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Lead Trekker Name</label>
-                        <input type="text" placeholder="Full Name" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark focus:outline-none focus:border-brandAccent focus:ring-1 focus:ring-brandAccent transition-all shadow-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">WhatsApp / Phone Number</label>
-                        <input type="tel" placeholder="+91" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark focus:outline-none focus:border-brandAccent focus:ring-1 focus:ring-brandAccent transition-all shadow-sm">
-                    </div>
-                </div>
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-                <!-- CUSTOM DROPDOWN: Date -->
-                <div class="relative" x-data="{ open: false }">
-                    <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Select Batch</label>
-                    <div @click="open = !open" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark flex items-center justify-between cursor-pointer hover:border-gray-400 transition-all shadow-sm">
-                        <span x-text="formDate"></span>
-                        <svg class="w-4 h-4 text-gray-400 transform transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                    </div>
-                    <div x-show="open" @click.away="open = false" x-transition class="absolute left-0 right-0 mt-1 bg-white rounded-xl overflow-hidden z-20 border border-gray-200 shadow-xl py-1">
-                        <template x-for="d in activeAd?.dates" :key="d">
-                            <div @click="formDate = d; open = false" class="px-4 py-2.5 text-sm hover:bg-gray-50 cursor-pointer transition-colors text-gray-700" x-text="d"></div>
-                        </template>
-                    </div>
-                </div>
+<nav
+x-data="{mobileOpen:false,scrolled:false}"
+@scroll.window="scrolled=window.scrollY>20"
+:class="scrolled?'bg-white/95 shadow-lg shadow-black/5':'bg-white/80'"
+class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-black/5 transition-all duration-300"
+>
 
-                <!-- CUSTOM DROPDOWN: Pickup Location -->
-                <div class="relative" x-data="{ open: false }">
-                    <label class="block text-xs font-semibold text-gray-700 mb-1.5 ml-1">Pickup Point</label>
-                    <div @click="open = !open" class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-sm text-brandDark flex items-center justify-between cursor-pointer hover:border-gray-400 transition-all shadow-sm">
-                        <span x-text="formPickup"></span>
-                        <svg class="w-4 h-4 text-gray-400 transform transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                    </div>
-                    <div x-show="open" @click.away="open = false" x-transition class="absolute left-0 right-0 mt-1 bg-white rounded-xl overflow-hidden z-20 border border-gray-200 shadow-xl py-1 max-h-40 overflow-y-auto">
-                        <template x-for="p in activeAd?.pickups" :key="p">
-                            <div @click="formPickup = p; open = false" class="px-4 py-2.5 text-sm hover:bg-gray-50 cursor-pointer transition-colors text-gray-700" x-text="p"></div>
-                        </template>
-                    </div>
-                </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start space-x-3">
-                    <svg class="w-5 h-5 text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <div class="text-xs text-blue-800 leading-relaxed">
-                        <span class="font-bold block mb-1">GPay / PhonePe Payment</span>
-                        Transfer total amount to <strong>7038347776</strong>. Your seats will be confirmed immediately after successful payment verification.
-                    </div>
-                </div>
+<div class="h-[72px] flex items-center justify-between">
 
-            </div>
 
-            <div class="p-4 md:p-6 bg-white border-t border-gray-100 shrink-0 rounded-b-3xl flex items-center justify-between">
-                <div>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Total Amount</p>
-                    <p class="text-2xl font-extrabold text-brandDark" x-text="'₹' + (activeAd ? activeAd.price * tickets : 0)"></p>
-                </div>
-                <button @click="submitForm()" class="bg-brandDark hover:bg-black text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-black/20 transition-all flex items-center">
-                    Pay via UPI
-                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
+<button
+@click="goHome();mobileOpen=false"
+class="group flex items-center gap-3 text-left"
+>
 
-        </div>
+<div
+    class="relative w-11 h-11 sm:w-12 sm:h-12 shrink-0"
+>
+
+    <!-- Subtle glow -->
+    <div
+        class="absolute inset-0 rounded-full
+               bg-yellow-400/20 blur-md
+               opacity-0 group-hover:opacity-100
+               transition-opacity duration-300"
+    ></div>
+
+
+    <!-- Logo frame -->
+    <div
+        class="relative w-full h-full
+               rounded-full overflow-hidden
+               bg-[#092C3D]
+               ring-1 ring-black/10
+               group-hover:ring-yellow-400
+               transition-all duration-300
+               group-hover:scale-105"
+    >
+
+        <!--
+        LOW QUALITY
+        Loads immediately.
+        IMPORTANT:
+        Make sure this exact file exists:
+        /view/images/low/Icon.png
+        -->
+
+        <img
+            src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
+            alt="Adventure Junction India"
+            width="48"
+            height="48"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            class="absolute inset-0
+                   w-full h-full
+                   object-cover"
+            onerror="
+                this.onerror=null;
+                this.src='https://cloud-mypc.github.io/view/images/low/icon.png';
+            "
+        >
+
+
+        <!--
+        HIGH QUALITY
+        Loaded independently.
+        -->
+
+        <img
+            src="https://cloud-mypc.github.io/view/images/Icon.png"
+            alt=""
+            width="48"
+            height="48"
+            loading="eager"
+            decoding="async"
+            class="absolute inset-0
+                   w-full h-full
+                   object-cover
+                   opacity-0
+                   transition-opacity duration-500"
+            onload="
+                this.classList.remove('opacity-0');
+                this.classList.add('opacity-100');
+            "
+        >
+
     </div>
 
-    <!-- Success Toast -->
-    <div x-show="toastOpen" x-cloak x-transition class="fixed top-20 right-4 z-50 bg-brandDark text-white px-5 py-4 rounded-xl shadow-2xl flex items-center space-x-3 border border-gray-700">
-        <svg class="w-5 h-5 text-brandAccent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        <span class="text-sm font-semibold">Redirecting to Payment Gateway...</span>
-    </div>
+</div>
 
-    <!-- ALPINE JS LOGIC & DATA -->
-    <script>
-        function adventureApp() {
-            return {
-                view: 'home',
-                activeAd: null,
-                modalOpen: false,
-                toastOpen: false,
-                tickets: 1,
-                formDate: '',
-                formPickup: '',
 
-                adventures: [
-                    {
-                        id: 'hidden-waterfall',
-                        category: 'Rappelling',
-                        title: 'Hidden Waterfall Rappelling',
-                        price: 2500,
-                        date: '15 / 16 Aug 2026',
-                        location: 'Near Pune & Lonavala',
-                        grade: 'Easy',
-                        endurance: 'Medium',
-                        height: '120ft',
-                        img: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'Experience this thrilling adventure activity at a beautifully hidden waterfall with no crowd around, managed by our best certified technical team.',
-                        fullDesc: 'Adventure Junction invites you all to experience this Thrilling Adventure activity at a beautifully Hidden Waterfall with no crowd around and managed by our best Certified Technical Team. Unplug from the city and descend down a roaring 120ft cascade in pristine nature.',
-                        dates: ['15 August 2026', '16 August 2026'],
-                        pickups: ['JM Road - 5:30 AM', 'Wakad - 6:00 AM', 'Mukai Chouk - 6:15 AM', 'Direct at Base Village - 8:30 AM'],
-                        inclusions: [
-                            'Bus transportation (Pune & Mumbai)',
-                            'Waterfall Rappelling (120ft)',
-                            'Best Certified Technical Team & Gear',
-                            'Breakfast & Tea',
-                            'Veg Lunch (Non-veg ₹100 extra)',
-                            'Basic First Aid & Forest charges',
-                            'Guidance and expertise'
-                        ],
-                        schedule: [
-                            { time: '5:30 AM', activity: 'Depart from JM Road by private bus' },
-                            { time: '8:30 AM', activity: 'Reach base village & Have breakfast' },
-                            { time: '10:00 AM', activity: 'Start the adventurous trek towards the Waterfall' },
-                            { time: '11:30 AM', activity: 'Reach top of the waterfall & start Rappelling' },
-                            { time: '3:00 PM', activity: 'Return trek to base village and have lunch' },
-                            { time: '5:00 PM', activity: 'Depart from base village back to Pune' },
-                            { time: '8:00 PM', activity: 'Reach Pune with loads of memories' }
-                        ],
-                        warning: 'Please avoid perfumes as there are wild honeybees in the jungle. Perfume can make them excited and can be fatal.',
-                        rules: [
-                            'Please cut your toenails before the trek.',
-                            'Carry regular medicines (if required).',
-                            'Carry trekking/sports shoes with good grip.',
-                            'Smoking and drinking alcohol are strictly prohibited.',
-                            'Do not wear jewelry or carry valuables.'
-                        ]
-                    },
-                    {
-                        id: 'jivdhan',
-                        category: 'Valley Crossing',
-                        title: 'Jivdhan Valley Crossing & Rappelling',
-                        price: 2800,
-                        date: 'Upcoming',
-                        location: 'Naneghat Region',
-                        grade: 'Moderate',
-                        endurance: 'High',
-                        height: '350ft',
-                        img: 'https://images.unsplash.com/photo-1522362391807-6f02271871de?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'A massive 350ft valley crossing followed by a thrilling rappel down the historic walls of Jivdhan fort.',
-                        fullDesc: 'Conquer the daunting heights of Jivdhan Fort with our specialized technical gear. Experience the rush of traversing the valley gap and abseiling down sheer rock faces.',
-                        dates: ['Select Batch'],
-                        pickups: ['Pune - Shivaji Nagar', 'Kalyan Station'],
-                        inclusions: ['Transport', 'Technical Gear', 'Meals', 'Expert Guide'],
-                        schedule: [],
-                        warning: 'Requires basic fitness level.',
-                        rules: ['Proper trekking shoes mandatory', 'No alcohol']
-                    },
-                    {
-                        id: 'dukes-nose',
-                        category: 'Rappelling',
-                        title: "Duke's Nose Valley Crossing & Rappelling",
-                        price: 2200,
-                        date: 'Upcoming',
-                        location: 'Lonavala',
-                        grade: 'Moderate',
-                        endurance: 'Medium',
-                        height: '300ft',
-                        img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'Rappel down the iconic Duke\'s Nose cliff edge with panoramic views of the Sahyadri ranges.',
-                        fullDesc: 'Duke\'s Nose (Nagphani) offers a heart-pumping 300ft rappel. Let our experts guide you down safely while you soak in the spectacular views of the valley below.',
-                        dates: ['Select Batch'],
-                        pickups: ['Lonavala Station', 'Pune Pickup'],
-                        inclusions: ['Safety Harness & Gear', 'Breakfast', 'Certified Guide'],
-                        schedule: [],
-                        warning: '',
-                        rules: ['No loose clothing', 'Follow instructor commands strictly']
-                    },
-                    {
-                        id: 'tail-baila',
-                        category: 'Climbing',
-                        title: 'Tail Baila Climbing & Rappelling',
-                        price: 3200,
-                        date: 'Upcoming',
-                        location: 'Mulshi / Lonavala',
-                        grade: 'Hard',
-                        endurance: 'High',
-                        height: 'Multi-pitch',
-                        img: 'https://images.unsplash.com/photo-1563299796-17596c35a7ea?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'Take on the colossal dykes of Tail Baila. Multi-pitch rock climbing suitable for adventure enthusiasts.',
-                        fullDesc: 'Tail Baila is famous for its massive rock walls. This event is designed for serious thrill-seekers ready to learn and execute multi-pitch climbing techniques.',
-                        dates: ['Select Batch'],
-                        pickups: ['Pune Center', 'Lonavala'],
-                        inclusions: ['Climbing Shoes', 'Ropes/Carabiners', 'Expert Lead Climber'],
-                        schedule: [],
-                        warning: 'Prior climbing experience is recommended but not mandatory.',
-                        rules: ['High endurance required', 'Strict discipline on the rock']
-                    },
-                    {
-                        id: 'lingana',
-                        category: 'Climbing',
-                        title: 'Lingana Climbing & Rappelling',
-                        price: 3500,
-                        date: 'Upcoming',
-                        location: 'Raigad Region',
-                        grade: 'Extreme',
-                        endurance: 'Very High',
-                        height: '1000ft+',
-                        img: 'https://images.unsplash.com/photo-1516616370751-86d6bd8b0651?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'The ultimate Sahyadri challenge. Climb the formidable Lingana pinnacle and rappel down 1000+ feet.',
-                        fullDesc: 'Lingana is known as one of the toughest treks and climbs in Maharashtra. Test your limits with a gruelling night trek followed by an epic climb.',
-                        dates: ['Select Batch'],
-                        pickups: ['Pune', 'Mumbai'],
-                        inclusions: ['Transport', 'Advanced Climbing Gear', '2 Meals', 'First Aid'],
-                        schedule: [],
-                        warning: 'Only for physically fit individuals. Medical check may be requested.',
-                        rules: ['Strictly no beginners', 'Mental toughness required']
-                    },
-                    {
-                        id: 'kokankada',
-                        category: 'Rappelling',
-                        title: "India's Highest Rappelling Kokankada",
-                        price: 5000,
-                        date: 'Upcoming',
-                        location: 'Harishchandragad',
-                        grade: 'Extreme',
-                        endurance: 'High',
-                        height: '1800ft',
-                        img: 'https://images.unsplash.com/photo-1627884873719-7d0c89ecb715?q=80&w=1200&auto=format&fit=crop',
-                        shortDesc: 'Abseil down the legendary overhanging cliff of Kokankada. A multi-stage 1800ft massive rappel.',
-                        fullDesc: 'The crown jewel of Indian adventure. Rappel down the massive 1800ft overhanging Konkankada wall in stages. An experience that will test your courage and leave you mesmerized.',
-                        dates: ['Select Batch'],
-                        pickups: ['Pune', 'Kalyan'],
-                        inclusions: ['Stay', 'Transport', 'All technical logistics', 'Meals'],
-                        schedule: [],
-                        warning: 'Not for the faint-hearted. Vertigo patients strictly prohibited.',
-                        rules: ['Must have done at least 1 previous 300ft rappel']
-                    }
-                ],
+<div class="leading-none">
 
-                goHome() {
-                    window.scrollTo(0, 0);
-                    this.view = 'home';
-                    setTimeout(() => { this.activeAd = null; }, 500);
-                },
+<div class="flex items-center gap-1.5">
 
-                openAdventure(ad) {
-                    this.activeAd = ad;
-                    this.formDate = ad.dates[0];
-                    this.formPickup = ad.pickups[0];
-                    this.tickets = 1;
-                    window.scrollTo(0, 0);
-                    this.view = 'detail';
-                },
+<h1
+class="text-[17px] sm:text-[19px] font-extrabold tracking-[-0.03em] text-[#092C3D]"
+>
+Adventure Junction
+</h1>
 
-                openModal() {
-                    this.modalOpen = true;
-                },
-                
-                closeModal() {
-                    this.modalOpen = false;
-                },
+<span
+class="hidden sm:block w-1.5 h-1.5 rounded-full bg-yellow-400 mt-1"
+></span>
 
-                submitForm() {
-                    this.closeModal();
-                    this.toastOpen = true;
-                    setTimeout(() => { this.toastOpen = false; }, 4000);
-                }
+</div>
+
+
+<p
+class="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.22em] font-bold text-gray-400"
+>
+Climbing • Rappelling
+</p>
+
+</div>
+
+</button>
+
+
+
+<div class="hidden lg:flex items-center gap-1">
+
+<a
+href="#expeditions"
+class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-gray-600 hover:text-[#092C3D] hover:bg-gray-50 transition-all"
+>
+Expeditions
+</a>
+
+<a
+href="#how-it-works"
+class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-gray-600 hover:text-[#092C3D] hover:bg-gray-50 transition-all"
+>
+How It Works
+</a>
+
+<a
+href="#about"
+class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-gray-600 hover:text-[#092C3D] hover:bg-gray-50 transition-all"
+>
+About Us
+</a>
+
+</div>
+
+
+
+<div class="flex items-center gap-2 sm:gap-3">
+
+<a
+href="https://www.instagram.com/adventure__junction"
+target="_blank"
+rel="noopener noreferrer"
+class="hidden sm:flex w-10 h-10 items-center justify-center rounded-xl text-gray-500 hover:text-[#092C3D] hover:bg-gray-100 transition-all"
+>
+
+<svg
+class="w-[19px] h-[19px]"
+fill="none"
+stroke="currentColor"
+stroke-width="1.8"
+viewBox="0 0 24 24"
+>
+
+<rect
+x="3"
+y="3"
+width="18"
+height="18"
+rx="5"
+></rect>
+
+<circle
+cx="12"
+cy="12"
+r="4"
+></circle>
+
+<circle
+cx="17.5"
+cy="6.5"
+r="1"
+fill="currentColor"
+stroke="none"
+></circle>
+
+</svg>
+
+</a>
+
+
+<a
+href="#expeditions"
+class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#092C3D] text-white text-[12px] font-bold shadow-sm hover:bg-[#0d4056] hover:-translate-y-0.5 transition-all"
+>
+
+Explore
+
+<svg
+class="w-3.5 h-3.5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M5 12h14M13 6l6 6-6 6"
+/>
+
+</svg>
+
+</a>
+
+
+<button
+@click="mobileOpen=!mobileOpen"
+class="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center bg-gray-50 text-[#092C3D]"
+>
+
+<svg
+x-show="!mobileOpen"
+class="w-5 h-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M4 7h16M4 12h16M4 17h16"
+/>
+
+</svg>
+
+
+<svg
+x-show="mobileOpen"
+x-cloak
+class="w-5 h-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+viewBox="0 0 24 24"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M6 6l12 12M18 6L6 18"
+/>
+
+</svg>
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div
+x-show="mobileOpen"
+x-cloak
+x-transition
+class="lg:hidden pb-4"
+>
+
+<div
+class="rounded-2xl bg-white border border-gray-100 shadow-xl p-2"
+>
+
+<a
+href="#expeditions"
+@click="mobileOpen=false"
+class="block px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700"
+>
+Expeditions
+</a>
+
+<a
+href="#how-it-works"
+@click="mobileOpen=false"
+class="block px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700"
+>
+How It Works
+</a>
+
+<a
+href="#about"
+@click="mobileOpen=false"
+class="block px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700"
+>
+About Us
+</a>
+
+<a
+href="https://www.instagram.com/adventure__junction"
+target="_blank"
+rel="noopener noreferrer"
+class="block px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700"
+>
+Instagram
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="pt-16 pb-12 min-h-screen">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header
+class="relative bg-brandDark text-white overflow-hidden"
+>
+
+<div
+class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40"
+></div>
+
+
+<div
+class="relative max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center"
+>
+<br>
+<span
+class="px-4 py-1.5 rounded-full border border-white/35 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm bg-white/10"
+>
+Mumbai • Pune • Lonavala
+</span>
+
+
+<h2
+class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 max-w-3xl"
+>
+Exploring India's Hidden Forts & History
+</h2>
+
+
+<p
+class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mb-8"
+>
+Trekking • Climbing • Rappelling. Discover places with no crowd around, managed by our certified technical team.
+</p>
+
+
+<a
+href="#expeditions"
+class="bg-brandAccent hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition-transform hover:-translate-y-0.5"
+>
+Explore Events
+</a>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     EXPEDITIONS
+===================================================== -->
+
+<section
+id="expeditions"
+class="bg-[#F7F8F6] py-20 sm:py-24"
+>
+
+<div
+class="max-w-7xl mx-auto px-5 sm:px-7 lg:px-8"
+>
+
+
+<div class="mb-10 md:mb-12">
+
+<div class="flex items-center gap-3 mb-3">
+
+<span
+class="w-7 h-[2px] bg-yellow-400"
+></span>
+
+<span
+class="text-[10px] sm:text-[11px] uppercase tracking-[0.24em] font-extrabold text-[#082C3D]"
+>
+Explore
+</span>
+
+</div>
+
+
+<h2
+class="text-3xl sm:text-4xl md:text-5xl font-black tracking-[-0.045em] text-[#082C3D]"
+>
+Upcoming Expeditions
+</h2>
+
+</div>
+
+
+
+<!-- =====================================================
+     FAST LOADING
+===================================================== -->
+
+<div
+x-show="loading"
+x-cloak
+class="py-20 text-center"
+>
+
+<div
+class="inline-block w-10 h-10 rounded-xl bg-yellow-400 animate-spin"
+></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ERROR
+===================================================== -->
+
+<div
+x-show="error && !loading"
+x-cloak
+class="py-10 text-center"
+>
+
+<p
+class="text-sm font-semibold text-red-500"
+x-text="error"
+></p>
+
+</div>
+
+
+
+<!-- =====================================================
+     CARDS
+===================================================== -->
+
+<div
+x-show="!loading"
+x-cloak
+class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+>
+
+
+<template
+x-for="(ad,index) in adventures"
+:key="ad.id"
+>
+
+<a
+:x-href="ad.url"
+:href="ad.url"
+class="event-card card-enter block aspect-[4/5.25]"
+:style="'animation-delay:'+(index*70)+'ms'"
+>
+
+
+<!-- LOW IMAGE -->
+
+<img
+:src="ad.lowImg"
+:alt="ad.title"
+class="event-image low-image"
+width="800"
+height="1050"
+loading="eager"
+decoding="async"
+>
+
+
+<!-- HIGH IMAGE -->
+
+<img
+:alt="ad.title"
+:src="ad.highImg"
+class="event-image high-image"
+width="800"
+height="1050"
+loading="lazy"
+decoding="async"
+@load="$event.target.classList.add('loaded')"
+>
+
+
+<div class="event-overlay"></div>
+
+
+
+<!-- TOP -->
+
+<div
+class="absolute top-5 left-5 right-5 z-20 flex items-start justify-between gap-3"
+>
+
+
+<div class="category-pill">
+
+<span
+class="w-2 h-2 rounded-full bg-yellow-400"
+></span>
+
+<span
+class="text-[9px] uppercase tracking-[.20em] font-black text-white"
+x-text="ad.category"
+></span>
+
+</div>
+
+
+
+<div
+class="availability-pill"
+:class="ad.availableSeats < 3 ? 'availability-low':''"
+>
+
+<span class="availability-dot"></span>
+
+<span
+class="text-[9px] font-black text-emerald-100 whitespace-nowrap"
+:class="ad.availableSeats < 3 ? 'text-amber-100':''"
+>
+
+<span
+x-text="ad.availableSeats"
+></span>
+
+<span class="font-semibold opacity-70">
+seats left
+</span>
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- BOTTOM -->
+
+<div
+class="absolute left-5 right-5 bottom-5 z-20"
+>
+
+
+<div
+class="flex items-center gap-2.5 mb-3"
+>
+
+<span
+class="w-7 h-[2px] bg-yellow-400"
+></span>
+
+<span
+class="text-[8px] uppercase tracking-[.24em] font-bold text-white/65"
+>
+Adventure Junction
+</span>
+
+</div>
+
+
+<h3
+class="text-[27px] sm:text-[29px] leading-[.95] tracking-[-.045em] font-black text-white drop-shadow-xl max-w-[94%]"
+x-text="ad.title"
+></h3>
+
+
+
+<div
+class="bottom-panel mt-4 p-3 flex items-center justify-between"
+>
+
+
+<div class="pl-2">
+
+<p
+class="text-[7px] uppercase tracking-[.20em] font-bold text-white/40"
+>
+Starting from
+</p>
+
+<p
+class="mt-1 text-[24px] leading-none font-black tracking-[-.04em] text-yellow-400"
+x-text="'₹'+ad.price"
+></p>
+
+</div>
+
+
+
+<div class="book-button">
+
+Book
+
+<svg
+class="w-4 h-4"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5"
+viewBox="0 0 24 24"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M5 12h14M13 6l6 6-6 6"
+/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+</template>
+
+
+
+<!-- EMPTY -->
+
+<div
+x-show="adventures.length===0 && !error"
+x-cloak
+class="col-span-full py-20 text-center"
+>
+
+<h3 class="font-black text-[#082C3D]">
+No upcoming expeditions
+</h3>
+
+<p class="mt-1 text-sm text-gray-400">
+New adventures will appear here soon.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     EXTERNAL JS — AT END OF BODY
+===================================================== -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script
+defer
+src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+></script>
+
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+'https://salaxcyxgwjqemryqwkx.supabase.co';
+
+
+const SUPABASE_KEY =
+'sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO';
+
+
+let supabaseClient = null;
+
+
+/* =====================================================
+   REMOVE LOADER
+===================================================== */
+
+function removeLoader(){
+
+    const loader =
+        document.getElementById(
+            'pageLoader'
+        );
+
+    if(loader){
+
+        loader.classList.add(
+            'hide'
+        );
+
+        setTimeout(
+            ()=>{
+                loader.remove();
+            },
+            300
+        );
+
+    }
+
+}
+
+
+/*
+ * HARD LIMIT.
+ * The user should NEVER sit on
+ * a white screen waiting for Supabase.
+ */
+
+setTimeout(
+    removeLoader,
+    900
+);
+
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+function adventureApp(){
+
+return{
+
+    adventures:[],
+
+    loading:true,
+
+    error:null,
+
+
+
+    async init(){
+
+        /*
+         * Start database immediately.
+         */
+
+        try{
+
+            if(
+                !window.supabase
+            ){
+
+                throw new Error(
+                    'Supabase library unavailable'
+                );
+
             }
+
+
+            supabaseClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_KEY
+                );
+
+
+            /*
+             * Restore cached cards FIRST.
+             */
+
+            this.restoreCache();
+
+
+            if(
+                this.adventures.length
+            ){
+
+                this.loading=false;
+
+                removeLoader();
+
+                /*
+                 * Refresh database
+                 * silently in background.
+                 */
+
+                this.loadEvents();
+
+            }else{
+
+                /*
+                 * No cache.
+                 * Give database a short
+                 * window to respond.
+                 */
+
+                const request =
+                    this.loadEvents();
+
+
+                await Promise.race([
+
+                    request,
+
+                    new Promise(
+                        resolve=>
+                            setTimeout(
+                                resolve,
+                                750
+                            )
+                    )
+
+                ]);
+
+
+                this.loading=false;
+
+                removeLoader();
+
+            }
+
+
+            /*
+             * Live updates.
+             */
+
+            supabaseClient
+                .channel(
+                    'aj-live-events'
+                )
+                .on(
+                    'postgres_changes',
+                    {
+                        event:'*',
+                        schema:'public',
+                        table:'expeditions'
+                    },
+                    ()=>{
+                        this.loadEvents();
+                    }
+                )
+                .on(
+                    'postgres_changes',
+                    {
+                        event:'*',
+                        schema:'public',
+                        table:'expedition_dates'
+                    },
+                    ()=>{
+                        this.loadEvents();
+                    }
+                )
+                .subscribe();
+
+
+            /*
+             * Periodic safety refresh.
+             */
+
+            setInterval(
+                ()=>{
+                    this.loadEvents();
+                },
+                60000
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            this.loading=false;
+
+            this.error=
+                'Unable to load expeditions.';
+
+            removeLoader();
+
         }
-    </script>
+
+    },
+
+
+
+    /* =================================================
+       CACHE
+    ================================================= */
+
+    restoreCache(){
+
+        try{
+
+            const cached =
+                localStorage.getItem(
+                    'aj_events_fast'
+                );
+
+
+            if(!cached){
+                return;
+            }
+
+
+            const parsed =
+                JSON.parse(cached);
+
+
+            if(
+                Array.isArray(parsed)
+            ){
+
+                this.adventures =
+                    parsed;
+
+            }
+
+        }catch(error){
+
+            console.warn(
+                'Cache:',
+                error
+            );
+
+        }
+
+    },
+
+
+
+    saveCache(data){
+
+        try{
+
+            localStorage.setItem(
+                'aj_events_fast',
+                JSON.stringify(data)
+            );
+
+        }catch(error){
+
+            console.warn(
+                'Cache save:',
+                error
+            );
+
+        }
+
+    },
+
+
+
+    /* =================================================
+       LOW QUALITY URL
+    ================================================= */
+
+    getLowUrl(highUrl){
+
+        if(!highUrl){
+            return '';
+        }
+
+
+        /*
+         * Expected:
+         *
+         * /view/images/name.jpg
+         *
+         * becomes:
+         *
+         * /view/images/low/name.jpg
+         */
+
+        const marker =
+            '/view/images/';
+
+
+        const index =
+            highUrl.indexOf(
+                marker
+            );
+
+
+        if(index===-1){
+
+            return highUrl;
+
+        }
+
+
+        const file =
+            highUrl.substring(
+                index+
+                marker.length
+            );
+
+
+        const base =
+            highUrl.substring(
+                0,
+                index+
+                marker.length
+            );
+
+
+        return (
+            base+
+            'low/'+
+            file
+        );
+
+    },
+
+
+
+    /* =================================================
+       TODAY
+    ================================================= */
+
+    today(){
+
+        const d =
+            new Date();
+
+
+        return (
+
+            d.getFullYear()+
+            '-' +
+            String(
+                d.getMonth()+1
+            ).padStart(2,'0')+
+            '-' +
+            String(
+                d.getDate()
+            ).padStart(2,'0')
+
+        );
+
+    },
+
+
+
+    /* =================================================
+       LOAD EVENTS
+    ================================================= */
+
+    async loadEvents(){
+
+        if(!supabaseClient){
+            return;
+        }
+
+
+        try{
+
+            const {
+
+                data:events,
+
+                error:eventError
+
+            } =
+            await supabaseClient
+                .from('expeditions')
+                .select(
+                    'id,title,slug,category,price,image_url'
+                )
+                .eq(
+                    'is_open',
+                    true
+                );
+
+
+            if(eventError){
+
+                throw eventError;
+
+            }
+
+
+            if(
+                !events ||
+                !events.length
+            ){
+
+                this.adventures=[];
+
+                this.saveCache([]);
+
+                this.loading=false;
+
+                return;
+
+            }
+
+
+            const ids =
+                events.map(
+                    e=>e.id
+                );
+
+
+            const {
+
+                data:dates,
+
+                error:dateError
+
+            } =
+            await supabaseClient
+                .from(
+                    'expedition_dates'
+                )
+                .select(
+                    'expedition_id,event_date,total_seats,reserved_seats'
+                )
+                .in(
+                    'expedition_id',
+                    ids
+                )
+                .gte(
+                    'event_date',
+                    this.today()
+                )
+                .order(
+                    'event_date',
+                    {
+                        ascending:true
+                    }
+                );
+
+
+            if(dateError){
+
+                throw dateError;
+
+            }
+
+
+            const grouped={};
+
+
+            (dates||[]).forEach(
+                row=>{
+
+                    if(
+                        !grouped[
+                            row.expedition_id
+                        ]
+                    ){
+
+                        grouped[
+                            row.expedition_id
+                        ]=[];
+
+                    }
+
+
+                    const total =
+                        Number(
+                            row.total_seats||0
+                        );
+
+
+                    const reserved =
+                        Number(
+                            row.reserved_seats||0
+                        );
+
+
+                    grouped[
+                        row.expedition_id
+                    ].push({
+
+                        date:
+                            row.event_date,
+
+                        available:
+                            Math.max(
+                                0,
+                                total-reserved
+                            )
+
+                    });
+
+                }
+            );
+
+
+            const cards=[];
+
+
+            events.forEach(
+                event=>{
+
+                    const eventDates =
+                        grouped[
+                            event.id
+                        ]||[];
+
+
+                    /*
+                     * Your requested rule:
+                     *
+                     * show first upcoming
+                     * event with 3+ seats.
+                     *
+                     * If it has 0/1/2,
+                     * automatically use next date.
+                     */
+
+                    const selected =
+                        eventDates.find(
+                            d=>
+                                d.available>=3
+                        );
+
+
+                    if(!selected){
+
+                        return;
+
+                    }
+
+
+                    const high =
+                        event.image_url;
+
+
+                    const low =
+                        this.getLowUrl(
+                            high
+                        );
+
+
+                    cards.push({
+
+                        id:
+                            event.id,
+
+                        title:
+                            event.title,
+
+                        category:
+                            event.category||
+                            'Adventure',
+
+                        price:
+                            Number(
+                                event.price||0
+                            ).toLocaleString(
+                                'en-IN'
+                            ),
+
+                        lowImg:
+                            low,
+
+                        highImg:
+                            high,
+
+                        availableSeats:
+                            selected.available,
+
+                        url:
+                            '/book='+
+                            encodeURIComponent(
+                                event.slug
+                            )
+
+                    });
+
+                }
+            );
+
+
+            this.adventures=
+                cards;
+
+
+            this.saveCache(
+                cards
+            );
+
+
+            this.loading=false;
+
+            this.error=null;
+
+
+            /*
+             * Start high-quality downloads
+             * AFTER the cards are visible.
+             */
+
+            this.$nextTick(
+                ()=>{
+                    this.loadHighQuality();
+                }
+            );
+
+
+        }catch(error){
+
+            console.error(
+                'Supabase error:',
+                error
+            );
+
+
+            /*
+             * Keep cached cards visible.
+             */
+
+            if(
+                !this.adventures.length
+            ){
+
+                this.error=
+                    'Unable to load expeditions right now.';
+
+            }
+
+
+            this.loading=false;
+
+        }
+
+    },
+
+
+
+    /* =================================================
+       HIGH QUALITY IMAGES
+    ================================================= */
+
+    loadHighQuality(){
+
+        const load=()=>{
+
+            document
+                .querySelectorAll(
+                    '.high-image'
+                )
+                .forEach(
+                    image=>{
+
+                        if(
+                            image.dataset.started
+                        ){
+                            return;
+                        }
+
+
+                        image.dataset.started=
+                            '1';
+
+
+                        /*
+                         * Browser downloads
+                         * this in background.
+                         */
+
+                        image.src=
+                            image
+                            .getAttribute(
+                                'src'
+                            );
+
+                    }
+                );
+
+        };
+
+
+        /*
+         * Images are already in src,
+         * but lazy loading means the browser
+         * handles them independently.
+         *
+         * requestIdleCallback gives the
+         * low-quality image priority.
+         */
+
+        if(
+            'requestIdleCallback'
+            in window
+        ){
+
+            requestIdleCallback(
+                load,
+                {
+                    timeout:1200
+                }
+            );
+
+        }else{
+
+            setTimeout(
+                load,
+                500
+            );
+
+        }
+
+    },
+
+
+
+    goHome(){
+
+        window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        });
+
+    }
+
+};
+
+}
+
+</script>
+
 </body>
 </html>
