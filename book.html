@@ -10,21 +10,14 @@
     content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
 >
 
-<title>Adventure Junction | Booking</title>
+<title>Adventure Junction • Book Your Adventure</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet"
 >
-
 
 <style>
 
@@ -44,7 +37,7 @@ html{
 
 body{
     background:#f5f7f6;
-    color:#092c3d;
+    color:#082c3d;
     font-family:"Outfit",Arial,sans-serif;
     overflow-x:hidden;
     padding-bottom:82px;
@@ -70,20 +63,20 @@ img{
     max-width:100%;
 }
 
-[x-cloak]{
-    display:none!important;
-}
-
 
 /* =========================================================
-   SVG ICON
+   SVG ICON SYSTEM
 ========================================================= */
 
 .icon{
-    width:19px;
-    height:19px;
-    display:block;
-    flex:none;
+    width:18px;
+    height:18px;
+    flex-shrink:0;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
 .icon-sm{
@@ -92,8 +85,8 @@ img{
 }
 
 .icon-lg{
-    width:22px;
-    height:22px;
+    width:21px;
+    height:21px;
 }
 
 
@@ -116,14 +109,14 @@ img{
     background:
         rgba(255,255,255,.94);
 
-    backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
-
     border-bottom:
         1px solid rgba(8,44,61,.07);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
 
 }
 
@@ -131,10 +124,7 @@ img{
 .header-inner{
 
     width:
-        min(
-            1240px,
-            calc(100% - 30px)
-        );
+        min(1220px,calc(100% - 28px));
 
     height:100%;
 
@@ -160,25 +150,26 @@ img{
 }
 
 
-.logo-mark{
+.logo-img{
 
-    width:43px;
-    height:43px;
+    position:relative;
 
-    border-radius:50%;
+    width:44px;
+    height:44px;
 
     overflow:hidden;
+
+    border-radius:50%;
 
     background:#082c3d;
 
     box-shadow:
-        0 5px 18px
-        rgba(8,44,61,.14);
+        0 5px 18px rgba(8,44,61,.15);
 
 }
 
 
-.logo-mark img{
+.logo-img img{
 
     width:100%;
     height:100%;
@@ -188,13 +179,18 @@ img{
 }
 
 
-.logo-title{
-
-    color:#092c3d;
-
-    font-size:17px;
+.logo-copy{
 
     line-height:1;
+
+}
+
+
+.logo-title{
+
+    color:#082c3d;
+
+    font-size:17px;
 
     font-weight:900;
 
@@ -210,8 +206,6 @@ img{
     color:#9aa5a8;
 
     font-size:8px;
-
-    line-height:1;
 
     font-weight:800;
 
@@ -235,12 +229,11 @@ img{
 
 .desktop-nav a{
 
-    padding:
-        10px 13px;
+    padding:10px 14px;
 
     border-radius:12px;
 
-    color:#69777c;
+    color:#66747a;
 
     font-size:11px;
 
@@ -255,7 +248,7 @@ img{
 
     color:#082c3d;
 
-    background:#f2f5f4;
+    background:#f1f4f3;
 
 }
 
@@ -271,41 +264,41 @@ img{
 }
 
 
-.instagram-btn{
+.instagram-button{
 
     width:40px;
     height:40px;
-
-    border-radius:12px;
-
-    border:0;
-
-    background:#f3f5f4;
-
-    color:#092c3d;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
+    border:0;
+
+    border-radius:12px;
+
+    color:#526168;
+
+    background:#f3f5f4;
+
 }
 
 
-.menu-btn{
+.menu-button{
 
     display:none;
 
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
 
     border:0;
 
     border-radius:12px;
 
-    background:#f2f5f4;
+    color:#082c3d;
 
-    color:#092c3d;
+    background:#f2f5f4;
 
 }
 
@@ -318,28 +311,26 @@ img{
 
     top:78px;
 
-    left:15px;
-    right:15px;
+    left:14px;
+    right:14px;
 
     padding:8px;
+
+    border:
+        1px solid #e4eae7;
 
     border-radius:18px;
 
     background:#fff;
 
-    border:1px solid #e5ebe8;
-
     box-shadow:
-        0 20px 55px
-        rgba(8,44,61,.14);
+        0 22px 55px rgba(8,44,61,.14);
 
 }
 
 
 .mobile-menu.show{
-
     display:block;
-
 }
 
 
@@ -349,13 +340,11 @@ img{
 
     align-items:center;
 
-    gap:11px;
+    gap:10px;
 
     padding:13px;
 
     border-radius:12px;
-
-    color:#536168;
 
     font-size:11px;
 
@@ -365,9 +354,7 @@ img{
 
 
 .mobile-menu a:hover{
-
     background:#f5f7f6;
-
 }
 
 
@@ -379,18 +366,13 @@ img{
 
     position:relative;
 
-    margin-top:72px;
+    height:390px;
 
-    height:
-        clamp(
-            330px,
-            50vw,
-            470px
-        );
+    margin-top:72px;
 
     overflow:hidden;
 
-    background:#071b24;
+    background:#071c25;
 
 }
 
@@ -406,8 +388,6 @@ img{
 
     object-fit:cover;
 
-    opacity:.95;
-
 }
 
 
@@ -418,29 +398,25 @@ img{
     inset:0;
 
     background:
-
         linear-gradient(
             to bottom,
-            rgba(3,16,22,.02),
-            rgba(3,16,22,.12) 35%,
-            rgba(3,16,22,.55) 70%,
-            rgba(3,16,22,.96)
+            rgba(2,12,17,.05),
+            rgba(2,12,17,.08) 28%,
+            rgba(2,12,17,.48) 63%,
+            rgba(2,12,17,.96) 100%
         );
 
 }
 
 
-.hero-content{
+.hero-inner{
 
     position:relative;
 
     z-index:2;
 
     width:
-        min(
-            1240px,
-            calc(100% - 30px)
-        );
+        min(1220px,calc(100% - 28px));
 
     height:100%;
 
@@ -450,12 +426,17 @@ img{
 
     align-items:flex-end;
 
-    padding-bottom:38px;
+    padding-bottom:35px;
 
 }
 
 
-.hero-label{
+.hero-content{
+    max-width:800px;
+}
+
+
+.hero-badge{
 
     display:inline-flex;
 
@@ -463,22 +444,20 @@ img{
 
     gap:7px;
 
-    padding:
-        7px 11px;
-
-    border-radius:999px;
+    padding:7px 11px;
 
     border:
-        1px solid
-        rgba(255,255,255,.2);
+        1px solid rgba(255,255,255,.22);
+
+    border-radius:50px;
+
+    color:#fff;
 
     background:
         rgba(0,0,0,.25);
 
     backdrop-filter:
-        blur(12px);
-
-    color:#fff;
+        blur(14px);
 
     font-size:8px;
 
@@ -491,42 +470,50 @@ img{
 }
 
 
-.hero-label-dot{
+.hero-badge-dot{
 
-    width:6px;
-    height:6px;
+    width:7px;
+    height:7px;
 
     border-radius:50%;
 
-    background:#ffc400;
+    background:#ffd22d;
 
     box-shadow:
-        0 0 12px
-        rgba(255,196,0,.75);
+        0 0 12px rgba(255,210,45,.8);
 
 }
 
 
 .hero-title{
 
-    max-width:780px;
-
     margin-top:14px;
 
     color:#fff;
 
     font-size:
-        clamp(
-            39px,
-            7vw,
-            72px
-        );
+        clamp(38px,6vw,64px);
 
-    line-height:.9;
+    line-height:.92;
 
     font-weight:900;
 
-    letter-spacing:-.065em;
+    letter-spacing:-.06em;
+
+}
+
+
+.hero-description{
+
+    max-width:650px;
+
+    margin-top:13px;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:11px;
+
+    line-height:1.65;
 
 }
 
@@ -539,12 +526,12 @@ img{
 
     gap:7px;
 
-    margin-top:17px;
+    margin-top:16px;
 
 }
 
 
-.hero-meta-item{
+.hero-meta span{
 
     display:flex;
 
@@ -552,22 +539,20 @@ img{
 
     gap:6px;
 
-    padding:
-        8px 11px;
+    padding:8px 10px;
 
-    border-radius:11px;
+    border-radius:10px;
+
+    color:#fff;
 
     background:
-        rgba(0,0,0,.32);
+        rgba(0,0,0,.28);
 
     border:
-        1px solid
-        rgba(255,255,255,.13);
+        1px solid rgba(255,255,255,.12);
 
     backdrop-filter:
         blur(10px);
-
-    color:#fff;
 
     font-size:8px;
 
@@ -577,26 +562,23 @@ img{
 
 
 /* =========================================================
-   MAIN
+   CONTAINER
 ========================================================= */
-
-.main{
-
-    padding:
-        25px 0 80px;
-
-}
-
 
 .container{
 
     width:
-        min(
-            1240px,
-            calc(100% - 30px)
-        );
+        min(1220px,calc(100% - 28px));
 
     margin:auto;
+
+}
+
+
+.main{
+
+    padding:
+        24px 0 90px;
 
 }
 
@@ -609,7 +591,7 @@ img{
         minmax(0,1fr)
         410px;
 
-    gap:26px;
+    gap:25px;
 
     align-items:start;
 
@@ -627,11 +609,31 @@ img{
 }
 
 
+.card{
+
+    background:#fff;
+
+    border:
+        1px solid #e4ebe8;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 10px 35px rgba(8,44,61,.045);
+
+}
+
+
+.card-padding{
+    padding:20px;
+}
+
+
 /* =========================================================
    QUICK STATS
 ========================================================= */
 
-.quick-stats{
+.stats{
 
     display:grid;
 
@@ -645,53 +647,50 @@ img{
 
 .stat{
 
+    min-width:0;
+
     padding:15px;
 
     border:
-        1px solid
-        #e2e9e6;
+        1px solid #e4ebe8;
 
-    border-radius:17px;
+    border-radius:16px;
 
     background:#fff;
-
-    box-shadow:
-        0 8px 25px
-        rgba(8,44,61,.035);
 
 }
 
 
 .stat-icon{
 
-    width:28px;
-    height:28px;
-
-    border-radius:9px;
+    width:29px;
+    height:29px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    background:#f5f7f6;
+    margin-bottom:10px;
 
-    color:#0a7e58;
+    border-radius:9px;
+
+    color:#082c3d;
+
+    background:#f0f4f2;
 
 }
 
 
 .stat-label{
 
-    margin-top:10px;
-
-    color:#9ba5a8;
+    color:#a0aaad;
 
     font-size:7px;
 
     font-weight:900;
 
-    letter-spacing:.16em;
+    letter-spacing:.14em;
 
     text-transform:uppercase;
 
@@ -700,36 +699,30 @@ img{
 
 .stat-value{
 
-    margin-top:5px;
+    margin-top:6px;
 
-    color:#092c3d;
+    overflow:hidden;
+
+    color:#082c3d;
 
     font-size:12px;
 
     font-weight:900;
 
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
 }
 
 
 /* =========================================================
-   INFO CARD
+   COLLAPSIBLE INFORMATION
 ========================================================= */
 
 .info-card{
 
     overflow:hidden;
-
-    border:
-        1px solid
-        #e3e9e6;
-
-    border-radius:20px;
-
-    background:#fff;
-
-    box-shadow:
-        0 8px 30px
-        rgba(8,44,61,.035);
 
 }
 
@@ -742,12 +735,9 @@ img{
 
     align-items:center;
 
-    justify-content:space-between;
+    gap:11px;
 
-    gap:14px;
-
-    padding:
-        17px 19px;
+    padding:17px 19px;
 
     cursor:pointer;
 
@@ -755,43 +745,43 @@ img{
 
 
 .info-card summary::-webkit-details-marker{
-
     display:none;
-
 }
 
 
-.info-heading{
+.summary-icon{
 
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-.info-icon{
-
-    width:31px;
-    height:31px;
+    width:34px;
+    height:34px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    border-radius:10px;
+    flex-shrink:0;
 
-    background:#f1f7f4;
+    border-radius:11px;
 
-    color:#087d57;
+    color:#082c3d;
+
+    background:#f0f4f2;
 
 }
 
 
-.info-title{
+.summary-text{
+
+    min-width:0;
+
+    flex:1;
+
+}
+
+
+.summary-title{
+
+    color:#082c3d;
 
     font-size:13px;
 
@@ -800,10 +790,23 @@ img{
 }
 
 
-.info-chevron{
+.summary-sub{
 
-    width:28px;
-    height:28px;
+    margin-top:2px;
+
+    color:#9ba5a8;
+
+    font-size:7px;
+
+    font-weight:700;
+
+}
+
+
+.summary-arrow{
+
+    width:27px;
+    height:27px;
 
     display:flex;
 
@@ -812,9 +815,9 @@ img{
 
     border-radius:9px;
 
-    background:#f4f6f5;
+    color:#66747a;
 
-    color:#65747a;
+    background:#f3f5f4;
 
     transition:.2s;
 
@@ -822,7 +825,7 @@ img{
 
 
 .info-card[open]
-.info-chevron{
+.summary-arrow{
 
     transform:
         rotate(180deg);
@@ -833,9 +836,9 @@ img{
 .info-content{
 
     padding:
-        0 19px 19px;
+        0 20px 20px;
 
-    color:#66747a;
+    color:#647177;
 
     font-size:11px;
 
@@ -845,42 +848,40 @@ img{
 
 
 .info-content p{
-
-    margin-bottom:9px;
-
+    margin-bottom:10px;
 }
 
 
-.bullet-list{
+.info-list{
 
     display:flex;
 
     flex-direction:column;
 
-    gap:7px;
+    gap:8px;
 
 }
 
 
-.bullet{
+.info-item{
 
     display:flex;
 
-    gap:8px;
-
     align-items:flex-start;
+
+    gap:9px;
 
 }
 
 
-.bullet-mark{
+.info-bullet{
 
     width:5px;
     height:5px;
 
     margin-top:7px;
 
-    flex:none;
+    flex-shrink:0;
 
     border-radius:50%;
 
@@ -890,76 +891,170 @@ img{
 
 
 /* =========================================================
+   DO / NOTES
+========================================================= */
+
+.note-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+}
+
+
+.note-box{
+
+    padding:14px;
+
+    border-radius:16px;
+
+    border:1px solid;
+
+}
+
+
+.note-box.warning{
+
+    color:#7d4141;
+
+    background:#fff5f4;
+
+    border-color:#f1d8d6;
+
+}
+
+
+.note-box.safe{
+
+    color:#25634e;
+
+    background:#f1fbf7;
+
+    border-color:#d8eee4;
+
+}
+
+
+.note-box.info{
+
+    color:#275e78;
+
+    background:#f1f8fc;
+
+    border-color:#d7e9f2;
+
+}
+
+
+.note-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+
+    font-size:10px;
+
+    font-weight:900;
+
+}
+
+
+.note-heading svg{
+    width:16px;
+    height:16px;
+}
+
+
+.note-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+.note-list div{
+
+    display:flex;
+
+    gap:7px;
+
+    font-size:8px;
+
+    line-height:1.5;
+
+}
+
+
+.note-list div::before{
+
+    content:"";
+
+    width:4px;
+    height:4px;
+
+    margin-top:5px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+}
+
+
+/* =========================================================
    BOOKING PANEL
 ========================================================= */
 
-.booking{
+.booking-column{
 
     position:sticky;
 
-    top:88px;
+    top:89px;
 
 }
 
 
 .booking-card{
 
-    overflow:hidden;
-
-    border-radius:24px;
-
-    background:#fff;
-
-    border:
-        1px solid
-        #e1e8e5;
-
-    box-shadow:
-        0 18px 55px
-        rgba(8,44,61,.09);
+    padding:20px;
 
 }
 
 
-.booking-top{
+.booking-heading{
 
-    padding:21px;
+    display:flex;
 
-    color:#fff;
+    align-items:flex-start;
 
-    background:
-        linear-gradient(
-            145deg,
-            #061b24,
-            #0b3546
-        );
+    justify-content:space-between;
 
-}
-
-
-.booking-label{
-
-    color:
-        rgba(255,255,255,.52);
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:.19em;
-
-    text-transform:uppercase;
+    gap:12px;
 
 }
 
 
 .booking-title{
 
-    margin-top:6px;
+    color:#082c3d;
 
-    font-size:22px;
+    font-size:20px;
 
-    line-height:1;
+    line-height:1.05;
 
     font-weight:900;
 
@@ -968,21 +1063,57 @@ img{
 }
 
 
-.booking-sub{
+.booking-subtitle{
 
-    margin-top:7px;
+    margin-top:5px;
 
-    color:
-        rgba(255,255,255,.55);
+    color:#9aa5a8;
 
     font-size:8px;
+
+    line-height:1.5;
 
 }
 
 
-.booking-body{
+.live-badge{
 
-    padding:20px;
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:7px 9px;
+
+    border-radius:9px;
+
+    color:#16845a;
+
+    background:#edfaf4;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    white-space:nowrap;
+
+}
+
+
+.live-dot{
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#18a66b;
+
+    box-shadow:
+        0 0 9px rgba(24,166,107,.6);
 
 }
 
@@ -991,31 +1122,19 @@ img{
    STEPS
 ========================================================= */
 
-.step{
-
-    padding-top:20px;
+.booking-step{
 
     margin-top:20px;
 
+    padding-top:20px;
+
     border-top:
-        1px solid
-        #edf1ef;
+        1px solid #edf1ef;
 
 }
 
 
-.step:first-child{
-
-    padding-top:0;
-
-    margin-top:0;
-
-    border-top:0;
-
-}
-
-
-.step-head{
+.step-header{
 
     display:flex;
 
@@ -1031,16 +1150,18 @@ img{
     width:29px;
     height:29px;
 
-    border-radius:10px;
-
     display:flex;
 
     align-items:center;
     justify-content:center;
 
+    flex-shrink:0;
+
+    border-radius:10px;
+
     color:#fff;
 
-    background:#092c3d;
+    background:#082c3d;
 
     font-size:9px;
 
@@ -1051,7 +1172,7 @@ img{
 
 .step-title{
 
-    color:#092c3d;
+    color:#082c3d;
 
     font-size:12px;
 
@@ -1060,11 +1181,11 @@ img{
 }
 
 
-.step-caption{
+.step-subtitle{
 
     margin-top:2px;
 
-    color:#9ba5a8;
+    color:#9ca6a9;
 
     font-size:7px;
 
@@ -1072,14 +1193,15 @@ img{
 
 
 /* =========================================================
-   DATES
+   DATE + SLOT
 ========================================================= */
 
-.date-list{
+.date-grid{
 
-    display:flex;
+    display:grid;
 
-    flex-direction:column;
+    grid-template-columns:
+        repeat(2,1fr);
 
     gap:8px;
 
@@ -1090,19 +1212,18 @@ img{
 
 .date-option{
 
+    position:relative;
+
     width:100%;
 
     padding:13px;
 
     border:
-        1px solid
-        #e0e7e4;
+        1px solid #dfe6e3;
 
     border-radius:15px;
 
     background:#fff;
-
-    color:#092c3d;
 
     text-align:left;
 
@@ -1113,152 +1234,149 @@ img{
 
 .date-option:hover{
 
-    transform:
-        translateY(-1px);
-
-    border-color:#d4c26c;
+    border-color:#d2b000;
 
 }
 
 
 .date-option.selected{
 
-    border:
-        1.5px solid
-        #e4b800;
+    border-color:#e5b900;
 
     background:
         linear-gradient(
             145deg,
             #fffdf0,
-            #fff9d8
+            #fff8d9
         );
 
     box-shadow:
-        0 7px 20px
-        rgba(220,175,0,.09);
-
-}
-
-
-.date-row{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-}
-
-
-.date-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-.date-calendar{
-
-    width:36px;
-    height:36px;
-
-    border-radius:11px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#f1f5f3;
-
-    color:#092c3d;
-
-}
-
-
-.date-option.selected
-.date-calendar{
-
-    background:#092c3d;
-
-    color:#ffc400;
+        0 7px 18px rgba(240,190,0,.12);
 
 }
 
 
 .date-day{
 
-    font-size:11px;
+    color:#a0aaad;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+}
+
+
+.date-number{
+
+    margin-top:5px;
+
+    color:#082c3d;
+
+    font-size:15px;
 
     font-weight:900;
 
 }
 
 
-.date-week{
+.date-month{
 
     margin-top:2px;
 
-    color:#929da0;
+    color:#68757a;
 
-    font-size:7px;
+    font-size:8px;
 
     font-weight:700;
 
 }
 
 
-.seat-badge{
+.date-seat{
 
-    padding:
-        6px 8px;
+    margin-top:8px;
 
-    border-radius:9px;
-
-    background:#edf9f3;
-
-    color:#11855c;
+    color:#168d60;
 
     font-size:7px;
 
     font-weight:900;
 
-    white-space:nowrap;
+}
+
+
+.slot-wrapper{
+
+    margin-top:13px;
 
 }
 
 
-.seat-badge.low{
+.field-label{
 
-    background:#fff4df;
+    display:block;
 
-    color:#a56b14;
+    margin-bottom:7px;
+
+    color:#526168;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:.04em;
+
+    text-transform:uppercase;
 
 }
 
 
-.seat-badge.full{
+.slot-grid{
 
-    background:#fff0f0;
+    display:flex;
 
-    color:#b44242;
+    flex-direction:column;
+
+    gap:7px;
 
 }
 
 
-/* =========================================================
-   COUNTER
-========================================================= */
+.slot-option{
 
-.counter{
+    width:100%;
+
+    padding:12px;
+
+    border:
+        1px solid #dfe6e3;
+
+    border-radius:13px;
+
+    background:#fff;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+
+.slot-option.selected{
+
+    border-color:#e5b900;
+
+    background:#fffbea;
+
+}
+
+
+.slot-row{
 
     display:flex;
 
@@ -1268,22 +1386,80 @@ img{
 
     gap:10px;
 
-    margin-top:13px;
+}
+
+
+.slot-name{
+
+    color:#082c3d;
+
+    font-size:9px;
+
+    font-weight:900;
+
+}
+
+
+.slot-time{
+
+    color:#66747a;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+
+.slot-seats{
+
+    margin-top:4px;
+
+    color:#168d60;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   GUEST COUNTER
+========================================================= */
+
+.counter-box{
+
+    margin-top:14px;
 
     padding:13px;
 
     border:
-        1px solid
-        #e1e7e4;
+        1px solid #e0e7e4;
 
-    border-radius:15px;
+    border-radius:16px;
 
     background:#fafcfb;
 
 }
 
 
-.counter-title{
+.counter-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+}
+
+
+.counter-label{
+
+    color:#082c3d;
 
     font-size:10px;
 
@@ -1292,13 +1468,15 @@ img{
 }
 
 
-.counter-sub{
+.counter-helper{
 
     margin-top:3px;
 
-    color:#9ba5a8;
+    color:#9aa5a8;
 
     font-size:7px;
+
+    line-height:1.4;
 
 }
 
@@ -1309,30 +1487,33 @@ img{
 
     align-items:center;
 
-    gap:9px;
+    gap:8px;
 
 }
 
 
 .counter-button{
 
-    width:37px;
-    height:37px;
-
-    border:
-        1px solid
-        #dfe6e3;
-
-    border-radius:11px;
-
-    background:#fff;
-
-    color:#092c3d;
+    width:38px;
+    height:38px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
+
+    border:
+        1px solid #dce4e1;
+
+    border-radius:11px;
+
+    color:#082c3d;
+
+    background:#fff;
+
+    font-size:20px;
+
+    font-weight:500;
 
 }
 
@@ -1346,11 +1527,13 @@ img{
 }
 
 
-.counter-number{
+.counter-value{
 
-    min-width:23px;
+    min-width:24px;
 
     text-align:center;
+
+    color:#082c3d;
 
     font-size:17px;
 
@@ -1370,13 +1553,15 @@ img{
 }
 
 
-.progress-head{
+.progress-top{
 
     display:flex;
 
+    align-items:center;
+
     justify-content:space-between;
 
-    color:#899598;
+    color:#8c989c;
 
     font-size:7px;
 
@@ -1385,15 +1570,15 @@ img{
 }
 
 
-.progress-bar{
+.progress-track{
 
     height:5px;
 
-    margin-top:5px;
+    margin-top:6px;
 
     overflow:hidden;
 
-    border-radius:99px;
+    border-radius:20px;
 
     background:#edf1ef;
 
@@ -1402,15 +1587,20 @@ img{
 
 .progress-fill{
 
-    width:0;
+    width:0%;
 
     height:100%;
 
-    border-radius:99px;
+    border-radius:20px;
 
-    background:#149967;
+    background:
+        linear-gradient(
+            90deg,
+            #0d8159,
+            #24b57b
+        );
 
-    transition:.25s;
+    transition:.3s;
 
 }
 
@@ -1421,49 +1611,53 @@ img{
 
 .participant-form{
 
-    margin-top:12px;
+    margin-top:13px;
 
-    padding:15px;
+    padding:16px;
 
     border:
-        1px solid
-        #e0e7e4;
+        1px solid #e0e7e4;
 
-    border-radius:17px;
+    border-radius:18px;
 
-    background:#fafcfb;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafcfb
+        );
 
 }
 
 
-.participant-head{
+.participant-top{
 
     display:flex;
 
     align-items:center;
 
-    gap:9px;
+    gap:10px;
 
 }
 
 
 .participant-number{
 
-    width:31px;
-    height:31px;
-
-    border-radius:10px;
+    width:32px;
+    height:32px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    background:#092c3d;
+    border-radius:11px;
 
     color:#fff;
 
-    font-size:9px;
+    background:#082c3d;
+
+    font-size:10px;
 
     font-weight:900;
 
@@ -1472,6 +1666,8 @@ img{
 
 .participant-title{
 
+    color:#082c3d;
+
     font-size:11px;
 
     font-weight:900;
@@ -1479,38 +1675,38 @@ img{
 }
 
 
-.participant-sub{
+.participant-subtitle{
 
     margin-top:2px;
 
-    color:#9ba5a8;
+    color:#9aa5a8;
 
     font-size:7px;
 
 }
 
 
-.field{
+.form-grid{
 
-    margin-top:12px;
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
 
 }
 
 
-.field-label{
+.form-field{
 
-    display:block;
+    margin-top:13px;
 
-    margin-bottom:6px;
+}
 
-    color:#59686d;
 
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:.04em;
-
+.form-field.full{
+    grid-column:1/-1;
 }
 
 
@@ -1520,49 +1716,48 @@ img{
 
     height:43px;
 
-    padding:
-        0 11px;
+    padding:0 12px;
 
     border:
-        1px solid
-        #dce4e1;
-
-    border-radius:12px;
+        1px solid #dce4e1;
 
     outline:none;
 
+    border-radius:12px;
+
+    color:#082c3d;
+
     background:#fff;
 
-    color:#092c3d;
-
-    font-size:11px;
+    font-size:10px;
 
     font-weight:600;
+
+    transition:.2s;
 
 }
 
 
 .input:focus{
 
-    border-color:#d9b500;
+    border-color:#e0b900;
 
     box-shadow:
-        0 0 0 3px
-        rgba(217,181,0,.10);
+        0 0 0 3px rgba(240,190,0,.09);
 
 }
 
 
 .input.invalid{
 
-    border-color:#d65b5b;
+    border-color:#d75b5b;
 
-    background:#fff9f9;
+    background:#fff7f7;
 
 }
 
 
-.age-error{
+.age-warning{
 
     display:none;
 
@@ -1572,23 +1767,23 @@ img{
 
     border-radius:10px;
 
+    color:#963e3e;
+
     background:#fff0f0;
 
-    color:#a43e3e;
+    border:1px solid #f0d4d4;
 
     font-size:7px;
 
-    line-height:1.5;
+    line-height:1.45;
 
     font-weight:800;
 
 }
 
 
-.age-error.show{
-
+.age-warning.show{
     display:block;
-
 }
 
 
@@ -1606,41 +1801,45 @@ img{
 
 .choice{
 
-    min-height:43px;
+    height:42px;
 
     border:
-        1px solid
-        #dce4e1;
+        1px solid #dce4e1;
 
     border-radius:12px;
 
-    background:#fff;
+    color:#68757a;
 
-    color:#66747a;
+    background:#fff;
 
     font-size:9px;
 
     font-weight:900;
+
+    transition:.2s;
 
 }
 
 
 .choice.selected{
 
-    border-color:#dcb700;
+    color:#082c3d;
 
-    background:#fff9d8;
+    border-color:#e4bb00;
 
-    color:#092c3d;
+    background:#fff9dc;
+
+    box-shadow:
+        0 5px 13px rgba(240,190,0,.08);
 
 }
 
 
-.meal-note{
+.meal-extra{
 
     margin-top:5px;
 
-    color:#ae681f;
+    color:#d57526;
 
     font-size:7px;
 
@@ -1653,42 +1852,42 @@ img{
 
     width:100%;
 
-    height:45px;
+    height:46px;
 
-    margin-top:13px;
+    margin-top:14px;
 
     border:0;
 
-    border-radius:12px;
+    border-radius:13px;
+
+    color:#071b24;
 
     background:
         linear-gradient(
             145deg,
             #ffe66d,
             #ffc400,
-            #eda600
+            #efa900
         );
 
-    color:#071b24;
+    box-shadow:
+        0 3px 0 #b97c00,
+        0 10px 22px rgba(255,193,7,.13);
 
     font-size:8px;
 
     font-weight:900;
 
-    letter-spacing:.1em;
+    letter-spacing:.11em;
 
     text-transform:uppercase;
-
-    box-shadow:
-        0 3px 0
-        #b87900;
 
 }
 
 
 .save-button:disabled{
 
-    opacity:.42;
+    opacity:.4;
 
     cursor:not-allowed;
 
@@ -1705,101 +1904,99 @@ img{
 
     flex-direction:column;
 
-    gap:6px;
+    gap:7px;
 
-    margin-top:10px;
+    margin-top:11px;
 
 }
 
 
-.saved{
+.saved-card{
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:8px;
-
-    padding:10px;
+    padding:11px;
 
     border:
-        1px solid
-        #d5eee1;
+        1px solid #d8eee3;
 
-    border-radius:13px;
+    border-radius:14px;
 
-    background:#f7fffa;
+    background:#f6fdf9;
 
 }
 
 
-.saved-left{
-
-    min-width:0;
+.saved-row{
 
     display:flex;
 
     align-items:center;
 
-    gap:8px;
+    gap:9px;
 
 }
 
 
 .saved-check{
 
-    width:25px;
-    height:25px;
-
-    border-radius:50%;
+    width:26px;
+    height:26px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    flex:none;
+    flex-shrink:0;
+
+    border-radius:50%;
 
     color:#fff;
 
-    background:#159967;
+    background:#16a269;
+
+}
+
+
+.saved-main{
+
+    min-width:0;
+
+    flex:1;
 
 }
 
 
 .saved-name{
 
-    max-width:170px;
-
     overflow:hidden;
 
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
+    color:#082c3d;
 
     font-size:9px;
 
     font-weight:900;
 
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
 }
 
 
-.saved-meta{
+.saved-details{
 
     margin-top:2px;
 
-    color:#7a878b;
+    color:#7b898e;
 
-    font-size:6px;
+    font-size:7px;
 
 }
 
 
-.saved-meal{
+.saved-extra{
 
-    color:#b06b20;
+    color:#d57526;
 
     font-size:7px;
 
@@ -1814,7 +2011,7 @@ img{
    PICKUP
 ========================================================= */
 
-.pickup-list{
+.pickup-grid{
 
     display:flex;
 
@@ -1834,8 +2031,7 @@ img{
     padding:12px;
 
     border:
-        1px solid
-        #dfe6e3;
+        1px solid #dfe6e3;
 
     border-radius:13px;
 
@@ -1843,12 +2039,14 @@ img{
 
     text-align:left;
 
+    transition:.2s;
+
 }
 
 
 .pickup-option.selected{
 
-    border-color:#dcb700;
+    border-color:#e2ba00;
 
     background:#fffbea;
 
@@ -1870,6 +2068,8 @@ img{
 
 .pickup-name{
 
+    color:#082c3d;
+
     font-size:8px;
 
     font-weight:900;
@@ -1879,9 +2079,9 @@ img{
 
 .pickup-time{
 
-    color:#68767b;
+    color:#657279;
 
-    font-size:7px;
+    font-size:8px;
 
     font-weight:900;
 
@@ -1894,26 +2094,25 @@ img{
    SUMMARY
 ========================================================= */
 
-.summary{
+.summary-card{
 
     margin-top:18px;
 
     padding:17px;
 
-    border-radius:18px;
+    border-radius:19px;
 
     color:#fff;
 
     background:
         linear-gradient(
             145deg,
-            #061b24,
-            #0b3546
+            #061e28,
+            #0a3547
         );
 
     box-shadow:
-        0 15px 35px
-        rgba(8,44,61,.12);
+        0 15px 35px rgba(8,44,61,.16);
 
 }
 
@@ -1928,8 +2127,7 @@ img{
 
     margin-bottom:9px;
 
-    color:
-        rgba(255,255,255,.58);
+    color:rgba(255,255,255,.6);
 
     font-size:9px;
 
@@ -1937,15 +2135,13 @@ img{
 
 
 .summary-row strong{
-
     color:#fff;
-
 }
 
 
-.summary-row.extra{
+.summary-row.orange{
 
-    color:#ffbd7b;
+    color:#ffb878;
 
 }
 
@@ -1965,13 +2161,12 @@ img{
     padding-top:13px;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.11);
+        1px solid rgba(255,255,255,.1);
 
 }
 
 
-.summary-total-label{
+.total-label{
 
     font-size:10px;
 
@@ -1980,13 +2175,15 @@ img{
 }
 
 
-.summary-total-value{
+.total-price{
 
-    color:#ffd333;
+    color:#ffd52e;
 
-    font-size:22px;
+    font-size:23px;
 
     font-weight:900;
+
+    letter-spacing:-.03em;
 
 }
 
@@ -1995,29 +2192,32 @@ img{
 
     width:100%;
 
-    height:47px;
+    height:48px;
 
     margin-top:12px;
 
     border:0;
 
-    border-radius:12px;
+    border-radius:13px;
+
+    color:#071b24;
 
     background:
         linear-gradient(
             145deg,
             #ffe66d,
             #ffc400,
-            #eda600
+            #efa900
         );
 
-    color:#071b24;
+    box-shadow:
+        0 3px 0 #b97c00;
 
     font-size:8px;
 
     font-weight:900;
 
-    letter-spacing:.09em;
+    letter-spacing:.1em;
 
     text-transform:uppercase;
 
@@ -2026,7 +2226,7 @@ img{
 
 .payment-button:disabled{
 
-    opacity:.38;
+    opacity:.4;
 
     cursor:not-allowed;
 
@@ -2034,217 +2234,18 @@ img{
 
 
 /* =========================================================
-   NOTE
-========================================================= */
-
-.note{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:9px;
-
-    margin-top:7px;
-
-    padding:10px;
-
-    border-radius:11px;
-
-    font-size:8px;
-
-    line-height:1.55;
-
-}
-
-
-.note-icon{
-
-    width:24px;
-    height:24px;
-
-    flex:none;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:8px;
-
-}
-
-
-.note.warning{
-
-    color:#8b3e3e;
-
-    background:#fff2f2;
-
-    border:
-        1px solid
-        #f0d8d8;
-
-}
-
-
-.note.warning
-.note-icon{
-
-    background:#ffe3e3;
-
-}
-
-
-.note.yellow{
-
-    color:#745b10;
-
-    background:#fff9df;
-
-    border:
-        1px solid
-        #efe0a7;
-
-}
-
-
-.note.yellow
-.note-icon{
-
-    background:#ffefb5;
-
-}
-
-
-.note.blue{
-
-    color:#235f7a;
-
-    background:#eef8fc;
-
-    border:
-        1px solid
-        #d3e9f3;
-
-}
-
-
-.note.blue
-.note-icon{
-
-    background:#dff1f8;
-
-}
-
-
-/* =========================================================
-   BOTTOM NAV
-========================================================= */
-
-.bottom-nav{
-
-    position:fixed;
-
-    left:12px;
-    right:12px;
-    bottom:10px;
-
-    z-index:10000;
-
-    height:65px;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:space-around;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius:20px;
-
-    background:
-        rgba(7,29,39,.94);
-
-    backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
-
-    box-shadow:
-        0 18px 45px
-        rgba(0,0,0,.23);
-
-}
-
-
-.bottom-item{
-
-    min-width:60px;
-
-    height:52px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:4px;
-
-    border-radius:14px;
-
-    color:
-        rgba(255,255,255,.47);
-
-    font-size:6px;
-
-    font-weight:800;
-
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-}
-
-
-.bottom-item.active{
-
-    color:#ffc400;
-
-    background:
-        rgba(255,196,0,.08);
-
-}
-
-
-.bottom-icon{
-
-    width:19px;
-    height:19px;
-
-}
-
-
-/* =========================================================
-   LOADING
+   EMPTY / LOADING
 ========================================================= */
 
 .loading{
 
-    padding:35px 10px;
+    padding:20px;
+
+    color:#8c989c;
 
     text-align:center;
 
-    color:#8e999d;
-
-    font-size:9px;
+    font-size:8px;
 
     font-weight:800;
 
@@ -2253,14 +2254,13 @@ img{
 
 .spinner{
 
-    width:29px;
-    height:29px;
+    width:24px;
+    height:24px;
 
     margin:0 auto 9px;
 
     border:
-        3px solid
-        #e7ecea;
+        2px solid #e5ebe8;
 
     border-top-color:#ffc400;
 
@@ -2290,39 +2290,38 @@ img{
     position:fixed;
 
     left:50%;
+    bottom:92px;
 
-    bottom:88px;
+    z-index:99999;
 
-    z-index:11000;
+    width:max-content;
 
     max-width:
         calc(100% - 28px);
 
-    padding:
-        11px 15px;
+    padding:11px 15px;
 
     border-radius:12px;
 
-    background:#092c3d;
-
     color:#fff;
 
-    font-size:8px;
+    background:#082c3d;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.2);
+
+    font-size:9px;
 
     font-weight:800;
 
     opacity:0;
 
-    pointer-events:none;
-
     transform:
         translate(-50%,25px);
 
-    transition:.25s;
+    pointer-events:none;
 
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.2);
+    transition:.25s;
 
 }
 
@@ -2338,17 +2337,122 @@ img{
 
 
 .toast.error{
+    background:#9f4141;
+}
 
-    background:#a13e3e;
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:12px;
+    right:12px;
+    bottom:12px;
+
+    z-index:8500;
+
+    height:62px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    padding:5px;
+
+    border:
+        1px solid rgba(255,255,255,.7);
+
+    border-radius:21px;
+
+    background:
+        rgba(255,255,255,.91);
+
+    box-shadow:
+        0 15px 45px rgba(8,44,61,.16);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+}
+
+
+.bottom-item{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+    border:0;
+
+    border-radius:16px;
+
+    color:#8a969a;
+
+    background:transparent;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+.bottom-item.active{
+
+    color:#082c3d;
+
+    background:#f0f4f2;
+
+}
+
+
+.bottom-item svg{
+
+    width:17px;
+    height:17px;
+
+}
+
+
+.bottom-item.active::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:4px;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:#ffc400;
 
 }
 
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
-@media(max-width:950px){
+@media(max-width:960px){
 
     .layout{
 
@@ -2357,7 +2461,7 @@ img{
     }
 
 
-    .booking{
+    .booking-column{
 
         position:static;
 
@@ -2365,35 +2469,17 @@ img{
 
 
     .desktop-nav{
-
         display:none;
-
     }
 
 
-    .menu-btn{
-
+    .menu-button{
         display:flex;
 
         align-items:center;
-
         justify-content:center;
-
     }
 
-
-    .bottom-nav{
-
-        display:flex;
-
-    }
-
-
-    body{
-
-        padding-bottom:88px;
-
-    }
 
 }
 
@@ -2402,7 +2488,7 @@ img{
 
     .container,
     .header-inner,
-    .hero-content{
+    .hero-inner{
 
         width:
             calc(100% - 24px);
@@ -2410,7 +2496,22 @@ img{
     }
 
 
-    .quick-stats{
+    .hero{
+        height:360px;
+    }
+
+
+    .hero-title{
+        font-size:41px;
+    }
+
+
+    .hero-description{
+        font-size:9px;
+    }
+
+
+    .stats{
 
         grid-template-columns:
             repeat(2,1fr);
@@ -2418,46 +2519,86 @@ img{
     }
 
 
-    .hero{
+    .note-grid{
 
-        height:355px;
+        grid-template-columns:1fr;
 
     }
 
+
+    .date-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .form-field.full{
+
+        grid-column:auto;
+
+    }
+
+
+    .main{
+
+        padding-top:17px;
+
+    }
+
+
+    .booking-card{
+
+        padding:17px;
+
+    }
+
+}
+
+
+@media(max-width:390px){
 
     .hero-title{
-
-        font-size:42px;
-
+        font-size:36px;
     }
 
 
-    .booking-body{
+    .date-grid{
 
-        padding:16px;
-
-    }
-
-
-    .booking-top{
-
-        padding:18px;
+        grid-template-columns:1fr;
 
     }
 
 }
 
 
-@media(min-width:951px){
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-    .bottom-nav{
+@media(prefers-reduced-motion:reduce){
 
-        display:none!important;
+    *,
+    *::before,
+    *::after{
+
+        scroll-behavior:auto!important;
+
+        transition:none!important;
+
+        animation:none!important;
 
     }
 
 }
-
 
 </style>
 
@@ -2481,7 +2622,7 @@ img{
     class="logo"
 >
 
-    <div class="logo-mark">
+    <div class="logo-img">
 
         <img
             src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
@@ -2495,7 +2636,7 @@ img{
     </div>
 
 
-    <div>
+    <div class="logo-copy">
 
         <div class="logo-title">
             Adventure Junction
@@ -2530,20 +2671,14 @@ img{
 <div class="header-action">
 
     <a
+        class="instagram-button"
         href="https://www.instagram.com/adventure__junction"
         target="_blank"
         rel="noopener noreferrer"
-        class="instagram-btn"
         aria-label="Instagram"
     >
 
-        <svg
-            class="icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-        >
+        <svg class="icon">
 
             <rect
                 x="3"
@@ -2551,13 +2686,13 @@ img{
                 width="18"
                 height="18"
                 rx="5"
-            />
+            ></rect>
 
             <circle
                 cx="12"
                 cy="12"
                 r="4"
-            />
+            ></circle>
 
             <circle
                 cx="17.5"
@@ -2565,7 +2700,7 @@ img{
                 r="1"
                 fill="currentColor"
                 stroke="none"
-            />
+            ></circle>
 
         </svg>
 
@@ -2573,23 +2708,19 @@ img{
 
 
     <button
-        class="menu-btn"
-        id="menuBtn"
-        aria-label="Menu"
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
     >
 
-        <svg
-            class="icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-        >
+        <svg class="icon">
 
-            <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke-linecap="round"
-            />
+            <path d="M4 7h16"></path>
+
+            <path d="M4 12h16"></path>
+
+            <path d="M4 17h16"></path>
 
         </svg>
 
@@ -2608,20 +2739,10 @@ img{
 
     <a href="./index.html#expeditions">
 
-        <svg
-            class="icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M3 20h18M5 17l7-13 7 13"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
+        <svg class="icon icon-sm">
+            <path d="M4 19h16"></path>
+            <path d="M6 19l2-9h8l2 9"></path>
+            <path d="M9 10l3-6 3 6"></path>
         </svg>
 
         Expeditions
@@ -2631,21 +2752,9 @@ img{
 
     <a href="./index.html#how-it-works">
 
-        <svg
-            class="icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <circle cx="12" cy="12" r="9"/>
-
-            <path
-                d="M12 7v5l3 2"
-                stroke-linecap="round"
-            />
-
+        <svg class="icon icon-sm">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 8v4l2.5 2"></path>
         </svg>
 
         How It Works
@@ -2655,21 +2764,10 @@ img{
 
     <a href="./index.html#about">
 
-        <svg
-            class="icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <circle cx="12" cy="12" r="9"/>
-
-            <path
-                d="M12 10v6M12 7.5h.01"
-                stroke-linecap="round"
-            />
-
+        <svg class="icon icon-sm">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 11v5"></path>
+            <path d="M12 8h.01"></path>
         </svg>
 
         About Us
@@ -2697,115 +2795,89 @@ img{
 <div class="hero-overlay"></div>
 
 
+<div class="hero-inner">
+
 <div class="hero-content">
 
-<div>
 
-    <div class="hero-label">
+<div class="hero-badge">
 
-        <span class="hero-label-dot"></span>
+    <span class="hero-badge-dot"></span>
 
-        Adventure Booking
+    Adventure Booking
 
-    </div>
-
-
-    <h1
-        class="hero-title"
-        id="heroTitle"
-    >
-        Adventure
-    </h1>
+</div>
 
 
-    <div class="hero-meta">
-
-        <div class="hero-meta-item">
-
-            <svg
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-            >
-
-                <rect
-                    x="3"
-                    y="4"
-                    width="18"
-                    height="17"
-                    rx="3"
-                />
-
-                <path
-                    d="M16 2v4M8 2v4M3 10h18"
-                />
-
-            </svg>
-
-            <span id="heroDate">
-                Select date
-            </span>
-
-        </div>
+<h1
+    class="hero-title"
+    id="heroTitle"
+>
+    Adventure
+</h1>
 
 
-        <div class="hero-meta-item">
-
-            <svg
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-            >
-
-                <path
-                    d="M12 3l8 4.5v6c0 4.2-3.4 6.7-8 7.5-4.6-.8-8-3.3-8-7.5v-6L12 3z"
-                />
-
-                <path
-                    d="M8.5 12l2.3 2.3 4.8-5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-
-            </svg>
-
-            Technical Team
-
-        </div>
+<p
+    class="hero-description"
+    id="heroDescription"
+>
+    Select your preferred date and slot,
+    then complete participant details.
+</p>
 
 
-        <div class="hero-meta-item">
+<div class="hero-meta">
 
-            <svg
-                class="icon-sm"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-            >
+    <span>
 
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                />
+        <svg class="icon icon-sm">
+            <rect
+                x="3"
+                y="4"
+                width="18"
+                height="17"
+                rx="2"
+            ></rect>
+            <path d="M16 2v4"></path>
+            <path d="M8 2v4"></path>
+            <path d="M3 10h18"></path>
+        </svg>
 
-                <path
-                    d="M12 7v5l3 2"
-                    stroke-linecap="round"
-                />
+        Multiple Dates
 
-            </svg>
+    </span>
 
-            Limited Seats
 
-        </div>
+    <span>
 
-    </div>
+        <svg class="icon icon-sm">
+            <path d="M12 7v5l3 2"></path>
+            <circle
+                cx="12"
+                cy="12"
+                r="9"
+            ></circle>
+        </svg>
+
+        Multiple Slots
+
+    </span>
+
+
+    <span>
+
+        <svg class="icon icon-sm">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+
+        Up to 100 Guests
+
+    </span>
+
+</div>
 
 </div>
 
@@ -2826,42 +2898,35 @@ img{
 
 
 <!-- =========================================================
-     INFORMATION
+     LEFT
 ========================================================= -->
 
-<div class="left-column">
+<section class="left-column">
 
 
-<div class="quick-stats">
+<!-- QUICK STATS -->
+
+<div class="stats">
 
 
 <div class="stat">
 
     <div class="stat-icon">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M3 20h18M5 17l7-13 7 13"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
+        <svg class="icon icon-sm">
+            <path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"></path>
         </svg>
 
     </div>
 
     <div class="stat-label">
-        Experience
+        Adventure
     </div>
 
-    <div class="stat-value">
+    <div
+        class="stat-value"
+        id="statCategory"
+    >
         Adventure
     </div>
 
@@ -2872,24 +2937,9 @@ img{
 
     <div class="stat-icon">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M12 21s7-6.1 7-12a7 7 0 10-14 0c0 5.9 7 12 7 12z"
-            />
-
-            <circle
-                cx="12"
-                cy="9"
-                r="2.2"
-            />
-
+        <svg class="icon icon-sm">
+            <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
         </svg>
 
     </div>
@@ -2909,39 +2959,30 @@ img{
 
     <div class="stat-icon">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
+        <svg class="icon icon-sm">
             <rect
                 x="3"
                 y="4"
                 width="18"
                 height="17"
-                rx="3"
-            />
-
-            <path
-                d="M16 2v4M8 2v4M3 10h18"
-            />
-
+                rx="2"
+            ></rect>
+            <path d="M16 2v4"></path>
+            <path d="M8 2v4"></path>
+            <path d="M3 10h18"></path>
         </svg>
 
     </div>
 
     <div class="stat-label">
-        Upcoming
+        Dates
     </div>
 
     <div
         class="stat-value"
-        id="statDate"
+        id="statDates"
     >
-        —
+        Loading
     </div>
 
 </div>
@@ -2951,30 +2992,9 @@ img{
 
     <div class="stat-icon">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <circle
-                cx="9"
-                cy="8"
-                r="3"
-            />
-
-            <circle
-                cx="17"
-                cy="9"
-                r="2.5"
-            />
-
-            <path
-                d="M3 20c.5-4 2.5-6 6-6s5.5 2 6 6M14 15c3 0 5 1.7 6 5"
-            />
-
+        <svg class="icon icon-sm">
+            <path d="M5 12h14"></path>
+            <path d="M12 5v14"></path>
         </svg>
 
     </div>
@@ -2983,11 +3003,8 @@ img{
         Capacity
     </div>
 
-    <div
-        class="stat-value"
-        id="statCapacity"
-    >
-        —
+    <div class="stat-value">
+        100 Max
     </div>
 
 </div>
@@ -2996,90 +3013,73 @@ img{
 </div>
 
 
-<!-- ABOUT -->
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
 <details
-    class="info-card"
+    class="card info-card"
     open
 >
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
+        <svg class="icon">
             <circle
                 cx="12"
                 cy="12"
                 r="9"
-            />
-
-            <path
-                d="M12 10v6M12 7.5h.01"
-                stroke-linecap="round"
-            />
-
+            ></circle>
+            <path d="M12 11v5"></path>
+            <path d="M12 8h.01"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        About This Adventure
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            About This Adventure
+        </div>
+
+        <div class="summary-sub">
+            Explore the experience before booking
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path
-            d="M6 9l6 6 6-6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        />
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<p>
-    Lingya Waterfall is a stunning natural attraction
-    located around 13.5 km ahead of Lavasa city in
-    Maharashtra.
+<p id="aboutText">
+
+Lingya Waterfall is a beautiful natural attraction
+surrounded by lush greenery and vibrant monsoon
+landscapes. The experience combines trekking,
+nature, swimming and adventurous rappelling.
+
 </p>
 
 <p>
-    The waterfall derives its name from the prominent
-    pinnacle nearby, known as Lingya, which holds
-    cultural and spiritual value for the local community.
-</p>
 
-<p>
-    Surrounded by lush greenery and vibrant flora, the
-    waterfall becomes especially breathtaking during
-    the monsoon season.
+The area is ideal for participants who enjoy
+nature, adventure, photography and exploring
+less-crowded destinations.
+
 </p>
 
 </div>
@@ -3087,90 +3087,76 @@ img{
 </details>
 
 
-<!-- ATTRACTIONS -->
+<!-- =====================================================
+     ATTRACTIONS
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M3 20h18M5 17l7-13 7 13"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
+        <svg class="icon">
+            <path d="M3 20l5-8 4 5 4-7 5 10"></path>
+            <path d="M3 20h18"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Major Attractions
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Major Attractions
+        </div>
+
+        <div class="summary-sub">
+            Highlights of the expedition
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path
-            d="M6 9l6 6 6-6"
-        />
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<div class="bullet-list">
+<div class="info-list">
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Most beautiful waterfall experience in Maharashtra.
-    </div>
+<div class="info-item">
+    <span class="info-bullet"></span>
+    <span>300+ ft adventurous rappelling.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        300+ ft adventurous rappelling.
-    </div>
+<div class="info-item">
+    <span class="info-bullet"></span>
+    <span>Beautiful monsoon waterfall experience.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Natural pool below the waterfall.
-    </div>
+<div class="info-item">
+    <span class="info-bullet"></span>
+    <span>Natural pool below the waterfall.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Crystal-clear bluish-green water.
-    </div>
+<div class="info-item">
+    <span class="info-bullet"></span>
+    <span>Crystal-clear bluish-green water.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Dense forest exploration.
-    </div>
+<div class="info-item">
+    <span class="info-bullet"></span>
+    <span>Dense forest and scenic surroundings.</span>
+</div>
 
 </div>
 
@@ -3179,128 +3165,115 @@ img{
 </details>
 
 
-<!-- ITINERARY -->
+<!-- =====================================================
+     ITINERARY
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
+        <svg class="icon">
             <circle
                 cx="12"
                 cy="12"
                 r="9"
-            />
-
-            <path
-                d="M12 7v5l3 2"
-                stroke-linecap="round"
-            />
-
+            ></circle>
+            <path d="M12 7v5l3 2"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Itinerary
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Itinerary
+        </div>
+
+        <div class="summary-sub">
+            Day plan & activity timeline
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path d="M6 9l6 6 6-6"/>
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<div class="bullet-list">
+<div class="info-list">
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        03:00 AM — Reach base village.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>03:00 AM</strong> — Reach base village.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        03:00–04:00 AM — Rest in bus.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>03:00–04:00 AM</strong> — Rest in bus.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        05:00 AM — Morning routine.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>05:00 AM</strong> — Morning routine.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        05:15 AM — Morning tea & breakfast.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>05:15 AM</strong> — Tea & breakfast.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        05:30 AM — Trek introduction with team.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>05:30 AM</strong> — Trek introduction with team.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        05:45 AM — Reach Lingya Waterfall.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>05:45 AM</strong> — Reach Lingya Waterfall.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        06:00 AM — Reach rappelling point.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>06:00 AM</strong> — Reach rappelling point.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        07:30 AM — Rappelling begins.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>07:30 AM</strong> — Rappelling begins.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        03:00 PM — Complete activity and trek towards base.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>03:00 PM</strong> — Complete activity and trek towards base village.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        04:30 PM — Reach base village.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>04:30 PM</strong> — Reach base village.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        04:30–05:30 PM — Lunch.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>04:30–05:30 PM</strong> — Lunch.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        05:30 PM — Journey back to city.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span><strong>05:30 PM</strong> — Journey back to city.</span>
+</div>
 
 </div>
 
@@ -3309,99 +3282,124 @@ img{
 </details>
 
 
-<!-- COST -->
+<!-- =====================================================
+     COST
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
+        <svg class="icon">
             <rect
-                x="3"
+                x="2"
                 y="5"
-                width="18"
+                width="20"
                 height="14"
-                rx="3"
-            />
-
-            <path
-                d="M3 10h18M7 15h3"
-            />
-
+                rx="2"
+            ></rect>
+            <path d="M2 10h20"></path>
+            <path d="M6 15h4"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Cost Includes
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Cost Includes & Excludes
+        </div>
+
+        <div class="summary-sub">
+            Know exactly what is covered
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path d="M6 9l6 6 6-6"/>
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<div class="bullet-list">
+<p><strong>Includes</strong></p>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Transport by Non-AC Bus.
-    </div>
+<div class="info-list">
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Adventure insurance with travel cover.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Transport by Non-AC Bus.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        One-time tea, breakfast & Veg lunch.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Adventure insurance with travel cover.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Safety equipment / gears.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Tea, breakfast & Veg lunch.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        300+ ft adventurous rappelling.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Safety equipment / gears.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Basic first aid.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>300+ ft adventurous rappelling.</span>
+</div>
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Basic first aid.</span>
+</div>
+
+</div>
+
+
+<p style="margin-top:15px;">
+<strong>Excludes</strong>
+</p>
+
+<div class="info-list">
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Cold drinks, mineral water, etc.</span>
+</div>
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Dinner and personal expenses.</span>
+</div>
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Private orders of meals or beverages.</span>
+</div>
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Travel expenses to railway stations.</span>
+</div>
+
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Medical expenses other than first aid.</span>
+</div>
 
 </div>
 
@@ -3410,125 +3408,112 @@ img{
 </details>
 
 
-<!-- THINGS TO CARRY -->
+<!-- =====================================================
+     THINGS TO CARRY
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M6 8h12l1 13H5L6 8z"
-            />
-
-            <path
-                d="M9 8V6a3 3 0 016 0v2"
-            />
-
+        <svg class="icon">
+            <path d="M6 8h12v12H6z"></path>
+            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+            <path d="M10 12h4"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Things to Carry
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Things to Carry
+        </div>
+
+        <div class="summary-sub">
+            Pack smart for the adventure
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path d="M6 9l6 6 6-6"/>
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<div class="bullet-list">
+<div class="info-list">
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Sanitizer, masks and personal medicines.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Sanitizer, masks and personal medicines.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        2–3 litres of water.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>2–3 litres of water (Must).</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Head torch / normal torch with extra batteries.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Head torch / torch with extra batteries.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Full-sleeve T-shirt and full pants.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Full-sleeve T-shirt and full pants.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Good trekking shoes and extra socks.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Good trekking shoes and extra socks.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Warm clothes / shawl, towel and extra clothes.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Warm clothes / shawl, towel and extra clothes.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Raincoat / poncho.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Raincoat / poncho.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Camera / cap (optional).
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Camera / cap (Optional).</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Electrolyte packets.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Electrolyte packets.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Fruits / dry fruits.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Fruits / dry fruits for the trek.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Haversack for belongings.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Haversack (Optional).</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Support stick if required.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Support stick (Optional).</span>
+</div>
 
 </div>
 
@@ -3537,93 +3522,75 @@ img{
 </details>
 
 
-<!-- DO'S -->
+<!-- =====================================================
+     DO'S
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M9 11l3 3L21 5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M21 12v6a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h9"
-                stroke-linecap="round"
-            />
-
+        <svg class="icon">
+            <path d="M5 12l4 4L19 6"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Do's
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Do's
+        </div>
+
+        <div class="summary-sub">
+            Before & during the trip
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path d="M6 9l6 6 6-6"/>
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
 
 <div class="info-content">
 
-<div class="bullet-list">
+<div class="info-list">
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Please cut your toenails.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Please cut your toenails before the trek.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Carry regular medicines if required.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Carry regular medicines if required.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Inform your family or close friends about this event.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Inform your family or close friends about this event.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Carry trekking / sports shoes with good grip.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Carry trekking / sports shoes with good grip.</span>
+</div>
 
-    <div class="bullet">
-        <span class="bullet-mark"></span>
-        Reach the meeting point at least 10 minutes early.
-    </div>
+<div class="info-item">
+<span class="info-bullet"></span>
+<span>Reach the meeting point at least 10 minutes early.</span>
+</div>
 
 </div>
 
@@ -3632,74 +3599,48 @@ img{
 </details>
 
 
-<!-- REFUND -->
+<!-- =====================================================
+     REFUND POLICY
+===================================================== -->
 
-<details class="info-card">
+<details class="card info-card">
 
 <summary>
 
-<div class="info-heading">
+    <div class="summary-icon">
 
-    <div class="info-icon">
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <path
-                d="M20 11a8 8 0 00-14.8-4L3 10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M3 5v5h5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M4 13a8 8 0 0014.8 4L21 14"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M21 19v-5h-5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
+        <svg class="icon">
+            <path d="M4 7h11"></path>
+            <path d="M4 7l3-3"></path>
+            <path d="M4 7l3 3"></path>
+            <path d="M20 17H9"></path>
+            <path d="M20 17l-3-3"></path>
+            <path d="M20 17l-3 3"></path>
         </svg>
 
     </div>
 
-    <div class="info-title">
-        Refund Policy
+
+    <div class="summary-text">
+
+        <div class="summary-title">
+            Refund Policy
+        </div>
+
+        <div class="summary-sub">
+            Cancellation & refund terms
+        </div>
+
     </div>
 
-</div>
 
+    <div class="summary-arrow">
 
-<div class="info-chevron">
+        <svg class="icon icon-sm">
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
 
-    <svg
-        class="icon-sm"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-
-        <path d="M6 9l6 6 6-6"/>
-
-    </svg>
-
-</div>
+    </div>
 
 </summary>
 
@@ -3707,20 +3648,27 @@ img{
 <div class="info-content">
 
 <p>
-    In case of cancellation <strong>before 48 hours</strong>
-    of departure time, <strong>50% of the total trek fees
-    will be deducted</strong>.
+
+<strong>Cancellation before 48 hours:</strong>
+50% of the total trek fees will be deducted.
+
 </p>
 
-<p>
-    If cancellation is made <strong>within 48 hours before
-    departure</strong>, <strong>100% of the total trek fees
-    will be deducted</strong>.
-</p>
 
 <p>
-    Refunds will be processed within
-    <strong>2 business days</strong>.
+
+<strong>Cancellation within 48 hours before departure:</strong>
+100% of the trek fees will be deducted.
+
+</p>
+
+
+<p>
+
+<strong>Refund processing:</strong>
+Eligible refunds will be processed within
+<strong>2 business days.</strong>
+
 </p>
 
 </div>
@@ -3728,207 +3676,164 @@ img{
 </details>
 
 
-<!-- IMPORTANT NOTES -->
+<!-- =====================================================
+     IMPORTANT SAFETY
+===================================================== -->
 
-<section class="info-card">
+<section class="card">
 
-<div style="padding:19px;">
+<div class="card-padding">
 
 <div
-    class="info-heading"
-    style="margin-bottom:10px;"
+    style="
+        font-size:14px;
+        font-weight:900;
+        margin-bottom:11px;
+    "
 >
+    Important Safety Notes
+</div>
 
-    <div class="info-icon">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<div class="note-grid">
 
-            <path
-                d="M12 3l9 18H3L12 3z"
-                stroke-linejoin="round"
-            />
 
-            <path
-                d="M12 9v5M12 17h.01"
-                stroke-linecap="round"
-            />
+<div class="note-box warning">
 
-        </svg>
+<div class="note-heading">
 
-    </div>
+<svg
+    class="icon"
+    viewBox="0 0 24 24"
+>
+    <path d="M12 3L2.5 20h19L12 3z"></path>
+    <path d="M12 9v5"></path>
+    <path d="M12 17h.01"></path>
+</svg>
 
-    <div class="info-title">
-        Important Notes
-    </div>
+No Perfumes
 
 </div>
 
 
-<div class="note warning">
+<div class="note-list">
 
-    <div class="note-icon">
+<div>
+Do not use perfumes or strong fragrances.
+</div>
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<div>
+They can attract honeybees in the jungle and may be dangerous.
+</div>
 
-            <path
-                d="M12 3c2 3 5 4.5 5 8.5a5 5 0 11-10 0C7 7.5 10 6 12 3z"
-            />
-
-        </svg>
-
-    </div>
-
-    <div>
-        Do not use perfumes. Strong fragrances can attract
-        honeybees in the jungle and may create a serious
-        safety risk.
-    </div>
+</div>
 
 </div>
 
 
-<div class="note warning">
+<div class="note-box warning">
 
-    <div class="note-icon">
+<div class="note-heading">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<svg
+    class="icon"
+    viewBox="0 0 24 24"
+>
+    <rect
+        x="5"
+        y="8"
+        width="14"
+        height="13"
+        rx="2"
+    ></rect>
+    <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
+</svg>
 
-            <circle
-                cx="12"
-                cy="8"
-                r="3"
-            />
-
-            <path
-                d="M5 21l3-7h8l3 7"
-            />
-
-        </svg>
-
-    </div>
-
-    <div>
-        Do not wear gold or carry valuables.
-    </div>
+No Valuables
 
 </div>
 
 
-<div class="note blue">
+<div class="note-list">
 
-    <div class="note-icon">
+<div>
+Do not wear gold.
+</div>
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<div>
+Avoid carrying unnecessary valuables.
+</div>
 
-            <path
-                d="M20 11.5a7.5 7.5 0 01-8 7.5 8 8 0 01-3.4-.8L4 20l1.8-4.1A7.5 7.5 0 1112 19"
-            />
-
-            <path
-                d="M8 10h8M8 13h5"
-                stroke-linecap="round"
-            />
-
-        </svg>
-
-    </div>
-
-    <div>
-        Inform your friends and family about this trip.
-    </div>
+</div>
 
 </div>
 
 
-<div class="note yellow">
+<div class="note-box info">
 
-    <div class="note-icon">
+<div class="note-heading">
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<svg
+    class="icon"
+    viewBox="0 0 24 24"
+>
+    <path d="M4 4h16v16H4z"></path>
+    <path d="M8 8h8"></path>
+    <path d="M8 12h8"></path>
+    <path d="M8 16h5"></path>
+</svg>
 
-            <path
-                d="M6 4v16M18 4v16"
-                stroke-linecap="round"
-            />
-
-            <path
-                d="M6 7h8a3 3 0 010 6H6M6 13h8a3 3 0 010 6H6"
-                stroke-linecap="round"
-            />
-
-        </svg>
-
-    </div>
-
-    <div>
-        Veg meal is included in the base price.
-        Non-Veg meal costs <strong>₹100 extra per participant</strong>.
-    </div>
+Stay Connected
 
 </div>
 
 
-<div class="note warning">
+<div class="note-list">
 
-    <div class="note-icon">
+<div>
+Inform your friends and family about the trip.
+</div>
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
+<div>
+Share your itinerary with someone you trust.
+</div>
 
-            <circle
-                cx="12"
-                cy="12"
-                r="9"
-            />
+</div>
 
-            <path
-                d="M12 7v5l3 2"
-                stroke-linecap="round"
-            />
+</div>
 
-        </svg>
 
-    </div>
+<div class="note-box safe">
 
-    <div>
-        Participants below <strong>16 years are not allowed</strong>.
-        Age verification is performed before participant submission.
-    </div>
+<div class="note-heading">
+
+<svg
+    class="icon"
+    viewBox="0 0 24 24"
+>
+    <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"></path>
+    <path d="M8 12l2.5 2.5L16 9"></path>
+</svg>
+
+Age & Safety
+
+</div>
+
+
+<div class="note-list">
+
+<div>
+Participants below 16 years are not allowed.
+</div>
+
+<div>
+Follow instructions from the adventure team.
+</div>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -3937,203 +3842,188 @@ img{
 </section>
 
 
-</div>
+</section>
 
 
 <!-- =========================================================
-     BOOKING PANEL
+     BOOKING COLUMN
 ========================================================= -->
 
-<aside class="booking">
+<aside class="booking-column">
 
-<section class="booking-card">
+<section class="card booking-card">
 
 
-<div class="booking-top">
+<div class="booking-heading">
 
-<div class="booking-label">
-    Reserve Your Adventure
+<div>
+
+<div class="booking-title">
+Reserve Your Adventure
 </div>
 
-<div
-    class="booking-title"
-    id="bookingTitle"
->
-    Select Your Date
-</div>
-
-<div class="booking-sub">
-    Secure your seats in a few simple steps.
+<div class="booking-subtitle">
+Choose your date, slot and participants.
 </div>
 
 </div>
 
 
-<div class="booking-body">
+<div class="live-badge">
 
+<span class="live-dot"></span>
 
-<!-- =====================================================
-     STEP 1
-===================================================== -->
+Live
 
-<div class="step">
-
-<div class="step-head">
-
-    <div class="step-number">
-        1
-    </div>
-
-    <div>
-
-        <div class="step-title">
-            Select Date
-        </div>
-
-        <div class="step-caption">
-            All upcoming dates & availability
-        </div>
-
-    </div>
-
-</div>
-
-
-<div
-    id="dateLoading"
-    class="loading"
->
-
-    <div class="spinner"></div>
-
-    Loading available dates...
-
-</div>
-
-
-<div
-    id="dateError"
-    class="loading"
-    style="display:none;color:#a13e3e;"
->
-    Unable to load available dates.
-</div>
-
-
-<div
-    id="dateList"
-    class="date-list"
->
 </div>
 
 </div>
 
 
 <!-- =====================================================
-     STEP 2
+     STEP 1 DATE
+===================================================== -->
+
+<div class="booking-step">
+
+<div class="step-header">
+
+<div class="step-number">
+1
+</div>
+
+<div>
+
+<div class="step-title">
+Select Date
+</div>
+
+<div class="step-subtitle">
+Choose from upcoming adventure dates
+</div>
+
+</div>
+
+</div>
+
+
+<div
+    class="date-grid"
+    id="dateGrid"
+>
+
+<div class="loading">
+
+<div class="spinner"></div>
+
+Loading dates...
+
+</div>
+
+</div>
+
+
+<div
+    class="slot-wrapper"
+    id="slotWrapper"
+    style="display:none;"
+>
+
+<label class="field-label">
+Available Slots
+</label>
+
+
+<div
+    class="slot-grid"
+    id="slotGrid"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     STEP 2 GUESTS
 ===================================================== -->
 
 <div
-    class="step"
+    class="booking-step"
     id="guestStep"
     style="display:none;"
 >
 
-<div class="step-head">
+<div class="step-header">
 
-    <div class="step-number">
-        2
-    </div>
+<div class="step-number">
+2
+</div>
 
-    <div>
+<div>
 
-        <div class="step-title">
-            Number of Guests
-        </div>
+<div class="step-title">
+Number of Guests
+</div>
 
-        <div class="step-caption">
-            Choose how many people are joining
-        </div>
+<div class="step-subtitle">
+Select how many participants are joining
+</div>
 
-    </div>
+</div>
 
 </div>
 
 
-<div class="counter">
+<div class="counter-box">
+
+<div class="counter-row">
 
 <div>
 
-    <div class="counter-title">
-        Total Guests
-    </div>
+<div class="counter-label">
+Total Guests
+</div>
 
-    <div
-        class="counter-sub"
-        id="counterSub"
-    >
-        Maximum available seats
-    </div>
+<div
+    class="counter-helper"
+    id="counterHelper"
+>
+Maximum 100 guests
+</div>
 
 </div>
 
 
 <div class="counter-controls">
 
-    <button
-        type="button"
-        class="counter-button"
-        id="minusBtn"
-    >
-
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-        >
-
-            <path
-                d="M5 12h14"
-                stroke-linecap="round"
-            />
-
-        </svg>
-
-    </button>
+<button
+    class="counter-button"
+    id="minusButton"
+    type="button"
+>
+−
+</button>
 
 
-    <div
-        class="counter-number"
-        id="guestCount"
-    >
-        1
-    </div>
+<div
+    class="counter-value"
+    id="guestCount"
+>
+1
+</div>
 
 
-    <button
-        type="button"
-        class="counter-button"
-        id="plusBtn"
-    >
+<button
+    class="counter-button"
+    id="plusButton"
+    type="button"
+>
++
+</button>
 
-        <svg
-            class="icon-sm"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-        >
-
-            <path
-                d="M12 5v14M5 12h14"
-                stroke-linecap="round"
-            />
-
-        </svg>
-
-    </button>
+</div>
 
 </div>
 
@@ -4143,57 +4033,57 @@ img{
 
 
 <!-- =====================================================
-     STEP 3
+     STEP 3 PARTICIPANTS
 ===================================================== -->
 
 <div
-    class="step"
+    class="booking-step"
     id="participantStep"
     style="display:none;"
 >
 
-<div class="step-head">
+<div class="step-header">
 
-    <div class="step-number">
-        3
-    </div>
+<div class="step-number">
+3
+</div>
 
-    <div>
+<div>
 
-        <div class="step-title">
-            Participant Details
-        </div>
+<div class="step-title">
+Participant Details
+</div>
 
-        <div class="step-caption">
-            Add each guest one at a time
-        </div>
+<div class="step-subtitle">
+Save one participant at a time
+</div>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="progress">
 
-<div class="progress-head">
+<div class="progress-top">
 
-    <span>
-        Participant progress
-    </span>
+<span>
+Participant progress
+</span>
 
-    <span id="progressText">
-        0 / 1
-    </span>
+<span id="progressText">
+0 / 1
+</span>
 
 </div>
 
 
-<div class="progress-bar">
+<div class="progress-track">
 
-    <div
-        class="progress-fill"
-        id="progressFill"
-    ></div>
+<div
+    class="progress-fill"
+    id="progressFill"
+></div>
 
 </div>
 
@@ -4201,109 +4091,113 @@ img{
 
 
 <div
-    id="savedList"
     class="saved-list"
+    id="savedList"
 >
 </div>
 
 
 <div
-    id="participantForm"
     class="participant-form"
+    id="participantForm"
 >
 
-<div class="participant-head">
 
-    <div
-        class="participant-number"
-        id="currentNumber"
-    >
-        1
-    </div>
+<div class="participant-top">
 
-    <div>
+<div
+    class="participant-number"
+    id="participantNumber"
+>
+1
+</div>
 
-        <div class="participant-title">
-            Participant 1
-        </div>
 
-        <div class="participant-sub">
-            Save this participant to continue
-        </div>
+<div>
 
-    </div>
+<div class="participant-title">
+Participant <span id="participantText">1</span>
+</div>
+
+<div class="participant-subtitle">
+Enter accurate details
+</div>
+
+</div>
 
 </div>
 
 
-<div class="field">
+<div class="form-grid">
+
+
+<div class="form-field full">
 
 <label class="field-label">
-    FULL NAME *
+Full Name *
 </label>
 
 <input
-    id="guestName"
+    id="nameInput"
     class="input"
     type="text"
-    placeholder="Enter full name"
+    placeholder="Participant full name"
     autocomplete="name"
 >
 
 </div>
 
 
-<div class="field">
+<div class="form-field">
 
 <label class="field-label">
-    AGE *
+Age *
 </label>
 
 <input
-    id="guestAge"
+    id="ageInput"
     class="input"
     type="number"
     min="16"
     max="100"
     inputmode="numeric"
-    placeholder="16 or above"
+    placeholder="16+"
 >
 
 
 <div
-    id="ageError"
-    class="age-error"
+    class="age-warning"
+    id="ageWarning"
 >
-    Participants below 16 years are not allowed.
-    Please enter a valid age of 16 or above.
+Participants below 16 years are not allowed.
 </div>
 
 </div>
 
 
-<div class="field">
+<div class="form-field">
 
 <label class="field-label">
-    MOBILE NUMBER *
+Mobile Number *
 </label>
 
 <input
-    id="guestPhone"
+    id="phoneInput"
     class="input"
     type="tel"
     maxlength="10"
     inputmode="numeric"
-    placeholder="10-digit mobile number"
+    placeholder="10 digit number"
     autocomplete="tel"
 >
 
 </div>
 
 
-<div class="field">
+<div class="form-field">
 
 <label class="field-label">
-    GENDER *
+Gender *
 </label>
 
 
@@ -4312,18 +4206,18 @@ img{
 <button
     type="button"
     class="choice"
-    id="maleBtn"
+    id="maleChoice"
 >
-    Male
+Male
 </button>
 
 
 <button
     type="button"
     class="choice"
-    id="femaleBtn"
+    id="femaleChoice"
 >
-    Female
+Female
 </button>
 
 </div>
@@ -4331,10 +4225,10 @@ img{
 </div>
 
 
-<div class="field">
+<div class="form-field">
 
 <label class="field-label">
-    MEAL PREFERENCE *
+Meal Preference *
 </label>
 
 
@@ -4343,26 +4237,29 @@ img{
 <button
     type="button"
     class="choice selected"
-    id="vegBtn"
+    id="vegChoice"
 >
-    Veg
+Veg
 </button>
 
 
 <button
     type="button"
     class="choice"
-    id="nonVegBtn"
+    id="nonVegChoice"
 >
-    Non-Veg
+Non-Veg
 </button>
 
 </div>
 
 
-<div class="meal-note">
-    Non-Veg meal: +₹100 per participant.
+<div class="meal-extra">
+Non-Veg meal adds ₹100 per participant.
 </div>
+
+</div>
+
 
 </div>
 
@@ -4370,66 +4267,69 @@ img{
 <button
     type="button"
     class="save-button"
-    id="saveGuest"
+    id="saveButton"
 >
-    Save Participant
+Save Participant
 </button>
 
 </div>
 
 
 <div
-    id="participantsDone"
+    id="allParticipantsComplete"
     style="
         display:none;
         margin-top:10px;
         padding:11px;
-        border-radius:12px;
-        background:#edfaf4;
-        border:1px solid #d1eee0;
-        color:#13885d;
+        border-radius:13px;
+        background:#edf9f3;
+        border:1px solid #d2ecdf;
+        color:#16845a;
         font-size:8px;
-        font-weight:800;
+        line-height:1.5;
+        font-weight:900;
     "
 >
-    All participant details saved successfully.
+
+✓ All participant details saved.
+
 </div>
 
 </div>
 
 
 <!-- =====================================================
-     STEP 4
+     STEP 4 PICKUP
 ===================================================== -->
 
 <div
-    class="step"
+    class="booking-step"
     id="pickupStep"
     style="display:none;"
 >
 
-<div class="step-head">
+<div class="step-header">
 
-    <div class="step-number">
-        4
-    </div>
+<div class="step-number">
+4
+</div>
 
-    <div>
+<div>
 
-        <div class="step-title">
-            Pickup Point
-        </div>
+<div class="step-title">
+Pickup Point
+</div>
 
-        <div class="step-caption">
-            Choose your boarding location
-        </div>
+<div class="step-subtitle">
+Select your preferred boarding point
+</div>
 
-    </div>
+</div>
 
 </div>
 
 
-<div class="pickup-list">
+<div class="pickup-grid">
 
 
 <button
@@ -4441,13 +4341,13 @@ img{
 
 <div class="pickup-row">
 
-    <span class="pickup-name">
-        Katraj Main Bus Stop, Pune
-    </span>
+<span class="pickup-name">
+Katraj Main Bus Stop, Pune
+</span>
 
-    <span class="pickup-time">
-        11:00 PM
-    </span>
+<span class="pickup-time">
+11:00 PM
+</span>
 
 </div>
 
@@ -4463,13 +4363,13 @@ img{
 
 <div class="pickup-row">
 
-    <span class="pickup-name">
-        Navale Bridge
-    </span>
+<span class="pickup-name">
+Navale Bridge
+</span>
 
-    <span class="pickup-time">
-        11:15 PM
-    </span>
+<span class="pickup-time">
+11:15 PM
+</span>
 
 </div>
 
@@ -4485,13 +4385,13 @@ img{
 
 <div class="pickup-row">
 
-    <span class="pickup-name">
-        Chandani Chowk
-    </span>
+<span class="pickup-name">
+Chandani Chowk
+</span>
 
-    <span class="pickup-time">
-        11:30 PM
-    </span>
+<span class="pickup-time">
+11:30 PM
+</span>
 
 </div>
 
@@ -4507,13 +4407,13 @@ img{
 
 <div class="pickup-row">
 
-    <span class="pickup-name">
-        Hinjewadi Chowk
-    </span>
+<span class="pickup-name">
+Hinjewadi Chowk
+</span>
 
-    <span class="pickup-time">
-        11:45 PM
-    </span>
+<span class="pickup-time">
+11:45 PM
+</span>
 
 </div>
 
@@ -4529,13 +4429,13 @@ img{
 
 <div class="pickup-row">
 
-    <span class="pickup-name">
-        Pirangut Chowk, Hinjewadi Phase 3
-    </span>
+<span class="pickup-name">
+Pirangut Chowk, Hinjewadi Phase 3
+</span>
 
-    <span class="pickup-time">
-        12:00 AM
-    </span>
+<span class="pickup-time">
+12:00 AM
+</span>
 
 </div>
 
@@ -4551,65 +4451,63 @@ img{
 ===================================================== -->
 
 <div
-    id="summary"
+    id="summaryArea"
     style="display:none;"
 >
 
-<div class="summary">
+<div class="summary-card">
 
 
 <div class="summary-row">
 
-    <span>
-        Guests
-    </span>
+<span>
+Participants
+</span>
 
-    <strong id="summaryGuests">
-        1
-    </strong>
+<strong id="summaryGuests">
+1
+</strong>
 
 </div>
 
 
 <div class="summary-row">
 
-    <span>
-        Trek Fee
-    </span>
+<span>
+Adventure Fee
+</span>
 
-    <strong id="summaryBase">
-        ₹0
-    </strong>
+<strong id="summaryAdventure">
+₹0
+</strong>
 
 </div>
 
 
-<div class="summary-row extra">
+<div class="summary-row orange">
 
-    <span>
-        Non-Veg Meals
-    </span>
+<span>
+Non-Veg Supplement
+</span>
 
-    <strong id="summaryExtra">
-        ₹0
-    </strong>
+<strong id="summaryNonVeg">
+₹0
+</strong>
 
 </div>
 
 
 <div class="summary-total">
 
-    <div class="summary-total-label">
-        Total
-    </div>
+<div class="total-label">
+Final Total
+</div>
 
-    <div
-        class="summary-total-value"
-        id="summaryTotal"
-    >
-        ₹0
-    </div>
-
+<div
+    class="total-price"
+    id="summaryTotal"
+>
+₹0
 </div>
 
 </div>
@@ -4621,13 +4519,13 @@ img{
     id="paymentButton"
     disabled
 >
-    Continue to Payment
+Proceed to Payment
 </button>
 
 </div>
 
-
 </div>
+
 
 </section>
 
@@ -4642,7 +4540,7 @@ img{
 
 
 <!-- =========================================================
-     BOTTOM NAV
+     BOTTOM NAVIGATION
 ========================================================= -->
 
 <nav class="bottom-nav">
@@ -4653,32 +4551,19 @@ img{
     class="bottom-item"
 >
 
-<svg
-    class="bottom-icon"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
->
+<svg class="icon">
 
-    <path
-        d="M3 10.5L12 3l9 7.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    />
+    <path d="M3 11l9-8 9 8"></path>
 
-    <path
-        d="M5 9.5V21h14V9.5"
-        stroke-linejoin="round"
-    />
+    <path d="M5 10v10h14V10"></path>
 
-    <path
-        d="M9 21v-6h6v6"
-    />
+    <path d="M9 20v-6h6v6"></path>
 
 </svg>
 
+<span>
 Home
+</span>
 
 </a>
 
@@ -4688,94 +4573,91 @@ Home
     class="bottom-item"
 >
 
-<svg
-    class="bottom-icon"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
->
+<svg class="icon">
 
-    <path
-        d="M3 20h18M5 17l7-13 7 13"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    />
+    <path d="M3 20l6-10 4 6 3-5 5 9"></path>
+
+    <path d="M3 20h18"></path>
 
 </svg>
 
+<span>
 Explore
+</span>
 
 </a>
 
 
-<a
-    href="./book.html"
+<button
+    type="button"
     class="bottom-item active"
+    id="bottomBook"
 >
 
-<svg
-    class="bottom-icon"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
->
+<svg class="icon">
 
     <rect
         x="4"
-        y="5"
+        y="3"
         width="16"
-        height="15"
-        rx="3"
-    />
+        height="18"
+        rx="2"
+    ></rect>
 
-    <path
-        d="M8 3v4M16 3v4M4 10h16"
-        stroke-linecap="round"
-    />
+    <path d="M8 7h8"></path>
 
-    <path
-        d="M8 14h3M8 17h5"
-        stroke-linecap="round"
-    />
+    <path d="M8 11h8"></path>
+
+    <path d="M8 15h5"></path>
 
 </svg>
 
-Book
+<span>
+Booking
+</span>
 
-</a>
+</button>
 
 
 <a
-    href="./index.html#about"
+    href="https://www.instagram.com/adventure__junction"
+    target="_blank"
+    rel="noopener noreferrer"
     class="bottom-item"
 >
 
-<svg
-    class="bottom-icon"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
->
+<svg class="icon">
+
+    <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+    ></rect>
 
     <circle
         cx="12"
         cy="12"
-        r="9"
-    />
+        r="4"
+    ></circle>
 
-    <path
-        d="M12 10v6M12 7.5h.01"
-        stroke-linecap="round"
-    />
+    <circle
+        cx="17.5"
+        cy="6.5"
+        r="1"
+        fill="currentColor"
+        stroke="none"
+    ></circle>
 
 </svg>
 
-About
+<span>
+Instagram
+</span>
 
 </a>
+
 
 </nav>
 
@@ -4785,17 +4667,9 @@ About
 ========================================================= -->
 
 <div
-    id="toast"
     class="toast"
->
-</div>
-
-
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    id="toast"
+></div>
 
 
 <script>
@@ -4805,217 +4679,258 @@ About
 ========================================================= */
 
 const SUPABASE_URL =
-    "https://salaxcyxgwjqemryqwkx.supabase.co";
+    "https://salaxcyxgwjqemryqwk2.supabase.co";
+
 
 const SUPABASE_KEY =
     "sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO";
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+
+let supabaseClient = null;
 
 
 /* =========================================================
-   CONFIG
+   STATE
 ========================================================= */
 
-const MAX_FRONTEND_GUESTS = 100;
+const state = {
 
-const NON_VEG_FEE = 100;
+    expedition:null,
 
+    dates:[],
 
-/*
- * IMPORTANT:
- *
- * If your database has a different price,
- * it is automatically taken from the
- * selected expedition.
- */
+    selectedDate:null,
 
-let selectedEvent = null;
+    selectedSlot:null,
 
-let selectedDate = null;
+    guestQuantity:1,
 
-let availableSeats = 0;
+    guests:[],
 
-let guestQuantity = 1;
+    gender:"",
 
-let participants = [];
+    meal:"Veg",
 
-let currentGender = "";
+    pickup:null,
 
-let currentMeal = "Veg";
+    maxGuests:1,
 
-let selectedPickup = null;
+    price:0
+
+};
 
 
 /* =========================================================
-   DOM
+   HELPERS
 ========================================================= */
 
 const $ = id =>
     document.getElementById(id);
 
 
+function money(value){
+
+    return "₹" +
+        Number(value || 0)
+        .toLocaleString("en-IN");
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function showToast(
+    message,
+    error=false
+){
+
+    const toast =
+        $("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.toggle(
+        "error",
+        error
+    );
+
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        window.__toastTimer
+    );
+
+    window.__toastTimer =
+        setTimeout(
+            () =>
+                toast.classList.remove(
+                    "show"
+                ),
+            2800
+        );
+
+}
+
+
 /* =========================================================
-   START
+   READ SELECTED EVENT
+========================================================= */
+
+function getSelectedEvent(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(
+                "AJ_SELECTED_EVENT"
+            );
+
+        if(!raw)
+            return null;
+
+        return JSON.parse(raw);
+
+    }
+    catch(error){
+
+        console.warn(
+            "Selected event:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIALIZE
 ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    start
+    init
 );
 
 
-async function start(){
+async function init(){
 
     setupMenu();
 
-    setupCounter();
-
-    setupParticipantForm();
+    setupForm();
 
     setupPickup();
 
-    setupPayment();
+    setupBottomBook();
 
-    restoreSelectedEvent();
+    const selected =
+        getSelectedEvent();
 
-}
 
+    if(!selected){
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-function setupMenu(){
-
-    $("menuBtn")
-        .addEventListener(
-            "click",
-            () => {
-
-                $("mobileMenu")
-                    .classList
-                    .toggle("show");
-
-            }
+        showToast(
+            "Adventure selection not found.",
+            true
         );
 
-}
-
-
-/* =========================================================
-   RESTORE EVENT FROM INDEX
-========================================================= */
-
-function restoreSelectedEvent(){
-
-    let raw =
-        localStorage.getItem(
-            "AJ_SELECTED_EVENT"
-        );
-
-
-    /*
-     * Backward compatibility.
-     */
-
-    if(!raw){
-
-        raw =
-            sessionStorage.getItem(
-                "AJ_SELECTED_EVENT"
-            );
-
-    }
-
-
-    if(!raw){
-
-        showDateError(
-            "No adventure selected. Please return to Expeditions."
+        renderNoDates(
+            "Please return to Expeditions and select an adventure."
         );
 
         return;
 
     }
+
+
+    state.expedition =
+        selected;
+
+
+    state.price =
+        Number(
+            selected.price || 0
+        );
+
+
+    applyEventHeader(
+        selected
+    );
 
 
     try{
 
-        selectedEvent =
-            JSON.parse(raw);
+        if(
+            !window.supabase
+        ){
 
-    }catch(error){
+            throw new Error(
+                "Supabase library unavailable"
+            );
 
-        console.error(error);
-
-        showDateError(
-            "Unable to read the selected adventure."
-        );
-
-        return;
-
-    }
+        }
 
 
-    if(
-        !selectedEvent ||
-        !selectedEvent.id
-    ){
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
 
-        showDateError(
-            "Invalid adventure selection."
-        );
 
-        return;
+        await loadAdventureData();
 
     }
+    catch(error){
 
+        console.error(
+            error
+        );
 
-    updateEventUI();
+        renderNoDates(
+            "Unable to load adventure dates right now."
+        );
 
-    loadDates();
+    }
 
 }
 
 
 /* =========================================================
-   EVENT UI
+   HEADER DATA
 ========================================================= */
 
-function updateEventUI(){
+function applyEventHeader(event){
 
-    const title =
-        selectedEvent.title ||
+    $("heroTitle").textContent =
+        event.title ||
         "Adventure";
 
 
-    $("heroTitle")
-        .textContent =
-        title;
+    $("statCategory").textContent =
+        event.category ||
+        "Adventure";
 
 
-    $("bookingTitle")
-        .textContent =
-        title;
+    if(event.img){
 
-
-    $("statCapacity")
-        .textContent =
-        "Loading";
-
-
-    if(
-        selectedEvent.img
-    ){
-
-        $("heroImage")
-            .src =
-            selectedEvent.img;
+        $("heroImage").src =
+            event.img;
 
     }
 
@@ -5023,55 +4938,91 @@ function updateEventUI(){
 
 
 /* =========================================================
-   LOAD ALL UPCOMING DATES
+   LOAD EXPEDITION + DATES
 ========================================================= */
 
-async function loadDates(){
+async function loadAdventureData(){
 
-    $("dateLoading")
-        .style
-        .display="block";
-
-
-    $("dateError")
-        .style
-        .display="none";
+    const expeditionId =
+        state.expedition.id;
 
 
-    $("dateList")
-        .innerHTML="";
+    if(!expeditionId){
+
+        throw new Error(
+            "Missing expedition ID"
+        );
+
+    }
 
 
-    try{
+    /*
+     * First get fresh expedition data.
+     */
 
-        const today =
-            getToday();
-
-
-        const {
-            data,
-            error
-        } =
+    const expeditionResponse =
         await supabaseClient
-
-            .from(
-                "expedition_dates"
+            .from("expeditions")
+            .select("*")
+            .eq(
+                "id",
+                expeditionId
             )
+            .maybeSingle();
 
-            .select(
-                "expedition_id,event_date,total_seats,reserved_seats"
-            )
 
+    if(
+        expeditionResponse.error
+    ){
+
+        throw expeditionResponse.error;
+
+    }
+
+
+    if(
+        expeditionResponse.data
+    ){
+
+        state.expedition =
+            {
+                ...state.expedition,
+                ...expeditionResponse.data
+            };
+
+
+        state.price =
+            Number(
+                expeditionResponse.data.price ??
+                state.price ??
+                0
+            );
+
+
+        applyEventHeader(
+            state.expedition
+        );
+
+    }
+
+
+    /*
+     * IMPORTANT:
+     *
+     * We intentionally use *
+     * here so the page does not
+     * break because your slot
+     * column has a different name.
+     */
+
+    const dateResponse =
+        await supabaseClient
+            .from("expedition_dates")
+            .select("*")
             .eq(
                 "expedition_id",
-                selectedEvent.id
+                expeditionId
             )
-
-            .gte(
-                "event_date",
-                today
-            )
-
             .order(
                 "event_date",
                 {
@@ -5080,112 +5031,369 @@ async function loadDates(){
             );
 
 
-        if(error){
+    if(
+        dateResponse.error
+    ){
 
-            throw error;
-
-        }
-
-
-        const dates =
-            (data || [])
-            .map(
-                row => {
-
-                    const total =
-                        Number(
-                            row.total_seats || 0
-                        );
-
-
-                    const reserved =
-                        Number(
-                            row.reserved_seats || 0
-                        );
-
-
-                    const available =
-                        Math.max(
-                            0,
-                            total-reserved
-                        );
-
-
-                    return {
-
-                        date:
-                            row.event_date,
-
-                        total:
-                            total,
-
-                        reserved:
-                            reserved,
-
-                        available:
-                            available
-
-                    };
-
-                }
-            )
-            .filter(
-                row =>
-                    row.available > 0
-            );
-
-
-        $("dateLoading")
-            .style
-            .display="none";
-
-
-        if(!dates.length){
-
-            showDateError(
-                "No upcoming seats are currently available."
-            );
-
-            return;
-
-        }
-
-
-        renderDates(
-            dates
-        );
-
-
-        /*
-         * Automatically select the
-         * first available date.
-         *
-         * User can change it.
-         */
-
-        selectDate(
-            dates[0]
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "DATE LOAD ERROR:",
-            error
-        );
-
-
-        $("dateLoading")
-            .style
-            .display="none";
-
-
-        showDateError(
-            "Unable to load available dates. Please try again."
-        );
+        throw dateResponse.error;
 
     }
+
+
+    const rows =
+        Array.isArray(
+            dateResponse.data
+        )
+        ? dateResponse.data
+        : [];
+
+
+    const today =
+        new Date();
+
+    today.setHours(
+        0,0,0,0
+    );
+
+
+    state.dates =
+        rows
+        .map(
+            normalizeDateRow
+        )
+        .filter(
+            row =>
+                row.dateObject &&
+                row.dateObject >= today
+        );
+
+
+    /*
+     * Keep all future dates.
+     */
+
+    renderDates();
+
+
+    /*
+     * Live database updates.
+     */
+
+    supabaseClient
+        .channel(
+            "aj-booking-live-" +
+            expeditionId
+        )
+        .on(
+            "postgres_changes",
+            {
+                event:"*",
+                schema:"public",
+                table:"expedition_dates",
+                filter:
+                    "expedition_id=eq." +
+                    expeditionId
+            },
+            () => {
+
+                refreshAvailability();
+
+            }
+        )
+        .subscribe();
+
+
+    /*
+     * Refresh every minute.
+     */
+
+    setInterval(
+        refreshAvailability,
+        60000
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE DATE ROW
+========================================================= */
+
+function normalizeDateRow(row){
+
+    const rawDate =
+        row.event_date ||
+        row.date ||
+        row.start_date;
+
+
+    const dateObject =
+        rawDate
+        ? new Date(
+            rawDate +
+            (
+                String(rawDate).length<=10
+                ? "T00:00:00"
+                : ""
+            )
+        )
+        : null;
+
+
+    const total =
+        Number(
+            row.total_seats ??
+            row.capacity ??
+            row.max_seats ??
+            row.seats ??
+            0
+        );
+
+
+    const reserved =
+        Number(
+            row.reserved_seats ??
+            row.booked_seats ??
+            row.used_seats ??
+            row.booked ??
+            0
+        );
+
+
+    const available =
+        row.available_seats !== undefined
+        ? Number(
+            row.available_seats
+        )
+        : Math.max(
+            0,
+            total-reserved
+        );
+
+
+    const slot =
+        getSlotData(
+            row
+        );
+
+
+    return {
+
+        raw:row,
+
+        id:
+            row.id ??
+            (
+                String(rawDate) +
+                "-" +
+                String(slot.name)
+            ),
+
+        date:
+            rawDate,
+
+        dateObject:
+
+            dateObject &&
+            !Number.isNaN(
+                dateObject.getTime()
+            )
+            ? dateObject
+            : null,
+
+        total:total,
+
+        reserved:reserved,
+
+        available:
+            Math.max(
+                0,
+                available
+            ),
+
+        slotName:
+            slot.name,
+
+        slotTime:
+            slot.time,
+
+        label:
+            slot.label
+
+    };
+
+}
+
+
+/* =========================================================
+   SLOT DETECTION
+========================================================= */
+
+function getSlotData(row){
+
+    /*
+     * Supports several common
+     * database naming styles.
+     */
+
+    const slotName =
+        firstValue(
+            row.slot_name,
+            row.slot,
+            row.slot_title,
+            row.session_name,
+            row.batch_name
+        );
+
+
+    const slotTime =
+        firstValue(
+            row.slot_time,
+            row.departure_time,
+            row.start_time,
+            row.time
+        );
+
+
+    /*
+     * If your table has no slot
+     * fields, create one clean
+     * "Available Slot".
+     */
+
+    if(
+        !slotName &&
+        !slotTime
+    ){
+
+        return {
+
+            name:
+                "Available Slot",
+
+            time:
+                "",
+
+            label:
+                "Available"
+
+        };
+
+    }
+
+
+    return {
+
+        name:
+            slotName ||
+            "Adventure Slot",
+
+        time:
+            formatTime(
+                slotTime
+            ),
+
+        label:
+            slotName ||
+            formatTime(
+                slotTime
+            ) ||
+            "Available"
+
+    };
+
+}
+
+
+function firstValue(){
+
+    for(
+        const value of arguments
+    ){
+
+        if(
+            value !== undefined &&
+            value !== null &&
+            String(value).trim()!==""
+        ){
+
+            return value;
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+/* =========================================================
+   TIME FORMAT
+========================================================= */
+
+function formatTime(value){
+
+    if(!value)
+        return "";
+
+
+    const text =
+        String(value);
+
+
+    /*
+     * Already formatted.
+     */
+
+    if(
+        /AM|PM/i.test(text)
+    ){
+
+        return text;
+
+    }
+
+
+    /*
+     * HH:MM:SS
+     */
+
+    const match =
+        text.match(
+            /^(\d{1,2}):(\d{2})/
+        );
+
+
+    if(!match)
+        return text;
+
+
+    let hour =
+        Number(match[1]);
+
+
+    const minute =
+        match[2];
+
+
+    const suffix =
+        hour>=12
+        ? "PM"
+        : "AM";
+
+
+    hour =
+        hour%12 || 12;
+
+
+    return (
+        hour +
+        ":" +
+        minute +
+        " " +
+        suffix
+    );
 
 }
 
@@ -5194,19 +5402,77 @@ async function loadDates(){
    RENDER DATES
 ========================================================= */
 
-function renderDates(
-    dates
-){
+function renderDates(){
 
-    const list =
-        $("dateList");
+    const grid =
+        $("dateGrid");
 
 
-    list.innerHTML="";
+    grid.innerHTML="";
 
 
-    dates.forEach(
-        function(date){
+    if(
+        !state.dates.length
+    ){
+
+        renderNoDates(
+            "No upcoming dates are currently available."
+        );
+
+        return;
+
+    }
+
+
+    $("statDates").textContent =
+        state.dates.length +
+        " Available";
+
+
+    /*
+     * Group rows by date.
+     */
+
+    const grouped =
+        new Map();
+
+
+    state.dates.forEach(
+        row => {
+
+            const key =
+                row.date;
+
+
+            if(
+                !grouped.has(key)
+            ){
+
+                grouped.set(
+                    key,
+                    []
+                );
+
+            }
+
+
+            grouped
+                .get(key)
+                .push(row);
+
+        }
+    );
+
+
+    Array.from(
+        grouped.entries()
+    )
+    .forEach(
+        ([date,rows]) => {
+
+            const first =
+                rows[0];
+
 
             const button =
                 document.createElement(
@@ -5221,82 +5487,71 @@ function renderDates(
 
 
             button.dataset.date =
-                date.date;
+                date;
 
 
-            const formatted =
-                formatDate(
-                    date.date
+            const d =
+                first.dateObject;
+
+
+            const day =
+                d.toLocaleDateString(
+                    "en-IN",
+                    {
+                        weekday:"short"
+                    }
                 );
 
 
-            const low =
-                date.available<=3;
+            const number =
+                d.toLocaleDateString(
+                    "en-IN",
+                    {
+                        day:"2-digit"
+                    }
+                );
+
+
+            const month =
+                d.toLocaleDateString(
+                    "en-IN",
+                    {
+                        month:"short",
+                        year:"numeric"
+                    }
+                );
+
+
+            const seats =
+                rows.reduce(
+                    (
+                        max,
+                        item
+                    ) =>
+                        Math.max(
+                            max,
+                            item.available
+                        ),
+                    0
+                );
 
 
             button.innerHTML = `
 
-                <div class="date-row">
+                <div class="date-day">
+                    ${day}
+                </div>
 
-                    <div class="date-left">
+                <div class="date-number">
+                    ${number}
+                </div>
 
-                        <div class="date-calendar">
+                <div class="date-month">
+                    ${month}
+                </div>
 
-                            <svg
-                                class="icon-sm"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                            >
-
-                                <rect
-                                    x="3"
-                                    y="4"
-                                    width="18"
-                                    height="17"
-                                    rx="3"
-                                />
-
-                                <path
-                                    d="M16 2v4M8 2v4M3 10h18"
-                                />
-
-                            </svg>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="date-day">
-                                ${formatted.day}
-                            </div>
-
-                            <div class="date-week">
-                                ${formatted.week}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="seat-badge ${
-                            low ? "low" : ""
-                        }"
-                    >
-
-                        ${date.available}
-                        ${
-                            date.available===1
-                            ? "seat"
-                            : "seats"
-                        }
-
-                    </div>
-
+                <div class="date-seat">
+                    ${seats} seats available
                 </div>
 
             `;
@@ -5304,17 +5559,14 @@ function renderDates(
 
             button.addEventListener(
                 "click",
-                function(){
-
+                () =>
                     selectDate(
                         date
-                    );
-
-                }
+                    )
             );
 
 
-            list.appendChild(
+            grid.appendChild(
                 button
             );
 
@@ -5325,100 +5577,328 @@ function renderDates(
 
 
 /* =========================================================
+   NO DATES
+========================================================= */
+
+function renderNoDates(message){
+
+    $("dateGrid").innerHTML = `
+
+        <div
+            style="
+                grid-column:1/-1;
+                padding:18px;
+                border:1px solid #e4ebe8;
+                border-radius:15px;
+                background:#fafcfb;
+                color:#8c989c;
+                font-size:8px;
+                line-height:1.5;
+                font-weight:800;
+                text-align:center;
+            "
+        >
+
+            ${escapeHTML(message)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
    SELECT DATE
 ========================================================= */
 
-function selectDate(
-    date
-){
+function selectDate(date){
 
-    selectedDate =
+    const rows =
+        state.dates.filter(
+            row =>
+                row.date === date
+        );
+
+
+    if(!rows.length)
+        return;
+
+
+    state.selectedDate =
         date;
 
 
-    availableSeats =
-        Number(
-            date.available || 0
-        );
+    state.selectedSlot =
+        null;
 
 
     /*
      * Reset booking.
      */
 
-    guestQuantity=1;
+    state.guestQuantity=1;
 
-    participants=[];
+    state.guests=[];
 
-    currentGender="";
+    state.gender="";
 
-    currentMeal="Veg";
+    state.meal="Veg";
 
-    selectedPickup=null;
+    state.pickup=null;
 
-
-    /*
-     * Mark selected date.
-     */
 
     document
         .querySelectorAll(
             ".date-option"
         )
         .forEach(
+            button =>
+                button.classList.toggle(
+                    "selected",
+                    button.dataset.date===date
+                )
+        );
+
+
+    renderSlots(
+        rows
+    );
+
+
+    $("guestStep")
+        .style
+        .display="none";
+
+
+    $("participantStep")
+        .style
+        .display="none";
+
+
+    $("pickupStep")
+        .style
+        .display="none";
+
+
+    $("summaryArea")
+        .style
+        .display="none";
+
+
+    showToast(
+        "Date selected. Choose your slot."
+    );
+
+
+    /*
+     * If there is exactly one slot,
+     * select it automatically.
+     */
+
+    if(
+        rows.length===1
+    ){
+
+        setTimeout(
+            () =>
+                selectSlot(
+                    rows[0]
+                ),
+            100
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER SLOTS
+========================================================= */
+
+function renderSlots(rows){
+
+    const wrapper =
+        $("slotWrapper");
+
+
+    const grid =
+        $("slotGrid");
+
+
+    wrapper.style.display =
+        "block";
+
+
+    grid.innerHTML="";
+
+
+    rows.forEach(
+        row => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type="button";
+
+            button.className=
+                "slot-option";
+
+
+            button.innerHTML = `
+
+                <div class="slot-row">
+
+                    <span class="slot-name">
+                        ${escapeHTML(
+                            row.slotName
+                        )}
+                    </span>
+
+                    <span class="slot-time">
+                        ${escapeHTML(
+                            row.slotTime
+                        )}
+                    </span>
+
+                </div>
+
+                <div class="slot-seats">
+                    ${row.available}
+                    seats available
+                </div>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () =>
+                    selectSlot(
+                        row
+                    )
+            );
+
+
+            grid.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SELECT SLOT
+========================================================= */
+
+function selectSlot(row){
+
+    if(
+        row.available<=0
+    ){
+
+        showToast(
+            "This slot is full.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    state.selectedSlot =
+        row;
+
+
+    /*
+     * Maximum 100,
+     * never more than available.
+     */
+
+    state.maxGuests =
+        Math.min(
+            100,
+            row.available
+        );
+
+
+    state.guestQuantity=1;
+
+
+    state.guests=[];
+
+
+    state.pickup=null;
+
+
+    document
+        .querySelectorAll(
+            ".slot-option"
+        )
+        .forEach(
             button => {
+
+                const text =
+                    button
+                    .querySelector(
+                        ".slot-seats"
+                    )
+                    ?.textContent
+                    .trim();
+
+
+                /*
+                 * Select by matching
+                 * slot name + time.
+                 */
+
+                const name =
+                    button
+                    .querySelector(
+                        ".slot-name"
+                    )
+                    ?.textContent
+                    .trim();
+
+
+                const time =
+                    button
+                    .querySelector(
+                        ".slot-time"
+                    )
+                    ?.textContent
+                    .trim();
+
 
                 button.classList.toggle(
                     "selected",
-                    button.dataset.date===
-                    date.date
+                    name ===
+                        String(
+                            row.slotName
+                        ).trim() &&
+                    time ===
+                        String(
+                            row.slotTime
+                        ).trim()
                 );
 
             }
         );
 
 
-    /*
-     * Update hero.
-     */
+    $("counterHelper").textContent =
+        "Maximum " +
+        state.maxGuests +
+        " guests for this slot";
 
-    $("heroDate")
-        .textContent =
-        formatDate(
-            date.date
-        ).full;
-
-
-    $("statDate")
-        .textContent =
-        formatDate(
-            date.date
-        ).short;
-
-
-    $("statCapacity")
-        .textContent =
-        availableSeats+
-        " seats";
-
-
-    /*
-     * Counter maximum.
-     */
-
-    $("counterSub")
-        .textContent =
-        "Up to "+
-        Math.min(
-            availableSeats,
-            MAX_FRONTEND_GUESTS
-        )+
-        " guests";
-
-
-    /*
-     * Show steps.
-     */
 
     $("guestStep")
         .style
@@ -5435,30 +5915,98 @@ function selectDate(
         .display="none";
 
 
-    $("summary")
+    $("summaryArea")
         .style
         .display="none";
 
-
-    $("participantsDone")
-        .style
-        .display="none";
-
-
-    $("participantForm")
-        .style
-        .display="block";
-
-
-    /*
-     * Reset form.
-     */
 
     resetParticipantForm();
 
-    renderSavedParticipants();
+    updateGuestCounter();
 
-    updateCounter();
+    updateProgress();
+
+    renderSavedGuests();
+
+    updateSummary();
+
+
+    showToast(
+        state.maxGuests +
+        " seats available for this slot."
+    );
+
+
+    if(
+        window.innerWidth<=960
+    ){
+
+        setTimeout(
+            () => {
+
+                $("guestStep")
+                    .scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+            },
+            120
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GUEST COUNTER
+========================================================= */
+
+function setupGuestCounter(){
+
+    $("minusButton")
+        .addEventListener(
+            "click",
+            decreaseGuests
+        );
+
+
+    $("plusButton")
+        .addEventListener(
+            "click",
+            increaseGuests
+        );
+
+}
+
+
+function decreaseGuests(){
+
+    if(
+        state.guestQuantity<=1
+    )
+        return;
+
+
+    if(
+        state.guestQuantity<=
+        state.guests.length
+    ){
+
+        showToast(
+            "Remove the saved participant before reducing the guest count.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    state.guestQuantity--;
+
+    updateGuestCounter();
 
     updateProgress();
 
@@ -5467,131 +6015,71 @@ function selectDate(
 }
 
 
-/* =========================================================
-   COUNTER
-========================================================= */
+function increaseGuests(){
 
-function setupCounter(){
+    if(
+        state.guestQuantity>=
+        state.maxGuests
+    ){
 
-    $("minusBtn")
-        .addEventListener(
-            "click",
-            function(){
-
-                if(
-                    guestQuantity<=1
-                ){
-
-                    return;
-
-                }
-
-
-                if(
-                    guestQuantity<=
-                    participants.length
-                ){
-
-                    showToast(
-                        "Remove the last participant before reducing the guest count.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                guestQuantity--;
-
-                updateCounter();
-
-                updateProgress();
-
-                updateSummary();
-
-            }
+        showToast(
+            "Only " +
+            state.maxGuests +
+            " seats are available for this slot.",
+            true
         );
 
+        return;
 
-    $("plusBtn")
-        .addEventListener(
-            "click",
-            function(){
-
-                const maximum =
-                    Math.min(
-                        availableSeats,
-                        MAX_FRONTEND_GUESTS
-                    );
+    }
 
 
-                if(
-                    guestQuantity>=maximum
-                ){
+    state.guestQuantity++;
 
-                    showToast(
-                        "Maximum "+maximum+" guests available for this date.",
-                        true
-                    );
+    updateGuestCounter();
 
-                    return;
+    updateProgress();
 
-                }
-
-
-                guestQuantity++;
-
-                updateCounter();
-
-                updateProgress();
-
-                updateSummary();
-
-            }
-        );
+    updateSummary();
 
 }
 
 
-function updateCounter(){
+function updateGuestCounter(){
 
-    $("guestCount")
-        .textContent =
-        guestQuantity;
-
-
-    const maximum =
-        Math.min(
-            availableSeats,
-            MAX_FRONTEND_GUESTS
-        );
+    $("guestCount").textContent =
+        state.guestQuantity;
 
 
-    $("minusBtn")
-        .disabled =
-        guestQuantity<=1;
+    $("minusButton").disabled =
+        state.guestQuantity<=1;
 
 
-    $("plusBtn")
-        .disabled =
-        guestQuantity>=maximum;
+    $("plusButton").disabled =
+        state.guestQuantity>=
+        state.maxGuests;
+
+
+    updateCurrentParticipant();
 
 }
 
 
 /* =========================================================
-   PARTICIPANT FORM
+   FORM SETUP
 ========================================================= */
 
-function setupParticipantForm(){
+function setupForm(){
 
-    $("maleBtn")
+    setupGuestCounter();
+
+
+    $("maleChoice")
         .addEventListener(
             "click",
-            function(){
+            () => {
 
-                currentGender="Male";
+                state.gender="Male";
 
                 updateChoices();
 
@@ -5599,12 +6087,12 @@ function setupParticipantForm(){
         );
 
 
-    $("femaleBtn")
+    $("femaleChoice")
         .addEventListener(
             "click",
-            function(){
+            () => {
 
-                currentGender="Female";
+                state.gender="Female";
 
                 updateChoices();
 
@@ -5612,27 +6100,12 @@ function setupParticipantForm(){
         );
 
 
-    $("vegBtn")
+    $("vegChoice")
         .addEventListener(
             "click",
-            function(){
+            () => {
 
-                currentMeal="Veg";
-
-                updateChoices();
-
-                updateSummary();
-
-            }
-        );
-
-
-    $("nonVegBtn")
-        .addEventListener(
-            "click",
-            function(){
-
-                currentMeal="Non-Veg";
+                state.meal="Veg";
 
                 updateChoices();
 
@@ -5642,21 +6115,36 @@ function setupParticipantForm(){
         );
 
 
-    $("guestAge")
+    $("nonVegChoice")
         .addEventListener(
-            "input",
-            liveAgeCheck
+            "click",
+            () => {
+
+                state.meal="Non-Veg";
+
+                updateChoices();
+
+                updateSummary();
+
+            }
         );
 
 
-    $("guestName")
+    $("ageInput")
         .addEventListener(
             "input",
-            clearFieldError
+            validateAge
         );
 
 
-    $("guestPhone")
+    $("nameInput")
+        .addEventListener(
+            "input",
+            updateSaveState
+        );
+
+
+    $("phoneInput")
         .addEventListener(
             "input",
             function(){
@@ -5672,11 +6160,13 @@ function setupParticipantForm(){
                         10
                     );
 
+                updateSaveState();
+
             }
         );
 
 
-    $("saveGuest")
+    $("saveButton")
         .addEventListener(
             "click",
             saveParticipant
@@ -5686,14 +6176,13 @@ function setupParticipantForm(){
 
 
 /* =========================================================
-   LIVE AGE CHECK
+   AGE VALIDATION
 ========================================================= */
 
-function liveAgeCheck(){
+function validateAge(){
 
     const value =
-        $("guestAge")
-            .value;
+        $("ageInput").value;
 
 
     const age =
@@ -5707,35 +6196,76 @@ function liveAgeCheck(){
         age<16
     ){
 
-        $("ageError")
+        $("ageWarning")
             .classList
             .add("show");
 
 
-        $("guestAge")
+        $("ageInput")
             .classList
             .add("invalid");
 
+    }
+    else{
 
-        $("saveGuest")
-            .disabled=true;
-
-    }else{
-
-        $("ageError")
+        $("ageWarning")
             .classList
             .remove("show");
 
 
-        $("guestAge")
+        $("ageInput")
             .classList
             .remove("invalid");
 
-
-        $("saveGuest")
-            .disabled=false;
-
     }
+
+
+    updateSaveState();
+
+}
+
+
+function updateSaveState(){
+
+    const name =
+        $("nameInput")
+        .value
+        .trim();
+
+
+    const age =
+        Number(
+            $("ageInput").value
+        );
+
+
+    const phone =
+        $("phoneInput")
+        .value
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    const valid =
+        name.length>=2 &&
+        age>=16 &&
+        age<=100 &&
+        /^[0-9]{10}$/.test(
+            phone
+        ) &&
+        (
+            state.gender===
+            "Male" ||
+            state.gender===
+            "Female"
+        );
+
+
+    $("saveButton")
+        .disabled =
+        !valid;
 
 }
 
@@ -5746,21 +6276,10 @@ function liveAgeCheck(){
 
 function saveParticipant(){
 
-    const maximum =
-        Math.min(
-            availableSeats,
-            MAX_FRONTEND_GUESTS
-        );
-
-
     if(
-        participants.length>=maximum
+        state.guests.length>=
+        state.guestQuantity
     ){
-
-        showToast(
-            "Maximum available seats reached.",
-            true
-        );
 
         return;
 
@@ -5768,25 +6287,24 @@ function saveParticipant(){
 
 
     const name =
-        $("guestName")
-            .value
-            .trim();
+        $("nameInput")
+        .value
+        .trim();
 
 
     const age =
         Number(
-            $("guestAge")
-                .value
+            $("ageInput").value
         );
 
 
     const phone =
-        $("guestPhone")
-            .value
-            .replace(
-                /\D/g,
-                ""
-            );
+        $("phoneInput")
+        .value
+        .replace(
+            /\D/g,
+            ""
+        );
 
 
     if(
@@ -5794,40 +6312,18 @@ function saveParticipant(){
     ){
 
         showToast(
-            "Please enter the participant's full name.",
+            "Enter the participant's full name.",
             true
         );
-
-        $("guestName")
-            .focus();
 
         return;
 
     }
 
 
-    /*
-     * HARD age restriction.
-     */
-
     if(
-        !age ||
         age<16
     ){
-
-        $("ageError")
-            .classList
-            .add("show");
-
-
-        $("guestAge")
-            .classList
-            .add("invalid");
-
-
-        $("guestAge")
-            .focus();
-
 
         showToast(
             "Participants below 16 years are not allowed.",
@@ -5844,7 +6340,7 @@ function saveParticipant(){
     ){
 
         showToast(
-            "Please enter a valid age.",
+            "Enter a valid age.",
             true
         );
 
@@ -5860,25 +6356,7 @@ function saveParticipant(){
     ){
 
         showToast(
-            "Please enter a valid 10-digit mobile number.",
-            true
-        );
-
-        $("guestPhone")
-            .focus();
-
-        return;
-
-    }
-
-
-    if(
-        currentGender!=="Male" &&
-        currentGender!=="Female"
-    ){
-
-        showToast(
-            "Please select gender.",
+            "Enter a valid 10-digit mobile number.",
             true
         );
 
@@ -5888,12 +6366,12 @@ function saveParticipant(){
 
 
     if(
-        currentMeal!=="Veg" &&
-        currentMeal!=="Non-Veg"
+        state.gender!=="Male" &&
+        state.gender!=="Female"
     ){
 
         showToast(
-            "Please select meal preference.",
+            "Select gender.",
             true
         );
 
@@ -5902,7 +6380,7 @@ function saveParticipant(){
     }
 
 
-    participants.push({
+    state.guests.push({
 
         name:name,
 
@@ -5910,23 +6388,25 @@ function saveParticipant(){
 
         phone:phone,
 
-        gender:currentGender,
+        gender:
+            state.gender,
 
-        meal:currentMeal
+        meal:
+            state.meal
 
     });
 
 
-    const completed =
-        participants.length>=
-        guestQuantity;
-
-
-    renderSavedParticipants();
+    renderSavedGuests();
 
     updateProgress();
 
     updateSummary();
+
+
+    const completed =
+        state.guests.length >=
+        state.guestQuantity;
 
 
     if(completed){
@@ -5936,7 +6416,7 @@ function saveParticipant(){
             .display="none";
 
 
-        $("participantsDone")
+        $("allParticipantsComplete")
             .style
             .display="block";
 
@@ -5946,7 +6426,7 @@ function saveParticipant(){
             .display="block";
 
 
-        $("summary")
+        $("summaryArea")
             .style
             .display="block";
 
@@ -5957,7 +6437,7 @@ function saveParticipant(){
 
 
         if(
-            window.innerWidth<=950
+            window.innerWidth<=960
         ){
 
             setTimeout(
@@ -5970,99 +6450,85 @@ function saveParticipant(){
                         });
 
                 },
-                100
+                120
             );
 
         }
 
-    }else{
+    }
+    else{
 
         resetParticipantForm();
 
         showToast(
-            "Participant "+
-            participants.length+
-            " saved."
+            "Participant " +
+            state.guests.length +
+            " saved ✓"
         );
 
     }
+
+
+    updateCurrentParticipant();
 
 }
 
 
 /* =========================================================
-   RESET FORM
+   RESET PARTICIPANT FORM
 ========================================================= */
 
 function resetParticipantForm(){
 
-    $("guestName")
-        .value="";
+    $("nameInput").value="";
+
+    $("ageInput").value="";
+
+    $("phoneInput").value="";
 
 
-    $("guestAge")
-        .value="";
-
-
-    $("guestPhone")
-        .value="";
-
-
-    $("ageError")
+    $("ageWarning")
         .classList
         .remove("show");
 
 
-    $("guestAge")
+    $("ageInput")
         .classList
         .remove("invalid");
 
 
-    $("saveGuest")
-        .disabled=false;
+    state.gender="";
 
-
-    currentGender="";
-
-    currentMeal="Veg";
+    state.meal="Veg";
 
 
     updateChoices();
 
+    updateCurrentParticipant();
 
-    const next =
-        participants.length+1;
+    updateSaveState();
+
+}
 
 
-    $("currentNumber")
+/* =========================================================
+   CURRENT PARTICIPANT
+========================================================= */
+
+function updateCurrentParticipant(){
+
+    const number =
+        state.guests.length+1;
+
+
+    $("participantNumber")
         .textContent =
-        next;
+        number;
 
 
-    $("currentNumber")
-        .nextElementSibling
-        ?.querySelector(
-            ".participant-title"
-        );
-
-    /*
-     * Update title safely.
-     */
-
-    const title =
-        $("participantForm")
-        .querySelector(
-            ".participant-title"
-        );
-
-
-    if(title){
-
-        title.textContent =
-            "Participant "+
-            next;
-
-    }
+    $("participantText")
+        .textContent =
+        number;
 
 }
 
@@ -6073,36 +6539,39 @@ function resetParticipantForm(){
 
 function updateChoices(){
 
-    $("maleBtn")
+    $("maleChoice")
         .classList
         .toggle(
             "selected",
-            currentGender==="Male"
+            state.gender==="Male"
         );
 
 
-    $("femaleBtn")
+    $("femaleChoice")
         .classList
         .toggle(
             "selected",
-            currentGender==="Female"
+            state.gender==="Female"
         );
 
 
-    $("vegBtn")
+    $("vegChoice")
         .classList
         .toggle(
             "selected",
-            currentMeal==="Veg"
+            state.meal==="Veg"
         );
 
 
-    $("nonVegBtn")
+    $("nonVegChoice")
         .classList
         .toggle(
             "selected",
-            currentMeal==="Non-Veg"
+            state.meal==="Non-Veg"
         );
+
+
+    updateSaveState();
 
 }
 
@@ -6111,7 +6580,7 @@ function updateChoices(){
    SAVED PARTICIPANTS
 ========================================================= */
 
-function renderSavedParticipants(){
+function renderSavedGuests(){
 
     const list =
         $("savedList");
@@ -6120,71 +6589,62 @@ function renderSavedParticipants(){
     list.innerHTML="";
 
 
-    participants.forEach(
-        function(person,index){
+    state.guests.forEach(
+        (guest,index) => {
 
-            const div =
+            const card =
                 document.createElement(
                     "div"
                 );
 
 
-            div.className=
-                "saved";
+            card.className=
+                "saved-card";
 
 
-            div.innerHTML=`
+            card.innerHTML = `
 
-                <div class="saved-left">
+                <div class="saved-row">
 
                     <div class="saved-check">
 
                         <svg
-                            class="icon-sm"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2.5"
+                            class="icon icon-sm"
+                            style="stroke-width:2.5;"
                         >
-
-                            <path
-                                d="M5 12l4 4L19 6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-
+                            <path d="M5 12l4 4L19 6"></path>
                         </svg>
 
                     </div>
 
 
-                    <div>
+                    <div class="saved-main">
 
                         <div class="saved-name">
-                            ${escapeHTML(person.name)}
+                            ${escapeHTML(
+                                guest.name
+                            )}
                         </div>
 
-                        <div class="saved-meta">
+                        <div class="saved-details">
                             Guest ${index+1}
-                            •
-                            ${person.age} yrs
-                            •
-                            ${person.gender}
+                            • ${guest.age} yrs
+                            • ${guest.gender}
+                            • ${guest.meal}
                         </div>
 
                     </div>
 
-                </div>
 
+                    <div class="saved-extra">
 
-                <div class="saved-meal">
+                        ${
+                            guest.meal==="Non-Veg"
+                            ? "+₹100"
+                            : "Veg"
+                        }
 
-                    ${
-                        person.meal===
-                        "Non-Veg"
-                        ? "+₹100"
-                        : "Veg"
-                    }
+                    </div>
 
                 </div>
 
@@ -6192,7 +6652,7 @@ function renderSavedParticipants(){
 
 
             list.appendChild(
-                div
+                card
             );
 
         }
@@ -6207,18 +6667,26 @@ function renderSavedParticipants(){
 
 function updateProgress(){
 
+    const completed =
+        state.guests.length;
+
+
+    const total =
+        state.guestQuantity;
+
+
     $("progressText")
         .textContent =
-        participants.length+
-        " / "+
-        guestQuantity;
+        completed +
+        " / " +
+        total;
 
 
-    const percentage =
-        guestQuantity>0
+    const percent =
+        total>0
         ? (
-            participants.length/
-            guestQuantity
+            completed /
+            total
         )*100
         : 0;
 
@@ -6228,9 +6696,8 @@ function updateProgress(){
         .width =
         Math.min(
             100,
-            percentage
-        )+
-        "%";
+            percent
+        )+"%";
 
 }
 
@@ -6270,7 +6737,7 @@ function setupPickup(){
                         );
 
 
-                        selectedPickup={
+                        state.pickup={
 
                             name:
                                 this.dataset.name,
@@ -6302,98 +6769,88 @@ function setupPickup(){
 
 function updateSummary(){
 
-    const basePrice =
-        Number(
-            selectedEvent?.price ||
-            0
-        );
+    const participants =
+        state.guests.length;
 
 
-    const baseTotal =
-        participants.length *
-        basePrice;
+    const base =
+        participants *
+        state.price;
 
 
-    const nonVegGuests =
-        participants.filter(
-            person =>
-                person.meal===
+    const nonVegCount =
+        state.guests.filter(
+            guest =>
+                guest.meal===
                 "Non-Veg"
         ).length;
 
 
-    const nonVegTotal =
-        nonVegGuests *
-        NON_VEG_FEE;
+    const nonVeg =
+        nonVegCount *
+        100;
 
 
     const total =
-        baseTotal+
-        nonVegTotal;
+        base+
+        nonVeg;
 
 
     $("summaryGuests")
         .textContent =
-        guestQuantity;
+        state.guestQuantity;
 
 
-    $("summaryBase")
+    $("summaryAdventure")
         .textContent =
-        money(
-            baseTotal
-        );
+        money(base);
 
 
-    $("summaryExtra")
+    $("summaryNonVeg")
         .textContent =
-        money(
-            nonVegTotal
-        );
+        money(nonVeg);
 
 
     $("summaryTotal")
         .textContent =
-        money(
-            total
-        );
+        money(total);
+
+
+    const ready =
+        state.selectedDate &&
+        state.selectedSlot &&
+        state.guests.length===
+        state.guestQuantity &&
+        state.pickup;
 
 
     $("paymentButton")
         .disabled =
-        !(
-            participants.length===
-            guestQuantity &&
-            guestQuantity>0 &&
-            selectedPickup!==null &&
-            selectedDate!==null
-        );
+        !ready;
 
 }
 
 
 /* =========================================================
-   PAYMENT / BOOKING DATA
+   PAYMENT / SAVE BOOKING
 ========================================================= */
 
-function setupPayment(){
-
-    $("paymentButton")
-        .addEventListener(
-            "click",
-            continuePayment
-        );
-
-}
+$("paymentButton")
+    .addEventListener(
+        "click",
+        proceedPayment
+    );
 
 
-function continuePayment(){
+function proceedPayment(){
 
     if(
-        !selectedDate
+        !state.selectedDate ||
+        !state.selectedSlot
     ){
 
         showToast(
-            "Please select a date.",
+            "Please select a date and slot.",
             true
         );
 
@@ -6403,8 +6860,8 @@ function continuePayment(){
 
 
     if(
-        participants.length!==
-        guestQuantity
+        state.guests.length !==
+        state.guestQuantity
     ){
 
         showToast(
@@ -6417,9 +6874,7 @@ function continuePayment(){
     }
 
 
-    if(
-        !selectedPickup
-    ){
+    if(!state.pickup){
 
         showToast(
             "Please select a pickup point.",
@@ -6431,29 +6886,22 @@ function continuePayment(){
     }
 
 
-    const basePrice =
-        Number(
-            selectedEvent?.price ||
-            0
-        );
-
-
-    const baseTotal =
-        participants.length *
-        basePrice;
-
-
-    const nonVegGuests =
-        participants.filter(
-            person =>
-                person.meal===
+    const nonVegCount =
+        state.guests.filter(
+            guest =>
+                guest.meal===
                 "Non-Veg"
         ).length;
 
 
+    const baseTotal =
+        state.guests.length *
+        state.price;
+
+
     const nonVegTotal =
-        nonVegGuests *
-        NON_VEG_FEE;
+        nonVegCount *
+        100;
 
 
     const finalTotal =
@@ -6463,69 +6911,67 @@ function continuePayment(){
 
     const booking={
 
-        event:{
+        expedition:{
 
             id:
-                selectedEvent.id,
-
-            slug:
-                selectedEvent.slug ||
-                "",
+                state.expedition.id,
 
             title:
-                selectedEvent.title ||
-                "",
+                state.expedition.title,
+
+            slug:
+                state.expedition.slug || "",
 
             category:
-                selectedEvent.category ||
-                "",
-
-            image:
-                selectedEvent.img ||
-                ""
+                state.expedition.category || ""
 
         },
+
 
         date:{
 
             date:
-                selectedDate.date,
+                state.selectedDate,
 
-            totalSeats:
-                selectedDate.total,
+            slotId:
+                state.selectedSlot.id,
 
-            reservedSeats:
-                selectedDate.reserved,
+            slotName:
+                state.selectedSlot.slotName,
+
+            slotTime:
+                state.selectedSlot.slotTime,
 
             availableAtSelection:
-                selectedDate.available
+                state.selectedSlot.available
 
         },
 
-        guests:
-            guestQuantity,
 
         participants:
-            participants,
+            state.guests,
+
+
+        totalGuests:
+            state.guestQuantity,
+
 
         pickup:
-            selectedPickup,
+            state.pickup,
+
 
         pricing:{
 
-            pricePerGuest:
-                basePrice,
+            basePrice:
+                state.price,
 
             baseTotal:
                 baseTotal,
 
             nonVegGuests:
-                nonVegGuests,
+                nonVegCount,
 
-            nonVegFee:
-                NON_VEG_FEE,
-
-            nonVegTotal:
+            nonVegSupplement:
                 nonVegTotal,
 
             finalTotal:
@@ -6533,8 +6979,10 @@ function continuePayment(){
 
         },
 
+
         createdAt:
-            new Date().toISOString()
+            new Date()
+            .toISOString()
 
     };
 
@@ -6556,241 +7004,302 @@ function continuePayment(){
 
 
     /*
-     * Your payment page can read
-     * AJ_BOOKING from localStorage.
+     * IMPORTANT:
+     *
+     * This is where your actual
+     * payment page should open.
+     *
+     * For now booking data is
+     * securely prepared and stored
+     * locally.
      */
 
-    window.location.href =
-        "./payment.html";
-
-}
-
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
-
-function getToday(){
-
-    const d =
-        new Date();
-
-
-    return (
-
-        d.getFullYear()+
-        "-" +
-        String(
-            d.getMonth()+1
-        ).padStart(2,"0")+
-        "-" +
-        String(
-            d.getDate()
-        ).padStart(2,"0")
-
-    );
-
-}
-
-
-function formatDate(
-    value
-){
-
-    const date =
-        new Date(
-            value+
-            "T00:00:00"
-        );
-
-
-    const day =
-        date.toLocaleDateString(
-            "en-IN",
-            {
-                day:"numeric",
-                month:"long",
-                year:"numeric"
-            }
-        );
-
-
-    const week =
-        date.toLocaleDateString(
-            "en-IN",
-            {
-                weekday:"long"
-            }
-        );
-
-
-    const short =
-        date.toLocaleDateString(
-            "en-IN",
-            {
-                day:"numeric",
-                month:"short"
-            }
-        );
-
-
-    return {
-
-        day:day,
-
-        week:week,
-
-        short:short,
-
-        full:
-            day+
-            " • "+
-            week
-
-    };
-
-}
-
-
-/* =========================================================
-   MONEY
-========================================================= */
-
-function money(
-    value
-){
-
-    return "₹"+
-        Number(
-            value||0
-        ).toLocaleString(
-            "en-IN"
-        );
-
-}
-
-
-/* =========================================================
-   DATE ERROR
-========================================================= */
-
-function showDateError(
-    message
-){
-
-    $("dateError")
-        .style
-        .display="block";
-
-
-    $("dateError")
-        .textContent =
-        message;
-
-}
-
-
-/* =========================================================
-   CLEAR FIELD ERROR
-========================================================= */
-
-function clearFieldError(){
-
-    this.classList
-        .remove(
-            "invalid"
-        );
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(
-    value
-){
-
-    return String(
-        value||""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function showToast(
-    message,
-    error=false
-){
-
-    const toast =
-        $("toast");
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.toggle(
-        "error",
-        error
+    showToast(
+        "Booking prepared • " +
+        money(finalTotal)
     );
 
 
-    toast.classList.add(
-        "show"
-    );
+    /*
+     * Uncomment when payment.html
+     * is ready:
+     *
+     * window.location.href =
+     * "./payment.html";
+     */
+
+}
 
 
-    clearTimeout(
-        toastTimer
-    );
+/* =========================================================
+   LIVE AVAILABILITY REFRESH
+========================================================= */
+
+async function refreshAvailability(){
+
+    if(
+        !supabaseClient ||
+        !state.expedition
+    )
+        return;
 
 
-    toastTimer =
-        setTimeout(
-            () => {
+    try{
 
-                toast.classList.remove(
-                    "show"
+        const response =
+            await supabaseClient
+                .from("expedition_dates")
+                .select("*")
+                .eq(
+                    "expedition_id",
+                    state.expedition.id
+                )
+                .order(
+                    "event_date",
+                    {
+                        ascending:true
+                    }
                 );
 
-            },
-            2800
+
+        if(response.error)
+            return;
+
+
+        const today =
+            new Date();
+
+        today.setHours(
+            0,0,0,0
+        );
+
+
+        state.dates =
+            (response.data || [])
+            .map(
+                normalizeDateRow
+            )
+            .filter(
+                row =>
+                    row.dateObject &&
+                    row.dateObject>=today
+            );
+
+
+        /*
+         * If the selected slot
+         * still exists, update it.
+         */
+
+        if(
+            state.selectedSlot
+        ){
+
+            const fresh =
+                state.dates.find(
+                    row =>
+                        String(row.id)===
+                        String(
+                            state.selectedSlot.id
+                        )
+                );
+
+
+            if(fresh){
+
+                state.selectedSlot =
+                    fresh;
+
+
+                state.maxGuests =
+                    Math.min(
+                        100,
+                        fresh.available
+                    );
+
+
+                if(
+                    state.guestQuantity>
+                    state.maxGuests
+                ){
+
+                    state.guestQuantity =
+                        Math.max(
+                            1,
+                            state.maxGuests
+                        );
+
+                }
+
+
+                $("counterHelper")
+                    .textContent =
+                    "Maximum " +
+                    state.maxGuests +
+                    " guests for this slot";
+
+
+                updateGuestCounter();
+
+                updateSummary();
+
+            }
+
+        }
+
+
+        renderDates();
+
+    }
+    catch(error){
+
+        console.warn(
+            "Availability refresh:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function setupMenu(){
+
+    $("menuButton")
+        .addEventListener(
+            "click",
+            function(){
+
+                $("mobileMenu")
+                    .classList
+                    .toggle(
+                        "show"
+                    );
+
+            }
         );
 
 }
+
+
+/* =========================================================
+   BOTTOM BOOK BUTTON
+========================================================= */
+
+function setupBottomBook(){
+
+    $("bottomBook")
+        .addEventListener(
+            "click",
+            function(){
+
+                const booking =
+                    document.querySelector(
+                        ".booking-column"
+                    );
+
+
+                if(booking){
+
+                    booking.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE BEFORE LEAVING
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        /*
+         * Keep the current state
+         * available if browser is
+         * refreshed accidentally.
+         */
+
+        try{
+
+            sessionStorage.setItem(
+                "AJ_BOOKING_DRAFT",
+                JSON.stringify({
+                    selectedDate:
+                        state.selectedDate,
+
+                    selectedSlot:
+                        state.selectedSlot,
+
+                    guestQuantity:
+                        state.guestQuantity,
+
+                    guests:
+                        state.guests,
+
+                    pickup:
+                        state.pickup
+
+                })
+            );
+
+        }
+        catch(error){}
+
+    }
+);
 
 </script>
 
+
+<!-- =========================================================
+     SUPABASE
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+<script>
+
+/*
+ * Re-run initialization after
+ * Supabase library is available.
+ *
+ * The first DOMContentLoaded call
+ * may happen before the CDN script.
+ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        if(
+            window.supabase &&
+            !supabaseClient
+        ){
+
+            init();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 
