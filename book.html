@@ -1,61 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
->
+<title>Adventure Junction — Booking</title>
 
-<title>Adventure Junction • Book Your Adventure</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
 
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+:root{
+    --navy:#082c3d;
+    --navy2:#061f2b;
+    --yellow:#ffc400;
+    --green:#059669;
+    --bg:#f5f7f6;
+    --muted:#7b8790;
+    --line:#e8ecee;
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    background:#f5f7f6;
-    color:#082c3d;
+    margin:0;
+    background:var(--bg);
+    color:var(--navy);
     font-family:"Outfit",Arial,sans-serif;
     overflow-x:hidden;
-    padding-bottom:82px;
 }
 
-button,
-input,
-select{
-    font-family:inherit;
+button,input,select{
+    font:inherit;
 }
 
 button{
     cursor:pointer;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
 }
 
 img{
@@ -63,4474 +46,1525 @@ img{
     max-width:100%;
 }
 
-
-/* =========================================================
-   SVG ICON SYSTEM
-========================================================= */
-
-.icon{
-    width:18px;
-    height:18px;
-    flex-shrink:0;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:1.8;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+.hidden{
+    display:none!important;
 }
 
-.icon-sm{
-    width:15px;
-    height:15px;
-}
-
-.icon-lg{
-    width:21px;
-    height:21px;
-}
-
-
-/* =========================================================
+/* =====================================================
    HEADER
-========================================================= */
+===================================================== */
 
-.header{
-
+.nav{
     position:fixed;
-
     top:0;
     left:0;
     right:0;
-
     height:72px;
-
-    z-index:9000;
-
-    background:
-        rgba(255,255,255,.94);
-
-    border-bottom:
-        1px solid rgba(8,44,61,.07);
-
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
-
+    z-index:1000;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(0,0,0,.06);
 }
 
-
-.header-inner{
-
-    width:
-        min(1220px,calc(100% - 28px));
-
-    height:100%;
-
+.nav-inner{
+    max-width:1280px;
+    height:72px;
     margin:auto;
-
+    padding:0 20px;
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
 }
 
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:var(--navy);
+}
 
 .logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-.logo-img{
-
-    position:relative;
-
-    width:44px;
-    height:44px;
-
-    overflow:hidden;
-
+    width:46px;
+    height:46px;
     border-radius:50%;
-
-    background:#082c3d;
-
-    box-shadow:
-        0 5px 18px rgba(8,44,61,.15);
-
+    overflow:hidden;
+    background:var(--navy);
+    box-shadow:0 5px 18px rgba(8,44,61,.16);
+    flex-shrink:0;
 }
 
-
-.logo-img img{
-
+.logo img{
     width:100%;
     height:100%;
-
     object-fit:cover;
-
 }
 
-
-.logo-copy{
-
-    line-height:1;
-
-}
-
-
-.logo-title{
-
-    color:#082c3d;
-
-    font-size:17px;
-
-    font-weight:900;
-
-    letter-spacing:-.045em;
-
-}
-
-
-.logo-sub{
-
-    margin-top:5px;
-
-    color:#9aa5a8;
-
-    font-size:8px;
-
+.brand-title{
+    font-size:18px;
     font-weight:800;
+    letter-spacing:-.03em;
+}
 
-    letter-spacing:.18em;
-
+.brand-sub{
+    margin-top:4px;
+    color:#92999d;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.2em;
     text-transform:uppercase;
-
 }
 
-
-.desktop-nav{
-
+.nav-actions{
     display:flex;
-
     align-items:center;
-
-    gap:4px;
-
-}
-
-
-.desktop-nav a{
-
-    padding:10px 14px;
-
-    border-radius:12px;
-
-    color:#66747a;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    transition:.2s;
-
-}
-
-
-.desktop-nav a:hover{
-
-    color:#082c3d;
-
-    background:#f1f4f3;
-
-}
-
-
-.header-action{
-
-    display:flex;
-
-    align-items:center;
-
     gap:8px;
-
 }
 
-
-.instagram-button{
-
-    width:40px;
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border:0;
-
+.nav-link{
+    text-decoration:none;
+    color:#657077;
+    padding:10px 14px;
     border-radius:12px;
-
-    color:#526168;
-
-    background:#f3f5f4;
-
+    font-size:13px;
+    font-weight:700;
 }
 
+.nav-link:hover{
+    background:#f4f6f7;
+    color:var(--navy);
+}
 
-.menu-button{
-
-    display:none;
-
-    width:42px;
-    height:42px;
-
-    border:0;
-
+.nav-cta{
+    text-decoration:none;
+    background:var(--navy);
+    color:#fff;
+    padding:11px 16px;
     border-radius:12px;
-
-    color:#082c3d;
-
-    background:#f2f5f4;
-
-}
-
-
-.mobile-menu{
-
-    display:none;
-
-    position:absolute;
-
-    top:78px;
-
-    left:14px;
-    right:14px;
-
-    padding:8px;
-
-    border:
-        1px solid #e4eae7;
-
-    border-radius:18px;
-
-    background:#fff;
-
-    box-shadow:
-        0 22px 55px rgba(8,44,61,.14);
-
-}
-
-
-.mobile-menu.show{
-    display:block;
-}
-
-
-.mobile-menu a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:13px;
-
-    border-radius:12px;
-
-    font-size:11px;
-
+    font-size:12px;
     font-weight:800;
-
 }
 
-
-.mobile-menu a:hover{
-    background:#f5f7f6;
+@media(max-width:700px){
+    .nav-link{display:none}
+    .nav-cta{display:none}
+    .brand-title{font-size:16px}
 }
 
+/* =====================================================
+   PAGE
+===================================================== */
 
-/* =========================================================
+.page{
+    padding-top:72px;
+    padding-bottom:100px;
+}
+
+.container{
+    width:min(1080px,calc(100% - 30px));
+    margin:auto;
+}
+
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .hero{
-
     position:relative;
-
-    height:390px;
-
-    margin-top:72px;
-
     overflow:hidden;
-
-    background:#071c25;
-
+    min-height:420px;
+    background:var(--navy);
+    color:white;
 }
 
-
-.hero-image{
-
+.hero-image-low,
+.hero-image-high{
     position:absolute;
-
     inset:0;
-
     width:100%;
     height:100%;
-
     object-fit:cover;
-
 }
 
+.hero-image-low{
+    filter:saturate(.9);
+}
+
+.hero-image-high{
+    opacity:0;
+    transition:opacity .6s ease;
+}
+
+.hero-image-high.loaded{
+    opacity:1;
+}
 
 .hero-overlay{
-
     position:absolute;
-
     inset:0;
-
     background:
         linear-gradient(
             to bottom,
-            rgba(2,12,17,.05),
-            rgba(2,12,17,.08) 28%,
-            rgba(2,12,17,.48) 63%,
-            rgba(2,12,17,.96) 100%
+            rgba(2,17,24,.15),
+            rgba(2,17,24,.25) 30%,
+            rgba(2,17,24,.82) 100%
         );
-
 }
-
-
-.hero-inner{
-
-    position:relative;
-
-    z-index:2;
-
-    width:
-        min(1220px,calc(100% - 28px));
-
-    height:100%;
-
-    margin:auto;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    padding-bottom:35px;
-
-}
-
 
 .hero-content{
+    position:relative;
+    z-index:2;
+    min-height:420px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:35px 0;
+}
+
+.category{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    width:max-content;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(15px);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+
+.category-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ffd22e;
+}
+
+.hero h1{
+    margin:15px 0 8px;
+    font-size:clamp(34px,6vw,64px);
+    line-height:.95;
+    letter-spacing:-.05em;
+    font-weight:800;
     max-width:800px;
 }
 
-
-.hero-badge{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:7px 11px;
-
-    border:
-        1px solid rgba(255,255,255,.22);
-
-    border-radius:50px;
-
-    color:#fff;
-
-    background:
-        rgba(0,0,0,.25);
-
-    backdrop-filter:
-        blur(14px);
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:.18em;
-
-    text-transform:uppercase;
-
-}
-
-
-.hero-badge-dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#ffd22d;
-
-    box-shadow:
-        0 0 12px rgba(255,210,45,.8);
-
-}
-
-
-.hero-title{
-
-    margin-top:14px;
-
-    color:#fff;
-
-    font-size:
-        clamp(38px,6vw,64px);
-
-    line-height:.92;
-
-    font-weight:900;
-
-    letter-spacing:-.06em;
-
-}
-
-
-.hero-description{
-
-    max-width:650px;
-
-    margin-top:13px;
-
-    color:rgba(255,255,255,.72);
-
-    font-size:11px;
-
-    line-height:1.65;
-
-}
-
-
 .hero-meta{
-
     display:flex;
-
     flex-wrap:wrap;
-
-    gap:7px;
-
-    margin-top:16px;
-
-}
-
-
-.hero-meta span{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:8px 10px;
-
-    border-radius:10px;
-
-    color:#fff;
-
-    background:
-        rgba(0,0,0,.28);
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    backdrop-filter:
-        blur(10px);
-
-    font-size:8px;
-
-    font-weight:800;
-
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-
-    width:
-        min(1220px,calc(100% - 28px));
-
-    margin:auto;
-
-}
-
-
-.main{
-
-    padding:
-        24px 0 90px;
-
-}
-
-
-.layout{
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1fr)
-        410px;
-
-    gap:25px;
-
-    align-items:start;
-
-}
-
-
-.left-column{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-}
-
-
-.card{
-
-    background:#fff;
-
-    border:
-        1px solid #e4ebe8;
-
-    border-radius:22px;
-
-    box-shadow:
-        0 10px 35px rgba(8,44,61,.045);
-
-}
-
-
-.card-padding{
-    padding:20px;
-}
-
-
-/* =========================================================
-   QUICK STATS
-========================================================= */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
     gap:9px;
-
+    margin-top:18px;
 }
 
-
-.stat{
-
-    min-width:0;
-
-    padding:15px;
-
-    border:
-        1px solid #e4ebe8;
-
-    border-radius:16px;
-
-    background:#fff;
-
-}
-
-
-.stat-icon{
-
-    width:29px;
-    height:29px;
-
+.meta{
     display:flex;
-
     align-items:center;
-    justify-content:center;
-
-    margin-bottom:10px;
-
-    border-radius:9px;
-
-    color:#082c3d;
-
-    background:#f0f4f2;
-
-}
-
-
-.stat-label{
-
-    color:#a0aaad;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-}
-
-
-.stat-value{
-
-    margin-top:6px;
-
-    overflow:hidden;
-
-    color:#082c3d;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-
-/* =========================================================
-   COLLAPSIBLE INFORMATION
-========================================================= */
-
-.info-card{
-
-    overflow:hidden;
-
-}
-
-
-.info-card summary{
-
-    list-style:none;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    padding:17px 19px;
-
-    cursor:pointer;
-
-}
-
-
-.info-card summary::-webkit-details-marker{
-    display:none;
-}
-
-
-.summary-icon{
-
-    width:34px;
-    height:34px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    flex-shrink:0;
-
-    border-radius:11px;
-
-    color:#082c3d;
-
-    background:#f0f4f2;
-
-}
-
-
-.summary-text{
-
-    min-width:0;
-
-    flex:1;
-
-}
-
-
-.summary-title{
-
-    color:#082c3d;
-
-    font-size:13px;
-
-    font-weight:900;
-
-}
-
-
-.summary-sub{
-
-    margin-top:2px;
-
-    color:#9ba5a8;
-
-    font-size:7px;
-
-    font-weight:700;
-
-}
-
-
-.summary-arrow{
-
-    width:27px;
-    height:27px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:9px;
-
-    color:#66747a;
-
-    background:#f3f5f4;
-
-    transition:.2s;
-
-}
-
-
-.info-card[open]
-.summary-arrow{
-
-    transform:
-        rotate(180deg);
-
-}
-
-
-.info-content{
-
-    padding:
-        0 20px 20px;
-
-    color:#647177;
-
+    gap:8px;
+    padding:9px 12px;
+    border-radius:12px;
+    background:rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(14px);
     font-size:11px;
-
-    line-height:1.75;
-
+    font-weight:700;
 }
 
+/* =====================================================
+   MAIN CARD
+===================================================== */
 
-.info-content p{
-    margin-bottom:10px;
+.booking-shell{
+    margin-top:-35px;
+    position:relative;
+    z-index:5;
 }
 
-
-.info-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-
-.info-item{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:9px;
-
-}
-
-
-.info-bullet{
-
-    width:5px;
-    height:5px;
-
-    margin-top:7px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    background:#ffc400;
-
-}
-
-
-/* =========================================================
-   DO / NOTES
-========================================================= */
-
-.note-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:10px;
-
-}
-
-
-.note-box{
-
-    padding:14px;
-
-    border-radius:16px;
-
-    border:1px solid;
-
-}
-
-
-.note-box.warning{
-
-    color:#7d4141;
-
-    background:#fff5f4;
-
-    border-color:#f1d8d6;
-
-}
-
-
-.note-box.safe{
-
-    color:#25634e;
-
-    background:#f1fbf7;
-
-    border-color:#d8eee4;
-
-}
-
-
-.note-box.info{
-
-    color:#275e78;
-
-    background:#f1f8fc;
-
-    border-color:#d7e9f2;
-
-}
-
-
-.note-heading{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-bottom:8px;
-
-    font-size:10px;
-
-    font-weight:900;
-
-}
-
-
-.note-heading svg{
-    width:16px;
-    height:16px;
-}
-
-
-.note-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-
-.note-list div{
-
-    display:flex;
-
-    gap:7px;
-
-    font-size:8px;
-
-    line-height:1.5;
-
-}
-
-
-.note-list div::before{
-
-    content:"";
-
-    width:4px;
-    height:4px;
-
-    margin-top:5px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    background:currentColor;
-
-}
-
-
-/* =========================================================
-   BOOKING PANEL
-========================================================= */
-
-.booking-column{
-
-    position:sticky;
-
-    top:89px;
-
-}
-
-
-.booking-card{
-
-    padding:20px;
-
-}
-
-
-.booking-heading{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-}
-
-
-.booking-title{
-
-    color:#082c3d;
-
-    font-size:20px;
-
-    line-height:1.05;
-
-    font-weight:900;
-
-    letter-spacing:-.035em;
-
-}
-
-
-.booking-subtitle{
-
-    margin-top:5px;
-
-    color:#9aa5a8;
-
-    font-size:8px;
-
-    line-height:1.5;
-
-}
-
-
-.live-badge{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:7px 9px;
-
-    border-radius:9px;
-
-    color:#16845a;
-
-    background:#edfaf4;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    text-transform:uppercase;
-
-    white-space:nowrap;
-
-}
-
-
-.live-dot{
-
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:#18a66b;
-
+.glass-card{
+    background:rgba(255,255,255,.97);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:28px;
     box-shadow:
-        0 0 9px rgba(24,166,107,.6);
-
+        0 20px 65px rgba(8,44,61,.12),
+        0 2px 10px rgba(8,44,61,.05);
+    overflow:hidden;
 }
 
+/* =====================================================
+   DATE SELECTOR
+===================================================== */
 
-/* =========================================================
-   STEPS
-========================================================= */
-
-.booking-step{
-
-    margin-top:20px;
-
-    padding-top:20px;
-
-    border-top:
-        1px solid #edf1ef;
-
+.section{
+    padding:25px;
 }
 
-
-.step-header{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
+.section + .section{
+    border-top:1px solid var(--line);
 }
 
-
-.step-number{
-
-    width:29px;
-    height:29px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    flex-shrink:0;
-
-    border-radius:10px;
-
-    color:#fff;
-
-    background:#082c3d;
-
-    font-size:9px;
-
-    font-weight:900;
-
+.section-title{
+    margin:0;
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.03em;
 }
 
-
-.step-title{
-
-    color:#082c3d;
-
+.section-sub{
+    margin:5px 0 0;
+    color:var(--muted);
     font-size:12px;
-
-    font-weight:900;
-
 }
-
-
-.step-subtitle{
-
-    margin-top:2px;
-
-    color:#9ca6a9;
-
-    font-size:7px;
-
-}
-
-
-/* =========================================================
-   DATE + SLOT
-========================================================= */
 
 .date-grid{
-
+    margin-top:18px;
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:8px;
-
-    margin-top:13px;
-
+    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:10px;
 }
 
-
-.date-option{
-
+.date-btn{
     position:relative;
-
-    width:100%;
-
-    padding:13px;
-
-    border:
-        1px solid #dfe6e3;
-
-    border-radius:15px;
-
-    background:#fff;
-
     text-align:left;
-
-    transition:.2s;
-
+    border:1px solid #e3e8ea;
+    background:#fff;
+    border-radius:17px;
+    padding:13px;
+    transition:.25s ease;
 }
 
-
-.date-option:hover{
-
-    border-color:#d2b000;
-
+.date-btn:hover{
+    transform:translateY(-2px);
+    border-color:#cbd5d9;
+    box-shadow:0 8px 20px rgba(8,44,61,.07);
 }
 
-
-.date-option.selected{
-
-    border-color:#e5b900;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf0,
-            #fff8d9
-        );
-
-    box-shadow:
-        0 7px 18px rgba(240,190,0,.12);
-
+.date-btn.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+    box-shadow:0 10px 24px rgba(8,44,61,.2);
 }
-
 
 .date-day{
-
-    color:#a0aaad;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:.12em;
-
+    font-size:10px;
     text-transform:uppercase;
-
+    letter-spacing:.14em;
+    font-weight:800;
+    opacity:.55;
 }
-
 
 .date-number{
-
-    margin-top:5px;
-
-    color:#082c3d;
-
-    font-size:15px;
-
+    margin-top:3px;
+    font-size:23px;
+    line-height:1;
     font-weight:900;
-
 }
-
 
 .date-month{
-
-    margin-top:2px;
-
-    color:#68757a;
-
-    font-size:8px;
-
+    font-size:11px;
     font-weight:700;
-
 }
 
-
-.date-seat{
-
-    margin-top:8px;
-
-    color:#168d60;
-
-    font-size:7px;
-
-    font-weight:900;
-
-}
-
-
-.slot-wrapper{
-
-    margin-top:13px;
-
-}
-
-
-.field-label{
-
-    display:block;
-
-    margin-bottom:7px;
-
-    color:#526168;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:.04em;
-
-    text-transform:uppercase;
-
-}
-
-
-.slot-grid{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
-
-}
-
-
-.slot-option{
-
-    width:100%;
-
-    padding:12px;
-
-    border:
-        1px solid #dfe6e3;
-
-    border-radius:13px;
-
-    background:#fff;
-
-    text-align:left;
-
-    transition:.2s;
-
-}
-
-
-.slot-option.selected{
-
-    border-color:#e5b900;
-
-    background:#fffbea;
-
-}
-
-
-.slot-row{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-}
-
-
-.slot-name{
-
-    color:#082c3d;
-
-    font-size:9px;
-
-    font-weight:900;
-
-}
-
-
-.slot-time{
-
-    color:#66747a;
-
-    font-size:8px;
-
-    font-weight:800;
-
-}
-
-
-.slot-seats{
-
-    margin-top:4px;
-
-    color:#168d60;
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-/* =========================================================
-   GUEST COUNTER
-========================================================= */
-
-.counter-box{
-
-    margin-top:14px;
-
-    padding:13px;
-
-    border:
-        1px solid #e0e7e4;
-
-    border-radius:16px;
-
-    background:#fafcfb;
-
-}
-
-
-.counter-row{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-}
-
-
-.counter-label{
-
-    color:#082c3d;
-
+.date-seats{
+    margin-top:10px;
     font-size:10px;
-
-    font-weight:900;
-
+    font-weight:800;
+    color:#059669;
 }
 
+.date-btn.active .date-seats{
+    color:#7ff1c0;
+}
 
-.counter-helper{
+.date-btn.sold{
+    opacity:.45;
+    pointer-events:none;
+}
 
+.date-btn.sold .date-seats{
+    color:#d34c4c;
+}
+
+/* =====================================================
+   SELECTED DATE
+===================================================== */
+
+.selected-bar{
+    margin-top:15px;
+    padding:14px 16px;
+    border-radius:16px;
+    background:#f5f8f7;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+}
+
+.selected-label{
+    color:#8a969b;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+
+.selected-value{
     margin-top:3px;
-
-    color:#9aa5a8;
-
-    font-size:7px;
-
-    line-height:1.4;
-
+    font-size:14px;
+    font-weight:800;
 }
 
+.capacity{
+    text-align:right;
+}
+
+.capacity strong{
+    color:var(--green);
+}
+
+/* =====================================================
+   GUEST COUNTER
+===================================================== */
+
+.counter{
+    margin-top:18px;
+    padding:16px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.counter-title{
+    font-size:14px;
+    font-weight:800;
+}
+
+.counter-sub{
+    margin-top:3px;
+    color:#8c979c;
+    font-size:10px;
+}
 
 .counter-controls{
-
     display:flex;
-
     align-items:center;
-
-    gap:8px;
-
+    gap:13px;
 }
 
-
-.counter-button{
-
+.counter-btn{
     width:38px;
     height:38px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border:
-        1px solid #dce4e1;
-
-    border-radius:11px;
-
-    color:#082c3d;
-
-    background:#fff;
-
-    font-size:20px;
-
-    font-weight:500;
-
-}
-
-
-.counter-button:disabled{
-
-    opacity:.35;
-
-    cursor:not-allowed;
-
-}
-
-
-.counter-value{
-
-    min-width:24px;
-
-    text-align:center;
-
-    color:#082c3d;
-
-    font-size:17px;
-
-    font-weight:900;
-
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress{
-
-    margin-top:11px;
-
-}
-
-
-.progress-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    color:#8c989c;
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-.progress-track{
-
-    height:5px;
-
-    margin-top:6px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:#edf1ef;
-
-}
-
-
-.progress-fill{
-
-    width:0%;
-
-    height:100%;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #0d8159,
-            #24b57b
-        );
-
-    transition:.3s;
-
-}
-
-
-/* =========================================================
-   PARTICIPANT FORM
-========================================================= */
-
-.participant-form{
-
-    margin-top:13px;
-
-    padding:16px;
-
-    border:
-        1px solid #e0e7e4;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fafcfb
-        );
-
-}
-
-
-.participant-top{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-.participant-number{
-
-    width:32px;
-    height:32px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:11px;
-
-    color:#fff;
-
-    background:#082c3d;
-
-    font-size:10px;
-
-    font-weight:900;
-
-}
-
-
-.participant-title{
-
-    color:#082c3d;
-
-    font-size:11px;
-
-    font-weight:900;
-
-}
-
-
-.participant-subtitle{
-
-    margin-top:2px;
-
-    color:#9aa5a8;
-
-    font-size:7px;
-
-}
-
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:10px;
-
-}
-
-
-.form-field{
-
-    margin-top:13px;
-
-}
-
-
-.form-field.full{
-    grid-column:1/-1;
-}
-
-
-.input{
-
-    width:100%;
-
-    height:43px;
-
-    padding:0 12px;
-
-    border:
-        1px solid #dce4e1;
-
-    outline:none;
-
+    border:0;
     border-radius:12px;
-
-    color:#082c3d;
-
-    background:#fff;
-
-    font-size:10px;
-
-    font-weight:600;
-
-    transition:.2s;
-
+    background:#edf1f2;
+    color:var(--navy);
+    font-size:22px;
+    font-weight:700;
 }
 
-
-.input:focus{
-
-    border-color:#e0b900;
-
-    box-shadow:
-        0 0 0 3px rgba(240,190,0,.09);
-
+.counter-btn:hover{
+    background:#e1e7e9;
 }
 
-
-.input.invalid{
-
-    border-color:#d75b5b;
-
-    background:#fff7f7;
-
+.counter-number{
+    min-width:24px;
+    text-align:center;
+    font-size:19px;
+    font-weight:900;
 }
 
+/* =====================================================
+   PARTICIPANTS
+===================================================== */
 
-.age-warning{
-
-    display:none;
-
-    margin-top:6px;
-
-    padding:8px 9px;
-
-    border-radius:10px;
-
-    color:#963e3e;
-
-    background:#fff0f0;
-
-    border:1px solid #f0d4d4;
-
-    font-size:7px;
-
-    line-height:1.45;
-
-    font-weight:800;
-
-}
-
-
-.age-warning.show{
-    display:block;
-}
-
-
-.choice-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+.participant-progress{
+    margin-top:18px;
+    display:flex;
     gap:7px;
-
+    overflow:auto;
+    padding-bottom:3px;
 }
 
+.progress-item{
+    min-width:48px;
+    height:38px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f0f3f4;
+    color:#89949a;
+    font-size:11px;
+    font-weight:900;
+}
+
+.progress-item.done{
+    background:#dff8ec;
+    color:#098557;
+}
+
+.progress-item.active{
+    background:var(--navy);
+    color:#fff;
+}
+
+.form-card{
+    margin-top:16px;
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:#fff;
+}
+
+.form-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.form-heading h3{
+    margin:0;
+    font-size:16px;
+    font-weight:800;
+}
+
+.saved{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#e2f8ed;
+    color:#078b59;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.field{
+    margin-top:14px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:6px;
+    font-size:10px;
+    font-weight:800;
+    color:#647178;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    border:1px solid #e0e6e8;
+    border-radius:13px;
+    background:#fbfcfc;
+    color:var(--navy);
+    outline:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#9fb1b8;
+    box-shadow:0 0 0 3px rgba(8,44,61,.06);
+}
+
+.field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.meal-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
 
 .choice{
-
-    height:42px;
-
-    border:
-        1px solid #dce4e1;
-
-    border-radius:12px;
-
-    color:#68757a;
-
-    background:#fff;
-
-    font-size:9px;
-
-    font-weight:900;
-
+    border:1px solid #e0e6e8;
+    border-radius:13px;
+    padding:12px;
+    cursor:pointer;
     transition:.2s;
-
 }
 
+.choice input{
+    display:none;
+}
 
 .choice.selected{
-
-    color:#082c3d;
-
-    border-color:#e4bb00;
-
-    background:#fff9dc;
-
-    box-shadow:
-        0 5px 13px rgba(240,190,0,.08);
-
+    border-color:var(--navy);
+    background:#f0f5f7;
 }
 
-
-.meal-extra{
-
-    margin-top:5px;
-
-    color:#d57526;
-
-    font-size:7px;
-
+.choice-title{
+    font-size:12px;
     font-weight:800;
-
 }
 
-
-.save-button{
-
-    width:100%;
-
-    height:46px;
-
-    margin-top:14px;
-
-    border:0;
-
-    border-radius:13px;
-
-    color:#071b24;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66d,
-            #ffc400,
-            #efa900
-        );
-
-    box-shadow:
-        0 3px 0 #b97c00,
-        0 10px 22px rgba(255,193,7,.13);
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:.11em;
-
-    text-transform:uppercase;
-
+.choice-sub{
+    margin-top:3px;
+    color:#89949a;
+    font-size:9px;
 }
 
+/* =====================================================
+   PICKUP
+===================================================== */
 
-.save-button:disabled{
-
-    opacity:.4;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =========================================================
-   SAVED PARTICIPANTS
-========================================================= */
-
-.saved-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
-
-    margin-top:11px;
-
-}
-
-
-.saved-card{
-
-    padding:11px;
-
-    border:
-        1px solid #d8eee3;
-
-    border-radius:14px;
-
-    background:#f6fdf9;
-
-}
-
-
-.saved-row{
-
-    display:flex;
-
-    align-items:center;
-
+.pickup-list{
+    margin-top:18px;
+    display:grid;
     gap:9px;
-
 }
 
-
-.saved-check{
-
-    width:26px;
-    height:26px;
-
+.pickup{
     display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    border:1px solid #e2e7e9;
+    border-radius:16px;
+    background:white;
+    cursor:pointer;
+}
 
+.pickup.active{
+    background:#eef5f7;
+    border-color:var(--navy);
+}
+
+.pickup-icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:#eef2f3;
+    display:flex;
     align-items:center;
     justify-content:center;
-
     flex-shrink:0;
-
-    border-radius:50%;
-
-    color:#fff;
-
-    background:#16a269;
-
 }
 
-
-.saved-main{
-
-    min-width:0;
-
-    flex:1;
-
+.pickup svg{
+    width:18px;
+    height:18px;
 }
-
-
-.saved-name{
-
-    overflow:hidden;
-
-    color:#082c3d;
-
-    font-size:9px;
-
-    font-weight:900;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-
-.saved-details{
-
-    margin-top:2px;
-
-    color:#7b898e;
-
-    font-size:7px;
-
-}
-
-
-.saved-extra{
-
-    color:#d57526;
-
-    font-size:7px;
-
-    font-weight:900;
-
-    white-space:nowrap;
-
-}
-
-
-/* =========================================================
-   PICKUP
-========================================================= */
-
-.pickup-grid{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
-
-    margin-top:12px;
-
-}
-
-
-.pickup-option{
-
-    width:100%;
-
-    padding:12px;
-
-    border:
-        1px solid #dfe6e3;
-
-    border-radius:13px;
-
-    background:#fff;
-
-    text-align:left;
-
-    transition:.2s;
-
-}
-
-
-.pickup-option.selected{
-
-    border-color:#e2ba00;
-
-    background:#fffbea;
-
-}
-
-
-.pickup-row{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-}
-
 
 .pickup-name{
-
-    color:#082c3d;
-
-    font-size:8px;
-
-    font-weight:900;
-
+    font-size:12px;
+    font-weight:800;
 }
-
 
 .pickup-time{
-
-    color:#657279;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    white-space:nowrap;
-
+    margin-top:2px;
+    color:#7e898f;
+    font-size:10px;
 }
 
+/* =====================================================
+   COUPON
+===================================================== */
 
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-.summary-card{
-
-    margin-top:18px;
-
-    padding:17px;
-
-    border-radius:19px;
-
-    color:#fff;
-
-    background:
-        linear-gradient(
-            145deg,
-            #061e28,
-            #0a3547
-        );
-
-    box-shadow:
-        0 15px 35px rgba(8,44,61,.16);
-
-}
-
-
-.summary-row{
-
+.coupon-row{
     display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:9px;
-
-    color:rgba(255,255,255,.6);
-
-    font-size:9px;
-
+    gap:9px;
+    margin-top:17px;
 }
 
+.coupon-row input{
+    min-width:0;
+    flex:1;
+    height:46px;
+    padding:0 14px;
+    border:1px solid #dfe5e7;
+    border-radius:13px;
+    outline:none;
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:800;
+}
 
-.summary-row strong{
+.coupon-btn{
+    border:0;
+    padding:0 17px;
+    border-radius:13px;
+    background:#edf1f2;
+    color:var(--navy);
+    font-size:11px;
+    font-weight:900;
+}
+
+.coupon-result{
+    margin-top:7px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.success{
+    color:#078557;
+}
+
+.danger{
+    color:#d14343;
+}
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary{
+    background:var(--navy);
+    color:white;
+    border-radius:22px;
+    padding:20px;
+}
+
+.summary-line{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin:9px 0;
+    font-size:12px;
+    color:#c3d0d5;
+}
+
+.summary-line strong{
     color:#fff;
 }
-
-
-.summary-row.orange{
-
-    color:#ffb878;
-
-}
-
 
 .summary-total{
-
+    border-top:1px solid rgba(255,255,255,.14);
+    margin-top:14px;
+    padding-top:15px;
     display:flex;
-
-    align-items:center;
-
     justify-content:space-between;
-
-    gap:10px;
-
-    margin-top:13px;
-
-    padding-top:13px;
-
-    border-top:
-        1px solid rgba(255,255,255,.1);
-
+    align-items:end;
 }
 
-
-.total-label{
-
+.summary-total span{
     font-size:10px;
-
-    font-weight:900;
-
-}
-
-
-.total-price{
-
-    color:#ffd52e;
-
-    font-size:23px;
-
-    font-weight:900;
-
-    letter-spacing:-.03em;
-
-}
-
-
-.payment-button{
-
-    width:100%;
-
-    height:48px;
-
-    margin-top:12px;
-
-    border:0;
-
-    border-radius:13px;
-
-    color:#071b24;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffe66d,
-            #ffc400,
-            #efa900
-        );
-
-    box-shadow:
-        0 3px 0 #b97c00;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:.1em;
-
+    color:#8fa3aa;
     text-transform:uppercase;
-
+    letter-spacing:.14em;
+    font-weight:800;
 }
 
-
-.payment-button:disabled{
-
-    opacity:.4;
-
-    cursor:not-allowed;
-
+.summary-total strong{
+    font-size:28px;
+    color:#ffd23a;
 }
 
+/* =====================================================
+   NOTES / DETAILS
+===================================================== */
 
-/* =========================================================
-   EMPTY / LOADING
-========================================================= */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:18px;
+}
 
-.loading{
+.info-box{
+    padding:14px;
+    background:#f7f9f8;
+    border-radius:16px;
+}
 
-    padding:20px;
-
-    color:#8c989c;
-
-    text-align:center;
-
+.info-box span{
+    display:block;
     font-size:8px;
-
+    color:#89959a;
+    text-transform:uppercase;
+    letter-spacing:.15em;
     font-weight:800;
-
 }
 
+.info-box strong{
+    display:block;
+    margin-top:5px;
+    font-size:13px;
+}
 
-.spinner{
+.text-content{
+    margin-top:18px;
+    color:#59676d;
+    font-size:12px;
+    line-height:1.7;
+}
 
-    width:24px;
-    height:24px;
+.list{
+    margin:10px 0 0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    gap:7px;
+}
 
-    margin:0 auto 9px;
+.list li{
+    display:flex;
+    gap:8px;
+    color:#59676d;
+    font-size:11px;
+    line-height:1.5;
+}
 
-    border:
-        2px solid #e5ebe8;
-
-    border-top-color:#ffc400;
-
+.list li::before{
+    content:"";
+    width:5px;
+    height:5px;
+    margin-top:6px;
     border-radius:50%;
-
-    animation:
-        spin .7s linear infinite;
-
+    background:#ffc400;
+    flex-shrink:0;
 }
 
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    left:50%;
-    bottom:92px;
-
-    z-index:99999;
-
-    width:max-content;
-
-    max-width:
-        calc(100% - 28px);
-
-    padding:11px 15px;
-
-    border-radius:12px;
-
-    color:#fff;
-
-    background:#082c3d;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.2);
-
-    font-size:9px;
-
-    font-weight:800;
-
-    opacity:0;
-
-    transform:
-        translate(-50%,25px);
-
-    pointer-events:none;
-
-    transition:.25s;
-
-}
-
-
-.toast.show{
-
-    opacity:1;
-
-    transform:
-        translate(-50%,0);
-
-}
-
-
-.toast.error{
-    background:#9f4141;
-}
-
-
-/* =========================================================
+/* =====================================================
    BOTTOM NAV
-========================================================= */
+===================================================== */
 
 .bottom-nav{
-
     position:fixed;
-
-    left:12px;
-    right:12px;
-    bottom:12px;
-
-    z-index:8500;
-
-    height:62px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    padding:5px;
-
-    border:
-        1px solid rgba(255,255,255,.7);
-
-    border-radius:21px;
-
-    background:
-        rgba(255,255,255,.91);
-
-    box-shadow:
-        0 15px 45px rgba(8,44,61,.16);
-
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
-
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:900;
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.94);
+    border-top:1px solid rgba(0,0,0,.07);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
 }
 
-
-.bottom-item{
-
-    position:relative;
-
+.bottom-inner{
+    max-width:1080px;
+    margin:auto;
     display:flex;
-
-    flex-direction:column;
-
     align-items:center;
+    gap:12px;
+}
 
-    justify-content:center;
+.price-bottom{
+    flex:1;
+    padding-left:4px;
+}
 
-    gap:3px;
-
-    border:0;
-
-    border-radius:16px;
-
-    color:#8a969a;
-
-    background:transparent;
-
-    font-size:7px;
-
+.price-bottom small{
+    display:block;
+    color:#89949a;
+    font-size:8px;
     font-weight:800;
-
+    text-transform:uppercase;
+    letter-spacing:.14em;
 }
 
-
-.bottom-item.active{
-
-    color:#082c3d;
-
-    background:#f0f4f2;
-
+.price-bottom strong{
+    display:block;
+    margin-top:2px;
+    color:var(--navy);
+    font-size:20px;
+    font-weight:900;
 }
 
-
-.bottom-item svg{
-
-    width:17px;
-    height:17px;
-
+.main-book{
+    border:0;
+    min-width:150px;
+    height:48px;
+    border-radius:14px;
+    background:linear-gradient(145deg,#ffe66d,#ffc400,#f0a800);
+    color:#071b24;
+    box-shadow:0 4px 0 #b87900,0 8px 22px rgba(255,193,7,.25);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.12em;
+    text-transform:uppercase;
 }
 
-
-.bottom-item.active::after{
-
-    content:"";
-
-    position:absolute;
-
-    bottom:4px;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:#ffc400;
-
+.main-book:disabled{
+    opacity:.45;
+    cursor:not-allowed;
 }
 
+/* =====================================================
+   LOADER
+===================================================== */
 
-/* =========================================================
+.loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#f6f8f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.cube{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:linear-gradient(145deg,#ffe66d,#ffc400,#f0a800);
+    box-shadow:0 5px 0 #b87900,0 15px 30px rgba(255,193,7,.25);
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    0%{transform:perspective(300px) rotateX(0) rotateY(0)}
+    50%{transform:perspective(300px) rotateX(180deg) rotateY(20deg)}
+    100%{transform:perspective(300px) rotateX(360deg) rotateY(0)}
+}
+
+/* =====================================================
    RESPONSIVE
-========================================================= */
+===================================================== */
 
-@media(max-width:960px){
+@media(max-width:640px){
 
-    .layout{
-
-        grid-template-columns:1fr;
-
+    .container{
+        width:min(100% - 20px,1080px);
     }
-
-
-    .booking-column{
-
-        position:static;
-
-    }
-
-
-    .desktop-nav{
-        display:none;
-    }
-
-
-    .menu-button{
-        display:flex;
-
-        align-items:center;
-        justify-content:center;
-    }
-
-
-}
-
-
-@media(max-width:650px){
-
-    .container,
-    .header-inner,
-    .hero-inner{
-
-        width:
-            calc(100% - 24px);
-
-    }
-
 
     .hero{
-        height:360px;
+        min-height:360px;
     }
 
-
-    .hero-title{
-        font-size:41px;
+    .hero-content{
+        min-height:360px;
+        padding:25px 0;
     }
 
-
-    .hero-description{
-        font-size:9px;
+    .booking-shell{
+        margin-top:-22px;
     }
 
-
-    .stats{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+    .section{
+        padding:19px;
     }
-
-
-    .note-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
 
     .date-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
 
-
-    .form-grid{
-
+    .field-row{
         grid-template-columns:1fr;
-
     }
 
-
-    .form-field.full{
-
-        grid-column:auto;
-
+    .info-grid{
+        grid-template-columns:1fr 1fr 1fr;
     }
 
-
-    .main{
-
-        padding-top:17px;
-
+    .main-book{
+        min-width:135px;
     }
-
-
-    .booking-card{
-
-        padding:17px;
-
-    }
-
 }
-
 
 @media(max-width:390px){
-
-    .hero-title{
-        font-size:36px;
-    }
-
-
-    .date-grid{
-
+    .info-grid{
         grid-template-columns:1fr;
-
     }
 
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-
-        scroll-behavior:auto!important;
-
-        transition:none!important;
-
-        animation:none!important;
-
+    .main-book{
+        min-width:120px;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     LOADER
+===================================================== -->
 
-<!-- =========================================================
+<div class="loader" id="loader">
+    <div class="cube"></div>
+</div>
+
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
-<header class="header">
+<nav class="nav">
 
-<div class="header-inner">
+    <div class="nav-inner">
 
+        <a class="brand" href="index.html">
 
-<a
-    href="./index.html"
-    class="logo"
->
+            <div class="logo">
 
-    <div class="logo-img">
+                <img
+                    src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
+                    alt="Adventure Junction"
+                    onerror="this.src='https://cloud-mypc.github.io/view/images/low/icon.png'"
+                >
 
-        <img
-            src="https://cloud-mypc.github.io/view/images/low/icon.jpg"
-            alt="Adventure Junction"
-            onerror="
-                this.onerror=null;
-                this.src='https://cloud-mypc.github.io/view/images/Icon.png';
-            "
-        >
+            </div>
 
-    </div>
+            <div>
+                <div class="brand-title">
+                    Adventure Junction
+                </div>
 
+                <div class="brand-sub">
+                    Climbing • Rappelling
+                </div>
+            </div>
 
-    <div class="logo-copy">
+        </a>
 
-        <div class="logo-title">
-            Adventure Junction
+        <div class="nav-actions">
+
+            <a
+                href="index.html#expeditions"
+                class="nav-link"
+            >
+                Expeditions
+            </a>
+
+            <a
+                href="index.html#how-it-works"
+                class="nav-link"
+            >
+                How It Works
+            </a>
+
+            <a
+                href="https://www.instagram.com/adventure__junction"
+                target="_blank"
+                rel="noopener"
+                class="nav-link"
+            >
+                Instagram
+            </a>
+
+            <a
+                href="index.html"
+                class="nav-cta"
+            >
+                Explore
+            </a>
+
         </div>
 
-        <div class="logo-sub">
-            Climbing • Rappelling
-        </div>
-
     </div>
-
-</a>
-
-
-<nav class="desktop-nav">
-
-    <a href="./index.html#expeditions">
-        Expeditions
-    </a>
-
-    <a href="./index.html#how-it-works">
-        How It Works
-    </a>
-
-    <a href="./index.html#about">
-        About Us
-    </a>
 
 </nav>
 
 
-<div class="header-action">
+<main class="page">
 
-    <a
-        class="instagram-button"
-        href="https://www.instagram.com/adventure__junction"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-    >
-
-        <svg class="icon">
-
-            <rect
-                x="3"
-                y="3"
-                width="18"
-                height="18"
-                rx="5"
-            ></rect>
-
-            <circle
-                cx="12"
-                cy="12"
-                r="4"
-            ></circle>
-
-            <circle
-                cx="17.5"
-                cy="6.5"
-                r="1"
-                fill="currentColor"
-                stroke="none"
-            ></circle>
-
-        </svg>
-
-    </a>
-
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="Open menu"
-    >
-
-        <svg class="icon">
-
-            <path d="M4 7h16"></path>
-
-            <path d="M4 12h16"></path>
-
-            <path d="M4 17h16"></path>
-
-        </svg>
-
-    </button>
-
-</div>
-
-
-</div>
-
-
-<div
-    class="mobile-menu"
-    id="mobileMenu"
->
-
-    <a href="./index.html#expeditions">
-
-        <svg class="icon icon-sm">
-            <path d="M4 19h16"></path>
-            <path d="M6 19l2-9h8l2 9"></path>
-            <path d="M9 10l3-6 3 6"></path>
-        </svg>
-
-        Expeditions
-
-    </a>
-
-
-    <a href="./index.html#how-it-works">
-
-        <svg class="icon icon-sm">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M12 8v4l2.5 2"></path>
-        </svg>
-
-        How It Works
-
-    </a>
-
-
-    <a href="./index.html#about">
-
-        <svg class="icon icon-sm">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M12 11v5"></path>
-            <path d="M12 8h.01"></path>
-        </svg>
-
-        About Us
-
-    </a>
-
-</div>
-
-</header>
-
-
-<!-- =========================================================
+<!-- =====================================================
      HERO
-========================================================= -->
+===================================================== -->
 
 <section class="hero">
 
-<img
-    id="heroImage"
-    class="hero-image"
-    src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1800&q=85"
-    alt="Adventure"
->
+    <img
+        id="heroLow"
+        class="hero-image-low"
+        src=""
+        alt=""
+    >
 
-<div class="hero-overlay"></div>
+    <img
+        id="heroHigh"
+        class="hero-image-high"
+        src=""
+        alt=""
+        onload="this.classList.add('loaded')"
+    >
 
+    <div class="hero-overlay"></div>
 
-<div class="hero-inner">
+    <div class="container hero-content">
 
-<div class="hero-content">
+        <div class="category">
 
+            <span class="category-dot"></span>
 
-<div class="hero-badge">
+            <span id="heroCategory">
+                Adventure
+            </span>
 
-    <span class="hero-badge-dot"></span>
+        </div>
 
-    Adventure Booking
+        <h1 id="heroTitle">
+            Loading adventure...
+        </h1>
 
-</div>
+        <div class="hero-meta">
 
+            <div class="meta">
+                <span>₹</span>
+                <span id="heroPrice">—</span>
+            </div>
 
-<h1
-    class="hero-title"
-    id="heroTitle"
->
-    Adventure
-</h1>
+            <div class="meta">
+                <span>Departure</span>
+                <span id="heroTime">—</span>
+            </div>
 
+            <div class="meta">
+                <span id="heroDuration">Adventure</span>
+            </div>
 
-<p
-    class="hero-description"
-    id="heroDescription"
->
-    Select your preferred date and slot,
-    then complete participant details.
-</p>
+        </div>
 
-
-<div class="hero-meta">
-
-    <span>
-
-        <svg class="icon icon-sm">
-            <rect
-                x="3"
-                y="4"
-                width="18"
-                height="17"
-                rx="2"
-            ></rect>
-            <path d="M16 2v4"></path>
-            <path d="M8 2v4"></path>
-            <path d="M3 10h18"></path>
-        </svg>
-
-        Multiple Dates
-
-    </span>
-
-
-    <span>
-
-        <svg class="icon icon-sm">
-            <path d="M12 7v5l3 2"></path>
-            <circle
-                cx="12"
-                cy="12"
-                r="9"
-            ></circle>
-        </svg>
-
-        Multiple Slots
-
-    </span>
-
-
-    <span>
-
-        <svg class="icon icon-sm">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-
-        Up to 100 Guests
-
-    </span>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
+<!-- =====================================================
+     BOOKING
+===================================================== -->
 
-<main class="main">
+<div class="container booking-shell">
 
-<div class="container">
+<div class="glass-card">
 
-<div class="layout">
+<!-- =====================================================
+     DATE
+===================================================== -->
 
+<section class="section">
 
-<!-- =========================================================
-     LEFT
-========================================================= -->
+    <h2 class="section-title">
+        Choose your adventure date
+    </h2>
 
-<section class="left-column">
+    <p class="section-sub">
+        Select one date. Each date has its own live seat availability.
+    </p>
 
+    <div
+        class="date-grid"
+        id="dateGrid"
+    ></div>
 
-<!-- QUICK STATS -->
+    <div
+        class="selected-bar"
+        id="selectedBar"
+        style="display:none"
+    >
 
-<div class="stats">
+        <div>
 
+            <div class="selected-label">
+                Selected date
+            </div>
 
-<div class="stat">
+            <div
+                class="selected-value"
+                id="selectedDateText"
+            ></div>
 
-    <div class="stat-icon">
+        </div>
 
-        <svg class="icon icon-sm">
-            <path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"></path>
-        </svg>
+        <div class="capacity">
+
+            <div class="selected-label">
+                Available
+            </div>
+
+            <strong id="selectedSeats">
+                0
+            </strong>
+
+        </div>
 
     </div>
 
-    <div class="stat-label">
-        Adventure
+</section>
+
+
+<!-- =====================================================
+     GUEST COUNT
+===================================================== -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        Number of guests
+    </h2>
+
+    <p class="section-sub">
+        Maximum guests are limited by the selected date's live availability.
+    </p>
+
+    <div class="counter">
+
+        <div>
+
+            <div class="counter-title">
+                Participants
+            </div>
+
+            <div
+                class="counter-sub"
+                id="counterSub"
+            >
+                Select a date first
+            </div>
+
+        </div>
+
+        <div class="counter-controls">
+
+            <button
+                class="counter-btn"
+                id="minusBtn"
+                type="button"
+            >
+                −
+            </button>
+
+            <div
+                class="counter-number"
+                id="guestCount"
+            >
+                1
+            </div>
+
+            <button
+                class="counter-btn"
+                id="plusBtn"
+                type="button"
+            >
+                +
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PARTICIPANTS
+===================================================== -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        Participant details
+    </h2>
+
+    <p class="section-sub">
+        Add each participant once. Everyone must be 16 years or older.
+    </p>
+
+    <div
+        class="participant-progress"
+        id="participantProgress"
+    ></div>
+
+    <div
+        class="form-card"
+        id="participantForm"
+    ></div>
+
+</section>
+
+
+<!-- =====================================================
+     PICKUP
+===================================================== -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        Pickup location
+    </h2>
+
+    <p class="section-sub">
+        Choose where you will board the adventure bus.
+    </p>
+
+    <div
+        class="pickup-list"
+        id="pickupList"
+    ></div>
+
+    <div class="text-content">
+        Please reach your selected pickup point at least
+        <strong>20 minutes before departure.</strong>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAYMENT
+===================================================== -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        Payment
+    </h2>
+
+    <p class="section-sub">
+        Apply your coupon before confirming the booking.
+    </p>
+
+    <div class="coupon-row">
+
+        <input
+            id="couponInput"
+            type="text"
+            maxlength="30"
+            placeholder="Coupon code"
+        >
+
+        <button
+            class="coupon-btn"
+            id="couponBtn"
+            type="button"
+        >
+            Apply
+        </button>
+
     </div>
 
     <div
-        class="stat-value"
-        id="statCategory"
+        class="coupon-result"
+        id="couponResult"
+    ></div>
+
+    <div
+        class="summary"
+        style="margin-top:18px"
     >
-        Adventure
-    </div>
 
-</div>
+        <div class="summary-line">
+            <span>Adventure fee</span>
+            <strong id="summaryAdventure">₹0</strong>
+        </div>
 
+        <div class="summary-line">
+            <span>Non-veg meals</span>
+            <strong id="summaryMeal">₹0</strong>
+        </div>
 
-<div class="stat">
+        <div class="summary-line">
+            <span>Discount</span>
+            <strong id="summaryDiscount">−₹0</strong>
+        </div>
 
-    <div class="stat-icon">
+        <div class="summary-total">
+            <div>
+                <span>Total payable</span>
+            </div>
 
-        <svg class="icon icon-sm">
-            <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"></path>
-            <circle cx="12" cy="10" r="2.5"></circle>
-        </svg>
-
-    </div>
-
-    <div class="stat-label">
-        Location
-    </div>
-
-    <div class="stat-value">
-        Maharashtra
-    </div>
-
-</div>
-
-
-<div class="stat">
-
-    <div class="stat-icon">
-
-        <svg class="icon icon-sm">
-            <rect
-                x="3"
-                y="4"
-                width="18"
-                height="17"
-                rx="2"
-            ></rect>
-            <path d="M16 2v4"></path>
-            <path d="M8 2v4"></path>
-            <path d="M3 10h18"></path>
-        </svg>
+            <strong id="summaryTotal">
+                ₹0
+            </strong>
+        </div>
 
     </div>
 
-    <div class="stat-label">
-        Dates
+    <div class="text-content">
+
+        <strong>Advance full payment is compulsory</strong>
+        to reserve seats.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EVENT DETAILS
+===================================================== -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        About this adventure
+    </h2>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+            <span>Grade</span>
+            <strong id="detailGrade">Easy</strong>
+        </div>
+
+        <div class="info-box">
+            <span>Endurance</span>
+            <strong id="detailEndurance">Medium</strong>
+        </div>
+
+        <div class="info-box">
+            <span>Height</span>
+            <strong id="detailHeight">—</strong>
+        </div>
+
     </div>
 
     <div
-        class="stat-value"
-        id="statDates"
+        class="text-content"
+        id="detailDescription"
+    ></div>
+
+
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
     >
-        Loading
-    </div>
+        Inclusions
+    </h3>
 
-</div>
-
-
-<div class="stat">
-
-    <div class="stat-icon">
-
-        <svg class="icon icon-sm">
-            <path d="M5 12h14"></path>
-            <path d="M12 5v14"></path>
-        </svg>
-
-    </div>
-
-    <div class="stat-label">
-        Capacity
-    </div>
-
-    <div class="stat-value">
-        100 Max
-    </div>
-
-</div>
+    <ul
+        class="list"
+        id="inclusions"
+    ></ul>
 
 
-</div>
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Things to carry
+    </h3>
+
+    <ul class="list">
+
+        <li>Trekking or sports shoes with good grip.</li>
+        <li>Regular medicines, if required.</li>
+        <li>Water bottle and personal essentials.</li>
+        <li>Light backpack suitable for trekking.</li>
+        <li>Weather-appropriate clothing.</li>
+
+    </ul>
 
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Itinerary
+    </h3>
 
-<details
-    class="card info-card"
-    open
->
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <circle
-                cx="12"
-                cy="12"
-                r="9"
-            ></circle>
-            <path d="M12 11v5"></path>
-            <path d="M12 8h.01"></path>
-        </svg>
-
-    </div>
+    <ul
+        class="list"
+        id="itinerary"
+    ></ul>
 
 
-    <div class="summary-text">
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Important guidelines
+    </h3>
 
-        <div class="summary-title">
-            About This Adventure
-        </div>
-
-        <div class="summary-sub">
-            Explore the experience before booking
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
+    <ul
+        class="list"
+        id="guidelines"
+    ></ul>
 
 
-<div class="info-content">
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Important notes
+    </h3>
 
-<p id="aboutText">
+    <ul class="list">
 
-Lingya Waterfall is a beautiful natural attraction
-surrounded by lush greenery and vibrant monsoon
-landscapes. The experience combines trekking,
-nature, swimming and adventurous rappelling.
+        <li>
+            Don't use perfumes. They can attract wild honeybees
+            in the jungle and can be fatal.
+        </li>
 
-</p>
+        <li>
+            Don't wear gold jewellery or carry valuables.
+        </li>
 
-<p>
+        <li>
+            Inform your friends and family about this trip.
+        </li>
 
-The area is ideal for participants who enjoy
-nature, adventure, photography and exploring
-less-crowded destinations.
+        <li>
+            Participants below 16 years are not allowed.
+        </li>
 
-</p>
+        <li>
+            Smoking and drinking alcohol are strictly prohibited.
+        </li>
 
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     ATTRACTIONS
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <path d="M3 20l5-8 4 5 4-7 5 10"></path>
-            <path d="M3 20h18"></path>
-        </svg>
-
-    </div>
+    </ul>
 
 
-    <div class="summary-text">
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Do's
+    </h3>
 
-        <div class="summary-title">
-            Major Attractions
-        </div>
+    <ul class="list">
 
-        <div class="summary-sub">
-            Highlights of the expedition
-        </div>
+        <li>Please cut your toenails before the trek.</li>
+
+        <li>Carry regular medicines if required.</li>
+
+        <li>Inform family or close friends about the event.</li>
+
+        <li>Carry trekking/sports shoes with good grip.</li>
+
+        <li>Reach the meeting point at least 10 minutes early.</li>
+
+    </ul>
+
+
+    <h3
+        class="section-title"
+        style="font-size:16px;margin-top:25px"
+    >
+        Refund policy
+    </h3>
+
+    <div class="text-content">
+
+        Cancellation before <strong>48 hours</strong> of
+        departure:
+        <strong>50% of the total trek fees will be deducted.</strong>
+
+        <br><br>
+
+        Cancellation within 48 hours before departure:
+        <strong>100% of the trek fees will be deducted.</strong>
+
+        <br><br>
+
+        Refunds will be processed within
+        <strong>2 business days.</strong>
 
     </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<div class="info-list">
-
-<div class="info-item">
-    <span class="info-bullet"></span>
-    <span>300+ ft adventurous rappelling.</span>
-</div>
-
-<div class="info-item">
-    <span class="info-bullet"></span>
-    <span>Beautiful monsoon waterfall experience.</span>
-</div>
-
-<div class="info-item">
-    <span class="info-bullet"></span>
-    <span>Natural pool below the waterfall.</span>
-</div>
-
-<div class="info-item">
-    <span class="info-bullet"></span>
-    <span>Crystal-clear bluish-green water.</span>
-</div>
-
-<div class="info-item">
-    <span class="info-bullet"></span>
-    <span>Dense forest and scenic surroundings.</span>
-</div>
-
-</div>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     ITINERARY
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <circle
-                cx="12"
-                cy="12"
-                r="9"
-            ></circle>
-            <path d="M12 7v5l3 2"></path>
-        </svg>
-
-    </div>
-
-
-    <div class="summary-text">
-
-        <div class="summary-title">
-            Itinerary
-        </div>
-
-        <div class="summary-sub">
-            Day plan & activity timeline
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<div class="info-list">
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>03:00 AM</strong> — Reach base village.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>03:00–04:00 AM</strong> — Rest in bus.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>05:00 AM</strong> — Morning routine.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>05:15 AM</strong> — Tea & breakfast.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>05:30 AM</strong> — Trek introduction with team.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>05:45 AM</strong> — Reach Lingya Waterfall.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>06:00 AM</strong> — Reach rappelling point.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>07:30 AM</strong> — Rappelling begins.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>03:00 PM</strong> — Complete activity and trek towards base village.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>04:30 PM</strong> — Reach base village.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>04:30–05:30 PM</strong> — Lunch.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span><strong>05:30 PM</strong> — Journey back to city.</span>
-</div>
-
-</div>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     COST
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <rect
-                x="2"
-                y="5"
-                width="20"
-                height="14"
-                rx="2"
-            ></rect>
-            <path d="M2 10h20"></path>
-            <path d="M6 15h4"></path>
-        </svg>
-
-    </div>
-
-
-    <div class="summary-text">
-
-        <div class="summary-title">
-            Cost Includes & Excludes
-        </div>
-
-        <div class="summary-sub">
-            Know exactly what is covered
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<p><strong>Includes</strong></p>
-
-<div class="info-list">
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Transport by Non-AC Bus.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Adventure insurance with travel cover.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Tea, breakfast & Veg lunch.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Safety equipment / gears.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>300+ ft adventurous rappelling.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Basic first aid.</span>
-</div>
-
-</div>
-
-
-<p style="margin-top:15px;">
-<strong>Excludes</strong>
-</p>
-
-<div class="info-list">
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Cold drinks, mineral water, etc.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Dinner and personal expenses.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Private orders of meals or beverages.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Travel expenses to railway stations.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Medical expenses other than first aid.</span>
-</div>
-
-</div>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     THINGS TO CARRY
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <path d="M6 8h12v12H6z"></path>
-            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
-            <path d="M10 12h4"></path>
-        </svg>
-
-    </div>
-
-
-    <div class="summary-text">
-
-        <div class="summary-title">
-            Things to Carry
-        </div>
-
-        <div class="summary-sub">
-            Pack smart for the adventure
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<div class="info-list">
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Sanitizer, masks and personal medicines.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>2–3 litres of water (Must).</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Head torch / torch with extra batteries.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Full-sleeve T-shirt and full pants.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Good trekking shoes and extra socks.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Warm clothes / shawl, towel and extra clothes.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Raincoat / poncho.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Camera / cap (Optional).</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Electrolyte packets.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Fruits / dry fruits for the trek.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Haversack (Optional).</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Support stick (Optional).</span>
-</div>
-
-</div>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     DO'S
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <path d="M5 12l4 4L19 6"></path>
-        </svg>
-
-    </div>
-
-
-    <div class="summary-text">
-
-        <div class="summary-title">
-            Do's
-        </div>
-
-        <div class="summary-sub">
-            Before & during the trip
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<div class="info-list">
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Please cut your toenails before the trek.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Carry regular medicines if required.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Inform your family or close friends about this event.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Carry trekking / sports shoes with good grip.</span>
-</div>
-
-<div class="info-item">
-<span class="info-bullet"></span>
-<span>Reach the meeting point at least 10 minutes early.</span>
-</div>
-
-</div>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     REFUND POLICY
-===================================================== -->
-
-<details class="card info-card">
-
-<summary>
-
-    <div class="summary-icon">
-
-        <svg class="icon">
-            <path d="M4 7h11"></path>
-            <path d="M4 7l3-3"></path>
-            <path d="M4 7l3 3"></path>
-            <path d="M20 17H9"></path>
-            <path d="M20 17l-3-3"></path>
-            <path d="M20 17l-3 3"></path>
-        </svg>
-
-    </div>
-
-
-    <div class="summary-text">
-
-        <div class="summary-title">
-            Refund Policy
-        </div>
-
-        <div class="summary-sub">
-            Cancellation & refund terms
-        </div>
-
-    </div>
-
-
-    <div class="summary-arrow">
-
-        <svg class="icon icon-sm">
-            <path d="M6 9l6 6 6-6"></path>
-        </svg>
-
-    </div>
-
-</summary>
-
-
-<div class="info-content">
-
-<p>
-
-<strong>Cancellation before 48 hours:</strong>
-50% of the total trek fees will be deducted.
-
-</p>
-
-
-<p>
-
-<strong>Cancellation within 48 hours before departure:</strong>
-100% of the trek fees will be deducted.
-
-</p>
-
-
-<p>
-
-<strong>Refund processing:</strong>
-Eligible refunds will be processed within
-<strong>2 business days.</strong>
-
-</p>
-
-</div>
-
-</details>
-
-
-<!-- =====================================================
-     IMPORTANT SAFETY
-===================================================== -->
-
-<section class="card">
-
-<div class="card-padding">
-
-<div
-    style="
-        font-size:14px;
-        font-weight:900;
-        margin-bottom:11px;
-    "
->
-    Important Safety Notes
-</div>
-
-
-<div class="note-grid">
-
-
-<div class="note-box warning">
-
-<div class="note-heading">
-
-<svg
-    class="icon"
-    viewBox="0 0 24 24"
->
-    <path d="M12 3L2.5 20h19L12 3z"></path>
-    <path d="M12 9v5"></path>
-    <path d="M12 17h.01"></path>
-</svg>
-
-No Perfumes
-
-</div>
-
-
-<div class="note-list">
-
-<div>
-Do not use perfumes or strong fragrances.
-</div>
-
-<div>
-They can attract honeybees in the jungle and may be dangerous.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="note-box warning">
-
-<div class="note-heading">
-
-<svg
-    class="icon"
-    viewBox="0 0 24 24"
->
-    <rect
-        x="5"
-        y="8"
-        width="14"
-        height="13"
-        rx="2"
-    ></rect>
-    <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
-</svg>
-
-No Valuables
-
-</div>
-
-
-<div class="note-list">
-
-<div>
-Do not wear gold.
-</div>
-
-<div>
-Avoid carrying unnecessary valuables.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="note-box info">
-
-<div class="note-heading">
-
-<svg
-    class="icon"
-    viewBox="0 0 24 24"
->
-    <path d="M4 4h16v16H4z"></path>
-    <path d="M8 8h8"></path>
-    <path d="M8 12h8"></path>
-    <path d="M8 16h5"></path>
-</svg>
-
-Stay Connected
-
-</div>
-
-
-<div class="note-list">
-
-<div>
-Inform your friends and family about the trip.
-</div>
-
-<div>
-Share your itinerary with someone you trust.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="note-box safe">
-
-<div class="note-heading">
-
-<svg
-    class="icon"
-    viewBox="0 0 24 24"
->
-    <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"></path>
-    <path d="M8 12l2.5 2.5L16 9"></path>
-</svg>
-
-Age & Safety
-
-</div>
-
-
-<div class="note-list">
-
-<div>
-Participants below 16 years are not allowed.
-</div>
-
-<div>
-Follow instructions from the adventure team.
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
 
 </section>
-
-
-</section>
-
-
-<!-- =========================================================
-     BOOKING COLUMN
-========================================================= -->
-
-<aside class="booking-column">
-
-<section class="card booking-card">
-
-
-<div class="booking-heading">
-
-<div>
-
-<div class="booking-title">
-Reserve Your Adventure
-</div>
-
-<div class="booking-subtitle">
-Choose your date, slot and participants.
-</div>
-
-</div>
-
-
-<div class="live-badge">
-
-<span class="live-dot"></span>
-
-Live
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     STEP 1 DATE
-===================================================== -->
-
-<div class="booking-step">
-
-<div class="step-header">
-
-<div class="step-number">
-1
-</div>
-
-<div>
-
-<div class="step-title">
-Select Date
-</div>
-
-<div class="step-subtitle">
-Choose from upcoming adventure dates
-</div>
-
-</div>
-
-</div>
-
-
-<div
-    class="date-grid"
-    id="dateGrid"
->
-
-<div class="loading">
-
-<div class="spinner"></div>
-
-Loading dates...
-
-</div>
-
-</div>
-
-
-<div
-    class="slot-wrapper"
-    id="slotWrapper"
-    style="display:none;"
->
-
-<label class="field-label">
-Available Slots
-</label>
-
-
-<div
-    class="slot-grid"
-    id="slotGrid"
->
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     STEP 2 GUESTS
-===================================================== -->
-
-<div
-    class="booking-step"
-    id="guestStep"
-    style="display:none;"
->
-
-<div class="step-header">
-
-<div class="step-number">
-2
-</div>
-
-<div>
-
-<div class="step-title">
-Number of Guests
-</div>
-
-<div class="step-subtitle">
-Select how many participants are joining
-</div>
-
-</div>
-
-</div>
-
-
-<div class="counter-box">
-
-<div class="counter-row">
-
-<div>
-
-<div class="counter-label">
-Total Guests
-</div>
-
-<div
-    class="counter-helper"
-    id="counterHelper"
->
-Maximum 100 guests
-</div>
-
-</div>
-
-
-<div class="counter-controls">
-
-<button
-    class="counter-button"
-    id="minusButton"
-    type="button"
->
-−
-</button>
-
-
-<div
-    class="counter-value"
-    id="guestCount"
->
-1
-</div>
-
-
-<button
-    class="counter-button"
-    id="plusButton"
-    type="button"
->
-+
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     STEP 3 PARTICIPANTS
-===================================================== -->
-
-<div
-    class="booking-step"
-    id="participantStep"
-    style="display:none;"
->
-
-<div class="step-header">
-
-<div class="step-number">
-3
-</div>
-
-<div>
-
-<div class="step-title">
-Participant Details
-</div>
-
-<div class="step-subtitle">
-Save one participant at a time
-</div>
-
-</div>
-
-</div>
-
-
-<div class="progress">
-
-<div class="progress-top">
-
-<span>
-Participant progress
-</span>
-
-<span id="progressText">
-0 / 1
-</span>
-
-</div>
-
-
-<div class="progress-track">
-
-<div
-    class="progress-fill"
-    id="progressFill"
-></div>
-
-</div>
-
-</div>
-
-
-<div
-    class="saved-list"
-    id="savedList"
->
-</div>
-
-
-<div
-    class="participant-form"
-    id="participantForm"
->
-
-
-<div class="participant-top">
-
-<div
-    class="participant-number"
-    id="participantNumber"
->
-1
-</div>
-
-
-<div>
-
-<div class="participant-title">
-Participant <span id="participantText">1</span>
-</div>
-
-<div class="participant-subtitle">
-Enter accurate details
-</div>
-
-</div>
-
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="form-field full">
-
-<label class="field-label">
-Full Name *
-</label>
-
-<input
-    id="nameInput"
-    class="input"
-    type="text"
-    placeholder="Participant full name"
-    autocomplete="name"
->
-
-</div>
-
-
-<div class="form-field">
-
-<label class="field-label">
-Age *
-</label>
-
-<input
-    id="ageInput"
-    class="input"
-    type="number"
-    min="16"
-    max="100"
-    inputmode="numeric"
-    placeholder="16+"
->
-
-
-<div
-    class="age-warning"
-    id="ageWarning"
->
-Participants below 16 years are not allowed.
-</div>
-
-</div>
-
-
-<div class="form-field">
-
-<label class="field-label">
-Mobile Number *
-</label>
-
-<input
-    id="phoneInput"
-    class="input"
-    type="tel"
-    maxlength="10"
-    inputmode="numeric"
-    placeholder="10 digit number"
-    autocomplete="tel"
->
-
-</div>
-
-
-<div class="form-field">
-
-<label class="field-label">
-Gender *
-</label>
-
-
-<div class="choice-grid">
-
-<button
-    type="button"
-    class="choice"
-    id="maleChoice"
->
-Male
-</button>
-
-
-<button
-    type="button"
-    class="choice"
-    id="femaleChoice"
->
-Female
-</button>
-
-</div>
-
-</div>
-
-
-<div class="form-field">
-
-<label class="field-label">
-Meal Preference *
-</label>
-
-
-<div class="choice-grid">
-
-<button
-    type="button"
-    class="choice selected"
-    id="vegChoice"
->
-Veg
-</button>
-
-
-<button
-    type="button"
-    class="choice"
-    id="nonVegChoice"
->
-Non-Veg
-</button>
-
-</div>
-
-
-<div class="meal-extra">
-Non-Veg meal adds ₹100 per participant.
-</div>
-
-</div>
-
-
-</div>
-
-
-<button
-    type="button"
-    class="save-button"
-    id="saveButton"
->
-Save Participant
-</button>
-
-</div>
-
-
-<div
-    id="allParticipantsComplete"
-    style="
-        display:none;
-        margin-top:10px;
-        padding:11px;
-        border-radius:13px;
-        background:#edf9f3;
-        border:1px solid #d2ecdf;
-        color:#16845a;
-        font-size:8px;
-        line-height:1.5;
-        font-weight:900;
-    "
->
-
-✓ All participant details saved.
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     STEP 4 PICKUP
-===================================================== -->
-
-<div
-    class="booking-step"
-    id="pickupStep"
-    style="display:none;"
->
-
-<div class="step-header">
-
-<div class="step-number">
-4
-</div>
-
-<div>
-
-<div class="step-title">
-Pickup Point
-</div>
-
-<div class="step-subtitle">
-Select your preferred boarding point
-</div>
-
-</div>
-
-</div>
-
-
-<div class="pickup-grid">
-
-
-<button
-    type="button"
-    class="pickup-option"
-    data-name="Katraj Main Bus Stop, Pune"
-    data-time="11:00 PM"
->
-
-<div class="pickup-row">
-
-<span class="pickup-name">
-Katraj Main Bus Stop, Pune
-</span>
-
-<span class="pickup-time">
-11:00 PM
-</span>
-
-</div>
-
-</button>
-
-
-<button
-    type="button"
-    class="pickup-option"
-    data-name="Navale Bridge"
-    data-time="11:15 PM"
->
-
-<div class="pickup-row">
-
-<span class="pickup-name">
-Navale Bridge
-</span>
-
-<span class="pickup-time">
-11:15 PM
-</span>
-
-</div>
-
-</button>
-
-
-<button
-    type="button"
-    class="pickup-option"
-    data-name="Chandani Chowk"
-    data-time="11:30 PM"
->
-
-<div class="pickup-row">
-
-<span class="pickup-name">
-Chandani Chowk
-</span>
-
-<span class="pickup-time">
-11:30 PM
-</span>
-
-</div>
-
-</button>
-
-
-<button
-    type="button"
-    class="pickup-option"
-    data-name="Hinjewadi Chowk"
-    data-time="11:45 PM"
->
-
-<div class="pickup-row">
-
-<span class="pickup-name">
-Hinjewadi Chowk
-</span>
-
-<span class="pickup-time">
-11:45 PM
-</span>
-
-</div>
-
-</button>
-
-
-<button
-    type="button"
-    class="pickup-option"
-    data-name="Pirangut Chowk, Hinjewadi Phase 3"
-    data-time="12:00 AM"
->
-
-<div class="pickup-row">
-
-<span class="pickup-name">
-Pirangut Chowk, Hinjewadi Phase 3
-</span>
-
-<span class="pickup-time">
-12:00 AM
-</span>
-
-</div>
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     SUMMARY
-===================================================== -->
-
-<div
-    id="summaryArea"
-    style="display:none;"
->
-
-<div class="summary-card">
-
-
-<div class="summary-row">
-
-<span>
-Participants
-</span>
-
-<strong id="summaryGuests">
-1
-</strong>
-
-</div>
-
-
-<div class="summary-row">
-
-<span>
-Adventure Fee
-</span>
-
-<strong id="summaryAdventure">
-₹0
-</strong>
-
-</div>
-
-
-<div class="summary-row orange">
-
-<span>
-Non-Veg Supplement
-</span>
-
-<strong id="summaryNonVeg">
-₹0
-</strong>
-
-</div>
-
-
-<div class="summary-total">
-
-<div class="total-label">
-Final Total
-</div>
-
-<div
-    class="total-price"
-    id="summaryTotal"
->
-₹0
-</div>
-
-</div>
-
-
-<button
-    type="button"
-    class="payment-button"
-    id="paymentButton"
-    disabled
->
-Proceed to Payment
-</button>
-
-</div>
-
-</div>
-
-
-</section>
-
-</aside>
-
 
 </div>
 
@@ -4539,1089 +1573,765 @@ Proceed to Payment
 </main>
 
 
-<!-- =========================================================
-     BOTTOM NAVIGATION
-========================================================= -->
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
 
-<nav class="bottom-nav">
+<div class="bottom-nav">
 
+    <div class="bottom-inner">
 
-<a
-    href="./index.html"
-    class="bottom-item"
->
+        <div class="price-bottom">
 
-<svg class="icon">
+            <small>
+                Total payable
+            </small>
 
-    <path d="M3 11l9-8 9 8"></path>
+            <strong id="bottomTotal">
+                ₹0
+            </strong>
 
-    <path d="M5 10v10h14V10"></path>
+        </div>
 
-    <path d="M9 20v-6h6v6"></path>
+        <button
+            class="main-book"
+            id="bookButton"
+            type="button"
+            disabled
+        >
+            Continue to UPI
+        </button>
 
-</svg>
+    </div>
 
-<span>
-Home
-</span>
-
-</a>
-
-
-<a
-    href="./index.html#expeditions"
-    class="bottom-item"
->
-
-<svg class="icon">
-
-    <path d="M3 20l6-10 4 6 3-5 5 9"></path>
-
-    <path d="M3 20h18"></path>
-
-</svg>
-
-<span>
-Explore
-</span>
-
-</a>
-
-
-<button
-    type="button"
-    class="bottom-item active"
-    id="bottomBook"
->
-
-<svg class="icon">
-
-    <rect
-        x="4"
-        y="3"
-        width="16"
-        height="18"
-        rx="2"
-    ></rect>
-
-    <path d="M8 7h8"></path>
-
-    <path d="M8 11h8"></path>
-
-    <path d="M8 15h5"></path>
-
-</svg>
-
-<span>
-Booking
-</span>
-
-</button>
-
-
-<a
-    href="https://www.instagram.com/adventure__junction"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="bottom-item"
->
-
-<svg class="icon">
-
-    <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-    ></rect>
-
-    <circle
-        cx="12"
-        cy="12"
-        r="4"
-    ></circle>
-
-    <circle
-        cx="17.5"
-        cy="6.5"
-        r="1"
-        fill="currentColor"
-        stroke="none"
-    ></circle>
-
-</svg>
-
-<span>
-Instagram
-</span>
-
-</a>
-
-
-</nav>
-
-
-<!-- =========================================================
-     TOAST
-========================================================= -->
-
-<div
-    class="toast"
-    id="toast"
-></div>
+</div>
 
 
 <script>
-
-/* =========================================================
+/* =====================================================
    SUPABASE
-========================================================= */
+===================================================== */
 
 const SUPABASE_URL =
-    "https://salaxcyxgwjqemryqwk2.supabase.co";
-
+    'https://salaxcyxgwjqemryqwkx.supabase.co';
 
 const SUPABASE_KEY =
-    "sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO";
+    'sb_publishable_7mesl3BgJVam7bcR-rcOag_908xtgoO';
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-let supabaseClient = null;
-
-
-/* =========================================================
-   STATE
-========================================================= */
+/* =====================================================
+   APP STATE
+===================================================== */
 
 const state = {
 
-    expedition:null,
+    event:null,
 
     dates:[],
 
     selectedDate:null,
 
-    selectedSlot:null,
+    pickups:[],
 
-    guestQuantity:1,
+    selectedPickup:null,
+
+    guestCount:1,
+
+    currentGuest:1,
 
     guests:[],
 
-    gender:"",
+    coupon:null,
 
-    meal:"Veg",
+    couponPercent:0,
 
-    pickup:null,
-
-    maxGuests:1,
-
-    price:0
+    saving:false
 
 };
 
 
-/* =========================================================
+/* =====================================================
    HELPERS
-========================================================= */
-
-const $ = id =>
-    document.getElementById(id);
-
+===================================================== */
 
 function money(value){
 
-    return "₹" +
-        Number(value || 0)
-        .toLocaleString("en-IN");
+    return '₹' + Number(value || 0)
+        .toLocaleString('en-IN');
 
 }
 
 
-function escapeHTML(value){
+function escapeHtml(value){
 
-    return String(value || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(value ?? '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
 
 }
 
 
-function showToast(
-    message,
-    error=false
-){
+function getLowUrl(highUrl){
 
-    const toast =
-        $("toast");
+    if(!highUrl) return '';
 
-    toast.textContent =
-        message;
+    const marker =
+        '/view/images/';
 
-    toast.classList.toggle(
-        "error",
-        error
-    );
+    const index =
+        highUrl.indexOf(marker);
 
-    toast.classList.add(
-        "show"
-    );
+    if(index === -1)
+        return highUrl;
 
-    clearTimeout(
-        window.__toastTimer
-    );
-
-    window.__toastTimer =
-        setTimeout(
-            () =>
-                toast.classList.remove(
-                    "show"
-                ),
-            2800
+    const file =
+        highUrl.substring(
+            index + marker.length
         );
 
+    const base =
+        highUrl.substring(
+            0,
+            index + marker.length
+        );
+
+    return base + 'low/' + file;
+
 }
 
 
-/* =========================================================
-   READ SELECTED EVENT
-========================================================= */
+function formatDate(date){
 
-function getSelectedEvent(){
+    const d =
+        new Date(date + 'T00:00:00');
+
+    return {
+        day:d.toLocaleDateString(
+            'en-IN',
+            {weekday:'short'}
+        ),
+        number:d.getDate(),
+        month:d.toLocaleDateString(
+            'en-IN',
+            {month:'short'}
+        ),
+        full:d.toLocaleDateString(
+            'en-IN',
+            {
+                weekday:'long',
+                day:'numeric',
+                month:'long',
+                year:'numeric'
+            }
+        )
+    };
+
+}
+
+
+/* =====================================================
+   LOAD SELECTED EVENT
+===================================================== */
+
+async function loadEvent(){
+
+    const raw =
+        localStorage.getItem(
+            'AJ_SELECTED_EVENT'
+        );
+
+    if(!raw){
+
+        window.location.href =
+            'index.html';
+
+        return;
+
+    }
+
+    let selected;
 
     try{
 
-        const raw =
-            localStorage.getItem(
-                "AJ_SELECTED_EVENT"
-            );
+        selected =
+            JSON.parse(raw);
 
-        if(!raw)
-            return null;
+    }catch{
 
-        return JSON.parse(raw);
+        window.location.href =
+            'index.html';
 
-    }
-    catch(error){
-
-        console.warn(
-            "Selected event:",
-            error
-        );
-
-        return null;
+        return;
 
     }
 
-}
+    if(!selected.id){
 
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    init
-);
-
-
-async function init(){
-
-    setupMenu();
-
-    setupForm();
-
-    setupPickup();
-
-    setupBottomBook();
-
-    const selected =
-        getSelectedEvent();
-
-
-    if(!selected){
-
-        showToast(
-            "Adventure selection not found.",
-            true
-        );
-
-        renderNoDates(
-            "Please return to Expeditions and select an adventure."
-        );
+        window.location.href =
+            'index.html';
 
         return;
 
     }
 
 
-    state.expedition =
-        selected;
+    const {
+        data:event,
+        error
+    } =
+    await supabaseClient
+
+        .from('expeditions')
+
+        .select(`
+            id,
+            title,
+            slug,
+            category,
+            price,
+            image_url,
+            is_open,
+            duration,
+            description,
+            inclusions,
+            itinerary,
+            guidelines,
+            grade,
+            endurance,
+            height,
+            departure_time
+        `)
+
+        .eq('id',selected.id)
+
+        .maybeSingle();
 
 
-    state.price =
-        Number(
-            selected.price || 0
-        );
-
-
-    applyEventHeader(
-        selected
-    );
-
-
-    try{
-
-        if(
-            !window.supabase
-        ){
-
-            throw new Error(
-                "Supabase library unavailable"
-            );
-
-        }
-
-
-        supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
-            );
-
-
-        await loadAdventureData();
-
-    }
-    catch(error){
-
-        console.error(
-            error
-        );
-
-        renderNoDates(
-            "Unable to load adventure dates right now."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   HEADER DATA
-========================================================= */
-
-function applyEventHeader(event){
-
-    $("heroTitle").textContent =
-        event.title ||
-        "Adventure";
-
-
-    $("statCategory").textContent =
-        event.category ||
-        "Adventure";
-
-
-    if(event.img){
-
-        $("heroImage").src =
-            event.img;
-
-    }
-
-}
-
-
-/* =========================================================
-   LOAD EXPEDITION + DATES
-========================================================= */
-
-async function loadAdventureData(){
-
-    const expeditionId =
-        state.expedition.id;
-
-
-    if(!expeditionId){
+    if(error || !event){
 
         throw new Error(
-            "Missing expedition ID"
+            'This adventure could not be found.'
         );
 
     }
 
 
-    /*
-     * First get fresh expedition data.
-     */
+    if(!event.is_open){
 
-    const expeditionResponse =
-        await supabaseClient
-            .from("expeditions")
-            .select("*")
-            .eq(
-                "id",
-                expeditionId
-            )
-            .maybeSingle();
-
-
-    if(
-        expeditionResponse.error
-    ){
-
-        throw expeditionResponse.error;
+        throw new Error(
+            'This adventure is currently closed.'
+        );
 
     }
 
 
-    if(
-        expeditionResponse.data
-    ){
-
-        state.expedition =
-            {
-                ...state.expedition,
-                ...expeditionResponse.data
-            };
+    state.event =
+        event;
 
 
-        state.price =
-            Number(
-                expeditionResponse.data.price ??
-                state.price ??
-                0
+    renderEvent();
+
+
+    await Promise.all([
+        loadDates(),
+        loadPickups()
+    ]);
+
+}
+
+
+/* =====================================================
+   EVENT DETAILS
+===================================================== */
+
+function renderEvent(){
+
+    const e =
+        state.event;
+
+
+    document.title =
+        e.title +
+        ' — Adventure Junction';
+
+
+    document.getElementById(
+        'heroTitle'
+    ).textContent =
+        e.title;
+
+
+    document.getElementById(
+        'heroCategory'
+    ).textContent =
+        e.category ||
+        'Adventure';
+
+
+    document.getElementById(
+        'heroPrice'
+    ).textContent =
+        money(e.price);
+
+
+    document.getElementById(
+        'heroTime'
+    ).textContent =
+        e.departure_time ||
+        '11:00 PM';
+
+
+    document.getElementById(
+        'heroDuration'
+    ).textContent =
+        e.duration ||
+        'Adventure';
+
+
+    document.getElementById(
+        'detailGrade'
+    ).textContent =
+        e.grade ||
+        'Easy';
+
+
+    document.getElementById(
+        'detailEndurance'
+    ).textContent =
+        e.endurance ||
+        'Medium';
+
+
+    document.getElementById(
+        'detailHeight'
+    ).textContent =
+        e.height ||
+        '—';
+
+
+    document.getElementById(
+        'detailDescription'
+    ).textContent =
+        e.description ||
+        'Adventure Junction invites you to experience an unforgettable adventure in pristine nature, managed by our certified technical team.';
+
+
+    setImage(
+        e.image_url
+    );
+
+
+    renderList(
+        'inclusions',
+        e.inclusions
+    );
+
+
+    renderItinerary(
+        e.itinerary
+    );
+
+
+    renderList(
+        'guidelines',
+        e.guidelines
+    );
+
+}
+
+
+/* =====================================================
+   DUAL IMAGE
+===================================================== */
+
+function setImage(url){
+
+    const low =
+        getLowUrl(url);
+
+    const lowImg =
+        document.getElementById(
+            'heroLow'
+        );
+
+    const highImg =
+        document.getElementById(
+            'heroHigh'
+        );
+
+    lowImg.src =
+        low || url;
+
+    highImg.src =
+        url;
+
+}
+
+
+/* =====================================================
+   JSON LIST
+===================================================== */
+
+function normalizeArray(value){
+
+    if(!value)
+        return [];
+
+    if(Array.isArray(value))
+        return value;
+
+    if(typeof value === 'string'){
+
+        try{
+
+            const parsed =
+                JSON.parse(value);
+
+            if(Array.isArray(parsed))
+                return parsed;
+
+        }catch{}
+
+        return [value];
+
+    }
+
+    if(typeof value === 'object'){
+
+        return Object.entries(value)
+            .map(
+                ([key,val]) =>
+                    key + ': ' + val
             );
 
+    }
 
-        applyEventHeader(
-            state.expedition
-        );
+    return [];
+
+}
+
+
+function renderList(id,value){
+
+    const list =
+        document.getElementById(id);
+
+    const items =
+        normalizeArray(value);
+
+    if(!items.length){
+
+        list.innerHTML =
+            '<li>Details will be shared before departure.</li>';
+
+        return;
 
     }
 
+    list.innerHTML =
+        items.map(
+            item => {
 
-    /*
-     * IMPORTANT:
-     *
-     * We intentionally use *
-     * here so the page does not
-     * break because your slot
-     * column has a different name.
-     */
+                if(typeof item === 'object'){
 
-    const dateResponse =
-        await supabaseClient
-            .from("expedition_dates")
-            .select("*")
-            .eq(
-                "expedition_id",
-                expeditionId
-            )
-            .order(
-                "event_date",
-                {
-                    ascending:true
+                    return `
+                        <li>
+                            ${escapeHtml(
+                                item.title ||
+                                item.name ||
+                                item.text ||
+                                JSON.stringify(item)
+                            )}
+                        </li>
+                    `;
+
                 }
-            );
+
+                return `
+                    <li>
+                        ${escapeHtml(item)}
+                    </li>
+                `;
+
+            }
+        ).join('');
+
+}
 
 
-    if(
-        dateResponse.error
-    ){
+function renderItinerary(value){
 
-        throw dateResponse.error;
+    const list =
+        document.getElementById(
+            'itinerary'
+        );
+
+    const items =
+        normalizeArray(value);
+
+    if(!items.length){
+
+        list.innerHTML =
+            '<li>Detailed itinerary will be shared with confirmed participants.</li>';
+
+        return;
 
     }
 
+    list.innerHTML =
+        items.map(
+            item => {
 
-    const rows =
-        Array.isArray(
-            dateResponse.data
-        )
-        ? dateResponse.data
-        : [];
+                if(typeof item === 'object'){
 
+                    const time =
+                        item.time ||
+                        item.title ||
+                        '';
+
+                    const description =
+                        item.description ||
+                        item.text ||
+                        item.activity ||
+                        '';
+
+                    return `
+                        <li>
+                            <strong>${escapeHtml(time)}</strong>
+                            ${description
+                                ? ' — ' +
+                                  escapeHtml(description)
+                                : ''}
+                        </li>
+                    `;
+
+                }
+
+                return `
+                    <li>
+                        ${escapeHtml(item)}
+                    </li>
+                `;
+
+            }
+        ).join('');
+
+}
+
+
+/* =====================================================
+   LOAD DATES
+===================================================== */
+
+async function loadDates(){
 
     const today =
-        new Date();
+        new Date()
+            .toISOString()
+            .slice(0,10);
 
-    today.setHours(
-        0,0,0,0
-    );
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+
+        .from('expedition_dates')
+
+        .select(`
+            id,
+            expedition_id,
+            event_date,
+            total_seats,
+            reserved_seats,
+            is_open
+        `)
+
+        .eq(
+            'expedition_id',
+            state.event.id
+        )
+
+        .eq(
+            'is_open',
+            true
+        )
+
+        .gte(
+            'event_date',
+            today
+        )
+
+        .order(
+            'event_date',
+            {ascending:true}
+        );
+
+
+    if(error)
+        throw error;
 
 
     state.dates =
-        rows
+        (data || [])
         .map(
-            normalizeDateRow
-        )
-        .filter(
-            row =>
-                row.dateObject &&
-                row.dateObject >= today
+            row => ({
+                ...row,
+
+                available:
+                    Math.max(
+                        0,
+                        Number(row.total_seats || 0) -
+                        Number(row.reserved_seats || 0)
+                    )
+            })
         );
 
-
-    /*
-     * Keep all future dates.
-     */
 
     renderDates();
 
-
-    /*
-     * Live database updates.
-     */
-
-    supabaseClient
-        .channel(
-            "aj-booking-live-" +
-            expeditionId
-        )
-        .on(
-            "postgres_changes",
-            {
-                event:"*",
-                schema:"public",
-                table:"expedition_dates",
-                filter:
-                    "expedition_id=eq." +
-                    expeditionId
-            },
-            () => {
-
-                refreshAvailability();
-
-            }
-        )
-        .subscribe();
-
-
-    /*
-     * Refresh every minute.
-     */
-
-    setInterval(
-        refreshAvailability,
-        60000
-    );
-
 }
 
 
-/* =========================================================
-   NORMALIZE DATE ROW
-========================================================= */
-
-function normalizeDateRow(row){
-
-    const rawDate =
-        row.event_date ||
-        row.date ||
-        row.start_date;
-
-
-    const dateObject =
-        rawDate
-        ? new Date(
-            rawDate +
-            (
-                String(rawDate).length<=10
-                ? "T00:00:00"
-                : ""
-            )
-        )
-        : null;
-
-
-    const total =
-        Number(
-            row.total_seats ??
-            row.capacity ??
-            row.max_seats ??
-            row.seats ??
-            0
-        );
-
-
-    const reserved =
-        Number(
-            row.reserved_seats ??
-            row.booked_seats ??
-            row.used_seats ??
-            row.booked ??
-            0
-        );
-
-
-    const available =
-        row.available_seats !== undefined
-        ? Number(
-            row.available_seats
-        )
-        : Math.max(
-            0,
-            total-reserved
-        );
-
-
-    const slot =
-        getSlotData(
-            row
-        );
-
-
-    return {
-
-        raw:row,
-
-        id:
-            row.id ??
-            (
-                String(rawDate) +
-                "-" +
-                String(slot.name)
-            ),
-
-        date:
-            rawDate,
-
-        dateObject:
-
-            dateObject &&
-            !Number.isNaN(
-                dateObject.getTime()
-            )
-            ? dateObject
-            : null,
-
-        total:total,
-
-        reserved:reserved,
-
-        available:
-            Math.max(
-                0,
-                available
-            ),
-
-        slotName:
-            slot.name,
-
-        slotTime:
-            slot.time,
-
-        label:
-            slot.label
-
-    };
-
-}
-
-
-/* =========================================================
-   SLOT DETECTION
-========================================================= */
-
-function getSlotData(row){
-
-    /*
-     * Supports several common
-     * database naming styles.
-     */
-
-    const slotName =
-        firstValue(
-            row.slot_name,
-            row.slot,
-            row.slot_title,
-            row.session_name,
-            row.batch_name
-        );
-
-
-    const slotTime =
-        firstValue(
-            row.slot_time,
-            row.departure_time,
-            row.start_time,
-            row.time
-        );
-
-
-    /*
-     * If your table has no slot
-     * fields, create one clean
-     * "Available Slot".
-     */
-
-    if(
-        !slotName &&
-        !slotTime
-    ){
-
-        return {
-
-            name:
-                "Available Slot",
-
-            time:
-                "",
-
-            label:
-                "Available"
-
-        };
-
-    }
-
-
-    return {
-
-        name:
-            slotName ||
-            "Adventure Slot",
-
-        time:
-            formatTime(
-                slotTime
-            ),
-
-        label:
-            slotName ||
-            formatTime(
-                slotTime
-            ) ||
-            "Available"
-
-    };
-
-}
-
-
-function firstValue(){
-
-    for(
-        const value of arguments
-    ){
-
-        if(
-            value !== undefined &&
-            value !== null &&
-            String(value).trim()!==""
-        ){
-
-            return value;
-
-        }
-
-    }
-
-    return "";
-
-}
-
-
-/* =========================================================
-   TIME FORMAT
-========================================================= */
-
-function formatTime(value){
-
-    if(!value)
-        return "";
-
-
-    const text =
-        String(value);
-
-
-    /*
-     * Already formatted.
-     */
-
-    if(
-        /AM|PM/i.test(text)
-    ){
-
-        return text;
-
-    }
-
-
-    /*
-     * HH:MM:SS
-     */
-
-    const match =
-        text.match(
-            /^(\d{1,2}):(\d{2})/
-        );
-
-
-    if(!match)
-        return text;
-
-
-    let hour =
-        Number(match[1]);
-
-
-    const minute =
-        match[2];
-
-
-    const suffix =
-        hour>=12
-        ? "PM"
-        : "AM";
-
-
-    hour =
-        hour%12 || 12;
-
-
-    return (
-        hour +
-        ":" +
-        minute +
-        " " +
-        suffix
-    );
-
-}
-
-
-/* =========================================================
-   RENDER DATES
-========================================================= */
+/* =====================================================
+   DATES
+===================================================== */
 
 function renderDates(){
 
     const grid =
-        $("dateGrid");
-
-
-    grid.innerHTML="";
-
-
-    if(
-        !state.dates.length
-    ){
-
-        renderNoDates(
-            "No upcoming dates are currently available."
+        document.getElementById(
+            'dateGrid'
         );
+
+
+    if(!state.dates.length){
+
+        grid.innerHTML = `
+            <div style="
+                grid-column:1/-1;
+                padding:30px;
+                text-align:center;
+                color:#7b8790;
+                font-size:12px;
+                font-weight:700;
+            ">
+                No booking dates are currently available.
+            </div>
+        `;
+
+        updateBookState();
 
         return;
 
     }
 
 
-    $("statDates").textContent =
-        state.dates.length +
-        " Available";
+    grid.innerHTML =
+        state.dates
+        .map(
+            date => {
+
+                const f =
+                    formatDate(
+                        date.event_date
+                    );
+
+                const sold =
+                    date.available <= 0;
+
+                const active =
+                    state.selectedDate &&
+                    state.selectedDate.id ===
+                    date.id;
 
 
-    /*
-     * Group rows by date.
-     */
+                return `
+                    <button
+                        type="button"
+                        class="date-btn
+                            ${active ? 'active' : ''}
+                            ${sold ? 'sold' : ''}"
+                        data-date-id="${date.id}"
+                    >
 
-    const grouped =
-        new Map();
+                        <div class="date-day">
+                            ${escapeHtml(f.day)}
+                        </div>
+
+                        <div class="date-number">
+                            ${f.number}
+                        </div>
+
+                        <div class="date-month">
+                            ${escapeHtml(f.month)}
+                            2026
+                        </div>
+
+                        <div class="date-seats">
+                            ${
+                                sold
+                                ? 'Sold out'
+                                : date.available +
+                                  ' seats available'
+                            }
+                        </div>
+
+                    </button>
+                `;
+
+            }
+        ).join('');
 
 
-    state.dates.forEach(
-        row => {
+    grid
+        .querySelectorAll(
+            '.date-btn:not(.sold)'
+        )
+        .forEach(
+            button => {
 
-            const key =
-                row.date;
+                button.addEventListener(
+                    'click',
+                    () => {
 
+                        selectDate(
+                            Number(
+                                button.dataset.dateId
+                            )
+                        );
 
-            if(
-                !grouped.has(key)
-            ){
-
-                grouped.set(
-                    key,
-                    []
+                    }
                 );
 
             }
-
-
-            grouped
-                .get(key)
-                .push(row);
-
-        }
-    );
-
-
-    Array.from(
-        grouped.entries()
-    )
-    .forEach(
-        ([date,rows]) => {
-
-            const first =
-                rows[0];
-
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type="button";
-
-            button.className=
-                "date-option";
-
-
-            button.dataset.date =
-                date;
-
-
-            const d =
-                first.dateObject;
-
-
-            const day =
-                d.toLocaleDateString(
-                    "en-IN",
-                    {
-                        weekday:"short"
-                    }
-                );
-
-
-            const number =
-                d.toLocaleDateString(
-                    "en-IN",
-                    {
-                        day:"2-digit"
-                    }
-                );
-
-
-            const month =
-                d.toLocaleDateString(
-                    "en-IN",
-                    {
-                        month:"short",
-                        year:"numeric"
-                    }
-                );
-
-
-            const seats =
-                rows.reduce(
-                    (
-                        max,
-                        item
-                    ) =>
-                        Math.max(
-                            max,
-                            item.available
-                        ),
-                    0
-                );
-
-
-            button.innerHTML = `
-
-                <div class="date-day">
-                    ${day}
-                </div>
-
-                <div class="date-number">
-                    ${number}
-                </div>
-
-                <div class="date-month">
-                    ${month}
-                </div>
-
-                <div class="date-seat">
-                    ${seats} seats available
-                </div>
-
-            `;
-
-
-            button.addEventListener(
-                "click",
-                () =>
-                    selectDate(
-                        date
-                    )
-            );
-
-
-            grid.appendChild(
-                button
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   NO DATES
-========================================================= */
-
-function renderNoDates(message){
-
-    $("dateGrid").innerHTML = `
-
-        <div
-            style="
-                grid-column:1/-1;
-                padding:18px;
-                border:1px solid #e4ebe8;
-                border-radius:15px;
-                background:#fafcfb;
-                color:#8c989c;
-                font-size:8px;
-                line-height:1.5;
-                font-weight:800;
-                text-align:center;
-            "
-        >
-
-            ${escapeHTML(message)}
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   SELECT DATE
-========================================================= */
-
-function selectDate(date){
-
-    const rows =
-        state.dates.filter(
-            row =>
-                row.date === date
         );
 
+}
 
-    if(!rows.length)
+
+/* =====================================================
+   DATE SELECT
+===================================================== */
+
+function selectDate(id){
+
+    const date =
+        state.dates.find(
+            item => item.id === id
+        );
+
+    if(!date)
         return;
 
 
@@ -5629,184 +2339,673 @@ function selectDate(date){
         date;
 
 
-    state.selectedSlot =
-        null;
-
-
     /*
-     * Reset booking.
-     */
-
-    state.guestQuantity=1;
-
-    state.guests=[];
-
-    state.gender="";
-
-    state.meal="Veg";
-
-    state.pickup=null;
-
-
-    document
-        .querySelectorAll(
-            ".date-option"
-        )
-        .forEach(
-            button =>
-                button.classList.toggle(
-                    "selected",
-                    button.dataset.date===date
-                )
-        );
-
-
-    renderSlots(
-        rows
-    );
-
-
-    $("guestStep")
-        .style
-        .display="none";
-
-
-    $("participantStep")
-        .style
-        .display="none";
-
-
-    $("pickupStep")
-        .style
-        .display="none";
-
-
-    $("summaryArea")
-        .style
-        .display="none";
-
-
-    showToast(
-        "Date selected. Choose your slot."
-    );
-
-
-    /*
-     * If there is exactly one slot,
-     * select it automatically.
+     * Never allow guest count
+     * above live capacity.
      */
 
     if(
-        rows.length===1
+        state.guestCount >
+        date.available
     ){
 
-        setTimeout(
-            () =>
-                selectSlot(
-                    rows[0]
-                ),
-            100
-        );
+        state.guestCount =
+            Math.max(
+                1,
+                date.available
+            );
 
     }
+
+
+    /*
+     * Reset participants when
+     * date changes.
+     */
+
+    state.guests = [];
+
+    state.currentGuest = 1;
+
+
+    renderDates();
+
+    updateSelectedDate();
+
+    renderGuestCounter();
+
+    renderParticipants();
+
+    updateSummary();
+
+    updateBookState();
 
 }
 
 
-/* =========================================================
-   RENDER SLOTS
-========================================================= */
+/* =====================================================
+   SELECTED DATE
+===================================================== */
 
-function renderSlots(rows){
+function updateSelectedDate(){
 
-    const wrapper =
-        $("slotWrapper");
-
-
-    const grid =
-        $("slotGrid");
+    const bar =
+        document.getElementById(
+            'selectedBar'
+        );
 
 
-    wrapper.style.display =
-        "block";
+    if(!state.selectedDate){
+
+        bar.style.display =
+            'none';
+
+        return;
+
+    }
 
 
-    grid.innerHTML="";
+    const f =
+        formatDate(
+            state.selectedDate.event_date
+        );
 
 
-    rows.forEach(
-        row => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
+    bar.style.display =
+        'flex';
 
 
-            button.type="button";
-
-            button.className=
-                "slot-option";
-
-
-            button.innerHTML = `
-
-                <div class="slot-row">
-
-                    <span class="slot-name">
-                        ${escapeHTML(
-                            row.slotName
-                        )}
-                    </span>
-
-                    <span class="slot-time">
-                        ${escapeHTML(
-                            row.slotTime
-                        )}
-                    </span>
-
-                </div>
-
-                <div class="slot-seats">
-                    ${row.available}
-                    seats available
-                </div>
-
-            `;
+    document.getElementById(
+        'selectedDateText'
+    ).textContent =
+        f.full +
+        ' • ' +
+        (
+            state.event.departure_time ||
+            '11:00 PM'
+        );
 
 
-            button.addEventListener(
-                "click",
-                () =>
-                    selectSlot(
-                        row
-                    )
+    document.getElementById(
+        'selectedSeats'
+    ).textContent =
+        state.selectedDate.available;
+
+
+    document.getElementById(
+        'counterSub'
+    ).textContent =
+        'Up to ' +
+        state.selectedDate.available +
+        ' guests for this date';
+
+}
+
+
+/* =====================================================
+   GUEST COUNTER
+===================================================== */
+
+function renderGuestCounter(){
+
+    document.getElementById(
+        'guestCount'
+    ).textContent =
+        state.guestCount;
+
+
+    const minus =
+        document.getElementById(
+            'minusBtn'
+        );
+
+    const plus =
+        document.getElementById(
+            'plusBtn'
+        );
+
+
+    minus.disabled =
+        state.guestCount <= 1;
+
+
+    plus.disabled =
+        !state.selectedDate ||
+        state.guestCount >=
+        state.selectedDate.available;
+
+}
+
+
+/* =====================================================
+   GUEST COUNT EVENTS
+===================================================== */
+
+document.getElementById(
+    'minusBtn'
+).addEventListener(
+    'click',
+    () => {
+
+        if(
+            state.guestCount <= 1
+        )
+            return;
+
+
+        state.guestCount--;
+
+        if(
+            state.currentGuest >
+            state.guestCount
+        ){
+
+            state.currentGuest =
+                state.guestCount;
+
+        }
+
+
+        state.guests =
+            state.guests.slice(
+                0,
+                state.guestCount
             );
 
 
-            grid.appendChild(
-                button
+        renderGuestCounter();
+
+        renderParticipants();
+
+        updateSummary();
+
+        updateBookState();
+
+    }
+);
+
+
+document.getElementById(
+    'plusBtn'
+).addEventListener(
+    'click',
+    () => {
+
+        if(!state.selectedDate)
+            return;
+
+
+        if(
+            state.guestCount >=
+            state.selectedDate.available
+        )
+            return;
+
+
+        state.guestCount++;
+
+        renderGuestCounter();
+
+        renderParticipants();
+
+        updateSummary();
+
+        updateBookState();
+
+    }
+);
+
+
+/* =====================================================
+   PARTICIPANT FORM
+===================================================== */
+
+function renderParticipants(){
+
+    const progress =
+        document.getElementById(
+            'participantProgress'
+        );
+
+
+    progress.innerHTML =
+        Array.from(
+            {length:state.guestCount},
+            (_,index) => {
+
+                const n =
+                    index + 1;
+
+                const saved =
+                    !!state.guests[
+                        index
+                    ];
+
+
+                return `
+                    <div class="
+                        progress-item
+                        ${saved ? 'done' : ''}
+                        ${!saved &&
+                          state.currentGuest === n
+                            ? 'active'
+                            : ''}
+                    ">
+                        ${
+                            saved
+                            ? '✓'
+                            : 'Guest ' + n
+                        }
+                    </div>
+                `;
+
+            }
+        ).join('');
+
+
+    const form =
+        document.getElementById(
+            'participantForm'
+        );
+
+
+    const existing =
+        state.guests[
+            state.currentGuest - 1
+        ] || {};
+
+
+    form.innerHTML = `
+
+        <div class="form-heading">
+
+            <h3>
+                Guest ${state.currentGuest}
+            </h3>
+
+            ${
+                state.guests[
+                    state.currentGuest - 1
+                ]
+                ? `
+                    <div class="saved">
+                        ✓
+                    </div>
+                `
+                : ''
+            }
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Full name
+            </label>
+
+            <input
+                id="guestName"
+                type="text"
+                autocomplete="name"
+                placeholder="Enter full name"
+                value="${escapeHtml(
+                    existing.full_name || ''
+                )}"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Mobile number
+            </label>
+
+            <input
+                id="guestPhone"
+                type="tel"
+                inputmode="numeric"
+                maxlength="15"
+                placeholder="10 digit mobile number"
+                value="${escapeHtml(
+                    existing.phone || ''
+                )}"
+            >
+
+        </div>
+
+
+        <div class="field-row">
+
+            <div class="field">
+
+                <label>
+                    Age
+                </label>
+
+                <input
+                    id="guestAge"
+                    type="number"
+                    min="16"
+                    max="100"
+                    inputmode="numeric"
+                    placeholder="16+"
+                    value="${existing.age || ''}"
+                >
+
+                <div
+                    id="ageMessage"
+                    style="
+                        margin-top:5px;
+                        font-size:9px;
+                        font-weight:700;
+                    "
+                ></div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Gender
+                </label>
+
+                <select id="guestGender">
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option
+                        value="male"
+                        ${existing.gender === 'male'
+                            ? 'selected'
+                            : ''}
+                    >
+                        Male
+                    </option>
+
+                    <option
+                        value="female"
+                        ${existing.gender === 'female'
+                            ? 'selected'
+                            : ''}
+                    >
+                        Female
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Meal preference
+            </label>
+
+            <div class="meal-row">
+
+                <label class="
+                    choice
+                    ${existing.meal === 'veg'
+                        ? 'selected'
+                        : ''}
+                ">
+
+                    <input
+                        type="radio"
+                        name="meal"
+                        value="veg"
+                        ${existing.meal === 'veg'
+                            ? 'checked'
+                            : ''}
+                    >
+
+                    <div class="choice-title">
+                        Vegetarian
+                    </div>
+
+                    <div class="choice-sub">
+                        Included
+                    </div>
+
+                </label>
+
+
+                <label class="
+                    choice
+                    ${existing.meal === 'non-veg'
+                        ? 'selected'
+                        : ''}
+                ">
+
+                    <input
+                        type="radio"
+                        name="meal"
+                        value="non-veg"
+                        ${existing.meal === 'non-veg'
+                            ? 'checked'
+                            : ''}
+                    >
+
+                    <div class="choice-title">
+                        Non-vegetarian
+                    </div>
+
+                    <div class="choice-sub">
+                        + ₹100
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="saveGuest"
+            style="
+                width:100%;
+                margin-top:17px;
+                height:46px;
+                border:0;
+                border-radius:13px;
+                background:#082c3d;
+                color:white;
+                font-size:11px;
+                font-weight:900;
+                letter-spacing:.1em;
+                text-transform:uppercase;
+            "
+        >
+            ${
+                state.currentGuest <
+                state.guestCount
+                ? 'Save & Add Next Guest'
+                : 'Save Guest Details'
+            }
+        </button>
+
+    `;
+
+
+    form.querySelectorAll(
+        'input[name="meal"]'
+    ).forEach(
+        radio => {
+
+            radio.addEventListener(
+                'change',
+                () => {
+
+                    form.querySelectorAll(
+                        '.choice'
+                    ).forEach(
+                        choice =>
+                            choice.classList.remove(
+                                'selected'
+                            )
+                    );
+
+
+                    radio
+                        .closest('.choice')
+                        .classList.add(
+                            'selected'
+                        );
+
+                }
             );
 
         }
     );
 
+
+    const ageInput =
+        document.getElementById(
+            'guestAge'
+        );
+
+    ageInput.addEventListener(
+        'input',
+        validateAge
+    );
+
+
+    document.getElementById(
+        'saveGuest'
+    ).addEventListener(
+        'click',
+        saveCurrentGuest
+    );
+
+
+    validateAge();
+
 }
 
 
-/* =========================================================
-   SELECT SLOT
-========================================================= */
+/* =====================================================
+   AGE VALIDATION
+===================================================== */
 
-function selectSlot(row){
+function validateAge(){
+
+    const input =
+        document.getElementById(
+            'guestAge'
+        );
+
+    const message =
+        document.getElementById(
+            'ageMessage'
+        );
+
+
+    const age =
+        Number(input.value);
+
 
     if(
-        row.available<=0
+        input.value &&
+        age < 16
     ){
 
-        showToast(
-            "This slot is full.",
-            true
+        input.setCustomValidity(
+            'Participants below 16 years are not allowed.'
+        );
+
+        message.textContent =
+            'Participants below 16 years are not allowed.';
+
+        message.style.color =
+            '#d14343';
+
+        return false;
+
+    }
+
+
+    input.setCustomValidity('');
+
+    if(input.value){
+
+        message.textContent =
+            'Age verified';
+
+        message.style.color =
+            '#078557';
+
+    }else{
+
+        message.textContent =
+            '';
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   SAVE GUEST
+===================================================== */
+
+function saveCurrentGuest(){
+
+    const name =
+        document.getElementById(
+            'guestName'
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            'guestPhone'
+        ).value.trim();
+
+
+    const age =
+        Number(
+            document.getElementById(
+                'guestAge'
+            ).value
+        );
+
+
+    const gender =
+        document.getElementById(
+            'guestGender'
+        ).value;
+
+
+    const mealInput =
+        document.querySelector(
+            'input[name="meal"]:checked'
+        );
+
+
+    const meal =
+        mealInput
+        ? mealInput.value
+        : '';
+
+
+    if(!name){
+
+        alert(
+            'Please enter the guest name.'
         );
 
         return;
@@ -5814,506 +3013,634 @@ function selectSlot(row){
     }
 
 
-    state.selectedSlot =
-        row;
+    if(
+        !/^[0-9+]{10,15}$/.test(
+            phone.replace(/\s/g,'')
+        )
+    ){
+
+        alert(
+            'Please enter a valid mobile number.'
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !age ||
+        age < 16 ||
+        age > 100
+    ){
+
+        alert(
+            'Participants must be 16 years or older.'
+        );
+
+        return;
+
+    }
+
+
+    if(!gender){
+
+        alert(
+            'Please select gender.'
+        );
+
+        return;
+
+    }
+
+
+    if(!meal){
+
+        alert(
+            'Please select meal preference.'
+        );
+
+        return;
+
+    }
+
+
+    state.guests[
+        state.currentGuest - 1
+    ] = {
+
+        full_name:name,
+
+        phone:phone,
+
+        age:age,
+
+        gender:gender,
+
+        meal:meal
+
+    };
 
 
     /*
-     * Maximum 100,
-     * never more than available.
+     * Move to next guest.
      */
 
-    state.maxGuests =
-        Math.min(
-            100,
-            row.available
+    if(
+        state.currentGuest <
+        state.guestCount
+    ){
+
+        state.currentGuest++;
+
+        renderParticipants();
+
+        updateSummary();
+
+        updateBookState();
+
+        document.getElementById(
+            'participantForm'
+        ).scrollIntoView({
+            behavior:'smooth',
+            block:'center'
+        });
+
+        return;
+
+    }
+
+
+    renderParticipants();
+
+    updateSummary();
+
+    updateBookState();
+
+}
+
+
+/* =====================================================
+   LOAD PICKUP STOPS
+===================================================== */
+
+async function loadPickups(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+
+        .from('pickup_stops')
+
+        .select(`
+            id,
+            stop_name,
+            pickup_time,
+            sort_order,
+            is_active
+        `)
+
+        .eq(
+            'expedition_id',
+            state.event.id
+        )
+
+        .eq(
+            'is_active',
+            true
+        )
+
+        .order(
+            'sort_order',
+            {ascending:true}
         );
 
 
-    state.guestQuantity=1;
+    if(error)
+        throw error;
 
 
-    state.guests=[];
+    state.pickups =
+        data || [];
 
 
-    state.pickup=null;
+    renderPickups();
+
+}
 
 
-    document
+/* =====================================================
+   PICKUPS
+===================================================== */
+
+function renderPickups(){
+
+    const list =
+        document.getElementById(
+            'pickupList'
+        );
+
+
+    if(!state.pickups.length){
+
+        list.innerHTML = `
+            <div style="
+                padding:18px;
+                border-radius:15px;
+                background:#f7f9f8;
+                color:#7b8790;
+                font-size:11px;
+                font-weight:700;
+            ">
+                Pickup details will be shared after booking.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        state.pickups
+        .map(
+            stop => {
+
+                const active =
+                    state.selectedPickup &&
+                    state.selectedPickup.id ===
+                    stop.id;
+
+
+                return `
+                    <div
+                        class="
+                            pickup
+                            ${active ? 'active' : ''}
+                        "
+                        data-pickup-id="${stop.id}"
+                    >
+
+                        <div class="pickup-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            >
+
+                                <path
+                                    d="M5 17h14l-1.5-7h-11z"
+                                />
+
+                                <path
+                                    d="M8 17v2M16 17v2"
+                                />
+
+                                <path
+                                    d="M8 10V7h8v3"
+                                />
+
+                                <circle
+                                    cx="8"
+                                    cy="17"
+                                    r="1.5"
+                                />
+
+                                <circle
+                                    cx="16"
+                                    cy="17"
+                                    r="1.5"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <div class="pickup-name">
+                                ${escapeHtml(
+                                    stop.stop_name
+                                )}
+                            </div>
+
+                            <div class="pickup-time">
+                                ${escapeHtml(
+                                    stop.pickup_time
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+            }
+        ).join('');
+
+
+    list
         .querySelectorAll(
-            ".slot-option"
+            '.pickup'
         )
         .forEach(
-            button => {
+            item => {
 
-                const text =
-                    button
-                    .querySelector(
-                        ".slot-seats"
-                    )
-                    ?.textContent
-                    .trim();
+                item.addEventListener(
+                    'click',
+                    () => {
 
-
-                /*
-                 * Select by matching
-                 * slot name + time.
-                 */
-
-                const name =
-                    button
-                    .querySelector(
-                        ".slot-name"
-                    )
-                    ?.textContent
-                    .trim();
+                        const id =
+                            Number(
+                                item.dataset.pickupId
+                            );
 
 
-                const time =
-                    button
-                    .querySelector(
-                        ".slot-time"
-                    )
-                    ?.textContent
-                    .trim();
+                        state.selectedPickup =
+                            state.pickups.find(
+                                p => p.id === id
+                            );
 
 
-                button.classList.toggle(
-                    "selected",
-                    name ===
-                        String(
-                            row.slotName
-                        ).trim() &&
-                    time ===
-                        String(
-                            row.slotTime
-                        ).trim()
+                        renderPickups();
+
+                        updateBookState();
+
+                    }
                 );
 
             }
         );
 
-
-    $("counterHelper").textContent =
-        "Maximum " +
-        state.maxGuests +
-        " guests for this slot";
+}
 
 
-    $("guestStep")
-        .style
-        .display="block";
+/* =====================================================
+   COUPON
+===================================================== */
+
+document.getElementById(
+    'couponBtn'
+).addEventListener(
+    'click',
+    applyCoupon
+);
 
 
-    $("participantStep")
-        .style
-        .display="block";
+async function applyCoupon(){
+
+    const input =
+        document.getElementById(
+            'couponInput'
+        );
 
 
-    $("pickupStep")
-        .style
-        .display="none";
+    const result =
+        document.getElementById(
+            'couponResult'
+        );
 
 
-    $("summaryArea")
-        .style
-        .display="none";
+    const code =
+        input.value
+            .trim()
+            .toUpperCase();
 
 
-    resetParticipantForm();
+    if(!code){
 
-    updateGuestCounter();
+        state.coupon=null;
+        state.couponPercent=0;
 
-    updateProgress();
+        result.textContent =
+            '';
 
-    renderSavedGuests();
+        updateSummary();
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+
+        .from('coupons')
+
+        .select(
+            'code,discount_percent,is_active'
+        )
+
+        .ilike(
+            'code',
+            code
+        )
+
+        .eq(
+            'is_active',
+            true
+        )
+
+        .maybeSingle();
+
+
+    if(error || !data){
+
+        state.coupon=null;
+        state.couponPercent=0;
+
+        result.textContent =
+            'Invalid or inactive coupon.';
+
+        result.className =
+            'coupon-result danger';
+
+        updateSummary();
+
+        return;
+
+    }
+
+
+    state.coupon =
+        data.code;
+
+    state.couponPercent =
+        Number(
+            data.discount_percent
+        );
+
+
+    result.textContent =
+        data.code +
+        ' applied — ' +
+        data.discount_percent +
+        '% discount';
+
+    result.className =
+        'coupon-result success';
+
 
     updateSummary();
 
+}
 
-    showToast(
-        state.maxGuests +
-        " seats available for this slot."
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+function calculate(){
+
+    const price =
+        Number(
+            state.event?.price || 0
+        );
+
+
+    const guests =
+        state.guests;
+
+
+    const adventure =
+        price *
+        state.guestCount;
+
+
+    const meal =
+        guests.reduce(
+            (sum,guest) =>
+                sum +
+                (
+                    guest.meal === 'non-veg'
+                    ? 100
+                    : 0
+                ),
+            0
+        );
+
+
+    const subtotal =
+        adventure + meal;
+
+
+    const discount =
+        Math.round(
+            subtotal *
+            state.couponPercent /
+            100 *
+            100
+        ) / 100;
+
+
+    const total =
+        Math.max(
+            0,
+            subtotal - discount
+        );
+
+
+    return {
+        adventure,
+        meal,
+        subtotal,
+        discount,
+        total
+    };
+
+}
+
+
+function updateSummary(){
+
+    const totals =
+        calculate();
+
+
+    document.getElementById(
+        'summaryAdventure'
+    ).textContent =
+        money(
+            totals.adventure
+        );
+
+
+    document.getElementById(
+        'summaryMeal'
+    ).textContent =
+        money(
+            totals.meal
+        );
+
+
+    document.getElementById(
+        'summaryDiscount'
+    ).textContent =
+        '−' +
+        money(
+            totals.discount
+        );
+
+
+    document.getElementById(
+        'summaryTotal'
+    ).textContent =
+        money(
+            totals.total
+        );
+
+
+    document.getElementById(
+        'bottomTotal'
+    ).textContent =
+        money(
+            totals.total
+        );
+
+}
+
+
+/* =====================================================
+   BOOK BUTTON STATE
+===================================================== */
+
+function allGuestsSaved(){
+
+    return (
+        state.guests.length ===
+        state.guestCount &&
+        state.guests.every(
+            guest =>
+                guest &&
+                guest.full_name &&
+                guest.phone &&
+                Number(guest.age) >= 16 &&
+                guest.gender &&
+                guest.meal
+        )
     );
 
-
-    if(
-        window.innerWidth<=960
-    ){
-
-        setTimeout(
-            () => {
-
-                $("guestStep")
-                    .scrollIntoView({
-                        behavior:"smooth",
-                        block:"start"
-                    });
-
-            },
-            120
-        );
-
-    }
-
 }
 
 
-/* =========================================================
-   GUEST COUNTER
-========================================================= */
-
-function setupGuestCounter(){
-
-    $("minusButton")
-        .addEventListener(
-            "click",
-            decreaseGuests
-        );
-
-
-    $("plusButton")
-        .addEventListener(
-            "click",
-            increaseGuests
-        );
-
-}
-
-
-function decreaseGuests(){
-
-    if(
-        state.guestQuantity<=1
-    )
-        return;
-
-
-    if(
-        state.guestQuantity<=
-        state.guests.length
-    ){
-
-        showToast(
-            "Remove the saved participant before reducing the guest count.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    state.guestQuantity--;
-
-    updateGuestCounter();
-
-    updateProgress();
-
-    updateSummary();
-
-}
-
-
-function increaseGuests(){
-
-    if(
-        state.guestQuantity>=
-        state.maxGuests
-    ){
-
-        showToast(
-            "Only " +
-            state.maxGuests +
-            " seats are available for this slot.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    state.guestQuantity++;
-
-    updateGuestCounter();
-
-    updateProgress();
-
-    updateSummary();
-
-}
-
-
-function updateGuestCounter(){
-
-    $("guestCount").textContent =
-        state.guestQuantity;
-
-
-    $("minusButton").disabled =
-        state.guestQuantity<=1;
-
-
-    $("plusButton").disabled =
-        state.guestQuantity>=
-        state.maxGuests;
-
-
-    updateCurrentParticipant();
-
-}
-
-
-/* =========================================================
-   FORM SETUP
-========================================================= */
-
-function setupForm(){
-
-    setupGuestCounter();
-
-
-    $("maleChoice")
-        .addEventListener(
-            "click",
-            () => {
-
-                state.gender="Male";
-
-                updateChoices();
-
-            }
-        );
-
-
-    $("femaleChoice")
-        .addEventListener(
-            "click",
-            () => {
-
-                state.gender="Female";
-
-                updateChoices();
-
-            }
-        );
-
-
-    $("vegChoice")
-        .addEventListener(
-            "click",
-            () => {
-
-                state.meal="Veg";
-
-                updateChoices();
-
-                updateSummary();
-
-            }
-        );
-
-
-    $("nonVegChoice")
-        .addEventListener(
-            "click",
-            () => {
-
-                state.meal="Non-Veg";
-
-                updateChoices();
-
-                updateSummary();
-
-            }
-        );
-
-
-    $("ageInput")
-        .addEventListener(
-            "input",
-            validateAge
-        );
-
-
-    $("nameInput")
-        .addEventListener(
-            "input",
-            updateSaveState
-        );
-
-
-    $("phoneInput")
-        .addEventListener(
-            "input",
-            function(){
-
-                this.value =
-                    this.value
-                    .replace(
-                        /\D/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        10
-                    );
-
-                updateSaveState();
-
-            }
-        );
-
-
-    $("saveButton")
-        .addEventListener(
-            "click",
-            saveParticipant
-        );
-
-}
-
-
-/* =========================================================
-   AGE VALIDATION
-========================================================= */
-
-function validateAge(){
-
-    const value =
-        $("ageInput").value;
-
-
-    const age =
-        Number(
-            value
-        );
-
-
-    if(
-        value!=="" &&
-        age<16
-    ){
-
-        $("ageWarning")
-            .classList
-            .add("show");
-
-
-        $("ageInput")
-            .classList
-            .add("invalid");
-
-    }
-    else{
-
-        $("ageWarning")
-            .classList
-            .remove("show");
-
-
-        $("ageInput")
-            .classList
-            .remove("invalid");
-
-    }
-
-
-    updateSaveState();
-
-}
-
-
-function updateSaveState(){
-
-    const name =
-        $("nameInput")
-        .value
-        .trim();
-
-
-    const age =
-        Number(
-            $("ageInput").value
-        );
-
-
-    const phone =
-        $("phoneInput")
-        .value
-        .replace(
-            /\D/g,
-            ""
+function updateBookState(){
+
+    const button =
+        document.getElementById(
+            'bookButton'
         );
 
 
     const valid =
-        name.length>=2 &&
-        age>=16 &&
-        age<=100 &&
-        /^[0-9]{10}$/.test(
-            phone
-        ) &&
-        (
-            state.gender===
-            "Male" ||
-            state.gender===
-            "Female"
-        );
+        !!state.selectedDate &&
+        state.guestCount > 0 &&
+        allGuestsSaved() &&
+        !!state.selectedPickup &&
+        !state.saving;
 
 
-    $("saveButton")
-        .disabled =
+    button.disabled =
         !valid;
 
 }
 
 
-/* =========================================================
-   SAVE PARTICIPANT
-========================================================= */
+/* =====================================================
+   CREATE BOOKING
+===================================================== */
 
-function saveParticipant(){
+document.getElementById(
+    'bookButton'
+).addEventListener(
+    'click',
+    createBooking
+);
+
+
+async function createBooking(){
+
+    if(state.saving)
+        return;
+
+
+    if(!state.selectedDate){
+
+        alert(
+            'Please select a date.'
+        );
+
+        return;
+
+    }
+
 
     if(
-        state.guests.length>=
-        state.guestQuantity
+        state.guestCount >
+        state.selectedDate.available
     ){
 
+        alert(
+            'Not enough seats available.'
+        );
+
+        await loadDates();
+
         return;
 
     }
 
 
-    const name =
-        $("nameInput")
-        .value
-        .trim();
+    if(!allGuestsSaved()){
 
-
-    const age =
-        Number(
-            $("ageInput").value
-        );
-
-
-    const phone =
-        $("phoneInput")
-        .value
-        .replace(
-            /\D/g,
-            ""
-        );
-
-
-    if(
-        name.length<2
-    ){
-
-        showToast(
-            "Enter the participant's full name.",
-            true
+        alert(
+            'Please save all participant details.'
         );
 
         return;
@@ -6321,13 +3648,10 @@ function saveParticipant(){
     }
 
 
-    if(
-        age<16
-    ){
+    if(!state.selectedPickup){
 
-        showToast(
-            "Participants below 16 years are not allowed.",
-            true
+        alert(
+            'Please select a pickup point.'
         );
 
         return;
@@ -6335,972 +3659,450 @@ function saveParticipant(){
     }
 
 
-    if(
-        age>100
-    ){
+    state.saving=true;
 
-        showToast(
-            "Enter a valid age.",
-            true
-        );
-
-        return;
-
-    }
+    updateBookState();
 
 
-    if(
-        !/^[0-9]{10}$/.test(
-            phone
-        )
-    ){
-
-        showToast(
-            "Enter a valid 10-digit mobile number.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    if(
-        state.gender!=="Male" &&
-        state.gender!=="Female"
-    ){
-
-        showToast(
-            "Select gender.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    state.guests.push({
-
-        name:name,
-
-        age:age,
-
-        phone:phone,
-
-        gender:
-            state.gender,
-
-        meal:
-            state.meal
-
-    });
-
-
-    renderSavedGuests();
-
-    updateProgress();
-
-    updateSummary();
-
-
-    const completed =
-        state.guests.length >=
-        state.guestQuantity;
-
-
-    if(completed){
-
-        $("participantForm")
-            .style
-            .display="none";
-
-
-        $("allParticipantsComplete")
-            .style
-            .display="block";
-
-
-        $("pickupStep")
-            .style
-            .display="block";
-
-
-        $("summaryArea")
-            .style
-            .display="block";
-
-
-        showToast(
-            "All participant details saved."
+    const button =
+        document.getElementById(
+            'bookButton'
         );
 
 
-        if(
-            window.innerWidth<=960
-        ){
-
-            setTimeout(
-                () => {
-
-                    $("pickupStep")
-                        .scrollIntoView({
-                            behavior:"smooth",
-                            block:"start"
-                        });
-
-                },
-                120
-            );
-
-        }
-
-    }
-    else{
-
-        resetParticipantForm();
-
-        showToast(
-            "Participant " +
-            state.guests.length +
-            " saved ✓"
-        );
-
-    }
-
-
-    updateCurrentParticipant();
-
-}
-
-
-/* =========================================================
-   RESET PARTICIPANT FORM
-========================================================= */
-
-function resetParticipantForm(){
-
-    $("nameInput").value="";
-
-    $("ageInput").value="";
-
-    $("phoneInput").value="";
-
-
-    $("ageWarning")
-        .classList
-        .remove("show");
-
-
-    $("ageInput")
-        .classList
-        .remove("invalid");
-
-
-    state.gender="";
-
-    state.meal="Veg";
-
-
-    updateChoices();
-
-    updateCurrentParticipant();
-
-    updateSaveState();
-
-}
-
-
-/* =========================================================
-   CURRENT PARTICIPANT
-========================================================= */
-
-function updateCurrentParticipant(){
-
-    const number =
-        state.guests.length+1;
-
-
-    $("participantNumber")
-        .textContent =
-        number;
-
-
-    $("participantText")
-        .textContent =
-        number;
-
-}
-
-
-/* =========================================================
-   CHOICE UI
-========================================================= */
-
-function updateChoices(){
-
-    $("maleChoice")
-        .classList
-        .toggle(
-            "selected",
-            state.gender==="Male"
-        );
-
-
-    $("femaleChoice")
-        .classList
-        .toggle(
-            "selected",
-            state.gender==="Female"
-        );
-
-
-    $("vegChoice")
-        .classList
-        .toggle(
-            "selected",
-            state.meal==="Veg"
-        );
-
-
-    $("nonVegChoice")
-        .classList
-        .toggle(
-            "selected",
-            state.meal==="Non-Veg"
-        );
-
-
-    updateSaveState();
-
-}
-
-
-/* =========================================================
-   SAVED PARTICIPANTS
-========================================================= */
-
-function renderSavedGuests(){
-
-    const list =
-        $("savedList");
-
-
-    list.innerHTML="";
-
-
-    state.guests.forEach(
-        (guest,index) => {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className=
-                "saved-card";
-
-
-            card.innerHTML = `
-
-                <div class="saved-row">
-
-                    <div class="saved-check">
-
-                        <svg
-                            class="icon icon-sm"
-                            style="stroke-width:2.5;"
-                        >
-                            <path d="M5 12l4 4L19 6"></path>
-                        </svg>
-
-                    </div>
-
-
-                    <div class="saved-main">
-
-                        <div class="saved-name">
-                            ${escapeHTML(
-                                guest.name
-                            )}
-                        </div>
-
-                        <div class="saved-details">
-                            Guest ${index+1}
-                            • ${guest.age} yrs
-                            • ${guest.gender}
-                            • ${guest.meal}
-                        </div>
-
-                    </div>
-
-
-                    <div class="saved-extra">
-
-                        ${
-                            guest.meal==="Non-Veg"
-                            ? "+₹100"
-                            : "Veg"
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-function updateProgress(){
-
-    const completed =
-        state.guests.length;
-
-
-    const total =
-        state.guestQuantity;
-
-
-    $("progressText")
-        .textContent =
-        completed +
-        " / " +
-        total;
-
-
-    const percent =
-        total>0
-        ? (
-            completed /
-            total
-        )*100
-        : 0;
-
-
-    $("progressFill")
-        .style
-        .width =
-        Math.min(
-            100,
-            percent
-        )+"%";
-
-}
-
-
-/* =========================================================
-   PICKUP
-========================================================= */
-
-function setupPickup(){
-
-    document
-        .querySelectorAll(
-            ".pickup-option"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    function(){
-
-                        document
-                            .querySelectorAll(
-                                ".pickup-option"
-                            )
-                            .forEach(
-                                item =>
-                                    item.classList
-                                    .remove(
-                                        "selected"
-                                    )
-                            );
-
-
-                        this.classList.add(
-                            "selected"
-                        );
-
-
-                        state.pickup={
-
-                            name:
-                                this.dataset.name,
-
-                            time:
-                                this.dataset.time
-
-                        };
-
-
-                        updateSummary();
-
-                        showToast(
-                            "Pickup point selected."
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-function updateSummary(){
-
-    const participants =
-        state.guests.length;
-
-
-    const base =
-        participants *
-        state.price;
-
-
-    const nonVegCount =
-        state.guests.filter(
-            guest =>
-                guest.meal===
-                "Non-Veg"
-        ).length;
-
-
-    const nonVeg =
-        nonVegCount *
-        100;
-
-
-    const total =
-        base+
-        nonVeg;
-
-
-    $("summaryGuests")
-        .textContent =
-        state.guestQuantity;
-
-
-    $("summaryAdventure")
-        .textContent =
-        money(base);
-
-
-    $("summaryNonVeg")
-        .textContent =
-        money(nonVeg);
-
-
-    $("summaryTotal")
-        .textContent =
-        money(total);
-
-
-    const ready =
-        state.selectedDate &&
-        state.selectedSlot &&
-        state.guests.length===
-        state.guestQuantity &&
-        state.pickup;
-
-
-    $("paymentButton")
-        .disabled =
-        !ready;
-
-}
-
-
-/* =========================================================
-   PAYMENT / SAVE BOOKING
-========================================================= */
-
-$("paymentButton")
-    .addEventListener(
-        "click",
-        proceedPayment
-    );
-
-
-function proceedPayment(){
-
-    if(
-        !state.selectedDate ||
-        !state.selectedSlot
-    ){
-
-        showToast(
-            "Please select a date and slot.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    if(
-        state.guests.length !==
-        state.guestQuantity
-    ){
-
-        showToast(
-            "Please complete all participant details.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    if(!state.pickup){
-
-        showToast(
-            "Please select a pickup point.",
-            true
-        );
-
-        return;
-
-    }
-
-
-    const nonVegCount =
-        state.guests.filter(
-            guest =>
-                guest.meal===
-                "Non-Veg"
-        ).length;
-
-
-    const baseTotal =
-        state.guests.length *
-        state.price;
-
-
-    const nonVegTotal =
-        nonVegCount *
-        100;
-
-
-    const finalTotal =
-        baseTotal+
-        nonVegTotal;
-
-
-    const booking={
-
-        expedition:{
-
-            id:
-                state.expedition.id,
-
-            title:
-                state.expedition.title,
-
-            slug:
-                state.expedition.slug || "",
-
-            category:
-                state.expedition.category || ""
-
-        },
-
-
-        date:{
-
-            date:
-                state.selectedDate,
-
-            slotId:
-                state.selectedSlot.id,
-
-            slotName:
-                state.selectedSlot.slotName,
-
-            slotTime:
-                state.selectedSlot.slotTime,
-
-            availableAtSelection:
-                state.selectedSlot.available
-
-        },
-
-
-        participants:
-            state.guests,
-
-
-        totalGuests:
-            state.guestQuantity,
-
-
-        pickup:
-            state.pickup,
-
-
-        pricing:{
-
-            basePrice:
-                state.price,
-
-            baseTotal:
-                baseTotal,
-
-            nonVegGuests:
-                nonVegCount,
-
-            nonVegSupplement:
-                nonVegTotal,
-
-            finalTotal:
-                finalTotal
-
-        },
-
-
-        createdAt:
-            new Date()
-            .toISOString()
-
-    };
-
-
-    localStorage.setItem(
-        "AJ_BOOKING",
-        JSON.stringify(
-            booking
-        )
-    );
-
-
-    sessionStorage.setItem(
-        "AJ_BOOKING",
-        JSON.stringify(
-            booking
-        )
-    );
-
-
-    /*
-     * IMPORTANT:
-     *
-     * This is where your actual
-     * payment page should open.
-     *
-     * For now booking data is
-     * securely prepared and stored
-     * locally.
-     */
-
-    showToast(
-        "Booking prepared • " +
-        money(finalTotal)
-    );
-
-
-    /*
-     * Uncomment when payment.html
-     * is ready:
-     *
-     * window.location.href =
-     * "./payment.html";
-     */
-
-}
-
-
-/* =========================================================
-   LIVE AVAILABILITY REFRESH
-========================================================= */
-
-async function refreshAvailability(){
-
-    if(
-        !supabaseClient ||
-        !state.expedition
-    )
-        return;
+    button.textContent =
+        'RESERVING SEATS...';
 
 
     try{
 
-        const response =
-            await supabaseClient
-                .from("expedition_dates")
-                .select("*")
-                .eq(
-                    "expedition_id",
-                    state.expedition.id
-                )
-                .order(
-                    "event_date",
-                    {
-                        ascending:true
-                    }
-                );
+        /*
+         * Contact person is the first participant.
+         */
+
+        const contact =
+            state.guests[0];
 
 
-        if(response.error)
-            return;
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .rpc(
+                'create_adventure_booking',
+                {
+                    p_expedition_date_id:
+                        state.selectedDate.id,
+
+                    p_pickup_stop_id:
+                        state.selectedPickup.id,
+
+                    p_contact_name:
+                        contact.full_name,
+
+                    p_contact_phone:
+                        contact.phone,
+
+                    p_coupon_code:
+                        state.coupon || null,
+
+                    p_payment_method:
+                        'UPI',
+
+                    p_guests:
+                        state.guests
+                }
+            );
 
 
-        const today =
-            new Date();
-
-        today.setHours(
-            0,0,0,0
-        );
+        if(error)
+            throw error;
 
 
-        state.dates =
-            (response.data || [])
-            .map(
-                normalizeDateRow
-            )
-            .filter(
-                row =>
-                    row.dateObject &&
-                    row.dateObject>=today
+        if(!data)
+            throw new Error(
+                'Booking could not be created.'
             );
 
 
         /*
-         * If the selected slot
-         * still exists, update it.
+         * Save booking locally for
+         * the payment/confirmation page.
          */
 
-        if(
-            state.selectedSlot
-        ){
+        localStorage.setItem(
+            'AJ_PENDING_BOOKING',
+            JSON.stringify({
 
-            const fresh =
-                state.dates.find(
-                    row =>
-                        String(row.id)===
-                        String(
-                            state.selectedSlot.id
-                        )
-                );
+                bookingId:
+                    data.booking_id,
 
+                bookingCode:
+                    data.booking_code,
 
-            if(fresh){
+                eventId:
+                    state.event.id,
 
-                state.selectedSlot =
-                    fresh;
+                eventName:
+                    state.event.title,
 
+                dateId:
+                    state.selectedDate.id,
 
-                state.maxGuests =
-                    Math.min(
-                        100,
-                        fresh.available
-                    );
+                eventDate:
+                    state.selectedDate.event_date,
 
+                guestCount:
+                    data.guest_count,
 
-                if(
-                    state.guestQuantity>
-                    state.maxGuests
-                ){
+                total:
+                    data.total_amount,
 
-                    state.guestQuantity =
-                        Math.max(
-                            1,
-                            state.maxGuests
-                        );
+                pickup:
+                    state.selectedPickup.stop_name,
 
-                }
+                pickupTime:
+                    state.selectedPickup.pickup_time,
 
+                guests:
+                    state.guests
 
-                $("counterHelper")
-                    .textContent =
-                    "Maximum " +
-                    state.maxGuests +
-                    " guests for this slot";
+            })
+        );
 
 
-                updateGuestCounter();
+        /*
+         * Open your UPI/payment page here.
+         *
+         * No fake UPI ID is hard-coded.
+         * The booking is already safely reserved.
+         */
 
-                updateSummary();
-
-            }
-
-        }
+        showBookingSuccess(
+            data
+        );
 
 
-        renderDates();
+    }catch(error){
 
-    }
-    catch(error){
-
-        console.warn(
-            "Availability refresh:",
+        console.error(
+            'Booking error:',
             error
         );
 
-    }
 
-}
-
-
-/* =========================================================
-   MENU
-========================================================= */
-
-function setupMenu(){
-
-    $("menuButton")
-        .addEventListener(
-            "click",
-            function(){
-
-                $("mobileMenu")
-                    .classList
-                    .toggle(
-                        "show"
-                    );
-
-            }
+        alert(
+            error.message ||
+            'Unable to reserve seats. Please try again.'
         );
 
-}
-
-
-/* =========================================================
-   BOTTOM BOOK BUTTON
-========================================================= */
-
-function setupBottomBook(){
-
-    $("bottomBook")
-        .addEventListener(
-            "click",
-            function(){
-
-                const booking =
-                    document.querySelector(
-                        ".booking-column"
-                    );
-
-
-                if(booking){
-
-                    booking.scrollIntoView({
-                        behavior:"smooth",
-                        block:"start"
-                    });
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   ESCAPE BEFORE LEAVING
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(){
 
         /*
-         * Keep the current state
-         * available if browser is
-         * refreshed accidentally.
+         * Refresh live capacity after
+         * any failed attempt.
          */
 
-        try{
-
-            sessionStorage.setItem(
-                "AJ_BOOKING_DRAFT",
-                JSON.stringify({
-                    selectedDate:
-                        state.selectedDate,
-
-                    selectedSlot:
-                        state.selectedSlot,
-
-                    guestQuantity:
-                        state.guestQuantity,
-
-                    guests:
-                        state.guests,
-
-                    pickup:
-                        state.pickup
-
-                })
-            );
-
-        }
-        catch(error){}
+        await loadDates();
 
     }
-);
-
-</script>
 
 
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
+    state.saving=false;
 
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
+    button.textContent =
+        'Continue to UPI';
+
+    updateBookState();
+
+}
 
 
-<script>
+/* =====================================================
+   SUCCESS
+===================================================== */
 
-/*
- * Re-run initialization after
- * Supabase library is available.
- *
- * The first DOMContentLoaded call
- * may happen before the CDN script.
- */
+function showBookingSuccess(data){
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+    const overlay =
+        document.createElement(
+            'div'
+        );
 
-        if(
-            window.supabase &&
-            !supabaseClient
-        ){
 
-            init();
+    overlay.style.cssText = `
+        position:fixed;
+        inset:0;
+        z-index:5000;
+        background:rgba(2,20,28,.65);
+        backdrop-filter:blur(14px);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+    `;
 
-        }
+
+    overlay.innerHTML = `
+
+        <div style="
+            width:min(430px,100%);
+            background:white;
+            border-radius:28px;
+            padding:28px;
+            box-shadow:0 30px 90px rgba(0,0,0,.25);
+            text-align:center;
+        ">
+
+            <div style="
+                width:64px;
+                height:64px;
+                margin:auto;
+                border-radius:50%;
+                background:#dff8ec;
+                color:#078557;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:30px;
+                font-weight:900;
+            ">
+                ✓
+            </div>
+
+            <h2 style="
+                margin:18px 0 6px;
+                color:#082c3d;
+                font-size:25px;
+                font-weight:900;
+            ">
+                Seats Reserved
+            </h2>
+
+            <p style="
+                margin:0;
+                color:#7b8790;
+                font-size:12px;
+                line-height:1.6;
+            ">
+                Your booking has been created successfully.
+            </p>
+
+            <div style="
+                margin-top:18px;
+                padding:15px;
+                border-radius:16px;
+                background:#f5f8f7;
+            ">
+
+                <div style="
+                    color:#89949a;
+                    font-size:9px;
+                    font-weight:800;
+                    letter-spacing:.12em;
+                ">
+                    BOOKING CODE
+                </div>
+
+                <div style="
+                    margin-top:5px;
+                    color:#082c3d;
+                    font-size:22px;
+                    font-weight:900;
+                ">
+                    ${escapeHtml(
+                        data.booking_code
+                    )}
+                </div>
+
+                <div style="
+                    margin-top:8px;
+                    color:#078557;
+                    font-size:12px;
+                    font-weight:800;
+                ">
+                    ${data.guest_count}
+                    participant(s)
+                    •
+                    ${money(data.total_amount)}
+                </div>
+
+            </div>
+
+            <p style="
+                margin:15px 0 0;
+                color:#7b8790;
+                font-size:10px;
+                line-height:1.5;
+            ">
+                Your seats are reserved.
+                Complete the UPI payment using the payment
+                instructions provided by Adventure Junction.
+            </p>
+
+            <button
+                id="successClose"
+                style="
+                    width:100%;
+                    margin-top:20px;
+                    height:48px;
+                    border:0;
+                    border-radius:14px;
+                    background:#082c3d;
+                    color:white;
+                    font-size:11px;
+                    font-weight:900;
+                    letter-spacing:.1em;
+                "
+            >
+                VIEW BOOKING
+            </button>
+
+        </div>
+    `;
+
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    document.getElementById(
+        'successClose'
+    ).onclick =
+        () => {
+
+            /*
+             * Change this to your
+             * final payment/confirmation
+             * page when ready.
+             */
+
+            window.location.href =
+                'booking-success.html';
+
+        };
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+async function init(){
+
+    try{
+
+        await loadEvent();
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        document.body.innerHTML = `
+
+            <div style="
+                min-height:100vh;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:25px;
+                background:#f5f7f6;
+                font-family:Outfit,Arial,sans-serif;
+            ">
+
+                <div style="
+                    max-width:430px;
+                    width:100%;
+                    background:white;
+                    padding:30px;
+                    border-radius:25px;
+                    text-align:center;
+                    box-shadow:0 20px 60px rgba(8,44,61,.12);
+                ">
+
+                    <h2 style="
+                        margin:0;
+                        color:#082c3d;
+                        font-size:23px;
+                        font-weight:900;
+                    ">
+                        Adventure unavailable
+                    </h2>
+
+                    <p style="
+                        margin:10px 0 20px;
+                        color:#7b8790;
+                        font-size:12px;
+                    ">
+                        ${escapeHtml(
+                            error.message ||
+                            'Unable to load this adventure.'
+                        )}
+                    </p>
+
+                    <a
+                        href="index.html"
+                        style="
+                            display:block;
+                            padding:13px;
+                            border-radius:13px;
+                            background:#082c3d;
+                            color:white;
+                            text-decoration:none;
+                            font-size:11px;
+                            font-weight:900;
+                        "
+                    >
+                        BACK TO EXPEDITIONS
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
 
     }
-);
 
+
+    renderGuestCounter();
+
+    updateSummary();
+
+    updateBookState();
+
+
+    /*
+     * Remove loader quickly.
+     */
+
+    setTimeout(
+        () => {
+
+            document
+                .getElementById(
+                    'loader'
+                )
+                ?.classList.add(
+                    'hide'
+                );
+
+        },
+        250
+    );
+
+}
+
+
+init();
 </script>
 
 </body>
-
 </html>
