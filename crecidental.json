@@ -1,0 +1,10 @@
+{
+  "telegram": {
+    "bot_token": "8355890681:AAFysxTpW80W0k-kZKgrFieEceQ6arfJuLE",
+    "channel_username": "mycloudvup"
+  },
+  "authentication": {
+    "mobile_number": "9040314183",
+    "pin": "9999"
+  }
+}
